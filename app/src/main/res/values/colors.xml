@@ -32,6 +32,14 @@
     <color name="green_bg_light">#552c312c</color>
 
 
+    <color name="red_bg">#E33333</color>
+    <color name="yellow_bg">#FBD12B</color>
+    <color name="gray_bg">#848484</color>
+    <color name="purple_bg">#4A0079</color>
+    <color name="green_bg">#E5009200</color>
+
+
+
     <color name="googlelogin_pressed">#c4473c</color>
     <color name="googlelogin_forcused">#f35748</color>
     <color name="googlelogin_default">#dc4e41</color>

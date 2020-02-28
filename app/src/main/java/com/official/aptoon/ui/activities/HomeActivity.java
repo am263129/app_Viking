@@ -71,6 +71,7 @@ import com.official.aptoon.ui.fragments.MoviesFragment;
 import com.official.aptoon.ui.fragments.SeriesFragment;
 import com.official.aptoon.ui.fragments.TvFragment;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -88,6 +89,9 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import de.hdodenhof.circleimageview.CircleImageView;
 import es.dmoral.toasty.Toasty;
+import lecho.lib.hellocharts.model.PieChartData;
+import lecho.lib.hellocharts.model.SliceValue;
+import lecho.lib.hellocharts.view.PieChartView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -110,6 +114,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private ImageView image_view_activity_actors_back;
     private Dialog dialog;
     ConsentForm form;
+
+    PieChartView pieChartView;
 
 
     IInAppBillingService mService;
@@ -338,6 +344,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         View headerview = navigationView.getHeaderView(0);
         this.text_view_name_nave_header=(TextView) headerview.findViewById(R.id.text_view_name_nave_header);
+        this.pieChartView = headerview.findViewById(R.id.chart);
         this.circle_image_view_profile_nav_header=(CircleImageView) headerview.findViewById(R.id.circle_image_view_profile_nav_header);
         this.image_view_profile_nav_header_bg=(ImageView) headerview.findViewById(R.id.image_view_profile_nav_header_bg);
         // init pager view
@@ -792,7 +799,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             text_view_name_nave_header.setText(prf.getString("NAME_USER").toString());
             Picasso.with(getApplicationContext()).load(prf.getString("IMAGE_USER").toString()).placeholder(R.drawable.placeholder_profile).error(R.drawable.placeholder_profile).resize(200,200).centerCrop().into(circle_image_view_profile_nav_header);
 
-            final com.squareup.picasso.Target target = new com.squareup.picasso.Target() {
+            final Target target = new Target() {
                 @Override
                 public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                     BlurImage.with(getApplicationContext()).load(bitmap).intensity(25).Async(true).into(image_view_profile_nav_header_bg);
@@ -813,6 +820,19 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             image_view_profile_nav_header_bg.setVisibility(View.GONE);
 
             text_view_name_nave_header.setText(getResources().getString(R.string.please_login));
+
+            //temp for show
+            List<SliceValue> pieData = new ArrayList<>();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                pieData.add(new SliceValue(14, getColor(R.color.red_bg)));
+                pieData.add(new SliceValue(50, getColor(R.color.gray_bg)));
+                pieData.add(new SliceValue(13, getColor(R.color.green_bg)));
+                pieData.add(new SliceValue(10, getColor(R.color.purple_bg)));
+                pieData.add(new SliceValue(13, getColor(R.color.yellow_bg)));
+            }
+            PieChartData pieChartData = new PieChartData(pieData);
+            pieChartView.setPieChartData(pieChartData);
+
             Picasso.with(getApplicationContext()).load(R.drawable.placeholder_profile).placeholder(R.drawable.placeholder_profile).error(R.drawable.placeholder_profile).resize(200,200).centerCrop().into(circle_image_view_profile_nav_header);
         }
         if (FromLogin){

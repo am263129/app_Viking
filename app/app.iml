@@ -244,5 +244,6 @@
     <orderEntry type="library" name="Gradle: io.michaelrocks:libphonenumber-android:8.10.16@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.github.greenfrvr:rubber-loader:1.1.2@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-ads-base:18.3.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.github.lecho:hellocharts-library:1.5.8@aar" level="project" />
   </component>
 </module>
