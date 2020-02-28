@@ -116,4 +116,9 @@
 
     <string name="Client_id">876258973917-cmegp4ql17312vki2c5vdgg67mua1p55.apps.googleusercontent.com</string>
 
+
+    <string name="com_facebook_loginview_log_out_button">Log out</string>
+    <string name="com_facebook_loginview_log_in_button">Facebook</string>
+    <string name="com_facebook_loginview_log_in_button_long">Log in with Facebook</string>
+
 </resources>

@@ -30,4 +30,11 @@
     <color name="orange_bg_light">#312e2c</color>
     <color name="pruple_bg_light">#2f2c31</color>
     <color name="green_bg_light">#552c312c</color>
+
+
+    <color name="googlelogin_pressed">#c4473c</color>
+    <color name="googlelogin_forcused">#f35748</color>
+    <color name="googlelogin_default">#dc4e41</color>
+
+
 </resources>

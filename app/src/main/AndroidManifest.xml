@@ -82,6 +82,9 @@
         <meta-data
             android:name="com.google.android.gms.cast.framework.OPTIONS_PROVIDER_CLASS_NAME"
             android:value="${applicationId}.cast.CastOptionsProvider" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
         <service android:name=".services.NotifFirebaseMessagingService">
             <intent-filter>

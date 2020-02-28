@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient
+        android:angle="90"
+        android:centerColor="@color/googlelogin_forcused"
+        android:endColor="@color/googlelogin_forcused"
+        android:startColor="@color/googlelogin_forcused" />
+
+    <corners android:radius="3dp" />
+</shape>
