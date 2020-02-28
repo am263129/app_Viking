@@ -114,4 +114,6 @@
     <string name="AD_MOB_ENABLED_BANNER">true</string>
     <string name="Error_Login">Please input Valid Login Info.</string>
 
+    <string name="Client_id">876258973917-cmegp4ql17312vki2c5vdgg67mua1p55.apps.googleusercontent.com</string>
+
 </resources>
