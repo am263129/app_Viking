@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.greenfrvr:rubber-loader:1.1.2@aar">
+    <ANNOTATIONS>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6ab4c064675f32b6d4ff82b64c5f42d6/jetified-rubber-loader-1.1.2/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6ab4c064675f32b6d4ff82b64c5f42d6/jetified-rubber-loader-1.1.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6ab4c064675f32b6d4ff82b64c5f42d6/jetified-rubber-loader-1.1.2/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.greenfrvr/rubber-loader/1.1.2/4ee1d370c5f7d4f7a5d376e3ae3e2d9680fbe576/rubber-loader-1.1.2-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.greenfrvr/rubber-loader/1.1.2/baae33b56d60cd8f2abd64b634b9b2cf92fe9cea/rubber-loader-1.1.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

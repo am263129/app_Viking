@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relative_layout_slide"
+    android:layout_width="match_parent"
+    android:layout_height="240dp"
+    >
+    <androidx.cardview.widget.CardView
+        app:cardPreventCornerOverlap="false"
+        app:cardElevation="10dp"
+        android:id="@+id/card_view_item_slide_one"
+        android:layout_marginBottom="10dp"
+        app:cardCornerRadius="5dp"
+        android:elevation="10dp"
+        app:cardBackgroundColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="240dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="240dp">
+                <androidx.viewpager.widget.ViewPager
+                    android:gravity="center"
+                    android:paddingBottom="0dp"
+                    android:id="@+id/view_pager_slide"
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp">
+                </androidx.viewpager.widget.ViewPager>
+                <com.github.vivchar.viewpagerindicator.ViewPagerIndicator
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:id = "@+id/view_pager_indicator"
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:layout_centerHorizontal="true"
+                    app:itemSelectedTint="@color/white"
+                    app:itemTint="@color/white_text"
+                    android:padding="3dp"
+                    app:delimiterSize = "4dp"
+                    app:itemSize="6dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginRight="15dp"
+                    />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

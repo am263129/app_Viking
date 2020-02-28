@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/relative_layout_comment_item"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+    <androidx.cardview.widget.CardView
+        app:cardBackgroundColor="#494949"
+        app:cardElevation="1dp"
+        android:id="@+id/card_view_category_status"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="7dp"
+        android:layout_marginTop="7dp"
+        app:cardCornerRadius="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:padding="6dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="50dp"
+                android:layout_height="50dp">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:padding="3dp"
+                    android:layout_margin="5dp"
+                    android:id="@+id/image_view_comment_iten"
+                    android:src="@drawable/placeholder_profile"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp" />
+            </RelativeLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginLeft="50dp"
+                android:layout_alignParentRight="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="Jocker"
+                        android:textColor="@color/white"
+                        android:gravity="left|center"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="0dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="0dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:id="@+id/text_view_name_item_comment" />
+                    <TextView
+                        android:layout_marginRight="5dp"
+                        android:gravity="right|center"
+                        android:padding="3dp"
+                        android:textSize="12sp"
+                        android:textColor="@color/white_text"
+                        android:text="2 hours ago"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:id="@+id/text_view_time_item_comment" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+            <TextView
+                android:text="Je sui un commentaire"
+
+                android:layout_marginTop="40dp"
+                android:gravity="left"
+                android:padding="10dp"
+                android:textSize="15dp"
+                android:textColor="@color/white_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_view_content_item_comment" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

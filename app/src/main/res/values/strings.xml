@@ -1,0 +1,117 @@
+<resources>
+    <string name="app_name">Aptoon</string>
+    <string name="publisher_id">pub-3447169368463700</string>
+
+    <string name="facebook_app_id">2703176636427041</string>
+    <string name="fb_login_protocol_scheme">fb2703176636427041</string>
+
+    <string name="download_foler">Aptoon</string>
+    <string name="panel_url">admin.aptoon.tv</string>
+    <string-array name="orders_list">
+        <item>Last Added</item>
+        <item>By Rating</item>
+        <item>By IMDb Rating</item>
+        <item>By Title</item>
+        <item>By Year</item>
+        <item>By Views</item>
+    </string-array>
+
+    <string name="media_route_menu_title">Play On</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example">Example action</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="try_again">TRY AGAIN</string>
+    <string name="error_server">Check your internet connexion</string>
+    <string name="no_source_available">No source available for this content</string>
+    <string name="cancel">Cancel</string>
+    <string name="submit">Submit</string>
+    <string name="rating_done">Your rating has been submitted successfully</string>
+    <string name="write_comment">Write a comment</string>
+    <string name="comment_hidden">Hidden</string>
+    <string name="now_time">Now</string>
+    <string name="off">Off</string>
+    <string name="on">On</string>
+    <string name="loading_subtitles">Loading subtitles ... </string>
+    <string name="for_you">For you</string>
+    <string name="search_about_actors">Search about actors here</string>
+    <string name="account_disabled">This account has been disabled</string>
+    <string name="operation_progress">Operations in progress, please wait.</string>
+    <string name="get_this_movie_here">Get this movie from link bellow  :</string>
+    <string name="get_this_tv_show_here">Get this tv show from link bellow  :</string>
+
+    <string name="get_this_serie_here">Get more series tv here</string>
+    <string name="get_this_channel_here">Get this channel from link bellow</string>
+
+    <string name="file_has_been_downloaded">File has been downloaded successfully</string>
+    <string name="Downloaded">Downloaded successfully</string>
+    <string name="exit">Exit</string>
+    <string name="policy_privacy">Policy privacy</string>
+    <string name="action_rate">Rate App</string>
+    <string name="action_support"><![CDATA[Report bug & Help]]></string>
+    <string name="share_this_app">Share this App</string>
+    <string name="my_profile">My Profile</string>
+    <string name="Logout">Logout</string>
+    <string name="login">Login / Register</string>
+    <string name="subscribe">Subscribe</string>
+    <string name="later">Later</string>
+    <string name="please_login">Login to your account</string>
+    <string name="message_logout">You are successfully logout</string>
+    <string name="hint_name">Full Name</string>
+    <string name="update_my_profile">UPDATE MY PROFILE</string>
+    <string name="error_short_value">This value very short please enter correct value</string>
+    <string name="infos_updated_successfully">your infos has been updated successfully</string>
+    <string name="rate_this_channel">Rate this channel</string>
+    <string name="rate_this_serie_tv">Rate this Serie TV</string>
+    <string name="rate_this_movie">Rate this movie</string>
+    <string name="channel_added_fav">This channel has been added to your list</string>
+    <string name="channel_removed_fav">This channel has been removed from your list</string>
+    <string name="website">Website</string>
+    <string name="update_now">Update Now</string>
+    <string name="skip">Skip</string>
+    <string name="title_notification">Enable push notifiction</string>
+    <string name="label_notification">Receive push notification</string>
+    <string name="clear_cache">Clear Cache</string>
+    <string name="label_cache">Clear locally cached images. Currently : </string>
+    <string name="contact_us">Contact us</string>
+    <string name="version_label">Version</string>
+    <string name="enable_subtitles">Enable subtitles</string>
+    <string name="hint_email">E-mail</string>
+    <string name="hint_message">Your message</string>
+    <string name="send_support">Send Message</string>
+    <string name="message_sended">Message has been sent successfully</string>
+    <string name="error_mail_valide">Please enter a valid E-mail</string>
+
+    <string name="title_slide_1">Welcome to Aptoon</string>
+    <string name="description_slide_1">Thank you for download Aptoon App ,Enjoy with this Amazing Android app with cool content.</string>
+
+    <string name="title_slide_2">Watch All here</string>
+    <string name="description_slide_2">Watch All content in one place : Anime Movies , Anime Series , Live Tv Channel and more </string>
+
+    <string name="title_slide_3">Use Subtitles</string>
+    <string name="description_slide_3">Watch your favorite Anime Movies / Series with your original language by using subtitles</string>
+
+    <string name="title_slide_4">Download and watch later</string>
+    <string name="description_slide_4">Download Anime Movies / Anime Series keep it on your device to watch it later</string>
+
+    <string name="title_slide_5">Watch On Big screen</string>
+    <string name="description_slide_5">Cast any content Anime Movies / Anime Series and Live TV channel to you TV and watch with comfortably</string>
+
+    <string name="dialog_text_no_ads_title">Turn Off ads</string>
+    <string name="dialog_text_no_premium_wallpapers_title">Premium Content</string>
+    <string name="dialog_text_no_premium_wallpapers_description">Get unlimited Stickerss</string>
+    <string name="dialog_text_no_ads_description">Use App more free without ads</string>
+    <string name="description_subsribte">With our pack. You can enjoy an ad-free experiance . and focus on the  essential!</string>
+    <string name="download_premium_content">Download Premium content</string>
+    <string name="play_premium_content">Play Premium content</string>
+    <string name="use_content_for_free">Now you can use this premium content for free</string>
+    <string name="AD_MOB_ENABLED_BANNER">true</string>
+    <string name="Error_Login">Please input Valid Login Info.</string>
+
+</resources>

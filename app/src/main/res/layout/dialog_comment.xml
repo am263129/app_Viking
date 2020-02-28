@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layoutDirection="ltr"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:paddingTop="5dp"
+        android:background="@drawable/dialog_radius_dark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:id="@+id/relative_layout_comment_back"
+                android:background="@drawable/border_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <LinearLayout
+                    android:gravity="left"
+                    android:layout_marginRight="50dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+                    <ImageView
+                        android:tint="@color/colorAccent"
+                        android:padding="15dp"
+                        app:srcCompat="@drawable/ic_comment"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp" />
+                    <TextView
+                        android:id="@+id/text_view_comment_dialog_count"
+                        android:textStyle="bold"
+                        android:textSize="15dp"
+                        android:gravity="center"
+                        android:textColor="@color/colorAccent"
+                        android:text="0 Comments"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+                <ImageView
+                    android:id="@+id/image_view_comment_dialog_close"
+                    android:layout_alignParentRight="true"
+                    android:tint="@color/colorAccent"
+                    android:padding="5dp"
+                    app:srcCompat="@drawable/ic_arrow_down"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="350dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp">
+                    <ImageView
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:visibility="gone"
+                        android:padding="40dp"
+                        android:adjustViewBounds="true"
+                        android:clickable="true"
+                        android:id="@+id/image_view_comment_dialog_empty"
+                        app:srcCompat="@drawable/ic_empty"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                    <ProgressBar
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="200dp"
+                        android:progressDrawable="@drawable/progress_comment"
+                        android:indeterminateDrawable="@drawable/progress_comment"
+                        style="?android:attr/progressBarStyleLarge"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:id="@+id/progress_bar_comment_dialog_comments" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:visibility="visible"
+                        android:id="@+id/recycler_view_comment_dialog_comments"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"/>
+                </RelativeLayout>
+            </RelativeLayout>
+            <RelativeLayout
+
+                android:padding="7dp"
+                android:background="@drawable/border_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+              >
+                <EditText
+                    android:background="@drawable/comment_bg_write"
+                    android:hint="@string/write_comment"
+                    android:padding="10dp"
+                    android:visibility="visible"
+                    android:layout_marginRight="48dp"
+                    android:textCursorDrawable="@null"
+                    android:inputType="textMultiLine"
+                    android:ems="10"
+                    android:textColor="@color/white"
+                    android:id="@+id/edit_text_comment_dialog_add_comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+                <ImageView
+                    android:background="@drawable/comment_bg_write"
+                    android:padding="7dp"
+                    android:id="@+id/image_view_comment_dialog_add_comment"
+                    app:srcCompat="@drawable/ic_send"
+                    android:tint="@color/colorAccent"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp" />
+                <ProgressBar
+                    android:background="@drawable/comment_bg_write"
+                    android:visibility="gone"
+                    android:progressDrawable="@drawable/progress_comment"
+                    android:indeterminateDrawable="@drawable/progress_comment"
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="8dp"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/progress_bar_comment_dialog_add_comment" />
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

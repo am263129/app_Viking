@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".ui.activities.HomeActivity">
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vp_horizontal_ntb"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+    <LinearLayout
+        android:layout_gravity="bottom"
+        app:layout_behavior=".ui.views.BottomNavigationBehavior"
+        android:visibility="visible"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:background="@color/dark_gray"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+                <fragment
+                    app:layout_insetEdge="top"
+                    android:id="@+id/caster_mini_controller"
+                    class="com.google.android.gms.cast.framework.media.widget.MiniControllerFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:castTitleTextAppearance="@style/MiniControllerTextAppearace"
+                    app:castSubtitleTextAppearance="@style/MiniControllerTextAppearace"/>
+            <RelativeLayout
+                android:background="@color/gray"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"/>
+        </LinearLayout>
+        <com.gauravk.bubblenavigation.BubbleNavigationConstraintView
+            android:id="@+id/top_navigation_constraint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/dark_gray"
+            android:elevation="0dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            app:bnc_mode="inside"
+            app:hideOnScroll="true"
+
+            >
+            <com.gauravk.bubblenavigation.BubbleToggleView
+                android:id="@+id/l_item_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:bt_icon="@drawable/ic_home"
+                app:bt_iconHeight="20dp"
+                app:bt_iconWidth="20dp"
+                app:bt_colorInactive="@color/yellow"
+                app:bt_colorActive="@color/yellow"
+                app:bt_shape="@drawable/bg_background_yellow"
+                app:bt_title="Home" />
+
+            <com.gauravk.bubblenavigation.BubbleToggleView
+                android:id="@+id/l_item_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:bt_iconHeight="20dp"
+                app:bt_iconWidth="20dp"
+
+                app:bt_colorActive="@color/red"
+                app:bt_colorInactive="@color/red"
+                app:bt_shape="@drawable/bg_background_red"
+                app:bt_icon="@drawable/ic_movie"
+                app:bt_title="Movies" />
+
+            <com.gauravk.bubblenavigation.BubbleToggleView
+                android:id="@+id/l_item_profile_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:bt_iconHeight="20dp"
+                app:bt_iconWidth="20dp"
+                app:bt_colorInactive="@color/green"
+                app:bt_colorActive="@color/green"
+                app:bt_shape="@drawable/bg_background_green"
+                app:bt_icon="@drawable/ic_tv_show"
+                app:bt_title="Series" />
+            <com.gauravk.bubblenavigation.BubbleToggleView
+                android:id="@+id/l_item_profileist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:bt_iconHeight="20dp"
+                app:bt_iconWidth="20dp"
+                app:bt_colorInactive="@color/pruple"
+                app:bt_colorActive="@color/pruple"
+                app:bt_shape="@drawable/bg_background_pruple"
+                app:bt_icon="@drawable/ic_television_box"
+                app:bt_title="LiveTV" />
+
+            <com.gauravk.bubblenavigation.BubbleToggleView
+                android:id="@+id/l_ite_profi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:bt_iconHeight="20dp"
+                app:bt_iconWidth="20dp"
+                app:bt_colorInactive="@color/orange"
+                app:bt_colorActive="@color/orange"
+                app:bt_shape="@drawable/bg_background_orange"
+                app:bt_icon="@drawable/ic_file_download"
+                app:bt_title="Downloads" />
+        </com.gauravk.bubblenavigation.BubbleNavigationConstraintView>
+
+    </LinearLayout>
+    <LinearLayout
+        app:layout_scrollFlags="scroll|enterAlways|snap"
+        android:background="@drawable/bg_gradient"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <FrameLayout
+            android:id="@+id/toolbar_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_marginTop="25dp"
+                android:background="@color/transparent"
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/CustomActionBar"
+                />
+            <RelativeLayout
+                android:focusable="true"
+                android:clickable="true"
+                android:visibility="gone"
+                android:id="@+id/relative_layout_home_activity_search_section"
+                android:background="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:padding="5dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:imeOptions="actionSearch"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:id="@+id/edit_text_home_activity_search"
+                        android:textSize="7pt"
+                        android:hint="@string/search_about_actors"
+                        android:layout_centerVertical="true"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:textColorHint="@color/white_text"
+                        android:textColor="@color/white"
+                        android:lines="1"
+                        android:background="@drawable/bg_search"
+                        android:layout_marginLeft="55dp"
+                        android:layout_marginRight="55dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp" />
+                    <RelativeLayout
+                        android:layout_marginRight="55dp"
+                        android:background="@drawable/bg_search"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp">
+                        <ImageView
+                            android:visibility="visible"
+                            android:id="@+id/image_view_activity_home_close_search"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:focusable="true"
+                            android:clickable="true"
+                            android:tint="@color/white"
+                            app:srcCompat="@drawable/ic_close"
+                            android:padding="7dp"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp" />
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_marginLeft="7dp"
+                        android:background="@drawable/bg_search"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp">
+                        <ImageView
+                            android:id="@+id/image_view_activity_actors_back"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:focusable="true"
+                            android:clickable="true"
+                            app:srcCompat="@drawable/ic_arrow_back"
+                            android:padding="7dp"
+                            android:tint="@color/white"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp" />
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_marginRight="7dp"
+                        android:background="@drawable/bg_search"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp">
+                        <ImageView
+                            android:id="@+id/image_view_activity_home_search"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:focusable="true"
+                            android:clickable="true"
+                            app:srcCompat="@drawable/ic_search"
+                            android:padding="7dp"
+                            android:tint="@color/white"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp" />
+                    </RelativeLayout>
+                </RelativeLayout>
+            </RelativeLayout>
+
+        </FrameLayout>
+
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

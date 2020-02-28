@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "593251371495",
+    "firebase_url": "https://aptoon.firebaseio.com",
+    "project_id": "aptoon",
+    "storage_bucket": "aptoon.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:593251371495:android:5260041880611eef9e9542",
+        "android_client_info": {
+          "package_name": "com.official.aptoon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "593251371495-0o8g12e0mgpoohckrdv3lqg8vnmng33a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxlzle311_cXYukWYQ3m6Dw9yhdahFvOg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "593251371495-0o8g12e0mgpoohckrdv3lqg8vnmng33a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

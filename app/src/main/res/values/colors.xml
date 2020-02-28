@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="colorPrimary">#ffa100</color>
+    <color name="colorPrimaryDark">#ffa100</color>
+    <color name="colorAccent">#FFA100</color>
+
+    <color name="colorGradient">#c70032</color>
+    <color name="black">#000000</color>
+    <color name="gray">#616161</color>
+    <color name="white">#FFFFFF</color>
+    <color name="transparent">#00ffffff</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#757575</color>
+    <color name="white_text">#BDBDBD</color>
+    <color name="dark_gray">#111111</color>
+    <color name="blue">#303f9f</color>
+    <color name="green">#388e3c</color>
+    <color name="red">#d32f2f</color>
+    <color name="pink">#c2185b</color>
+    <color name="pruple">#7b1fa2</color>
+    <color name="yellow">#ffa100</color>
+    <color name="orange">#f69320</color>
+
+    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@color/colorAccent</color>
+
+    <color name="blue_bg_light">#e8eaf6</color>
+    <color name="red_bg_light">#312c2d</color>
+    <color name="yellow_bg_light">#31302c</color>
+    <color name="pink_bg_light">#312c2e</color>
+    <color name="orange_bg_light">#312e2c</color>
+    <color name="pruple_bg_light">#2f2c31</color>
+    <color name="green_bg_light">#552c312c</color>
+</resources>
