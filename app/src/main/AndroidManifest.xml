@@ -21,7 +21,8 @@
         android:theme="@style/Theme.AppCompat"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.activities.Register"></activity>
+        <activity android:name=".ui.activities.Register"
+            android:theme="@style/AppThemeNoAction"></activity>
         <activity
             android:name=".ui.activities.OuterLoginActivity"
             android:theme="@style/AppThemeNoAction">

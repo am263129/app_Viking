@@ -71,7 +71,7 @@ public class OuterLoginActivity extends AppCompatActivity implements View.OnClic
     boolean hide = true;
     LoginButton btn_facebook;
     Button btn_login,   btn_livechat;
-    RelativeLayout btn_google;
+    RelativeLayout btn_google,btn_view_facebook;
     TextView btn_forgot, btn_signup;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -96,6 +96,7 @@ public class OuterLoginActivity extends AppCompatActivity implements View.OnClic
         btn_login = (Button)findViewById(R.id.btn_login);
         btn_facebook = (LoginButton)findViewById(R.id.btn_facebook);
         btn_google = (RelativeLayout)findViewById(R.id.btn_google);
+        btn_view_facebook = (RelativeLayout)findViewById(R.id.btn_view_facebook);
         btn_forgot = (TextView)findViewById(R.id.btn_forget_password);
         btn_signup = (TextView)findViewById(R.id.btn_sign_up);
         btn_livechat = (Button)findViewById(R.id.btn_live_chat);
@@ -106,9 +107,11 @@ public class OuterLoginActivity extends AppCompatActivity implements View.OnClic
         btn_forgot.setOnClickListener(this);
         btn_signup.setOnClickListener(this);
         btn_livechat.setOnClickListener(this);
+        btn_view_facebook.setOnClickListener(this);
 
         label_facebook = (TextView)findViewById(R.id.label_facebook);
         label_google = (TextView)findViewById(R.id.label_google);
+
 
 
 
@@ -358,8 +361,8 @@ public class OuterLoginActivity extends AppCompatActivity implements View.OnClic
                     login();
                 }
                 break;
-            case R.id.btn_facebook:
-                login_with_facebook();
+            case R.id.btn_view_facebook:
+                btn_facebook.callOnClick();
                 break;
             case R.id.btn_google:
                 login_with_google();
@@ -368,6 +371,8 @@ public class OuterLoginActivity extends AppCompatActivity implements View.OnClic
             case R.id.btn_forget_password:
                 break;
             case R.id.btn_sign_up:
+                Intent intent = new Intent(OuterLoginActivity.this, Register.class);
+                startActivity(intent);
                 break;
             case R.id.btn_live_chat:
                 break;
