@@ -108,7 +108,7 @@ public class IntroActivity extends AppCompatActivity {
         this.linear_layout_skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(IntroActivity.this,HomeActivity.class);
+                Intent intent = new Intent(IntroActivity.this,OuterLoginActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.enter, R.anim.exit);
                 finish();

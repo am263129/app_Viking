@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
-        android:background="@color/cast_intro_overlay_background_color"
+        android:background="#BC2B2B2B"
         android:orientation="vertical">
 
         <LinearLayout
@@ -94,16 +94,6 @@
                         android:text=""
                         android:textSize="14sp" />
 
-                    <ImageView
-                        android:id="@+id/show_pass_btn_confirm"
-                        android:layout_width="25dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="10dp"
-                        android:alpha=".5"
-                        android:onClick="ShowHidePass"
-                        android:src="@drawable/hide_pass" />
                 </RelativeLayout>
 
 

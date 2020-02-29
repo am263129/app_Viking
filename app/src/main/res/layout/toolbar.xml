@@ -21,9 +21,9 @@
             android:padding="10dp">
 
             <ImageView
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:background="@mipmap/ic_launcher_foreground"
+                android:layout_width="80dp"
+                android:layout_height="20dp"
+                android:background="@drawable/logo"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
                 tools:ignore="MissingPrefix" />

@@ -30,7 +30,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.7"
-                android:background="@drawable/btn_back" />
+                android:background="@drawable/btn_back"
+                android:visibility="gone" />
 
             <ImageView
                 android:id="@+id/imageView6"
@@ -44,7 +45,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.7"
-                android:background="@drawable/btn_menu" />
+                android:background="@drawable/btn_menu"
+                android:visibility="gone" />
         </LinearLayout>
 
         <LinearLayout

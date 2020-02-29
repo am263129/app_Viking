@@ -122,6 +122,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
 
 
+
+
     private static final String LOG_TAG = "iabv3";
     // put your Google merchant id here (as stated in public profile of your Payments Merchant Center)
     // if filled library will provide protection against Freedom alike Play Market simulators
