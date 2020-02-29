@@ -110,7 +110,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private RelativeLayout relative_layout_home_activity_search_section;
     private EditText edit_text_home_activity_search;
     private ImageView image_view_activity_home_close_search;
-    private ImageView image_view_activity_home_search;
+//    private ImageView image_view_activity_home_search;
     private ImageView image_view_activity_actors_back;
     private Dialog dialog;
     ConsentForm form;
@@ -156,6 +156,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         initBuy();
         firebaseSubscribe();
         initGDPR();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setHomeButtonEnabled(false);
     }
     private void initBuy() {
         Intent serviceIntent =
@@ -298,40 +300,42 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             super.onActivityResult(requestCode, resultCode, data);
     }
     private void initActions() {
-        image_view_activity_actors_back.setOnClickListener(v->{
-            relative_layout_home_activity_search_section.setVisibility(View.GONE);
-            edit_text_home_activity_search.setText("");
-        });
-        edit_text_home_activity_search.setOnEditorActionListener((v,actionId,event) -> {
-            if (edit_text_home_activity_search.getText().length()>0){
-                Intent intent =  new Intent(HomeActivity.this,SearchActivity.class);
-                intent.putExtra("query",edit_text_home_activity_search.getText().toString());
-                startActivity(intent);
-                overridePendingTransition(R.anim.enter, R.anim.exit);
-
-                relative_layout_home_activity_search_section.setVisibility(View.GONE);
-                edit_text_home_activity_search.setText("");
-            }
-            return false;
-        });
-        image_view_activity_home_close_search.setOnClickListener(v->{
-            edit_text_home_activity_search.setText("");
-        });
-        image_view_activity_home_search.setOnClickListener(v->{
-            if (edit_text_home_activity_search.getText().length()>0) {
-
-                Intent intent =  new Intent(HomeActivity.this,SearchActivity.class);
-                intent.putExtra("query",edit_text_home_activity_search.getText().toString());
-                startActivity(intent);
-                overridePendingTransition(R.anim.enter, R.anim.exit);
-                relative_layout_home_activity_search_section.setVisibility(View.GONE);
-                edit_text_home_activity_search.setText("");
-            }
-        });
+//        image_view_activity_actors_back.setOnClickListener(v->{
+//            relative_layout_home_activity_search_section.setVisibility(View.GONE);
+//            edit_text_home_activity_search.setText("");
+//        });
+//        edit_text_home_activity_search.setOnEditorActionListener((v,actionId,event) -> {
+//            if (edit_text_home_activity_search.getText().length()>0){
+//                Intent intent =  new Intent(HomeActivity.this,SearchActivity.class);
+//                intent.putExtra("query",edit_text_home_activity_search.getText().toString());
+//                startActivity(intent);
+//                overridePendingTransition(R.anim.enter, R.anim.exit);
+//
+//                relative_layout_home_activity_search_section.setVisibility(View.GONE);
+//                edit_text_home_activity_search.setText("");
+//            }
+//            return false;
+//        });
+//        image_view_activity_home_close_search.setOnClickListener(v->{
+//            edit_text_home_activity_search.setText("");
+//        });
+//        image_view_activity_home_search.setOnClickListener(v->{
+//            if (edit_text_home_activity_search.getText().length()>0) {
+//
+//                Intent intent =  new Intent(HomeActivity.this,SearchActivity.class);
+//                intent.putExtra("query",edit_text_home_activity_search.getText().toString());
+//                startActivity(intent);
+//                overridePendingTransition(R.anim.enter, R.anim.exit);
+//                relative_layout_home_activity_search_section.setVisibility(View.GONE);
+//                edit_text_home_activity_search.setText("");
+//            }
+//        });
     }
 
     private void initViews() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        toolbar.setNavigationIcon(null);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -384,21 +388,21 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-        this.relative_layout_home_activity_search_section =  (RelativeLayout) findViewById(R.id.relative_layout_home_activity_search_section);
-        this.edit_text_home_activity_search =  (EditText) findViewById(R.id.edit_text_home_activity_search);
-        this.image_view_activity_home_close_search =  (ImageView) findViewById(R.id.image_view_activity_home_close_search);
-        this.image_view_activity_actors_back =  (ImageView) findViewById(R.id.image_view_activity_actors_back);
-        this.image_view_activity_home_search =  (ImageView) findViewById(R.id.image_view_activity_home_search);
+//        this.relative_layout_home_activity_search_section =  (RelativeLayout) findViewById(R.id.relative_layout_home_activity_search_section);
+//        this.edit_text_home_activity_search =  (EditText) findViewById(R.id.edit_text_home_activity_search);
+//        this.image_view_activity_home_close_search =  (ImageView) findViewById(R.id.image_view_activity_home_close_search);
+//        this.image_view_activity_actors_back =  (ImageView) findViewById(R.id.image_view_activity_actors_back);
+//        this.image_view_activity_home_search =  (ImageView) findViewById(R.id.image_view_activity_home_search);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_home, menu);
-        MenuItem item = menu.findItem(R.id.action_search);
-        CastButtonFactory.setUpMediaRouteButton(getApplicationContext(),
-                menu,
-                R.id.media_route_menu_item);
+//        getMenuInflater().inflate(R.menu.menu_home, menu);
+//        MenuItem item = menu.findItem(R.id.action_search);
+//        CastButtonFactory.setUpMediaRouteButton(getApplicationContext(),
+//                menu,
+//                R.id.media_route_menu_item);
         return true;
     }
 
@@ -770,14 +774,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        switch (id){
-            case R.id.action_search :
-                edit_text_home_activity_search.requestFocus();
-                relative_layout_home_activity_search_section.setVisibility(View.VISIBLE);
-                break;
-        }
+//        int id = item.getItemId();
+//
+//        switch (id){
+//            case R.id.action_search :
+//                edit_text_home_activity_search.requestFocus();
+//                relative_layout_home_activity_search_section.setVisibility(View.VISIBLE);
+//                break;
+//        }
 
         return super.onOptionsItemSelected(item);
     }

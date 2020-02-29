@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
+import android.graphics.fonts.Font;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
@@ -51,6 +53,7 @@ import com.official.aptoon.api.apiClient;
 import com.official.aptoon.api.apiRest;
 import com.official.aptoon.entity.ApiResponse;
 
+import org.bouncycastle.asn1.dvcs.TargetEtcChain;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -63,6 +66,7 @@ import retrofit2.Retrofit;
 public class OuterLoginActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 
     EditText edt_password, edt_email;
+    TextView label_facebook, label_google;
     ImageView img_eye;
     boolean hide = true;
     LoginButton btn_facebook;
@@ -103,7 +107,19 @@ public class OuterLoginActivity extends AppCompatActivity implements View.OnClic
         btn_signup.setOnClickListener(this);
         btn_livechat.setOnClickListener(this);
 
+        label_facebook = (TextView)findViewById(R.id.label_facebook);
+        label_google = (TextView)findViewById(R.id.label_google);
 
+
+
+        Typeface font = Typeface.createFromAsset(OuterLoginActivity.this.getAssets(), "SpartanMB-Regular.otf");
+        edt_email .setTypeface(font);
+        edt_password.setTypeface(font);
+        btn_login.setTypeface(font);
+        btn_forgot.setTypeface(font);
+        btn_signup.setTypeface(font);
+        label_facebook.setTypeface(font);
+        label_google.setTypeface(font);
         prf= new PrefManager(getApplicationContext());
 
         GoogleSignIn();
@@ -156,6 +172,7 @@ public class OuterLoginActivity extends AppCompatActivity implements View.OnClic
         callbackManager = CallbackManager.Factory.create();
 
         // Callback registration
+
         btn_facebook.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {

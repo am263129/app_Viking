@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:facebook="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:facebook="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
+        android:background="@color/cast_intro_overlay_background_color"
         android:orientation="vertical">
 
         <LinearLayout
@@ -40,12 +41,14 @@
                 <EditText
                     android:id="@+id/edt_email"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:background="@color/gray"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_input_gray"
                     android:ems="10"
+                    android:fontFamily="@font/aguafina_script"
                     android:hint="E-mail or Mobile"
                     android:inputType="textEmailAddress"
-                    android:padding="8dp" />
+                    android:padding="10dp"
+                    android:textSize="14sp" />
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -55,12 +58,13 @@
                     <EditText
                         android:id="@+id/edit_password"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:background="@color/gray"
+                        android:layout_height="50dp"
+                        android:background="@drawable/bg_input_gray"
                         android:hint="Password"
                         android:inputType="textPassword"
-                        android:padding="8dp"
-                        android:text="" />
+                        android:padding="10dp"
+                        android:text=""
+                        android:textSize="14sp" />
 
                     <ImageView
                         android:id="@+id/show_pass_btn"
@@ -82,7 +86,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="8dp"
-                android:text="Forgot password?" />
+                android:text="Forgot password?"
+                android:textSize="12sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -96,9 +101,10 @@
                 <Button
                     android:id="@+id/btn_login"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="50dp"
                     android:background="@drawable/selector_btn_login"
                     android:text="Login"
+                    android:textAllCaps="false"
                     android:textColor="@color/black" />
 
             </LinearLayout>
@@ -108,7 +114,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="Or" />
+                android:text="Or"
+                android:textSize="12sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -130,12 +137,36 @@
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
                     android:textSize="15sp"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
+
+                <RelativeLayout
+                    android:id="@+id/btn_view_facebook"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_btn_facebooklogin">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        app:srcCompat="@drawable/facebook_mark" />
+
+                    <TextView
+                        android:id="@+id/label_facebook"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/days_one"
+                        android:text="Facebook"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/btn_google"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="50dp"
                     android:layout_weight="1"
                     android:background="@drawable/selector_btn_googlelogin">
 
@@ -147,13 +178,13 @@
                         facebook:srcCompat="@drawable/google_mark" />
 
                     <TextView
-                        android:id="@+id/textView3"
+                        android:id="@+id/label_google"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:fontFamily="@font/days_one"
                         android:text="Google"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
                 </RelativeLayout>
             </LinearLayout>
@@ -173,7 +204,8 @@
                 android:layout_alignParentLeft="false"
                 android:layout_alignParentRight="false"
                 android:layout_centerInParent="true"
-                android:text="Not a member? Sign up now" />
+                android:text="Not a member? Sign up now"
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/btn_live_chat"

@@ -123,103 +123,114 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <androidx.appcompat.widget.Toolbar
-                android:layout_marginTop="25dp"
-                android:background="@color/transparent"
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:theme="@style/CustomActionBar"
+<!--            <androidx.appcompat.widget.Toolbar-->
+<!--                android:layout_marginTop="25dp"-->
+<!--                android:background="@color/transparent"-->
+<!--                android:id="@+id/toolbar"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:theme="@style/CustomActionBar"-->
+<!--                />-->
+            <include
+                layout="@layout/toolbar"
                 />
-            <RelativeLayout
-                android:focusable="true"
-                android:clickable="true"
-                android:visibility="gone"
-                android:id="@+id/relative_layout_home_activity_search_section"
-                android:background="@color/black"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+<!--            <RelativeLayout-->
+<!--                android:focusable="true"-->
+<!--                android:clickable="true"-->
+<!--                android:visibility="gone"-->
+<!--                android:id="@+id/relative_layout_home_activity_search_section"-->
+<!--                android:background="@color/black"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content">-->
 
-                <RelativeLayout
-                    android:padding="5dp"
-                    android:layout_marginTop="30dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <EditText
-                        android:imeOptions="actionSearch"
-                        android:inputType="text"
-                        android:maxLines="1"
-                        android:id="@+id/edit_text_home_activity_search"
-                        android:textSize="7pt"
-                        android:hint="@string/search_about_actors"
-                        android:layout_centerVertical="true"
-                        android:paddingLeft="15dp"
-                        android:paddingRight="15dp"
-                        android:textColorHint="@color/white_text"
-                        android:textColor="@color/white"
-                        android:lines="1"
-                        android:background="@drawable/bg_search"
-                        android:layout_marginLeft="55dp"
-                        android:layout_marginRight="55dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="35dp" />
-                    <RelativeLayout
-                        android:layout_marginRight="55dp"
-                        android:background="@drawable/bg_search"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp">
-                        <ImageView
-                            android:visibility="visible"
-                            android:id="@+id/image_view_activity_home_close_search"
-                            android:background="?attr/selectableItemBackgroundBorderless"
-                            android:focusable="true"
-                            android:clickable="true"
-                            android:tint="@color/white"
-                            app:srcCompat="@drawable/ic_close"
-                            android:padding="7dp"
-                            android:layout_width="35dp"
-                            android:layout_height="35dp" />
-                    </RelativeLayout>
-                    <RelativeLayout
-                        android:layout_marginLeft="7dp"
-                        android:background="@drawable/bg_search"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp">
-                        <ImageView
-                            android:id="@+id/image_view_activity_actors_back"
-                            android:background="?attr/selectableItemBackgroundBorderless"
-                            android:focusable="true"
-                            android:clickable="true"
-                            app:srcCompat="@drawable/ic_arrow_back"
-                            android:padding="7dp"
-                            android:tint="@color/white"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp" />
-                    </RelativeLayout>
-                    <RelativeLayout
-                        android:layout_marginRight="7dp"
-                        android:background="@drawable/bg_search"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp">
-                        <ImageView
-                            android:id="@+id/image_view_activity_home_search"
-                            android:background="?attr/selectableItemBackgroundBorderless"
-                            android:focusable="true"
-                            android:clickable="true"
-                            app:srcCompat="@drawable/ic_search"
-                            android:padding="7dp"
-                            android:tint="@color/white"
-                            android:layout_width="35dp"
-                            android:layout_height="35dp" />
-                    </RelativeLayout>
-                </RelativeLayout>
-            </RelativeLayout>
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="30dp"-->
+<!--                    android:padding="5dp"-->
+<!--                    android:visibility="gone">-->
+
+<!--                    <EditText-->
+<!--                        android:id="@+id/edit_text_home_activity_search"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="35dp"-->
+<!--                        android:layout_centerVertical="true"-->
+<!--                        android:layout_marginLeft="55dp"-->
+<!--                        android:layout_marginRight="55dp"-->
+<!--                        android:background="@drawable/bg_search"-->
+<!--                        android:hint="@string/search_about_actors"-->
+<!--                        android:imeOptions="actionSearch"-->
+<!--                        android:inputType="text"-->
+<!--                        android:lines="1"-->
+<!--                        android:maxLines="1"-->
+<!--                        android:paddingLeft="15dp"-->
+<!--                        android:paddingRight="15dp"-->
+<!--                        android:textColor="@color/white"-->
+<!--                        android:textColorHint="@color/white_text"-->
+<!--                        android:textSize="7pt" />-->
+
+<!--                    <RelativeLayout-->
+<!--                        android:layout_width="35dp"-->
+<!--                        android:layout_height="35dp"-->
+<!--                        android:layout_alignParentRight="true"-->
+<!--                        android:layout_centerVertical="true"-->
+<!--                        android:layout_marginRight="55dp"-->
+<!--                        android:background="@drawable/bg_search">-->
+
+<!--                        <ImageView-->
+<!--                            android:id="@+id/image_view_activity_home_close_search"-->
+<!--                            android:layout_width="35dp"-->
+<!--                            android:layout_height="35dp"-->
+<!--                            android:background="?attr/selectableItemBackgroundBorderless"-->
+<!--                            android:clickable="true"-->
+<!--                            android:focusable="true"-->
+<!--                            android:padding="7dp"-->
+<!--                            android:tint="@color/white"-->
+<!--                            android:visibility="visible"-->
+<!--                            app:srcCompat="@drawable/ic_close" />-->
+<!--                    </RelativeLayout>-->
+
+<!--                    <RelativeLayout-->
+<!--                        android:layout_width="35dp"-->
+<!--                        android:layout_height="35dp"-->
+<!--                        android:layout_alignParentLeft="true"-->
+<!--                        android:layout_centerVertical="true"-->
+<!--                        android:layout_marginLeft="7dp"-->
+<!--                        android:background="@drawable/bg_search">-->
+
+<!--                        <ImageView-->
+<!--                            android:id="@+id/image_view_activity_actors_back"-->
+<!--                            android:layout_width="40dp"-->
+<!--                            android:layout_height="40dp"-->
+<!--                            android:background="?attr/selectableItemBackgroundBorderless"-->
+<!--                            android:clickable="true"-->
+<!--                            android:focusable="true"-->
+<!--                            android:padding="7dp"-->
+<!--                            android:tint="@color/white"-->
+<!--                            app:srcCompat="@drawable/ic_arrow_back" />-->
+<!--                    </RelativeLayout>-->
+
+<!--                    <RelativeLayout-->
+<!--                        android:layout_width="35dp"-->
+<!--                        android:layout_height="35dp"-->
+<!--                        android:layout_alignParentRight="true"-->
+<!--                        android:layout_centerVertical="true"-->
+<!--                        android:layout_marginRight="7dp"-->
+<!--                        android:background="@drawable/bg_search">-->
+
+<!--                        <ImageView-->
+<!--                            android:id="@+id/image_view_activity_home_search"-->
+<!--                            android:layout_width="35dp"-->
+<!--                            android:layout_height="35dp"-->
+<!--                            android:background="?attr/selectableItemBackgroundBorderless"-->
+<!--                            android:clickable="true"-->
+<!--                            android:focusable="true"-->
+<!--                            android:padding="7dp"-->
+<!--                            android:tint="@color/white"-->
+<!--                            app:srcCompat="@drawable/ic_search" />-->
+<!--                    </RelativeLayout>-->
+<!--                </RelativeLayout>-->
+<!--            </RelativeLayout>-->
 
         </FrameLayout>
 

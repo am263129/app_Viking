@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/ToolBarStyle"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@null">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:background="@mipmap/ic_launcher_foreground"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                tools:ignore="MissingPrefix" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="TV Series" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Movies" />
+
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/notification" />
+
+            <RelativeLayout
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:gravity="center">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/circle_image_view_profile_nav_header"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="3dp"
+                    android:src="@drawable/placeholder_profile"
+                    app:civ_border_color="#FF000000"
+                    app:civ_border_width="0dp" />
+
+                <ImageView
+                    android:id="@+id/imageView12"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/profil_picture" />
+            </RelativeLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</androidx.appcompat.widget.Toolbar>

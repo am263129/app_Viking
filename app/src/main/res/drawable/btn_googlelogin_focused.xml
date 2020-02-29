@@ -6,5 +6,6 @@
         android:endColor="@color/googlelogin_forcused"
         android:startColor="@color/googlelogin_forcused" />
 
-    <corners android:radius="3dp" />
+    <corners android:topRightRadius="4dp"
+        android:bottomRightRadius="4dp"/>
 </shape>

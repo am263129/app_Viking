@@ -6,5 +6,6 @@
         android:endColor="@color/googlelogin_default"
         android:startColor="@color/googlelogin_default" />
 
-    <corners android:radius="3dp" />
+    <corners android:topRightRadius="4dp"
+        android:bottomRightRadius="4dp"/>
 </shape>
