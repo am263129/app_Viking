@@ -136,6 +136,7 @@
     <orderEntry type="library" name="Gradle: androidx.databinding:databinding-runtime:3.5.3@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.multidex:multidex:2.0.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.jaeger.statusbarutil:library:1.5.1@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.roughike:bottom-bar:2.3.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.material:material:1.2.0-alpha03@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-cast-framework:18.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-cast:18.0.0@aar" level="project" />

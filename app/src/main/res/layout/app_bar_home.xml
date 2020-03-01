@@ -36,29 +36,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"/>
         </LinearLayout>
+
         <com.gauravk.bubblenavigation.BubbleNavigationConstraintView
             android:id="@+id/top_navigation_constraint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/dark_gray"
             android:elevation="0dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
             android:paddingLeft="10dp"
+            android:paddingTop="5dp"
             android:paddingRight="10dp"
+            android:paddingBottom="5dp"
+            android:visibility="gone"
             app:bnc_mode="inside"
-            app:hideOnScroll="true"
 
-            >
+            app:hideOnScroll="true">
+
             <com.gauravk.bubblenavigation.BubbleToggleView
                 android:id="@+id/l_item_home"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:bt_icon="@drawable/ic_home"
+                app:bt_active="true"
+                app:bt_colorActive="@color/orange"
+                app:bt_colorInactive="@color/orange"
+                app:bt_icon="@drawable/home"
                 app:bt_iconHeight="20dp"
                 app:bt_iconWidth="20dp"
-                app:bt_colorInactive="@color/orange"
-                app:bt_colorActive="@color/orange"
                 app:bt_shape="@drawable/bg_background_yellow"
                 app:bt_title="Home" />
 
@@ -66,13 +69,13 @@
                 android:id="@+id/l_item_search"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:bt_iconHeight="20dp"
-                app:bt_iconWidth="20dp"
-
+                app:bt_active="true"
                 app:bt_colorActive="@color/orange"
                 app:bt_colorInactive="@color/orange"
-                app:bt_shape="@drawable/bg_background_red"
                 app:bt_icon="@drawable/ic_search"
+                app:bt_iconHeight="20dp"
+                app:bt_iconWidth="20dp"
+                app:bt_shape="@drawable/bg_background_red"
                 app:bt_title="Search" />
 
 
@@ -80,24 +83,26 @@
                 android:id="@+id/l_item_profileist"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:bt_active="true"
+                app:bt_colorActive="@color/orange"
+                app:bt_colorInactive="@color/orange"
+                app:bt_icon="@drawable/live_tv"
                 app:bt_iconHeight="20dp"
                 app:bt_iconWidth="20dp"
-                app:bt_colorInactive="@color/orange"
-                app:bt_colorActive="@color/orange"
                 app:bt_shape="@drawable/bg_background_pruple"
-                app:bt_icon="@drawable/ic_television_box"
                 app:bt_title="Live" />
 
             <com.gauravk.bubblenavigation.BubbleToggleView
                 android:id="@+id/l_ite_profi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:bt_active="true"
+                app:bt_colorActive="@color/orange"
+                app:bt_colorInactive="@color/orange"
+                app:bt_icon="@drawable/download"
                 app:bt_iconHeight="20dp"
                 app:bt_iconWidth="20dp"
-                app:bt_colorInactive="@color/orange"
-                app:bt_colorActive="@color/orange"
                 app:bt_shape="@drawable/bg_background_orange"
-                app:bt_icon="@drawable/ic_file_download"
                 app:bt_title="Downloads" />
 
             <com.gauravk.bubblenavigation.BubbleToggleView

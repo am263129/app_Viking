@@ -71,6 +71,7 @@ import com.official.aptoon.ui.fragments.MoviesFragment;
 import com.official.aptoon.ui.fragments.SearchFragment;
 import com.official.aptoon.ui.fragments.SeriesFragment;
 import com.official.aptoon.ui.fragments.TvFragment;
+import com.roughike.bottombar.BottomBar;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -140,6 +141,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private boolean readyToPurchase = false;
 
     public static HomeActivity self;
+    private BottomBar mBottomBar;
 
     ServiceConnection mServiceConn = new ServiceConnection() {
         @Override
@@ -170,6 +172,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(false);
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mBottomBar.onSaveInstanceState(outState);
+    }
+
     private void initBuy() {
         Intent serviceIntent =
                 new Intent("com.android.vending.billing.InAppBillingService.BIND");
@@ -361,6 +370,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void initViews() {
+        
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         toolbar.setNavigationIcon(null);
