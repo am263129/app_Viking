@@ -57,8 +57,8 @@
                 app:bt_icon="@drawable/ic_home"
                 app:bt_iconHeight="20dp"
                 app:bt_iconWidth="20dp"
-                app:bt_colorInactive="@color/yellow"
-                app:bt_colorActive="@color/yellow"
+                app:bt_colorInactive="@color/orange"
+                app:bt_colorActive="@color/orange"
                 app:bt_shape="@drawable/bg_background_yellow"
                 app:bt_title="Home" />
 
@@ -69,34 +69,24 @@
                 app:bt_iconHeight="20dp"
                 app:bt_iconWidth="20dp"
 
-                app:bt_colorActive="@color/red"
-                app:bt_colorInactive="@color/red"
+                app:bt_colorActive="@color/orange"
+                app:bt_colorInactive="@color/orange"
                 app:bt_shape="@drawable/bg_background_red"
-                app:bt_icon="@drawable/ic_movie"
-                app:bt_title="Movies" />
+                app:bt_icon="@drawable/ic_search"
+                app:bt_title="Search" />
 
-            <com.gauravk.bubblenavigation.BubbleToggleView
-                android:id="@+id/l_item_profile_list"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:bt_iconHeight="20dp"
-                app:bt_iconWidth="20dp"
-                app:bt_colorInactive="@color/green"
-                app:bt_colorActive="@color/green"
-                app:bt_shape="@drawable/bg_background_green"
-                app:bt_icon="@drawable/ic_tv_show"
-                app:bt_title="Series" />
+
             <com.gauravk.bubblenavigation.BubbleToggleView
                 android:id="@+id/l_item_profileist"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:bt_iconHeight="20dp"
                 app:bt_iconWidth="20dp"
-                app:bt_colorInactive="@color/pruple"
-                app:bt_colorActive="@color/pruple"
+                app:bt_colorInactive="@color/orange"
+                app:bt_colorActive="@color/orange"
                 app:bt_shape="@drawable/bg_background_pruple"
                 app:bt_icon="@drawable/ic_television_box"
-                app:bt_title="LiveTV" />
+                app:bt_title="Live" />
 
             <com.gauravk.bubblenavigation.BubbleToggleView
                 android:id="@+id/l_ite_profi"
@@ -109,6 +99,36 @@
                 app:bt_shape="@drawable/bg_background_orange"
                 app:bt_icon="@drawable/ic_file_download"
                 app:bt_title="Downloads" />
+
+            <com.gauravk.bubblenavigation.BubbleToggleView
+                android:id="@+id/l_item_series"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:bt_colorActive="@color/green"
+                app:bt_colorInactive="@color/green"
+                app:bt_icon="@drawable/ic_tv_show"
+                app:bt_iconHeight="20dp"
+                app:bt_iconWidth="20dp"
+                app:bt_shape="@drawable/bg_background_green"
+                app:bt_title="Searis"
+                tools:layout_editor_absoluteX="10dp"
+                tools:layout_editor_absoluteY="5dp" />
+
+            <com.gauravk.bubblenavigation.BubbleToggleView
+                android:id="@+id/l_item_Movie"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:bt_colorActive="@color/green"
+                app:bt_colorInactive="@color/green"
+                app:bt_icon="@drawable/ic_tv_show"
+                app:bt_iconHeight="20dp"
+                app:bt_iconWidth="20dp"
+                app:bt_shape="@drawable/bg_background_green"
+                app:bt_title="Searis"
+                tools:layout_editor_absoluteX="10dp"
+                tools:layout_editor_absoluteY="5dp" />
         </com.gauravk.bubblenavigation.BubbleNavigationConstraintView>
 
     </LinearLayout>

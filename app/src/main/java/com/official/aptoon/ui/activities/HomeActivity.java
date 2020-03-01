@@ -68,6 +68,7 @@ import com.official.aptoon.entity.Genre;
 import com.official.aptoon.ui.fragments.DownloadsFragment;
 import com.official.aptoon.ui.fragments.HomeFragment;
 import com.official.aptoon.ui.fragments.MoviesFragment;
+import com.official.aptoon.ui.fragments.SearchFragment;
 import com.official.aptoon.ui.fragments.SeriesFragment;
 import com.official.aptoon.ui.fragments.TvFragment;
 import com.squareup.picasso.Picasso;
@@ -102,23 +103,29 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
     private NavigationView navigationView;
-    private TextView text_view_name_nave_header;
+    private TextView text_view_name_nave_header, Tab_Series, Tab_movies;
     private CircleImageView circle_image_view_profile_nav_header;
     private ImageView image_view_profile_nav_header_bg;
     private Dialog rateDialog;
     private boolean FromLogin;
     private RelativeLayout relative_layout_home_activity_search_section;
-    private EditText edit_text_home_activity_search;
+    private EditText edit_text_home_activity_search, edt_search_index;
     private ImageView image_view_activity_home_close_search;
 //    private ImageView image_view_activity_home_search;
     private ImageView image_view_activity_actors_back;
     private Dialog dialog;
+
+    private boolean search_mode = false;
+    private LinearLayout toolbar_normal;
+
+
     ConsentForm form;
 
     PieChartView pieChartView;
 
 
     IInAppBillingService mService;
+    BubbleNavigationConstraintView bubbleNavigationLinearView;
 
 
 
@@ -131,6 +138,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     private BillingProcessor bp;
     private boolean readyToPurchase = false;
+
+    public static HomeActivity self;
 
     ServiceConnection mServiceConn = new ServiceConnection() {
         @Override
@@ -302,6 +311,23 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             super.onActivityResult(requestCode, resultCode, data);
     }
     private void initActions() {
+        Tab_Series.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bubbleNavigationLinearView.setCurrentActiveItem(4);
+                edt_search_index.setVisibility(View.GONE);
+                toolbar_normal.setVisibility(View.VISIBLE);
+            }
+        }
+        );
+        Tab_movies.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bubbleNavigationLinearView.setCurrentActiveItem(5);
+                edt_search_index.setVisibility(View.GONE);
+                toolbar_normal.setVisibility(View.VISIBLE);
+            }
+        });
 //        image_view_activity_actors_back.setOnClickListener(v->{
 //            relative_layout_home_activity_search_section.setVisibility(View.GONE);
 //            edit_text_home_activity_search.setText("");
@@ -354,18 +380,23 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         this.circle_image_view_profile_nav_header=(CircleImageView) headerview.findViewById(R.id.circle_image_view_profile_nav_header);
         this.image_view_profile_nav_header_bg=(ImageView) headerview.findViewById(R.id.image_view_profile_nav_header_bg);
         // init pager view
-
+        this.Tab_Series = (TextView)findViewById(R.id.tab_tv_series);
+        this.Tab_movies = (TextView)findViewById(R.id.tab_movies);
+        this.edt_search_index = (EditText)findViewById(R.id.edt_search_index);
+        this.toolbar_normal = (LinearLayout)findViewById(R.id.toolbar_normal);
+        bubbleNavigationLinearView = findViewById(R.id.top_navigation_constraint);
         viewPager = (ViewPager) findViewById(R.id.vp_horizontal_ntb);
         viewPager.setOffscreenPageLimit(100);
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new HomeFragment());
-        adapter.addFragment(new MoviesFragment());
-        adapter.addFragment(new SeriesFragment());
+        adapter.addFragment(new SearchFragment());
         adapter.addFragment(new TvFragment());
         adapter.addFragment(new DownloadsFragment());
+        adapter.addFragment(new MoviesFragment());
+        adapter.addFragment(new SeriesFragment());
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(0);
-        final BubbleNavigationConstraintView bubbleNavigationLinearView = findViewById(R.id.top_navigation_constraint);
+
 
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -375,7 +406,18 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onPageSelected(int i) {
+
+                if(i ==1){
+                    edt_search_index.setVisibility(View.VISIBLE);
+                    toolbar_normal.setVisibility(View.GONE);
+                }
+                else{
+                    edt_search_index.setVisibility(View.GONE);
+                    toolbar_normal.setVisibility(View.VISIBLE);
+                }
                 bubbleNavigationLinearView.setCurrentActiveItem(i);
+
+
             }
 
             @Override
@@ -395,6 +437,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 //        this.image_view_activity_home_close_search =  (ImageView) findViewById(R.id.image_view_activity_home_close_search);
 //        this.image_view_activity_actors_back =  (ImageView) findViewById(R.id.image_view_activity_actors_back);
 //        this.image_view_activity_home_search =  (ImageView) findViewById(R.id.image_view_activity_home_search);
+        self = this;
     }
 
     @Override
@@ -926,5 +969,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
         }
 
+    }
+
+    public static HomeActivity getInstance(){
+        return self;
     }
 }

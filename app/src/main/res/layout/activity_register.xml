@@ -43,6 +43,7 @@
                     android:id="@+id/edt_email"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:layout_marginTop="5dp"
                     android:background="@drawable/bg_input_gray"
                     android:ems="10"
                     android:hint="E-mail or Mobile"
@@ -50,10 +51,74 @@
                     android:padding="10dp"
                     android:textSize="14sp" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/edt_username"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginRight="2.5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_input_gray"
+                        android:ems="10"
+                        android:hint="User Name"
+                        android:inputType="textEmailAddress"
+                        android:padding="10dp"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/edt_birthday"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="2.5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_input_gray"
+                        android:hint="Date of Birth"
+                        android:padding="10dp"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/edt_firstname"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginRight="2.5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_input_gray"
+                        android:ems="10"
+                        android:hint="First Name"
+                        android:inputType="textEmailAddress"
+                        android:padding="10dp"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/edt_lastname"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="2.5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_input_gray"
+                        android:ems="10"
+                        android:hint="Last Name"
+                        android:inputType="textEmailAddress"
+                        android:padding="10dp"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp">
+                    android:layout_marginTop="10dp">
 
                     <EditText
                         android:id="@+id/register_password"
