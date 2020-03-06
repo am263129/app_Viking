@@ -3,6 +3,7 @@ package com.official.aptoon.ui.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -16,9 +17,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.official.aptoon.Provider.PrefManager;
 import com.official.aptoon.R;
+import com.official.aptoon.api.apiClient;
+import com.official.aptoon.api.apiRest;
+import com.official.aptoon.entity.ApiResponse;
 
 import java.util.Calendar;
+
+import es.dmoral.toasty.Toasty;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+
 
 public class Register extends AppCompatActivity implements View.OnClickListener {
 
@@ -33,6 +46,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     private TextView dateView;
     private int year, month, day, birth_year, birth_month, birth_day;
     private DatePickerDialog picker;
+
+    private ProgressDialog register_progress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,11 +135,96 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         }
     }
     public void Register(){
-        Toast.makeText(Register.this,"Welcome to APTOON!", Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(Register.this, HomeActivity.class);
-        startActivity(intent);
-        finish();
+        
+    register_progress= ProgressDialog.show(this, null,getResources().getString(R.string.operation_progress), true);
+    Retrofit retrofit = apiClient.getClient();
+    apiRest service = retrofit.create(apiRest.class);
+    String name = edt_firstname.getText().toString() + " " + edt_lastname.getText().toString();
+    String username = edt_email.getText().toString();
+    String password = edt_password.getText().toString();
+    String type = "Phone";
+    Integer length = username.split("@").length;
+    if(username.split("@").length > 1){
+        type = username.split("@")[1].split("[.]")[0];
     }
+    String image = "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg" ;
+    Call<ApiResponse> call = service.register(name,username,password,type,image);
+        call.enqueue(new Callback<ApiResponse>() {
+        @Override
+        public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+            if(response.body()!=null){
+                if (response.body().getCode()==200){
+
+                    String id_user="0";
+                    String name_user="x";
+                    String username_user="x";
+                    String salt_user="0";
+                    String token_user="0";
+                    String type_user="x";
+                    String image_user="x";
+                    String enabled="x";
+                    for (int i=0;i<response.body().getValues().size();i++){
+                        if (response.body().getValues().get(i).getName().equals("salt")){
+                            salt_user=response.body().getValues().get(i).getValue();
+                        }
+                        if (response.body().getValues().get(i).getName().equals("token")){
+                            token_user=response.body().getValues().get(i).getValue();
+                        }
+                        if (response.body().getValues().get(i).getName().equals("id")){
+                            id_user=response.body().getValues().get(i).getValue();
+                        }
+                        if (response.body().getValues().get(i).getName().equals("name")){
+                            name_user=response.body().getValues().get(i).getValue();
+                        }
+                        if (response.body().getValues().get(i).getName().equals("type")){
+                            type_user=response.body().getValues().get(i).getValue();
+                        }
+                        if (response.body().getValues().get(i).getName().equals("username")){
+                            username_user=response.body().getValues().get(i).getValue();
+                        }
+                        if (response.body().getValues().get(i).getName().equals("url")){
+                            image_user=response.body().getValues().get(i).getValue();
+                        }
+                        if (response.body().getValues().get(i).getName().equals("enabled")){
+                            enabled=response.body().getValues().get(i).getValue();
+                        }
+                    }if (enabled.equals("true")){
+                        PrefManager prf= new PrefManager(Register.this);
+                        prf.setString("ID_USER",id_user);
+                        prf.setString("SALT_USER",salt_user);
+                        prf.setString("TOKEN_USER",token_user);
+                        prf.setString("NAME_USER",name_user);
+                        prf.setString("TYPE_USER",type_user);
+                        prf.setString("USERN_USER",username_user);
+                        prf.setString("IMAGE_USER",image_user);
+                        prf.setString("LOGGED","TRUE");
+                        String  token = FirebaseInstanceId.getInstance().getToken();
+//                        if (name_user.equals("null")){
+//                            linear_layout_otp_confirm_login_activity.setVisibility(View.GONE);
+//                            linear_layout_name_input_login_activity.setVisibility(View.VISIBLE);
+//                        }else{
+//                            updateToken(Integer.parseInt(id_user),token_user,token,name_user);
+//                        }
+//
+                    }else{
+                        Toasty.error(Register.this,getResources().getString(R.string.account_disabled), Toast.LENGTH_SHORT, true).show();
+                    }
+                }
+                if (response.body().getCode()==500){
+                    Toasty.error(Register.this, "Operation has been cancelled ! ", Toast.LENGTH_SHORT, true).show();
+                }
+            }else{
+                Toasty.error(Register.this, "Operation has been cancelled ! ", Toast.LENGTH_SHORT, true).show();
+            }
+            register_progress.dismiss();
+        }
+        @Override
+        public void onFailure(Call<ApiResponse> call, Throwable t) {
+            Toasty.error(Register.this, "Operation has been cancelled ! ", Toast.LENGTH_SHORT, true).show();
+            register_progress.dismiss();
+        }
+    });
+}
 
     public void ShowHidePass() {
         hide = !hide;

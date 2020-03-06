@@ -55,6 +55,7 @@ import com.google.ads.consent.ConsentStatus;
 import com.google.android.gms.cast.framework.CastButtonFactory;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.jackandphantom.blurimage.BlurImage;
@@ -87,6 +88,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 import de.hdodenhof.circleimageview.CircleImageView;
 import es.dmoral.toasty.Toasty;
@@ -125,7 +127,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
 
     IInAppBillingService mService;
-    BubbleNavigationConstraintView bubbleNavigationLinearView;
+//    BubbleNavigationConstraintView bubbleNavigationLinearView;
 
 
 
@@ -138,7 +140,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     private BillingProcessor bp;
     private boolean readyToPurchase = false;
-
+    BottomNavigationView bottomNavigation;
     public static HomeActivity self;
 
     ServiceConnection mServiceConn = new ServiceConnection() {
@@ -170,6 +172,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(false);
     }
+
+
+
+
     private void initBuy() {
         Intent serviceIntent =
                 new Intent("com.android.vending.billing.InAppBillingService.BIND");
@@ -314,18 +320,22 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         Tab_Series.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bubbleNavigationLinearView.setCurrentActiveItem(4);
+//                bubbleNavigationLinearView.setCurrentActiveItem(4);
+
                 edt_search_index.setVisibility(View.GONE);
                 toolbar_normal.setVisibility(View.VISIBLE);
+                openFragment(new SeriesFragment());
             }
         }
         );
         Tab_movies.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bubbleNavigationLinearView.setCurrentActiveItem(5);
+//                bubbleNavigationLinearView.setCurrentActiveItem(5);
+
                 edt_search_index.setVisibility(View.GONE);
                 toolbar_normal.setVisibility(View.VISIBLE);
+                openFragment(new MoviesFragment());
             }
         });
 //        image_view_activity_actors_back.setOnClickListener(v->{
@@ -387,7 +397,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         this.Tab_movies = (TextView)findViewById(R.id.tab_movies);
         this.edt_search_index = (EditText)findViewById(R.id.edt_search_index);
         this.toolbar_normal = (LinearLayout)findViewById(R.id.toolbar_normal);
-        bubbleNavigationLinearView = findViewById(R.id.top_navigation_constraint);
+//        bubbleNavigationLinearView = findViewById(R.id.top_navigation_constraint);
         viewPager = (ViewPager) findViewById(R.id.vp_horizontal_ntb);
         viewPager.setOffscreenPageLimit(100);
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -397,43 +407,47 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         adapter.addFragment(new DownloadsFragment());
         adapter.addFragment(new MoviesFragment());
         adapter.addFragment(new SeriesFragment());
-        viewPager.setAdapter(adapter);
-        viewPager.setCurrentItem(0);
 
+        bottomNavigation = findViewById(R.id.bottom_navigation);
+        bottomNavigation.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
 
-        viewPager.setAdapter(adapter);
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int i, float v, int i1) {
-            }
-
-            @Override
-            public void onPageSelected(int i) {
-
-                if(i ==1){
-                    edt_search_index.setVisibility(View.VISIBLE);
-                    toolbar_normal.setVisibility(View.GONE);
-                }
-                else{
-                    edt_search_index.setVisibility(View.GONE);
-                    toolbar_normal.setVisibility(View.VISIBLE);
-                }
-                bubbleNavigationLinearView.setCurrentActiveItem(i);
-
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int i) {
-
-            }
-        });
-        bubbleNavigationLinearView.setNavigationChangeListener(new BubbleNavigationChangeListener() {
-            @Override
-            public void onNavigationChanged(View view, int position) {
-                viewPager.setCurrentItem(position, true);
-            }
-        });
+//        viewPager.setAdapter(adapter);
+//        viewPager.setCurrentItem(0);
+//
+//
+//        viewPager.setAdapter(adapter);
+//        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//            @Override
+//            public void onPageScrolled(int i, float v, int i1) {
+//            }
+//
+//            @Override
+//            public void onPageSelected(int i) {
+//
+//                if(i ==1){
+//                    edt_search_index.setVisibility(View.VISIBLE);
+//                    toolbar_normal.setVisibility(View.GONE);
+//                }
+//                else{
+//                    edt_search_index.setVisibility(View.GONE);
+//                    toolbar_normal.setVisibility(View.VISIBLE);
+//                }
+////                bubbleNavigationLinearView.setCurrentActiveItem(i);
+//
+//
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int i) {
+//
+//            }
+//        });
+//        bubbleNavigationLinearView.setNavigationChangeListener(new BubbleNavigationChangeListener() {
+//            @Override
+//            public void onNavigationChanged(View view, int position) {
+//                viewPager.setCurrentItem(position, true);
+//            }
+//        });
 
 //        this.relative_layout_home_activity_search_section =  (RelativeLayout) findViewById(R.id.relative_layout_home_activity_search_section);
 //        this.edit_text_home_activity_search =  (EditText) findViewById(R.id.edit_text_home_activity_search);
@@ -453,6 +467,41 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 //                R.id.media_route_menu_item);
         return true;
     }
+
+    //new bottom navigation bar//
+
+    public void openFragment(Fragment fragment) {
+        FragmentTransaction transaction = HomeActivity.this.getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, fragment);
+        transaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+    BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    edt_search_index.setVisibility(View.GONE);
+                    toolbar_normal.setVisibility(View.VISIBLE);
+                    switch (item.getItemId()) {
+                        case R.id.navigation_home:
+                            openFragment(new HomeFragment());
+                            return true;
+                        case R.id.navigation_search:
+                            edt_search_index.setVisibility(View.VISIBLE);
+                            toolbar_normal.setVisibility(View.GONE);
+                            openFragment(new SearchFragment());
+                            return true;
+                        case R.id.navigation_livetv:
+                            openFragment(new TvFragment());
+                            return true;
+                        case R.id.navigation_download:
+                            openFragment(new DownloadsFragment());
+                            return true;
+                    }
+                    return false;
+                }
+            };
+
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override

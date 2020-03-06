@@ -71,9 +71,9 @@ public class SearchFragment extends Fragment {
         tabLayout.setupWithViewPager(viewPager);
 
 
-        Intent intent = new Intent(HomeActivity.getInstance(), SearchActivity.class);
-        intent.putExtra("query","Eskimo");
-        startActivity(intent);
+//        Intent intent = new Intent(HomeActivity.getInstance(), SearchActivity.class);
+//        intent.putExtra("query","Eskimo");
+//        startActivity(intent);
 
         return view;
     }

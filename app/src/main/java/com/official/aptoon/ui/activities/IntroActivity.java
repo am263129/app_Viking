@@ -62,7 +62,7 @@ public class IntroActivity extends AppCompatActivity {
                 if (position <6){
                     view_pager_slide.setCurrentItem(position+1);
                 }else{
-                    Intent intent = new Intent(IntroActivity.this,HomeActivity.class);
+                    Intent intent = new Intent(IntroActivity.this,OuterLoginActivity.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.enter, R.anim.exit);
                     finish();
