@@ -78,6 +78,7 @@ import com.squareup.picasso.Target;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -171,9 +172,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         initGDPR();
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(false);
+        setinitvlue();
     }
 
-
+    private void setinitvlue() {
+        if(!Global.user_image.equals("")){
+            Drawable user_avatar = LoadImageFromWebOperations(Global.user_image);
+            circle_image_view_profile_nav_header.setImageDrawable(user_avatar);
+        }
+    }
 
 
     private void initBuy() {
@@ -1021,6 +1028,16 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
         }
 
+    }
+
+    public static Drawable LoadImageFromWebOperations(String url) {
+        try {
+            InputStream is = (InputStream) new URL(url).getContent();
+            Drawable d = Drawable.createFromStream(is, "src name");
+            return d;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public static HomeActivity getInstance(){

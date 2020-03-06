@@ -85,7 +85,7 @@
                         android:layout_height="120dp"
                         android:layout_marginLeft="30dp"
                         android:layout_marginTop="20dp"
-                        android:src="@drawable/avatar"
+                        android:src="@drawable/com_facebook_profile_picture_blank_square"
                         app:civ_border_color="#FF000000"
                         app:civ_border_width="0dp" />
                 </RelativeLayout>

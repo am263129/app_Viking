@@ -51,6 +51,7 @@ import com.official.aptoon.Provider.PrefManager;
 import com.official.aptoon.R;
 import com.official.aptoon.api.apiClient;
 import com.official.aptoon.api.apiRest;
+import com.official.aptoon.config.Global;
 import com.official.aptoon.entity.ApiResponse;
 
 import org.bouncycastle.asn1.dvcs.TargetEtcChain;
@@ -145,6 +146,87 @@ public class OuterLoginActivity extends AppCompatActivity implements View.OnClic
 
 
     private void login(){
+        register_progress= ProgressDialog.show(this, null,getResources().getString(R.string.operation_progress), true);
+        Retrofit retrofit = apiClient.getClient();
+        apiRest service = retrofit.create(apiRest.class);
+        String name = edt_email.getText().toString();
+        String password = edt_password.getText().toString();
+        Call<ApiResponse> call = service.login(name,password);
+        call.enqueue(new Callback<ApiResponse>() {
+            @Override
+            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+                if(response.body()!=null){
+                    if (response.body().getCode()==200){
+
+                        String id_user="0";
+                        String name_user="x";
+                        String username_user="x";
+                        String salt_user="0";
+                        String token_user="0";
+                        String type_user="x";
+                        String image_user="x";
+                        String enabled="x";
+                        for (int i=0;i<response.body().getValues().size();i++){
+                            if (response.body().getValues().get(i).getName().equals("salt")){
+                                salt_user=response.body().getValues().get(i).getValue();
+                            }
+                            if (response.body().getValues().get(i).getName().equals("token")){
+                                token_user=response.body().getValues().get(i).getValue();
+                            }
+                            if (response.body().getValues().get(i).getName().equals("id")){
+                                id_user=response.body().getValues().get(i).getValue();
+                            }
+                            if (response.body().getValues().get(i).getName().equals("name")){
+                                name_user=response.body().getValues().get(i).getValue();
+                            }
+                            if (response.body().getValues().get(i).getName().equals("type")){
+                                type_user=response.body().getValues().get(i).getValue();
+                            }
+                            if (response.body().getValues().get(i).getName().equals("username")){
+                                username_user=response.body().getValues().get(i).getValue();
+                            }
+                            if (response.body().getValues().get(i).getName().equals("url")){
+                                image_user=response.body().getValues().get(i).getValue();
+                            }
+                            if (response.body().getValues().get(i).getName().equals("enabled")){
+                                enabled=response.body().getValues().get(i).getValue();
+                            }
+                        }if (enabled.equals("true")){
+                            PrefManager prf= new PrefManager(getApplicationContext());
+                            prf.setString("ID_USER",id_user);
+                            prf.setString("SALT_USER",salt_user);
+                            prf.setString("TOKEN_USER",token_user);
+                            prf.setString("NAME_USER",name_user);
+                            prf.setString("TYPE_USER",type_user);
+                            prf.setString("USERN_USER",username_user);
+                            prf.setString("IMAGE_USER",image_user);
+                            prf.setString("LOGGED","TRUE");
+                            Global.user_image = image_user;
+                            String  token = FirebaseInstanceId.getInstance().getToken();
+                            if (name_user.equals("null")){
+                            }else{
+                                updateToken(Integer.parseInt(id_user),token_user,token,name_user);
+                            }
+
+
+                        }else{
+                            Toasty.error(getApplicationContext(),getResources().getString(R.string.account_disabled), Toast.LENGTH_SHORT, true).show();
+                        }
+                    }
+                    if (response.body().getCode()==500){
+                        Toasty.error(getApplicationContext(), "Operation has been cancelled ! ", Toast.LENGTH_SHORT, true).show();
+                    }
+                }else{
+                    Toasty.error(getApplicationContext(), "Operation has been cancelled ! ", Toast.LENGTH_SHORT, true).show();
+                }
+                register_progress.dismiss();
+            }
+            @Override
+            public void onFailure(Call<ApiResponse> call, Throwable t) {
+                Toasty.error(getApplicationContext(), "Operation has been cancelled ! ", Toast.LENGTH_SHORT, true).show();
+                register_progress.dismiss();
+            }
+        });
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
         finish();
@@ -243,6 +325,8 @@ public class OuterLoginActivity extends AppCompatActivity implements View.OnClic
         Retrofit retrofit = apiClient.getClient();
         apiRest service = retrofit.create(apiRest.class);
         Call<ApiResponse> call = service.register(name,username,password,type,image);
+        Global.user_image = image;
+        Global.user_name = name;
         call.enqueue(new Callback<ApiResponse>() {
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {

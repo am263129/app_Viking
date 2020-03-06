@@ -16,6 +16,11 @@ public class Global {
     public static final String SUBSCRIPTION_ID = "SUBSCRIPTION_ID";
     public static final String MERCHANT_KEY = "MERCHANT_KEY" ; // PUT YOUR MERCHANT KEY HERE;
     public static final long   SUBSCRIPTION_DURATION = 30; // PUT SUBSCRIPTION DURATION DAYS HERE;
+
+
+    public static String user_name = "";
+    public static String user_image = "";
+
 }
 
 
