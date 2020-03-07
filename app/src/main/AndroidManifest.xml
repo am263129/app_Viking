@@ -21,7 +21,8 @@
         android:theme="@style/Theme.AppCompat"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.activities.ProfileActivity"></activity>
+        <activity android:name=".ui.activities.ProfileActivity"
+            android:theme="@style/AppThemeNoAction" ></activity>
         <activity
             android:name=".ui.activities.forgotpassActivity"
             android:theme="@style/AppThemeNoAction" />

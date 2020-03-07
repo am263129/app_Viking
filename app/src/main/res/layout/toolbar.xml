@@ -62,12 +62,50 @@
                     android:gravity="center"
                     android:text="Movies" />
 
-                <ImageView
-                    android:id="@+id/imageView8"
+                <RelativeLayout
+                    android:id="@+id/btn_notifications"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/notification" />
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/imageView8"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/notification" />
+
+                    <RelativeLayout
+                        android:id="@+id/unred_notifications"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:visibility="gone">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_width="7dp"
+                            android:layout_height="7dp"
+                            android:layout_marginLeft="5dp"
+                            android:src="@drawable/noti_back"
+                            app:civ_border_color="#FF000000"
+                            app:civ_border_width="0dp" />
+
+                        <TextView
+                            android:id="@+id/num_notifications"
+                            android:layout_width="5dp"
+                            android:layout_height="5dp"
+                            android:layout_marginLeft="6dp"
+                            android:gravity="center"
+                            android:scrollbarThumbHorizontal="@color/black"
+                            android:text="TextView"
+                            android:textColor="@color/black"
+                            android:textSize="4dp"
+                            tools:text="6" />
+                    </RelativeLayout>
+
+                </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="50dp"
@@ -80,12 +118,11 @@
                         android:layout_height="35dp"
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="3dp"
-                        android:src="@drawable/placeholder_profile"
-                        app:civ_border_color="#FF000000"
+                        android:src="@drawable/com_facebook_profile_picture_blank_square"
                         app:civ_border_width="0dp" />
 
                     <ImageView
-                        android:id="@+id/imageView12"
+                        android:id="@+id/btn_profile"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/profil_picture" />

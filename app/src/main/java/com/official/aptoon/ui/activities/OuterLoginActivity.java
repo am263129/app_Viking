@@ -146,7 +146,8 @@ public class OuterLoginActivity extends AppCompatActivity implements View.OnClic
 
 
     private void login(){
-        register_progress= ProgressDialog.show(this, null,getResources().getString(R.string.operation_progress), true);
+
+        register_progress= ProgressDialog.show(OuterLoginActivity.this, null,getResources().getString(R.string.operation_progress), true);
         Retrofit retrofit = apiClient.getClient();
         apiRest service = retrofit.create(apiRest.class);
         String name = edt_email.getText().toString();
@@ -156,8 +157,9 @@ public class OuterLoginActivity extends AppCompatActivity implements View.OnClic
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                 if(response.body()!=null){
-                    if (response.body().getCode()==200){
 
+                    if (response.body().getCode()==200){
+                        Toast.makeText(OuterLoginActivity.this,"1",Toast.LENGTH_SHORT).show();
                         String id_user="0";
                         String name_user="x";
                         String username_user="x";
@@ -192,6 +194,7 @@ public class OuterLoginActivity extends AppCompatActivity implements View.OnClic
                                 enabled=response.body().getValues().get(i).getValue();
                             }
                         }if (enabled.equals("true")){
+                            Toast.makeText(OuterLoginActivity.this,"2",Toast.LENGTH_SHORT).show();
                             PrefManager prf= new PrefManager(getApplicationContext());
                             prf.setString("ID_USER",id_user);
                             prf.setString("SALT_USER",salt_user);
@@ -201,35 +204,46 @@ public class OuterLoginActivity extends AppCompatActivity implements View.OnClic
                             prf.setString("USERN_USER",username_user);
                             prf.setString("IMAGE_USER",image_user);
                             prf.setString("LOGGED","TRUE");
+
+                            Toast.makeText(OuterLoginActivity.this,"kkk",Toast.LENGTH_SHORT).show();
                             Global.user_image = image_user;
                             String  token = FirebaseInstanceId.getInstance().getToken();
                             if (name_user.equals("null")){
                             }else{
                                 updateToken(Integer.parseInt(id_user),token_user,token,name_user);
                             }
+                            register_progress.dismiss();
+                            Toast.makeText(OuterLoginActivity.this,"kkk bug is here",Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(OuterLoginActivity.this, HomeActivity.class);
+                            startActivity(intent);
+                            finish();
 
 
                         }else{
+                            register_progress.dismiss();
                             Toasty.error(getApplicationContext(),getResources().getString(R.string.account_disabled), Toast.LENGTH_SHORT, true).show();
                         }
                     }
                     if (response.body().getCode()==500){
+                        register_progress.dismiss();
                         Toasty.error(getApplicationContext(), "Operation has been cancelled ! ", Toast.LENGTH_SHORT, true).show();
                     }
+
                 }else{
+                    register_progress.dismiss();
                     Toasty.error(getApplicationContext(), "Operation has been cancelled ! ", Toast.LENGTH_SHORT, true).show();
                 }
-                register_progress.dismiss();
             }
             @Override
             public void onFailure(Call<ApiResponse> call, Throwable t) {
                 Toasty.error(getApplicationContext(), "Operation has been cancelled ! ", Toast.LENGTH_SHORT, true).show();
                 register_progress.dismiss();
+                //only_for_test
+//                startActivity(intent);
+//                finish();
             }
         });
-        Intent intent = new Intent(this, HomeActivity.class);
-        startActivity(intent);
-        finish();
+
     }
 
     private void login_with_google(){
@@ -321,7 +335,7 @@ public class OuterLoginActivity extends AppCompatActivity implements View.OnClic
     }
 
     public void signUp(String username,String password,String name,String type,String image){
-        register_progress= ProgressDialog.show(this, null,getResources().getString(R.string.operation_progress), true);
+        register_progress= ProgressDialog.show(OuterLoginActivity.this, null,getResources().getString(R.string.operation_progress), true);
         Retrofit retrofit = apiClient.getClient();
         apiRest service = retrofit.create(apiRest.class);
         Call<ApiResponse> call = service.register(name,username,password,type,image);
@@ -375,6 +389,7 @@ public class OuterLoginActivity extends AppCompatActivity implements View.OnClic
                             prf.setString("TYPE_USER",type_user);
                             prf.setString("USERN_USER",username_user);
                             prf.setString("IMAGE_USER",image_user);
+                            Global.user_image = image_user;
                             prf.setString("LOGGED","TRUE");
                             String  token = FirebaseInstanceId.getInstance().getToken();
                             if (name_user.equals("null")){
@@ -404,7 +419,7 @@ public class OuterLoginActivity extends AppCompatActivity implements View.OnClic
     }
 
     public void updateToken(Integer id,String key,String token,String name){
-        register_progress= ProgressDialog.show(this, null,getResources().getString(R.string.operation_progress), true);
+        register_progress= ProgressDialog.show(OuterLoginActivity.this, null,getResources().getString(R.string.operation_progress), true);
         Retrofit retrofit = apiClient.getClient();
         apiRest service = retrofit.create(apiRest.class);
         Call<ApiResponse> call = service.editToken(id,key,token,name);

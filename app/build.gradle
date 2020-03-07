@@ -103,5 +103,6 @@ dependencies {
     implementation 'com.roughike:bottom-bar:2.3.1'
     implementation files('libs/YouTubeAndroidPlayerApi.jar')
     implementation 'com.github.lecho:hellocharts-library:1.5.8@aar'
+//    implementation 'com.soundcloud.android:android-crop:1.0.1@aar'
 }
 apply plugin: 'com.google.gms.google-services'

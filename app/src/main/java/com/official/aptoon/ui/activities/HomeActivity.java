@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -26,8 +27,10 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -36,6 +39,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -108,10 +112,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
     private TextView text_view_name_nave_header, Tab_Series, Tab_movies;
     private CircleImageView circle_image_view_profile_nav_header;
-    private ImageView image_view_profile_nav_header_bg;
+
+    private ImageView image_view_profile_nav_header_bg, btn_profile;
     private Dialog rateDialog;
     private boolean FromLogin;
-    private RelativeLayout relative_layout_home_activity_search_section;
+    private RelativeLayout relative_layout_home_activity_search_section, btn_notification;
     private EditText edit_text_home_activity_search, edt_search_index;
     private ImageView image_view_activity_home_close_search;
 //    private ImageView image_view_activity_home_search;
@@ -121,7 +126,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private boolean search_mode = false;
     private LinearLayout toolbar_normal;
 
-
+    View popupView;
+    PopupWindow popupWindow;
     ConsentForm form;
 
     PieChartView pieChartView;
@@ -164,6 +170,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        Toast.makeText(HomeActivity.this,"kkk",Toast.LENGTH_SHORT).show();
         getGenreList();
         initViews();
         initActions();
@@ -176,9 +183,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void setinitvlue() {
+        openFragment(new HomeFragment());
         if(!Global.user_image.equals("")){
-            Drawable user_avatar = LoadImageFromWebOperations(Global.user_image);
-            circle_image_view_profile_nav_header.setImageDrawable(user_avatar);
+            Toast.makeText(HomeActivity.this,Global.user_image,Toast.LENGTH_SHORT).show();
+//            Drawable user_avatar = LoadImageFromWebOperations(Global.user_image);
+//            circle_image_view_profile_nav_header.setImageDrawable(user_avatar);
         }
     }
 
@@ -417,6 +426,22 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         bottomNavigation = findViewById(R.id.bottom_navigation);
         bottomNavigation.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
+        btn_notification = findViewById(R.id.btn_notifications);
+        btn_notification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                show_notifications();
+            }
+        });
+        btn_profile = findViewById(R.id.btn_profile);
+        btn_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
 //        viewPager.setAdapter(adapter);
 //        viewPager.setCurrentItem(0);
@@ -462,6 +487,57 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 //        this.image_view_activity_actors_back =  (ImageView) findViewById(R.id.image_view_activity_actors_back);
 //        this.image_view_activity_home_search =  (ImageView) findViewById(R.id.image_view_activity_home_search);
         self = this;
+    }
+
+    public static Point getLocationOnScreen(View view) {
+        int[] location = new int[2];
+        view.getLocationOnScreen(location);
+        return new Point(location[0], location[1]);
+    }
+
+    private void show_notifications() {
+        int gravity = Gravity.TOP;
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        popupView = inflater.inflate(R.layout.notification_window, null);
+        int width = 600;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true;
+        int[] pos = new int[2];
+        btn_notification.getLocationOnScreen(pos);
+
+        popupWindow = new PopupWindow(popupView, width, height, focusable);
+        ImageView close = popupView.findViewById(R.id.btn_close);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
+        TextView btn_show_all = popupView.findViewById(R.id.btn_show_all);
+        btn_show_all.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+
+            popupWindow.showAtLocation(navigationView,0, pos[0]-400,pos[1]+100);
+
+
+//        LayoutInflater layoutInflater = getLayoutInflater();
+//        int popupWidth = 500;//ViewGroup.LayoutParams.WRAP_CONTENT;
+//        int popupHeight = ViewGroup.LayoutParams.WRAP_CONTENT;
+//        popupView = layoutInflater.inflate(R.layout.notification_window, null);
+//
+//        PopupWindow attachmentPopup = new PopupWindow(this);
+//        attachmentPopup.setFocusable(true);
+//        attachmentPopup.setWidth(popupWidth);
+//        attachmentPopup.setHeight(popupHeight);
+//        attachmentPopup.setContentView(popupView);
+//        attachmentPopup.showAsDropDown(navigationView, -5, 0);
+
     }
 
     @Override
@@ -932,11 +1008,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             //temp for show
             List<SliceValue> pieData = new ArrayList<>();
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                pieData.add(new SliceValue(14, getColor(R.color.red_bg)));
-                pieData.add(new SliceValue(50, getColor(R.color.gray_bg)));
-                pieData.add(new SliceValue(13, getColor(R.color.green_bg)));
-                pieData.add(new SliceValue(10, getColor(R.color.purple_bg)));
-                pieData.add(new SliceValue(13, getColor(R.color.yellow_bg)));
+                pieData.add(new SliceValue(Global.val_watching, getColor(R.color.red_bg)));
+                pieData.add(new SliceValue(Global.val_completed, getColor(R.color.gray_bg)));
+                pieData.add(new SliceValue(Global.val_on_hold, getColor(R.color.green_bg)));
+                pieData.add(new SliceValue(Global.val_dropped, getColor(R.color.purple_bg)));
+                pieData.add(new SliceValue(Global.val_plan_to_watch, getColor(R.color.yellow_bg)));
             }
             PieChartData pieChartData = new PieChartData(pieData);
             pieChartView.setPieChartData(pieChartData);
