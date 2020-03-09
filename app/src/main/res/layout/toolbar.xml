@@ -41,7 +41,7 @@
                 <ImageView
                     android:layout_width="80dp"
                     android:layout_height="20dp"
-                    android:background="@drawable/logo"
+                    android:background="@drawable/logo_gray"
                     android:paddingTop="15dp"
                     android:paddingBottom="15dp"
                     tools:ignore="MissingPrefix" />

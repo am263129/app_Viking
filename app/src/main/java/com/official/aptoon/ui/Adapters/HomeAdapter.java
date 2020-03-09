@@ -380,7 +380,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             clickableViews.add(nativeAdTitle);
             clickableViews.add(nativeAdCallToAction);
 
-            // Register the Title and CTA button to listen for clicks.
+            // RegisterActivity the Title and CTA button to listen for clicks.
             nativeAd.registerViewForInteraction(
                     adView,
                     nativeAdMedia,

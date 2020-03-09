@@ -171,7 +171,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Toast.makeText(HomeActivity.this,"kkk",Toast.LENGTH_SHORT).show();
         getGenreList();
         initViews();
         initActions();
@@ -500,7 +499,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         int screen_width = displayMetrics.widthPixels;
 
-        int width = (int)Math.floor(screen_width/3);
+        int width = (int)Math.floor(screen_width/2);
         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
         boolean focusable = true;
         int[] pos = new int[2];
@@ -514,13 +513,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 popupWindow.dismiss();
             }
         });
-        TextView btn_show_all = popupView.findViewById(R.id.btn_show_all);
-        btn_show_all.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+        //TextView btn_show_all = popupView.findViewById(R.id.btn_show_all);
+//        btn_show_all.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
         popupWindow.showAtLocation(navigationView,0, pos[0]-width + (int)width/4,pos[1]+100);
 
 

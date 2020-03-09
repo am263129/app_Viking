@@ -7,9 +7,6 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.graphics.fonts.Font;
-import android.media.Image;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
@@ -19,7 +16,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,15 +34,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.official.aptoon.Provider.PrefManager;
 import com.official.aptoon.R;
 import com.official.aptoon.api.apiClient;
@@ -54,7 +43,6 @@ import com.official.aptoon.api.apiRest;
 import com.official.aptoon.config.Global;
 import com.official.aptoon.entity.ApiResponse;
 
-import org.bouncycastle.asn1.dvcs.TargetEtcChain;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -477,7 +465,7 @@ public class OuterLoginActivity extends AppCompatActivity implements View.OnClic
                 startActivity(intent);
                 break;
             case R.id.btn_sign_up:
-                intent = new Intent(OuterLoginActivity.this, Register.class);
+                intent = new Intent(OuterLoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_live_chat:

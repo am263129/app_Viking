@@ -38,7 +38,7 @@
                 android:layout_width="0dp"
                 android:layout_height="30dp"
                 android:layout_weight="8"
-                app:srcCompat="@mipmap/ic_launcher_foreground" />
+                app:srcCompat="@drawable/logo" />
 
             <ImageView
                 android:id="@+id/imageView7"

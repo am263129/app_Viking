@@ -27,7 +27,7 @@
             android:name=".ui.activities.forgotpassActivity"
             android:theme="@style/AppThemeNoAction" />
         <activity
-            android:name=".ui.activities.Register"
+            android:name=".ui.activities.RegisterActivity"
             android:theme="@style/AppThemeNoAction" />
         <activity
             android:name=".ui.activities.OuterLoginActivity"
