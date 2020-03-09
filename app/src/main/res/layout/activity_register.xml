@@ -221,7 +221,8 @@
                 android:layout_height="50dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="20dp"
-                android:background="@drawable/live" />
+                android:background="@drawable/live"
+                android:visibility="gone" />
         </RelativeLayout>
 
 

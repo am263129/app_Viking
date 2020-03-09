@@ -28,13 +28,7 @@
                 android:src="@drawable/com_facebook_profile_picture_blank_square"
                 app:civ_border_width="0dp" />
 
-            <ImageView
-                android:id="@+id/btn_edit_photo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:visibility="gone"
-                app:srcCompat="@drawable/effect" />
+
 
         </RelativeLayout>
 

@@ -113,7 +113,7 @@
                     android:gravity="center">
 
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/circle_image_view_profile_nav_header"
+                        android:id="@+id/btn_profile"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
                         android:layout_marginLeft="8dp"
@@ -122,7 +122,7 @@
                         app:civ_border_width="0dp" />
 
                     <ImageView
-                        android:id="@+id/btn_profile"
+                        android:id="@+id/back_profile"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/profil_picture" />

@@ -116,7 +116,8 @@
                         android:background="@drawable/label_balance"
                         android:gravity="center"
                         android:orientation="horizontal"
-                        android:padding="2dp">
+                        android:padding="2dp"
+                        android:visibility="gone">
 
                         <ImageView
                             android:id="@+id/imageView4"

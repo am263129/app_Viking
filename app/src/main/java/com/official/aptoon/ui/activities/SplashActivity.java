@@ -200,18 +200,10 @@ public class SplashActivity extends AppCompatActivity {
                             Toasty.error(getApplicationContext(),getResources().getString(R.string.account_disabled), Toast.LENGTH_SHORT, true).show();
                         }
                         if (response.body().getCode().equals(200)) {
-                            if (!prf.getString("first").equals("true")){
-                                Intent intent = new Intent(SplashActivity.this,IntroActivity.class);
-                                startActivity(intent);
-                                overridePendingTransition(R.anim.enter, R.anim.exit);
-                                finish();
-                                prf.setString("first","true");
-                            }else{
                                 Intent intent = new Intent(SplashActivity.this,OuterLoginActivity.class);
                                 startActivity(intent);
                                 overridePendingTransition(R.anim.enter, R.anim.exit);
                                 finish();
-                            }
                         }else if (response.body().getCode().equals(202)) {
                             String title_update=response.body().getValues().get(0).getValue();
                             String featurs_update=response.body().getMessage();
@@ -238,85 +230,43 @@ public class SplashActivity extends AppCompatActivity {
                                     })
                                     .setNegativeButton(getResources().getString(R.string.skip), new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
-                                            if (!prf.getString("first").equals("true")){
-                                                Intent intent = new Intent(SplashActivity.this,IntroActivity.class);
-                                                startActivity(intent);
-                                                overridePendingTransition(R.anim.enter, R.anim.exit);
-                                                finish();
-                                                prf.setString("first","true");
-                                            }else{
                                                 Intent intent = new Intent(SplashActivity.this,OuterLoginActivity.class);
                                                 startActivity(intent);
                                                 overridePendingTransition(R.anim.enter, R.anim.exit);
                                                 finish();
-                                            }
                                         }
                                     })
                                     .setCancelable(false)
                                     .setIcon(R.drawable.ic_update)
                                     .show();
                         } else {
-                            if (!prf.getString("first").equals("true")){
-                                Intent intent = new Intent(SplashActivity.this,IntroActivity.class);
-                                startActivity(intent);
-                                overridePendingTransition(R.anim.enter, R.anim.exit);
-                                finish();
-                                prf.setString("first","true");
-                            }else{
                                 Intent intent = new Intent(SplashActivity.this,OuterLoginActivity.class);
                                 startActivity(intent);
                                 overridePendingTransition(R.anim.enter, R.anim.exit);
                                 finish();
-                            }
                         }
                     }else {
-                        if (!prf.getString("first").equals("true")){
-                            Intent intent = new Intent(SplashActivity.this,IntroActivity.class);
-                            startActivity(intent);
-                            overridePendingTransition(R.anim.enter, R.anim.exit);
-                            finish();
-                            prf.setString("first","true");
-                        }else{
-//                            Intent intent = new Intent(SplashActivity.this,OuterLoginActivity.class);
                             Intent intent = new Intent(SplashActivity.this,OuterLoginActivity.class);
                             startActivity(intent);
                             overridePendingTransition(R.anim.enter, R.anim.exit);
                             finish();
                         }
-                    }
                 }
                 @Override
                 public void onFailure(Call<ApiResponse> call, Throwable t) {
                     updateTextViews();
-                    if (!prf.getString("first").equals("true")){
-                        Intent intent = new Intent(SplashActivity.this,IntroActivity.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.enter, R.anim.exit);
-                        finish();
-                        prf.setString("first","true");
-                    }else{
-//                        Intent intent = new Intent(SplashActivity.this,OuterLoginActivity.class);
                         Intent intent = new Intent(SplashActivity.this,OuterLoginActivity.class);
                         startActivity(intent);
                         overridePendingTransition(R.anim.enter, R.anim.exit);
                         finish();
                     }
-                }
             });
         }else{
-            if (!prf.getString("first").equals("true")){
-                Intent intent = new Intent(SplashActivity.this,IntroActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.enter, R.anim.exit);
-                finish();
-                prf.setString("first","true");
-            }else{
-//                Intent intent = new Intent(SplashActivity.this,OuterLoginActivity.class);
+
                 Intent intent = new Intent(SplashActivity.this,OuterLoginActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.enter, R.anim.exit);
                 finish();
-            }
 
         }
 

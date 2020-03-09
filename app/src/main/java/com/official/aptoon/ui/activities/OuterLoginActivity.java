@@ -147,6 +147,7 @@ public class OuterLoginActivity extends AppCompatActivity implements View.OnClic
 
     private void login(){
 
+
         register_progress= ProgressDialog.show(OuterLoginActivity.this, null,getResources().getString(R.string.operation_progress), true);
         Retrofit retrofit = apiClient.getClient();
         apiRest service = retrofit.create(apiRest.class);
@@ -238,9 +239,11 @@ public class OuterLoginActivity extends AppCompatActivity implements View.OnClic
             public void onFailure(Call<ApiResponse> call, Throwable t) {
                 Toasty.error(getApplicationContext(), "Operation has been cancelled ! ", Toast.LENGTH_SHORT, true).show();
                 register_progress.dismiss();
-                //only_for_test
-//                startActivity(intent);
-//                finish();
+                //test
+                Intent intent = new Intent(OuterLoginActivity.this, HomeActivity.class);
+                startActivity(intent);
+                finish();
+
             }
         });
 

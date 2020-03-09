@@ -24,6 +24,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -111,9 +112,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private ViewPagerAdapter adapter;
     private NavigationView navigationView;
     private TextView text_view_name_nave_header, Tab_Series, Tab_movies;
-    private CircleImageView circle_image_view_profile_nav_header;
+    private CircleImageView circle_image_view_profile_nav_header,btn_profile;
 
-    private ImageView image_view_profile_nav_header_bg, btn_profile;
+    private ImageView image_view_profile_nav_header_bg;
     private Dialog rateDialog;
     private boolean FromLogin;
     private RelativeLayout relative_layout_home_activity_search_section, btn_notification;
@@ -184,11 +185,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     private void setinitvlue() {
         openFragment(new HomeFragment());
-        if(!Global.user_image.equals("")){
-            Toast.makeText(HomeActivity.this,Global.user_image,Toast.LENGTH_SHORT).show();
-//            Drawable user_avatar = LoadImageFromWebOperations(Global.user_image);
-//            circle_image_view_profile_nav_header.setImageDrawable(user_avatar);
-        }
     }
 
 
@@ -499,7 +495,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         int gravity = Gravity.TOP;
         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         popupView = inflater.inflate(R.layout.notification_window, null);
-        int width = 600;
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+
+        int screen_width = displayMetrics.widthPixels;
+
+        int width = (int)Math.floor(screen_width/3);
         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
         boolean focusable = true;
         int[] pos = new int[2];
@@ -520,23 +521,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
             }
         });
+        popupWindow.showAtLocation(navigationView,0, pos[0]-width + (int)width/4,pos[1]+100);
 
-
-
-            popupWindow.showAtLocation(navigationView,0, pos[0]-400,pos[1]+100);
-
-
-//        LayoutInflater layoutInflater = getLayoutInflater();
-//        int popupWidth = 500;//ViewGroup.LayoutParams.WRAP_CONTENT;
-//        int popupHeight = ViewGroup.LayoutParams.WRAP_CONTENT;
-//        popupView = layoutInflater.inflate(R.layout.notification_window, null);
-//
-//        PopupWindow attachmentPopup = new PopupWindow(this);
-//        attachmentPopup.setFocusable(true);
-//        attachmentPopup.setWidth(popupWidth);
-//        attachmentPopup.setHeight(popupHeight);
-//        attachmentPopup.setContentView(popupView);
-//        attachmentPopup.showAsDropDown(navigationView, -5, 0);
 
     }
 
@@ -982,11 +968,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             nav_Menu.findItem(R.id.login).setVisible(false);
             text_view_name_nave_header.setText(prf.getString("NAME_USER").toString());
             Picasso.with(getApplicationContext()).load(prf.getString("IMAGE_USER").toString()).placeholder(R.drawable.placeholder_profile).error(R.drawable.placeholder_profile).resize(200,200).centerCrop().into(circle_image_view_profile_nav_header);
+            Picasso.with(getApplicationContext()).load(prf.getString("IMAGE_USER").toString()).placeholder(R.drawable.placeholder_profile).error(R.drawable.placeholder_profile).resize(200,200).centerCrop().into(btn_profile);
 
             final Target target = new Target() {
                 @Override
                 public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                     BlurImage.with(getApplicationContext()).load(bitmap).intensity(25).Async(true).into(image_view_profile_nav_header_bg);
+                    BlurImage.with(getApplicationContext()).load(bitmap).intensity(25).Async(true).into(btn_profile);
                 }
                 @Override
                 public void onBitmapFailed(Drawable errorDrawable) { }
