@@ -60,7 +60,7 @@
     <string name="Logout">Logout</string>
     <string name="login">Login / Register</string>
     <string name="subscribe">Subscribe</string>
-    <string name="later">Later</string>
+    <string name="later">LATER</string>
     <string name="please_login">Login to your account</string>
     <string name="message_logout">You are successfully logout</string>
     <string name="hint_name">Full Name</string>
@@ -121,5 +121,6 @@
     <string name="com_facebook_loginview_log_in_button">Facebook</string>
     <string name="com_facebook_loginview_log_in_button_long">Log in with Facebook</string>
     <string name="broadcast_time">Broadcast Time</string>
+    <string name="never">NEVER</string>
 
 </resources>

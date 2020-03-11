@@ -30,24 +30,35 @@
                 android:text="Rate This Movie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <androidx.appcompat.widget.AppCompatRatingBar
-                android:layout_gravity="center"
-                android:id="@+id/AppCompatRatingBar_dialog_rating_app"
-                android:indeterminateTint="#ffffff"
-                android:foregroundTint="#ffffff"
-                android:progressTint="#ffffff"
-                android:backgroundTint="@color/gray"
-                android:secondaryProgressTint="@color/gray"
-                android:progressBackgroundTint="@color/gray"
-                android:rating="0"
-                android:stepSize="1"
-                android:elevation="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="10dp"
-                android:layout_below="@+id/relative_layout_user"
-                android:layout_centerHorizontal="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView11"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/rating_happy" />
+
+                <androidx.appcompat.widget.AppCompatRatingBar
+                    android:id="@+id/AppCompatRatingBar_dialog_rating_app"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/relative_layout_user"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:progressBackgroundTint="@color/gray"
+                    android:progressTint="#ffffff"
+                    android:progressDrawable="@drawable/rating_bar"
+                    android:secondaryProgressTint="@color/gray"
+                    android:stepSize="1" />
+            </LinearLayout>
+
             <LinearLayout
                 android:weightSum="2"
                 android:layout_width="match_parent"

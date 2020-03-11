@@ -23,13 +23,13 @@
                     android:layout_height="match_parent">
                     <include layout="@layout/place_holder_page_grid_poster" />
                 </LinearLayout>
+
                 <ImageView
-                    android:visibility="gone"
-                    android:padding="100dp"
-                    app:srcCompat="@drawable/ic_empty"
                     android:id="@+id/image_view_empty_list"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:padding="100dp"
+                    android:visibility="gone" />
                 <androidx.recyclerview.widget.RecyclerView
                     android:visibility="visible"
                     android:id="@+id/recycler_view_downloads_fragment"

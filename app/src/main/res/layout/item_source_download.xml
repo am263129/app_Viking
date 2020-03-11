@@ -53,16 +53,17 @@
             android:background="#c8ffffff"
             android:layout_width="50dp"
             android:layout_height="50dp">
-        <ImageView
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:clickable="true"
-            android:focusable="true"
-            android:id="@+id/image_view_item_source_type_download"
-            android:padding="4dp"
-            android:tint="@color/black"
-            app:srcCompat="@drawable/ic_file_download"
-            android:layout_width="50dp"
-            android:layout_height="50dp" />
+
+            <ImageView
+                android:id="@+id/image_view_item_source_type_download"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="4dp"
+                android:tint="@color/black"
+                app:srcCompat="@drawable/ico_download_film" />
         </RelativeLayout>
 </RelativeLayout>
 </RelativeLayout>

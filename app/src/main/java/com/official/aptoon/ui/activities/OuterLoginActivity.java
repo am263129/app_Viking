@@ -148,7 +148,6 @@ public class OuterLoginActivity extends AppCompatActivity implements View.OnClic
                 if(response.body()!=null){
 
                     if (response.body().getCode()==200){
-                        Toast.makeText(OuterLoginActivity.this,"1",Toast.LENGTH_SHORT).show();
                         String id_user="0";
                         String name_user="x";
                         String username_user="x";

@@ -3,6 +3,7 @@ package com.official.aptoon.api;
 import com.official.aptoon.config.Global;
 import com.official.aptoon.entity.Actor;
 import com.official.aptoon.entity.ApiResponse;
+import com.official.aptoon.entity.BroadcastTime;
 import com.official.aptoon.entity.Category;
 import com.official.aptoon.entity.Channel;
 import com.official.aptoon.entity.Comment;
@@ -80,6 +81,11 @@ public interface apiRest {
     @FormUrlEncoded
     @POST("user/login/"+ Global.SECURE_KEY+"/"+ Global.ITEM_PURCHASE_CODE+"/")
     Call<ApiResponse> login(@Field("username") String username, @Field("password") String password);
+
+
+
+    @GET("user/broadcast_time_list/"+ Global.SECURE_KEY+"/"+ Global.ITEM_PURCHASE_CODE+"/")
+    Call<List<BroadcastTime>> broadcast_time();
 
 
     @FormUrlEncoded
