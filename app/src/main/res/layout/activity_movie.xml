@@ -164,13 +164,13 @@
                                 android:textColor="@color/white_text" />
 
                             <LinearLayout
-                                android:visibility="gone"
                                 android:id="@+id/linear_layout_activity_movie_rating"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="7dp"
                                 android:background="@drawable/border_right"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal"
+                                android:visibility="gone">
 
                                 <androidx.appcompat.widget.AppCompatRatingBar
                                     android:id="@+id/rating_bar_activity_movie_rating"
@@ -188,12 +188,12 @@
                             </LinearLayout>
 
                             <LinearLayout
-                                android:visibility="gone"
                                 android:id="@+id/linear_layout_activity_movie_imdb"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="7dp"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal"
+                                android:visibility="gone">
 
                                 <ImageView
                                     android:layout_width="30dp"

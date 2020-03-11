@@ -194,7 +194,6 @@ public class OuterLoginActivity extends AppCompatActivity implements View.OnClic
                             prf.setString("IMAGE_USER",image_user);
                             prf.setString("LOGGED","TRUE");
 
-                            Toast.makeText(OuterLoginActivity.this,"kkk",Toast.LENGTH_SHORT).show();
                             Global.user_image = image_user;
                             String  token = FirebaseInstanceId.getInstance().getToken();
                             if (name_user.equals("null")){
@@ -202,7 +201,6 @@ public class OuterLoginActivity extends AppCompatActivity implements View.OnClic
                                 updateToken(Integer.parseInt(id_user),token_user,token,name_user);
                             }
                             register_progress.dismiss();
-                            Toast.makeText(OuterLoginActivity.this,"kkk bug is here",Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(OuterLoginActivity.this, HomeActivity.class);
                             startActivity(intent);
                             finish();

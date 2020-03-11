@@ -16,11 +16,13 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent">
+
                 <LinearLayout
-                    android:visibility="gone"
                     android:id="@+id/linear_layout_load_home_fragment"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:visibility="gone">
+
                     <include layout="@layout/place_holder_page" />
                 </LinearLayout>
                 <LinearLayout

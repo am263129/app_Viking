@@ -29,6 +29,10 @@
     </group>
     <item android:title="Applications">
         <menu>
+            <item
+                android:id="@+id/broadcast_tv"
+                android:icon="@drawable/live_tv"
+                android:title="@string/broadcast_time" />
 
             <item
                 android:id="@+id/nav_rate"

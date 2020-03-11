@@ -120,5 +120,6 @@
     <string name="com_facebook_loginview_log_out_button">Log out</string>
     <string name="com_facebook_loginview_log_in_button">Facebook</string>
     <string name="com_facebook_loginview_log_in_button_long">Log in with Facebook</string>
+    <string name="broadcast_time">Broadcast Time</string>
 
 </resources>

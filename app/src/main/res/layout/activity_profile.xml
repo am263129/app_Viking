@@ -9,11 +9,11 @@
     tools:context=".ui.activities.ProfileActivity">
 
     <LinearLayout
+        android:id="@+id/pre_padding"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#BC2B2B2B"
-        android:orientation="vertical"
-        android:paddingTop="40dp">
+        android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -29,17 +29,18 @@
                 app:civ_border_width="0dp" />
 
 
-
         </RelativeLayout>
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp">
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="8">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -50,7 +51,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:padding="40dp">
+                        android:paddingLeft="40dp"
+                        android:paddingRight="40dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -173,7 +175,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical"></LinearLayout>
 
                 </LinearLayout>
@@ -181,10 +183,14 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
+                android:layout_height="0dp"
+                android:layout_alignParentBottom="false"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="2"
                 android:orientation="vertical"
-                android:padding="40dp">
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp">
 
                 <Button
                     android:id="@+id/btn_save"
@@ -198,7 +204,7 @@
                     android:textSize="12sp" />
             </LinearLayout>
 
-        </RelativeLayout>
+        </LinearLayout>
 
     </LinearLayout>
 

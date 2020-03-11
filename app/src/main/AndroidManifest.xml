@@ -21,8 +21,11 @@
         android:theme="@style/Theme.AppCompat"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.activities.ProfileActivity"
-            android:theme="@style/AppThemeNoAction" ></activity>
+        <activity android:name=".ui.activities.BroadcastTimeActivity"></activity>
+        <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
+        <activity
+            android:name=".ui.activities.ProfileActivity"
+            android:theme="@style/AppThemeNoAction" />
         <activity
             android:name=".ui.activities.forgotpassActivity"
             android:theme="@style/AppThemeNoAction" />
@@ -32,11 +35,13 @@
         <activity
             android:name=".ui.activities.OuterLoginActivity"
             android:theme="@style/AppThemeNoAction">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
 
         <meta-data
@@ -125,13 +130,11 @@
         <activity
             android:name=".ui.activities.HomeActivity"
             android:theme="@style/AppThemeActionDestils">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".ui.activities.YoutubeActivity"
@@ -191,12 +194,12 @@
             android:name=".ui.activities.SplashActivity"
             android:theme="@style/AppThemeActionDestils">
 
-             <intent-filter>
-             <action android:name="android.intent.action.MAIN" />
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
 
 
-             <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".ui.activities.SettingsActivity"

@@ -48,7 +48,7 @@ public class NotificationAdapter extends ArrayAdapter<Notification> implements F
         ImageView icon = v.findViewById(R.id.icon_notification);
 
         message.setText(notifications.get(position).getMessage().toString());
-
+        message.setSelected(true);
         switch (notifications.get(position).getType()){
             case "download":
                 icon.setImageResource(R.drawable.ico_notification_download);

@@ -48,6 +48,11 @@ public interface apiRest {
     @GET("search/{query}/" + Global.SECURE_KEY + "/" + Global.ITEM_PURCHASE_CODE + "/")
     Call<Data> searchData(@Path("query") String query);
 
+    @GET("search/{query}/" + Global.SECURE_KEY + "/" + Global.ITEM_PURCHASE_CODE + "/")
+    Call<Data> LivesearchData(@Path("query") String query, @Path("type") String type);
+
+
+
     @GET("role/by/poster/{id}/" + Global.SECURE_KEY + "/" + Global.ITEM_PURCHASE_CODE + "/")
     Call<List<Actor>> getRolesByPoster(@Path("id") Integer id);
 

@@ -26,7 +26,7 @@
                 android:gravity="center"
                 android:text="Notifications"
                 android:textColor="@color/orange"
-                android:textSize="14sp" />
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -40,7 +40,7 @@
     </FrameLayout>
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/alert_empty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -50,8 +50,10 @@
         android:textSize="12sp" />
 
     <ListView
+        android:id="@+id/list_notification"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="15dp" />
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp" />
 
 </LinearLayout>

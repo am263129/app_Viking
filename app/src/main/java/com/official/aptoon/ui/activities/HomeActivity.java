@@ -40,6 +40,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
@@ -71,6 +72,8 @@ import com.official.aptoon.api.apiRest;
 import com.official.aptoon.config.Global;
 import com.official.aptoon.entity.ApiResponse;
 import com.official.aptoon.entity.Genre;
+import com.official.aptoon.entity.Notification;
+import com.official.aptoon.ui.Adapters.NotificationAdapter;
 import com.official.aptoon.ui.fragments.DownloadsFragment;
 import com.official.aptoon.ui.fragments.HomeFragment;
 import com.official.aptoon.ui.fragments.MoviesFragment;
@@ -492,18 +495,32 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     private void show_notifications() {
         int gravity = Gravity.TOP;
+
         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         popupView = inflater.inflate(R.layout.notification_window, null);
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
         int screen_width = displayMetrics.widthPixels;
-
         int width = (int)Math.floor(screen_width/2);
         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
         boolean focusable = true;
         int[] pos = new int[2];
         btn_notification.getLocationOnScreen(pos);
+
+        TextView alert = popupView.findViewById(R.id.alert_empty);
+
+        ListView list_notifications = popupView.findViewById(R.id.list_notification);
+        //only for test
+        alert.setVisibility(View.GONE);
+        ArrayList<Notification> notifications = new ArrayList<Notification>();
+        notifications.add(new Notification("You have earned 70 coins","coin"));
+        notifications.add(new Notification("Naruto Uzmaki 160 successfully downloaded","check"));
+        notifications.add(new Notification("Naruto 980 is online","check"));
+        notifications.add(new Notification("You have earned 120 coins","coin"));
+        notifications.add(new Notification("Devil May Cry 5 video downloading","download"));
+        NotificationAdapter adapter = new NotificationAdapter(HomeActivity.this,R.layout.item_notification,notifications);
+        list_notifications.setAdapter(adapter);
 
         popupWindow = new PopupWindow(popupView, width, height, focusable);
         ImageView close = popupView.findViewById(R.id.btn_close);
@@ -513,13 +530,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 popupWindow.dismiss();
             }
         });
-        //TextView btn_show_all = popupView.findViewById(R.id.btn_show_all);
-//        btn_show_all.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
         popupWindow.showAtLocation(navigationView,0, pos[0]-width + (int)width/4,pos[1]+100);
 
 
@@ -616,6 +626,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
         }else if (id==R.id.logout){
             logout();
+        }
+        else if (id==R.id.broadcast_tv){
+            Intent intent  = new Intent(HomeActivity.this, BroadcastTimeActivity.class);
+            startActivity(intent);
+
         }
         else if (id==R.id.nav_share){
             final String appPackageName=getApplication().getPackageName();

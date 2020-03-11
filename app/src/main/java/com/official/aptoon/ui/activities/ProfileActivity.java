@@ -3,17 +3,21 @@ package com.official.aptoon.ui.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.jackandphantom.blurimage.BlurImage;
@@ -58,6 +62,25 @@ public class ProfileActivity extends AppCompatActivity {
         edt_con_pass .setTypeface(font);
 
         edt_email.setText(Global.user_name);
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int screen_height = displayMetrics.heightPixels;
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)img_user_avatar.getLayoutParams();
+
+        LinearLayout pre_padding = findViewById(R.id.pre_padding);
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            params.setMargins(0, screen_height/9, 0, 10);
+            params.height = screen_height/4;
+            img_user_avatar.setLayoutParams(params);
+            LinearLayout.LayoutParams padding_params = (LinearLayout.LayoutParams)pre_padding.getLayoutParams();
+            pre_padding.setPadding(0,20,0,0);
+        } else {
+            params.setMargins(0, screen_height/6, 0, 10);
+            params.height = screen_height/4;
+            img_user_avatar.setLayoutParams(params);
+        }
 
         if(!Global.user_image.equals("")){
             PrefManager prf= new PrefManager(getApplicationContext());
