@@ -91,10 +91,15 @@ public class HomeFragment extends Fragment {
                 if (response.isSuccessful()){
                     dataList.clear();
                     dataList.add(new Data().setViewType(0));
+                    if (!response.body().getStreaming_URL().equals("")){
+                        Data streaming_data =  new Data();
+                        streaming_data.setStreaming_URL(response.body().getStreaming_URL());
+                        dataList.add(streaming_data);
+                    }
                     if (response.body().getSlides().size()>0){
-                        Data sliodeData =  new Data();
-                        sliodeData.setSlides(response.body().getSlides());
-                        dataList.add(sliodeData);
+                        Data slideData =  new Data();
+                        slideData.setSlides(response.body().getSlides());
+                        dataList.add(slideData);
                     }
                     if (response.body().getChannels().size()>0){
                        Data channelData = new Data();

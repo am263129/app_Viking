@@ -128,7 +128,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private Dialog dialog;
 
     private boolean search_mode = false;
-    private LinearLayout toolbar_normal;
+    private LinearLayout toolbar_normal, toolbar_search;
 
     View popupView;
     PopupWindow popupWindow;
@@ -336,7 +336,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View v) {
 //                bubbleNavigationLinearView.setCurrentActiveItem(4);
 
-                edt_search_index.setVisibility(View.GONE);
+                toolbar_search.setVisibility(View.GONE);
                 toolbar_normal.setVisibility(View.VISIBLE);
                 openFragment(new SeriesFragment());
             }
@@ -347,7 +347,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View v) {
 //                bubbleNavigationLinearView.setCurrentActiveItem(5);
 
-                edt_search_index.setVisibility(View.GONE);
+                toolbar_search.setVisibility(View.GONE);
                 toolbar_normal.setVisibility(View.VISIBLE);
                 openFragment(new MoviesFragment());
             }
@@ -411,6 +411,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         this.Tab_movies = (TextView)findViewById(R.id.tab_movies);
         this.edt_search_index = (EditText)findViewById(R.id.edt_search_index);
         this.toolbar_normal = (LinearLayout)findViewById(R.id.toolbar_normal);
+        this.toolbar_search = (LinearLayout)findViewById(R.id.toolbar_search);
 //        bubbleNavigationLinearView = findViewById(R.id.top_navigation_constraint);
         viewPager = (ViewPager) findViewById(R.id.vp_horizontal_ntb);
         viewPager.setOffscreenPageLimit(100);
@@ -558,14 +559,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    edt_search_index.setVisibility(View.GONE);
+                    toolbar_search.setVisibility(View.GONE);
                     toolbar_normal.setVisibility(View.VISIBLE);
                     switch (item.getItemId()) {
                         case R.id.navigation_home:
                             openFragment(new HomeFragment());
                             return true;
                         case R.id.navigation_search:
-                            edt_search_index.setVisibility(View.VISIBLE);
+                            toolbar_search.setVisibility(View.VISIBLE);
                             toolbar_normal.setVisibility(View.GONE);
                             openFragment(new SearchFragment());
                             return true;
@@ -589,12 +590,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.nav_home) {
             viewPager.setCurrentItem(0);
-        }else if(id == R.id.login){
-            Intent intent= new Intent(HomeActivity.this, LoginActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
-
-            FromLogin=true;
+//        }
+//        else if(id == R.id.login){
+//            Intent intent= new Intent(HomeActivity.this, LoginActivity.class);
+//            startActivity(intent);
+//            overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
+//
+//            FromLogin=true;
 
         }else if (id == R.id.nav_exit) {
             final PrefManager prf = new PrefManager(getApplicationContext());
@@ -607,24 +609,26 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.enter, R.anim.exit);
-        }else if (id==R.id.my_profile){
-            PrefManager prf= new PrefManager(getApplicationContext());
-            if (prf.getString("LOGGED").toString().equals("TRUE")){
-                Intent intent  =  new Intent(getApplicationContext(), EditActivity.class);
-                intent.putExtra("id", Integer.parseInt(prf.getString("ID_USER")));
-                intent.putExtra("image",prf.getString("IMAGE_USER").toString());
-                intent.putExtra("name",prf.getString("NAME_USER").toString());
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
-
-            }else{
-                Intent intent= new Intent(HomeActivity.this, LoginActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
-
-                FromLogin=true;
-            }
-        }else if (id==R.id.logout){
+        }
+//        else if (id==R.id.my_profile){
+//            PrefManager prf= new PrefManager(getApplicationContext());
+//            if (prf.getString("LOGGED").toString().equals("TRUE")){
+//                Intent intent  =  new Intent(getApplicationContext(), EditActivity.class);
+//                intent.putExtra("id", Integer.parseInt(prf.getString("ID_USER")));
+//                intent.putExtra("image",prf.getString("IMAGE_USER").toString());
+//                intent.putExtra("name",prf.getString("NAME_USER").toString());
+//                startActivity(intent);
+//                overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
+//
+//            }else{
+//                Intent intent= new Intent(HomeActivity.this, LoginActivity.class);
+//                startActivity(intent);
+//                overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
+//
+//                FromLogin=true;
+//            }
+//        }
+        else if (id==R.id.logout){
             logout();
         }
         else if (id==R.id.broadcast_tv){
@@ -677,9 +681,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
         }else{
             Menu nav_Menu = navigationView.getMenu();
-            nav_Menu.findItem(R.id.my_profile).setVisible(false);
+//            nav_Menu.findItem(R.id.my_profile).setVisible(false);
             nav_Menu.findItem(R.id.logout).setVisible(false);
-            nav_Menu.findItem(R.id.login).setVisible(true);
+//            nav_Menu.findItem(R.id.login).setVisible(true);
             text_view_name_nave_header.setText(getResources().getString(R.string.please_login));
             Picasso.with(getApplicationContext()).load(R.drawable.placeholder_profile).placeholder(R.drawable.placeholder_profile).error(R.drawable.placeholder_profile).resize(200,200).centerCrop().into(circle_image_view_profile_nav_header);
         }
@@ -976,10 +980,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
 
         if (prf.getString("LOGGED").toString().equals("TRUE")){
-            nav_Menu.findItem(R.id.my_profile).setVisible(true);
+//            nav_Menu.findItem(R.id.my_profile).setVisible(true);
 
             nav_Menu.findItem(R.id.logout).setVisible(true);
-            nav_Menu.findItem(R.id.login).setVisible(false);
+//            nav_Menu.findItem(R.id.login).setVisible(false);
             text_view_name_nave_header.setText(prf.getString("NAME_USER").toString());
             Picasso.with(getApplicationContext()).load(prf.getString("IMAGE_USER").toString()).placeholder(R.drawable.placeholder_profile).error(R.drawable.placeholder_profile).resize(200,200).centerCrop().into(circle_image_view_profile_nav_header);
             Picasso.with(getApplicationContext()).load(prf.getString("IMAGE_USER").toString()).placeholder(R.drawable.placeholder_profile).error(R.drawable.placeholder_profile).resize(200,200).centerCrop().into(btn_profile);
@@ -1000,9 +1004,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             image_view_profile_nav_header_bg.setVisibility(View.VISIBLE);
 
         }else{
-            nav_Menu.findItem(R.id.my_profile).setVisible(false);
+//            nav_Menu.findItem(R.id.my_profile).setVisible(false);
             nav_Menu.findItem(R.id.logout).setVisible(false);
-            nav_Menu.findItem(R.id.login).setVisible(true);
+//            nav_Menu.findItem(R.id.login).setVisible(true);
             image_view_profile_nav_header_bg.setVisibility(View.GONE);
 
             text_view_name_nave_header.setText(getResources().getString(R.string.please_login));

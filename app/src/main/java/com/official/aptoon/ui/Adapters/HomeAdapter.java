@@ -109,6 +109,11 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 viewHolder = new AdmobNativeHolder(v6);
                 break;
             }
+            case 7: {
+                View v7 = inflater.inflate(R.layout.item_streaming, parent, false);
+                viewHolder = new EmptyHolder(v7);
+                break;
+            }
         }
         return viewHolder;
     }

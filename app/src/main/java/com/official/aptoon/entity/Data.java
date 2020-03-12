@@ -33,6 +33,10 @@ public class Data {
     @Expose
     private Genre genre;
 
+    @SerializedName("streaming")
+    @Expose
+    private String streaming_URL;
+
     private int viewType = 1;
 
     public List<Slide> getSlides() {
@@ -50,6 +54,10 @@ public class Data {
 
     public void setActors(List<Actor> actors) {
         this.actors = actors;
+    }
+
+    public void setStreaming_URL(String streaming_URL) {
+        this.streaming_URL = streaming_URL;
     }
 
     public List<Channel> getChannels() {
@@ -70,6 +78,10 @@ public class Data {
 
     public List<Genre> getGenres() {
         return genres;
+    }
+
+    public String getStreaming_URL() {
+        return streaming_URL;
     }
 
     public void setGenres(List<Genre> genres) {

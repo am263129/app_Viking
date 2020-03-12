@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relative_layout_slide"
+    android:layout_width="match_parent"
+    android:layout_height="240dp"
+    >
+    <androidx.cardview.widget.CardView
+        app:cardPreventCornerOverlap="false"
+        app:cardElevation="10dp"
+        android:id="@+id/card_view_item_slide_one"
+        android:layout_marginBottom="10dp"
+        app:cardCornerRadius="5dp"
+        android:elevation="10dp"
+        app:cardBackgroundColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="240dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="240dp">
+
+            <VideoView
+                android:id="@+id/myVideo"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:layout_centerInParent="true"
+                android:visibility="visible" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

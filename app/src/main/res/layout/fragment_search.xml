@@ -4,11 +4,24 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.HomeFragment">
+
     <LinearLayout
+        android:id="@+id/linear_layout_page_error_search"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-<!--        <include layout="@layout/search_bar" />-->
+        android:visibility="gone">
+
+        <include layout="@layout/page_error" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linear_layout_show_search"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="visible">
+        <!--        <include layout="@layout/search_bar" />-->
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"

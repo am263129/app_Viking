@@ -6,14 +6,14 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home"
             android:title="Home" />
-        <item
-            android:id="@+id/my_profile"
-            android:icon="@drawable/ic_account"
-            android:title="@string/my_profile" />
-        <item
-            android:id="@+id/login"
-            android:icon="@drawable/ic_login_black"
-            android:title="@string/login" />
+<!--        <item-->
+<!--            android:id="@+id/my_profile"-->
+<!--            android:icon="@drawable/ic_account"-->
+<!--            android:title="@string/my_profile" />-->
+<!--        <item-->
+<!--            android:id="@+id/login"-->
+<!--            android:icon="@drawable/ic_login_black"-->
+<!--            android:title="@string/login" />-->
         <item
             android:id="@+id/logout"
             android:icon="@drawable/ic_logout"

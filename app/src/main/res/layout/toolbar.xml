@@ -20,16 +20,34 @@
             android:orientation="horizontal"
             android:padding="10dp">
 
-            <EditText
-                android:id="@+id/edt_search_index"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <LinearLayout
+                android:id="@+id/toolbar_search"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="@drawable/bg_genre"
-                android:ems="10"
-                android:hint="Search index"
-                android:inputType="textPersonName"
-                android:padding="4dp"
-                android:visibility="gone" />
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/edt_search_index"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="9"
+                    android:background="@drawable/bg_genre"
+                    android:ems="10"
+                    android:hint="Search index"
+                    android:inputType="textPersonName"
+                    android:padding="4dp"
+                    android:visibility="visible" />
+
+                <ImageView
+                    android:id="@+id/btn_search"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@android:drawable/ic_menu_search" />
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/toolbar_normal"
