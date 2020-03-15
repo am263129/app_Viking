@@ -182,7 +182,6 @@ public class OuterLoginActivity extends AppCompatActivity implements View.OnClic
                                 enabled=response.body().getValues().get(i).getValue();
                             }
                         }if (enabled.equals("true")){
-                            Toast.makeText(OuterLoginActivity.this,"2",Toast.LENGTH_SHORT).show();
                             PrefManager prf= new PrefManager(getApplicationContext());
                             prf.setString("ID_USER",id_user);
                             prf.setString("SALT_USER",salt_user);
@@ -224,7 +223,7 @@ public class OuterLoginActivity extends AppCompatActivity implements View.OnClic
             public void onFailure(Call<ApiResponse> call, Throwable t) {
                 Toasty.error(getApplicationContext(), "Operation has been cancelled ! ", Toast.LENGTH_SHORT, true).show();
                 register_progress.dismiss();
-                //test
+//                //test
                 Intent intent = new Intent(OuterLoginActivity.this, HomeActivity.class);
                 startActivity(intent);
                 finish();

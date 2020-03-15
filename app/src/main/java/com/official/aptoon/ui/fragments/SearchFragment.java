@@ -80,19 +80,14 @@ public class SearchFragment extends Fragment {
             public void onTabSelected(TabLayout.Tab tab) {
                 switch (tab.getPosition()){
                     case 0:
-                        Toast.makeText(HomeActivity.getInstance(),"Anime",Toast.LENGTH_SHORT).show();
                         break;
                     case 1:
-                        Toast.makeText(HomeActivity.getInstance(),"Manage",Toast.LENGTH_SHORT).show();
                         break;
                     case 2:
-                        Toast.makeText(HomeActivity.getInstance(),"Chreacters",Toast.LENGTH_SHORT).show();
                         break;
                     case 3:
-                        Toast.makeText(HomeActivity.getInstance(),"Generes",Toast.LENGTH_SHORT).show();
                         break;
                     case 4:
-                        Toast.makeText(HomeActivity.getInstance(),"Studios",Toast.LENGTH_SHORT).show();
                         break;
 
                 }

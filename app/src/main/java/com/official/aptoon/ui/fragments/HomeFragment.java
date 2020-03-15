@@ -80,6 +80,9 @@ public class HomeFragment extends Fragment {
 
     private void loadData() {
 
+
+        //video streaming.
+
         showLoadingView();
         Retrofit retrofit = apiClient.getClient();
         apiRest service = retrofit.create(apiRest.class);
@@ -91,11 +94,11 @@ public class HomeFragment extends Fragment {
                 if (response.isSuccessful()){
                     dataList.clear();
                     dataList.add(new Data().setViewType(0));
-                    if (!response.body().getStreaming_URL().equals("")){
-                        Data streaming_data =  new Data();
-                        streaming_data.setStreaming_URL(response.body().getStreaming_URL());
-                        dataList.add(streaming_data);
-                    }
+//                    if (!response.body().getStreaming_URL().equals("")){
+//                        Data streaming_data =  new Data();
+//                        streaming_data.setStreaming_URL(response.body().getStreaming_URL());
+//                        dataList.add(streaming_data);
+//                    }
                     if (response.body().getSlides().size()>0){
                         Data slideData =  new Data();
                         slideData.setSlides(response.body().getSlides());
