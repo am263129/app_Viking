@@ -2,7 +2,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <color name="colorPrimary">#ffa100</color>
     <color name="colorPrimaryDark">#ffa100</color>
-    <color name="colorAccent">#FFA100</color>
+    <color name="colorAccent">#5b86e5</color>
 
     <color name="colorGradient">#c70032</color>
     <color name="black">#000000</color>
@@ -48,6 +48,8 @@
     <color name="facebooklogin_pressed">#26437a</color>
     <color name="facebooklogin_forcused">#345eab</color>
     <color name="facebooklogin_default">#2e5397</color>
+    <color name="guider_orange">#5b86e5</color>
+    <color name="guider_pink">#36d1dc</color>
 
 
 

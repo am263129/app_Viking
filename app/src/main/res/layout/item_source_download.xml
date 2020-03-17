@@ -11,59 +11,63 @@
     android:layout_marginTop="5dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/image_view_item_source_type_image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@color/guider_pink"
+        android:padding="10dp"
+        android:tint="@color/black"
+        app:srcCompat="@drawable/ic_mp4_file" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="55dp"
+        android:layout_marginRight="55dp"
+        android:background="@drawable/background_download_item"
+        android:gravity="center|left"
+        android:orientation="vertical"
+        android:padding="6dp">
+
+        <TextView
+            android:id="@+id/text_view_item_source_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mp4 Source"
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/text_view_item_source_source"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="https://www.youtube.com/watch?v=hHW1oY26kxQ"
+            android:textColor="@color/black"
+            android:textSize="10dp"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:background="@color/guider_orange">
+
         <ImageView
-            android:id="@+id/image_view_item_source_type_image"
+            android:id="@+id/image_view_item_source_type_download"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="4dp"
             android:tint="@color/black"
-            android:background="#c8ffffff"
-            android:padding="10dp"
-            app:srcCompat="@drawable/ic_mp4_file"
-            android:layout_width="50dp"
-            android:layout_height="50dp" />
-        <LinearLayout
-            android:padding="6dp"
-            android:gravity="center|left"
-            android:orientation="vertical"
-            android:layout_marginRight="55dp"
-            android:layout_marginLeft="55dp"
-            android:background="#c8ffffff"
-            android:layout_width="match_parent"
-            android:layout_height="50dp">
-            <TextView
-                android:id="@+id/text_view_item_source_type"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:text="Mp4 Source"
-                android:textSize="15dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/text_view_item_source_source"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:lines="1"
-                android:text="https://www.youtube.com/watch?v=hHW1oY26kxQ"
-                android:textColor="@color/black"
-                android:textSize="10dp"
-                android:visibility="gone" />
-        </LinearLayout>
-        <RelativeLayout
-            android:layout_alignParentRight="true"
-            android:background="#c8ffffff"
-            android:layout_width="50dp"
-            android:layout_height="50dp">
-
-            <ImageView
-                android:id="@+id/image_view_item_source_type_download"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:clickable="true"
-                android:focusable="true"
-                android:padding="4dp"
-                android:tint="@color/black"
-                app:srcCompat="@drawable/ico_download_film" />
-        </RelativeLayout>
+            app:srcCompat="@drawable/ico_download_film" />
+    </RelativeLayout>
 </RelativeLayout>
 </RelativeLayout>

@@ -1,47 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layoutDirection="ltr"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    android:layoutDirection="ltr">
+
     <RelativeLayout
-        android:paddingTop="5dp"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/dialog_radius"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:background="@drawable/gradient_background"
+        android:paddingTop="5dp">
+
         <LinearLayout
             android:id="@+id/linear_layout_rate"
-            android:visibility="visible"
-            android:padding="10dp"
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:visibility="visible">
+
             <TextView
                 android:id="@+id/text_view_rate_title"
-                android:textColor="@color/primary_text"
-                android:textStyle="bold"
-                android:textAlignment="center"
-                android:textSize="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:lines="1"
                 android:minLines="1"
                 android:text="Rate This Movie"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:gravity="center"
                 android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/imageView11"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/rating_happy" />
 
                 <androidx.appcompat.widget.AppCompatRatingBar
                     android:id="@+id/AppCompatRatingBar_dialog_rating_app"
@@ -53,36 +49,41 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="10dp"
                     android:progressBackgroundTint="@color/gray"
-                    android:progressTint="#ffffff"
                     android:progressDrawable="@drawable/rating_bar"
+                    android:progressTint="#ffffff"
                     android:secondaryProgressTint="@color/gray"
                     android:stepSize="1" />
             </LinearLayout>
 
             <LinearLayout
-                android:weightSum="2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:weightSum="2">
+
                 <Button
                     android:id="@+id/button_cancel"
-                    android:textStyle="bold"
-                    android:text="@string/cancel"
-                    android:textColor="@color/dark_gray"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:layout_weight="1"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_genre"
+                    android:clickable="true"
+                    android:text="@string/cancel"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
                 <Button
                     android:id="@+id/buttun_send"
-                    android:textStyle="bold"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_genre"
+                    android:clickable="true"
                     android:text="@string/submit"
                     android:textColor="@color/white"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content" />
+                    android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
 

@@ -2,6 +2,7 @@ package com.official.aptoon.ui.Adapters;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdChoicesView;
@@ -79,7 +81,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 viewHolder = new EmptyHolder(v0);
                 break;
             }
-            case 1: {
+            case 7: {
                 View v1 = inflater.inflate(R.layout.item_slides, parent, false);
                 viewHolder = new SlideHolder(v1);
                 break;
@@ -109,9 +111,9 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 viewHolder = new AdmobNativeHolder(v6);
                 break;
             }
-            case 7: {
+            case 1: {
                 View v7 = inflater.inflate(R.layout.item_streaming, parent, false);
-                viewHolder = new EmptyHolder(v7);
+                viewHolder = new StreamingHolder(v7);
                 break;
             }
         }
@@ -121,7 +123,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder_parent, int position) {
         switch (getItemViewType(position)){
-            case 1:
+            case 7:
 
                 final SlideHolder holder = (SlideHolder) holder_parent;
 
@@ -200,6 +202,16 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                 break;
             }
+            case 1:{
+                final StreamingHolder streamingHolder = (StreamingHolder) holder_parent;
+
+                String vidAddress = "https://archive.org/download/ksnn_compilation_master_the_internet/ksnn_compilation_master_the_internet_512kb.mp4";
+                Uri vidUri = Uri.parse(vidAddress);
+                streamingHolder.video_view_item.setVideoURI(vidUri);
+                streamingHolder.video_view_item.start();
+
+                break;
+            }
         }
     }
 
@@ -250,6 +262,15 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             this.recycle_view_channels_item=(RecyclerView) itemView.findViewById(R.id.recycle_view_channels_item);
             this.image_view_item_channel_more=  (ImageView) itemView.findViewById(R.id.image_view_item_channel_more);
 
+        }
+    }
+
+    private class StreamingHolder extends RecyclerView.ViewHolder {
+        private final VideoView video_view_item;
+
+        public StreamingHolder(View itemView) {
+            super(itemView);
+            this.video_view_item=  (VideoView) itemView.findViewById(R.id.myVideo);
         }
     }
 

@@ -9,7 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/background_comment"
+        android:background="@drawable/background_download_item"
         android:paddingTop="5dp">
 
         <LinearLayout
@@ -70,13 +70,12 @@
                         android:id="@+id/image_view_comment_dialog_empty"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true"
+                        android:layout_centerInParent="true"
                         android:adjustViewBounds="true"
                         android:clickable="true"
                         android:padding="40dp"
                         android:visibility="gone"
-                        app:srcCompat="@drawable/ic_empty" />
+                        app:srcCompat="@drawable/ico_comment" />
 
                     <ProgressBar
                         android:id="@+id/progress_bar_comment_dialog_comments"
@@ -125,7 +124,7 @@
                     android:layout_alignParentRight="true"
                     android:background="@drawable/comment_bg_write"
                     android:padding="7dp"
-                    android:tint="@color/colorAccent"
+                    android:tint="@color/cast_libraries_material_featurehighlight_outer_highlight_default_color"
                     app:srcCompat="@drawable/ic_send" />
 
                 <ProgressBar

@@ -6,17 +6,19 @@
     android:layoutDirection="ltr"
     android:id="@+id/relative_layout_dialog_source_close"
     android:layout_height="match_parent">
+
     <RelativeLayout
-        android:paddingTop="5dp"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/dialog_radius"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/comment_bg_login"
+        android:paddingTop="5dp">
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycle_view_activity_dialog_sources"
-            android:clipToPadding="false"
-            android:clipChildren="false"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:clipChildren="false"
+            android:clipToPadding="false" />
     </RelativeLayout>
 </RelativeLayout>
