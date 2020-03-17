@@ -5,10 +5,10 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/linear_layout_load_search"
+        android:id="@+id/linear_layout_placehoder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <include layout="@layout/place_holder_page_live_search" />
     </LinearLayout>
@@ -17,11 +17,12 @@
         android:id="@+id/linear_layout_data_search"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone">
+        android:visibility="visible">
 
-        <ListView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_search_result"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
     </LinearLayout>
 </RelativeLayout>

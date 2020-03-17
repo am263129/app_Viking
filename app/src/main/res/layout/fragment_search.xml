@@ -25,13 +25,13 @@
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="60dp"
             android:layout_marginTop="60dp">
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:minHeight="?actionBarSize"
                 app:tabGravity="fill"
                 app:tabIndicatorColor="@color/colorPrimary"
@@ -39,6 +39,34 @@
                 app:tabMode="fixed"
                 app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"></com.google.android.material.tabs.TabLayout>
         </androidx.viewpager.widget.ViewPager>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/linear_layout_placehoder"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
+
+                <include layout="@layout/place_holder_page_live_search" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_layout_data_search"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/list_search_result"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="80dp" />
+
+            </LinearLayout>
+        </RelativeLayout>
 
     </LinearLayout>
 

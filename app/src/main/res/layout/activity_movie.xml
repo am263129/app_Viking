@@ -198,7 +198,7 @@
                                 <ImageView
                                     android:layout_width="30dp"
                                     android:layout_height="20dp"
-                                    android:src="@drawable/imdb" />
+                                    android:src="@drawable/myanimelist" />
 
                                 <TextView
                                     android:id="@+id/text_view_activity_movie_imdb_rating"

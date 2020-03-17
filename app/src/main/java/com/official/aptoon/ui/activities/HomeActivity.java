@@ -78,6 +78,7 @@ import com.official.aptoon.ui.fragments.DownloadsFragment;
 import com.official.aptoon.ui.fragments.HomeFragment;
 import com.official.aptoon.ui.fragments.MoviesFragment;
 import com.official.aptoon.ui.fragments.SearchFragment;
+import com.official.aptoon.ui.fragments.Search_ObjectFragment;
 import com.official.aptoon.ui.fragments.SeriesFragment;
 import com.official.aptoon.ui.fragments.TvFragment;
 import com.squareup.picasso.Picasso;
@@ -134,7 +135,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private boolean FromLogin;
     private RelativeLayout relative_layout_home_activity_search_section, btn_notification;
     private EditText edit_text_home_activity_search, edt_search_index;
-    private ImageView image_view_activity_home_close_search;
+    private ImageView image_view_activity_home_close_search, btn_search;
 //    private ImageView image_view_activity_home_search;
     private ImageView image_view_activity_actors_back;
     private Dialog dialog;
@@ -374,6 +375,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 openFragment(new MoviesFragment());
             }
         });
+        btn_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Search_ObjectFragment.channel_list.removeAllViews();
+                SearchFragment.get_search_result(edt_search_index.getText().toString());
+            }
+        });
 //        image_view_activity_actors_back.setOnClickListener(v->{
 //            relative_layout_home_activity_search_section.setVisibility(View.GONE);
 //            edit_text_home_activity_search.setText("");
@@ -446,6 +454,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         this.edt_search_index = (EditText)findViewById(R.id.edt_search_index);
         this.toolbar_normal = (LinearLayout)findViewById(R.id.toolbar_normal);
         this.toolbar_search = (LinearLayout)findViewById(R.id.toolbar_search);
+        btn_search = findViewById(R.id.btn_search);
 //        bubbleNavigationLinearView = findViewById(R.id.top_navigation_constraint);
         viewPager = (ViewPager) findViewById(R.id.vp_horizontal_ntb);
         viewPager.setOffscreenPageLimit(100);
@@ -470,7 +479,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         btn_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
+//                Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
+                Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
                 startActivity(intent);
             }
         });
