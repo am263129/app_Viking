@@ -21,11 +21,11 @@ public class Global {
     public static String user_name = "";
     public static String user_image = "";
 
-    public static Integer val_watching = 0;
-    public static Integer val_completed = 0;
-    public static Integer val_on_hold = 0;
-    public static Integer val_dropped = 0;
-    public static Integer val_plan_to_watch = 0;
+    public static Integer val_watching = 10;
+    public static Integer val_completed = 13;
+    public static Integer val_on_hold = 22;
+    public static Integer val_dropped = 34;
+    public static Integer val_plan_to_watch = 5;
 
 }
 

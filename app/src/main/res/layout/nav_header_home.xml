@@ -170,6 +170,7 @@
                             android:textSize="10sp" />
 
                         <TextView
+                            android:id="@+id/label_dropped"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="3"
@@ -197,6 +198,7 @@
                             android:textSize="10sp" />
 
                         <TextView
+                            android:id="@+id/label_on_hold"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="3"
@@ -224,6 +226,7 @@
                             android:textSize="10sp" />
 
                         <TextView
+                            android:id="@+id/label_plan_to_watch"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="3"
@@ -251,6 +254,7 @@
                             android:textSize="10sp" />
 
                         <TextView
+                            android:id="@+id/label_watching"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="3"
@@ -278,6 +282,7 @@
                             android:textSize="10sp" />
 
                         <TextView
+                            android:id="@+id/label_completed"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="3"
@@ -300,6 +305,7 @@
                             android:textSize="10sp" />
 
                         <TextView
+                            android:id="@+id/label_days"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="3"
@@ -321,6 +327,7 @@
                             android:textSize="10sp" />
 
                         <TextView
+                            android:id="@+id/label_mean_score"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="3"
@@ -342,6 +349,7 @@
                             android:textSize="10sp" />
 
                         <TextView
+                            android:id="@+id/label_total_entries"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="3"
@@ -363,6 +371,7 @@
                             android:textSize="10sp" />
 
                         <TextView
+                            android:id="@+id/label_rewatched"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="3"
@@ -384,6 +393,7 @@
                             android:textSize="10sp" />
 
                         <TextView
+                            android:id="@+id/label_episodes"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="3"

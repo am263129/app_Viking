@@ -61,6 +61,9 @@ public class BroadcastTimeActivity extends AppCompatActivity {
         time_list.add(new BroadcastTime("11:23","3 Kids and Advantage of Leon scott kenedy"));
         time_list.add(new BroadcastTime("13:45","Naruto (445)"));
         time_list.add(new BroadcastTime("14:11","Naruto (446)"));
+        adapter = new BroadcastAdapter(BroadcastTimeActivity.this, R.layout.item_broadcast_time, time_list );
+        broadcast_list.setAdapter(adapter);
+        show_data();
     }
 
     private void init_view() {
@@ -86,6 +89,7 @@ public class BroadcastTimeActivity extends AppCompatActivity {
 
 
     public void load_data(){
+        /*
         show_load();
 
         Retrofit retrofit = apiClient.getClient();
@@ -113,6 +117,8 @@ public class BroadcastTimeActivity extends AppCompatActivity {
                 show_error();
             }
         });
+
+         */
     }
 
     private void show_load() {
