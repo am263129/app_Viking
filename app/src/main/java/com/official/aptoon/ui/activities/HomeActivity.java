@@ -115,9 +115,21 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private ViewPagerAdapter adapter;
     private NavigationView navigationView;
     private TextView text_view_name_nave_header, Tab_Series, Tab_movies;
+
     private CircleImageView circle_image_view_profile_nav_header,btn_profile;
 
     private ImageView image_view_profile_nav_header_bg;
+    private TextView
+        label_watching,
+        label_completed,
+        label_on_hold,
+        label_dropped,
+        label_plan_to_wathc,
+        label_days,
+        label_mean_score,
+        label_total_entries,
+        label_rewatched,
+        label_episodes;
     private Dialog rateDialog;
     private boolean FromLogin;
     private RelativeLayout relative_layout_home_activity_search_section, btn_notification;
@@ -187,6 +199,16 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     private void setinitvlue() {
         openFragment(new HomeFragment());
+        label_watching.setText(String.valueOf(Global.val_watching));
+        label_completed.setText(String.valueOf(Global.val_completed));
+        label_on_hold.setText(String.valueOf(Global.val_on_hold));
+        label_dropped.setText(String.valueOf(Global.val_dropped));
+        label_plan_to_wathc.setText(String.valueOf(Global.val_plan_to_watch));
+        label_days.setText(String.valueOf(Global.val_days));
+        label_mean_score.setText(String.valueOf(Global.val_mean_score));
+        label_total_entries.setText(String.valueOf(Global.val_total_entries));
+        label_rewatched.setText(String.valueOf(Global.val_rewathced));
+        label_episodes.setText(String.valueOf(Global.val_episodes));
     }
 
 
@@ -392,6 +414,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         getSupportActionBar().setTitle("");
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
+
+
         // Hide expand button from tool bar.
 
 //        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -404,6 +428,16 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         View headerview = navigationView.getHeaderView(0);
         this.text_view_name_nave_header=(TextView) headerview.findViewById(R.id.text_view_name_nave_header);
         this.pieChartView = headerview.findViewById(R.id.chart);
+        label_watching = headerview.findViewById(R.id.label_watching);
+        label_completed = headerview.findViewById(R.id.label_completed);
+        label_on_hold = headerview.findViewById(R.id.label_on_hold);
+        label_dropped = headerview.findViewById(R.id.label_dropped);
+        label_plan_to_wathc = headerview.findViewById(R.id.label_plan_to_watch);
+        label_days = headerview.findViewById(R.id.label_days);
+        label_mean_score = headerview.findViewById(R.id.label_mean_score);
+        label_total_entries = headerview.findViewById(R.id.label_total_entries);
+        label_rewatched = headerview.findViewById(R.id.label_rewatched);
+        label_episodes = headerview.findViewById(R.id.label_episodes);
         this.circle_image_view_profile_nav_header=(CircleImageView) headerview.findViewById(R.id.circle_image_view_profile_nav_header);
         this.image_view_profile_nav_header_bg=(ImageView) headerview.findViewById(R.id.image_view_profile_nav_header_bg);
         // init pager view

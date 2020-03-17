@@ -143,11 +143,12 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="right|center_vertical">
+                android:gravity="center_vertical">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -235,7 +236,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="200dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:orientation="horizontal">
@@ -260,6 +261,7 @@
                             android:layout_weight="3"
                             android:text="0"
                             android:textSize="10sp" />
+
                     </LinearLayout>
 
                     <LinearLayout
