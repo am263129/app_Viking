@@ -72,7 +72,8 @@
                 android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
-                android:text="Movie" />
+                android:text="Movie"
+                android:textColor="@color/white" />
         </LinearLayout>
 
         <LinearLayout
@@ -101,6 +102,7 @@
                 android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
+                android:textColor="@color/white"
                 android:text="1" />
         </LinearLayout>
 
@@ -130,6 +132,7 @@
                 android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
+                android:textColor="@color/white"
                 android:text="Finished Airing" />
         </LinearLayout>
 
@@ -159,6 +162,7 @@
                 android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
+                android:textColor="@color/white"
                 android:text="Mar 4, 2020 to Mar 27, 2020" />
         </LinearLayout>
 
@@ -188,6 +192,7 @@
                 android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
+                android:textColor="@color/white"
                 android:text="Fall 2020" />
         </LinearLayout>
 
@@ -217,6 +222,7 @@
                 android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
+                android:textColor="@color/white"
                 android:text="Tuesday at 20.30 (PCT)" />
         </LinearLayout>
 
@@ -246,6 +252,7 @@
                 android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
+                android:textColor="@color/white"
                 android:text="Tokyo TV. Kadokawa" />
         </LinearLayout>
 
@@ -275,6 +282,7 @@
                 android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
+                android:textColor="@color/white"
                 android:text="America Managa" />
         </LinearLayout>
 
@@ -304,6 +312,7 @@
                 android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
+                android:textColor="@color/white"
                 android:text="Cartoon Network" />
         </LinearLayout>
 
@@ -333,6 +342,7 @@
                 android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
+                android:textColor="@color/white"
                 android:text="Light novel" />
         </LinearLayout>
 
