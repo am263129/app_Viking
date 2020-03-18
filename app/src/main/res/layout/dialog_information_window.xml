@@ -30,6 +30,13 @@
 
         </LinearLayout>
 
+        <ImageView
+            android:id="@+id/btn_close"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="right|center_vertical"
+            app:srcCompat="@drawable/expand" />
+
     </FrameLayout>
 
     <LinearLayout

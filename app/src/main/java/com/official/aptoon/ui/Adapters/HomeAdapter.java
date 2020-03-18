@@ -1,8 +1,10 @@
 package com.official.aptoon.ui.Adapters;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,8 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.VideoView;
@@ -34,6 +38,7 @@ import com.google.android.gms.ads.formats.UnifiedNativeAdView;
 import com.official.aptoon.Provider.PrefManager;
 import com.official.aptoon.R;
 import com.official.aptoon.entity.Data;
+import com.official.aptoon.entity.Notification;
 import com.official.aptoon.ui.activities.ActorsActivity;
 import com.official.aptoon.ui.activities.GenreActivity;
 import com.official.aptoon.ui.activities.HomeActivity;
@@ -48,6 +53,8 @@ import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
+
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -209,6 +216,54 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 Uri vidUri = Uri.parse(vidAddress);
                 streamingHolder.video_view_item.setVideoURI(vidUri);
                 streamingHolder.video_view_item.start();
+                streamingHolder.btn_show_info.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        LayoutInflater inflater = (LayoutInflater) HomeActivity.getInstance().getSystemService(LAYOUT_INFLATER_SERVICE);
+                        View popupView = inflater.inflate(R.layout.dialog_information_window, null);
+                        DisplayMetrics displayMetrics = new DisplayMetrics();
+                        HomeActivity.getInstance().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                        int screen_width = displayMetrics.widthPixels;
+                        int width = (int)Math.floor(screen_width/2);
+                        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+                        boolean focusable = true;
+                        int[] pos = new int[2];
+                        streamingHolder.btn_show_info.getLocationOnScreen(pos);
+                        PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+                        TextView info_type = popupView.findViewById(R.id.info_type);
+                        TextView info_episodes = popupView.findViewById(R.id.info_episodes);
+                        TextView info_status = popupView.findViewById(R.id.info_status);
+                        TextView info_aired = popupView.findViewById(R.id.info_aired);
+                        TextView info_premiered = popupView.findViewById(R.id.info_premiered);
+                        TextView info_broadcast = popupView.findViewById(R.id.info_broadcast);
+                        TextView info_producers = popupView.findViewById(R.id.info_producers);
+                        TextView info_licensors = popupView.findViewById(R.id.info_licensors);
+                        TextView info_studio = popupView.findViewById(R.id.info_studio);
+                        TextView info_source = popupView.findViewById(R.id.info_source);
+                        ImageView btn_close = popupView.findViewById(R.id.btn_close);
+                        info_type.setSelected(true);
+                        info_episodes.setSelected(true);
+                        info_status.setSelected(true);
+                        info_aired.setSelected(true);
+                        info_premiered.setSelected(true);
+                        info_broadcast.setSelected(true);
+                        info_producers.setSelected(true);
+                        info_licensors.setSelected(true);
+                        info_studio.setSelected(true);
+                        info_source.setSelected(true);
+                        btn_close.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                popupWindow.dismiss();
+                            }
+                        });
+
+
+
+                        popupWindow.showAtLocation(streamingHolder.itemView,0, pos[0],pos[1]+100);
+
+                    }
+                });
 
                 break;
             }
@@ -267,10 +322,15 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private class StreamingHolder extends RecyclerView.ViewHolder {
         private final VideoView video_view_item;
+        private final LinearLayout btn_show_info, btn_share, btn_add_to_mylist;
+
 
         public StreamingHolder(View itemView) {
             super(itemView);
-            this.video_view_item=  (VideoView) itemView.findViewById(R.id.myVideo);
+            this.video_view_item = (VideoView) itemView.findViewById(R.id.myVideo);
+            this.btn_show_info = (LinearLayout)itemView.findViewById(R.id.btn_info);
+            this.btn_share = (LinearLayout)itemView.findViewById(R.id.btn_share);
+            this.btn_add_to_mylist = (LinearLayout)itemView.findViewById(R.id.btn_add_to_list);
         }
     }
 

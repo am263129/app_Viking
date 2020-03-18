@@ -82,15 +82,15 @@
 
                 <RelativeLayout
                     android:id="@+id/btn_notifications"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_weight="1"
                     android:gravity="center">
 
                     <ImageView
                         android:id="@+id/imageView8"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_centerHorizontal="true"
                         android:layout_weight="1"
                         app:srcCompat="@drawable/notification" />

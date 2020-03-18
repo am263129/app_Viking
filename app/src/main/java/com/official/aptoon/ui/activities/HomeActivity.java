@@ -110,7 +110,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
     private NavigationView navigationView;
+    private DrawerLayout menu_drawerLayout;
     private TextView text_view_name_nave_header, Tab_Series, Tab_movies;
+
 
     private CircleImageView circle_image_view_profile_nav_header,btn_profile;
 
@@ -143,8 +145,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     ConsentForm form;
 
     PieChartView pieChartView;
-
-
     IInAppBillingService mService;
 //    BubbleNavigationConstraintView bubbleNavigationLinearView;
 
@@ -426,8 +426,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 //        toggle.syncState();
         this.navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-
+        this.menu_drawerLayout = findViewById(R.id.drawer_layout);
         View headerview = navigationView.getHeaderView(0);
         this.text_view_name_nave_header=(TextView) headerview.findViewById(R.id.text_view_name_nave_header);
         this.pieChartView = headerview.findViewById(R.id.chart);
@@ -474,9 +473,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         btn_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
-                Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
-                startActivity(intent);
+                menu_drawerLayout.openDrawer(Gravity.RIGHT);
             }
         });
 

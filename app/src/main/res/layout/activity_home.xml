@@ -17,12 +17,12 @@
         android:id="@+id/nav_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
+        android:layout_gravity="end"
+        android:background="@color/dark_gray"
         android:fitsSystemWindows="true"
         android:theme="@style/NavigationView"
-        app:itemTextColor="@color/white"
-        app:itemIconTint="@color/white"
-        android:background="@color/dark_gray"
         app:headerLayout="@layout/nav_header_home"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
         app:menu="@menu/activity_main_drawer" />
 </androidx.drawerlayout.widget.DrawerLayout>
