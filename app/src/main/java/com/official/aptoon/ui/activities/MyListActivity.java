@@ -33,10 +33,16 @@ public class MyListActivity extends AppCompatActivity {
     private SwipeRefreshLayout swipe_refresh_layout_list_my_list_search;
     private Button button_try_again;
     private LinearLayout linear_layout_layout_error;
-    private RecyclerView recycler_view_activity_my_list;
+    private RecyclerView recycler_view_activity_my_list_completed,
+    recycler_view_activity_my_list_watching,
+    recycler_view_activity_my_list_plan,
+    recycler_view_activity_my_list_canceled;
     private ImageView image_view_empty_list;
     private GridLayoutManager gridLayoutManager;
-    private PosterAdapter adapter;
+    private PosterAdapter adapter_completed;
+    private PosterAdapter adapter_watching;
+    private PosterAdapter adapter_plan;
+    private PosterAdapter adapter_canceled;
 
     private int pastVisiblesItems, visibleItemCount, totalItemCount;
     private boolean loading = true;
@@ -44,7 +50,10 @@ public class MyListActivity extends AppCompatActivity {
     private Integer page = 0;
     private Integer position = 0;
     private Integer item = 0 ;
-    ArrayList<Poster> posterArrayList = new ArrayList<>();
+    ArrayList<Poster> posterArrayList_completed = new ArrayList<>();
+    ArrayList<Poster> posterArrayList_watching = new ArrayList<>();
+    ArrayList<Poster> posterArrayList_plan = new ArrayList<>();
+    ArrayList<Poster> posterArrayList_canceled = new ArrayList<>();
     private RelativeLayout relative_layout_load_more;
     private LinearLayout linear_layout_load_my_list_activity;
 
@@ -62,45 +71,48 @@ public class MyListActivity extends AppCompatActivity {
 
         initView();
         initAction();
-        loadPosters();
+        loadPosters_completed();
+        loadPosters_watching();
+        loadPosters_plan();
+        loadPosters_canceled();
         showAdsBanner();
     }
 
 
 
 
-    private void loadPosters() {
+    private void loadPosters_completed() {
         List<Poster> tempPosterArrayList = new ArrayList<>();
         try {
-            tempPosterArrayList = Hawk.get("my_list");
+            tempPosterArrayList = Hawk.get("my_list_completed");
 
         }catch (NullPointerException e){
             tempPosterArrayList  = new ArrayList<>();
         }
         if (tempPosterArrayList.size()>0){
-            recycler_view_activity_my_list.setVisibility(View.VISIBLE);
+            recycler_view_activity_my_list_completed.setVisibility(View.VISIBLE);
             image_view_empty_list.setVisibility(View.GONE);
         }else{
-            recycler_view_activity_my_list.setVisibility(View.GONE);
+            recycler_view_activity_my_list_completed.setVisibility(View.GONE);
             image_view_empty_list.setVisibility(View.VISIBLE);
         }
 
         for (int i = 0; i < tempPosterArrayList.size(); i++) {
-            posterArrayList.add(tempPosterArrayList.get(i));
+            posterArrayList_completed.add(tempPosterArrayList.get(i));
             if (native_ads_enabled){
                 item++;
                 if (item == lines_beetween_ads ){
                     item= 0;
                     if (prefManager.getString("ADMIN_NATIVE_TYPE").equals("FACEBOOK")) {
-                        posterArrayList.add(new Poster().setTypeView(4));
+                        posterArrayList_completed.add(new Poster().setTypeView(4));
                     }else if (prefManager.getString("ADMIN_NATIVE_TYPE").equals("ADMOB")){
-                        posterArrayList.add(new Poster().setTypeView(5));
+                        posterArrayList_completed.add(new Poster().setTypeView(5));
                     } else if (prefManager.getString("ADMIN_NATIVE_TYPE").equals("BOTH")){
                         if (type_ads == 0) {
-                            posterArrayList.add(new Poster().setTypeView(4));
+                            posterArrayList_completed.add(new Poster().setTypeView(4));
                             type_ads = 1;
                         }else if (type_ads == 1){
-                            posterArrayList.add(new Poster().setTypeView(5));
+                            posterArrayList_completed.add(new Poster().setTypeView(5));
                             type_ads = 0;
                         }
                     }
@@ -109,7 +121,141 @@ public class MyListActivity extends AppCompatActivity {
         }
 
         swipe_refresh_layout_list_my_list_search.setRefreshing(false);
-        adapter.notifyDataSetChanged();
+        adapter_completed.notifyDataSetChanged();
+
+
+    }
+    private void loadPosters_watching() {
+        List<Poster> tempPosterArrayList = new ArrayList<>();
+        try {
+            tempPosterArrayList = Hawk.get("my_list_watching");
+
+        }catch (NullPointerException e){
+            tempPosterArrayList  = new ArrayList<>();
+        }
+        if (tempPosterArrayList.size()>0){
+            recycler_view_activity_my_list_watching.setVisibility(View.VISIBLE);
+            image_view_empty_list.setVisibility(View.GONE);
+        }else{
+            recycler_view_activity_my_list_watching.setVisibility(View.GONE);
+            image_view_empty_list.setVisibility(View.VISIBLE);
+        }
+
+        for (int i = 0; i < tempPosterArrayList.size(); i++) {
+            posterArrayList_watching.add(tempPosterArrayList.get(i));
+            if (native_ads_enabled){
+                item++;
+                if (item == lines_beetween_ads ){
+                    item= 0;
+                    if (prefManager.getString("ADMIN_NATIVE_TYPE").equals("FACEBOOK")) {
+                        posterArrayList_watching.add(new Poster().setTypeView(4));
+                    }else if (prefManager.getString("ADMIN_NATIVE_TYPE").equals("ADMOB")){
+                        posterArrayList_watching.add(new Poster().setTypeView(5));
+                    } else if (prefManager.getString("ADMIN_NATIVE_TYPE").equals("BOTH")){
+                        if (type_ads == 0) {
+                            posterArrayList_watching.add(new Poster().setTypeView(4));
+                            type_ads = 1;
+                        }else if (type_ads == 1){
+                            posterArrayList_watching.add(new Poster().setTypeView(5));
+                            type_ads = 0;
+                        }
+                    }
+                }
+            }
+        }
+
+        swipe_refresh_layout_list_my_list_search.setRefreshing(false);
+        adapter_watching.notifyDataSetChanged();
+
+
+    }
+    private void loadPosters_plan() {
+        List<Poster> tempPosterArrayList = new ArrayList<>();
+        try {
+            tempPosterArrayList = Hawk.get("my_list_plan_to_watch");
+
+        }catch (NullPointerException e){
+            tempPosterArrayList  = new ArrayList<>();
+        }
+        if (tempPosterArrayList.size()>0){
+            recycler_view_activity_my_list_plan.setVisibility(View.VISIBLE);
+            image_view_empty_list.setVisibility(View.GONE);
+        }else{
+            recycler_view_activity_my_list_plan.setVisibility(View.GONE);
+            image_view_empty_list.setVisibility(View.VISIBLE);
+        }
+
+        for (int i = 0; i < tempPosterArrayList.size(); i++) {
+            posterArrayList_plan.add(tempPosterArrayList.get(i));
+            if (native_ads_enabled){
+                item++;
+                if (item == lines_beetween_ads ){
+                    item= 0;
+                    if (prefManager.getString("ADMIN_NATIVE_TYPE").equals("FACEBOOK")) {
+                        posterArrayList_plan.add(new Poster().setTypeView(4));
+                    }else if (prefManager.getString("ADMIN_NATIVE_TYPE").equals("ADMOB")){
+                        posterArrayList_plan.add(new Poster().setTypeView(5));
+                    } else if (prefManager.getString("ADMIN_NATIVE_TYPE").equals("BOTH")){
+                        if (type_ads == 0) {
+                            posterArrayList_plan.add(new Poster().setTypeView(4));
+                            type_ads = 1;
+                        }else if (type_ads == 1){
+                            posterArrayList_plan.add(new Poster().setTypeView(5));
+                            type_ads = 0;
+                        }
+                    }
+                }
+            }
+        }
+
+        swipe_refresh_layout_list_my_list_search.setRefreshing(false);
+        adapter_plan.notifyDataSetChanged();
+
+
+    }
+    private void loadPosters_canceled() {
+        List<Poster> tempPosterArrayList = new ArrayList<>();
+        try {
+            tempPosterArrayList = Hawk.get("my_list_canceled");
+
+        }catch (NullPointerException e){
+            tempPosterArrayList  = new ArrayList<>();
+        }
+        if (tempPosterArrayList.size()>0){
+            recycler_view_activity_my_list_canceled.setVisibility(View.VISIBLE);
+            image_view_empty_list.setVisibility(View.GONE);
+        }else{
+            recycler_view_activity_my_list_canceled.setVisibility(View.GONE);
+            image_view_empty_list.setVisibility(View.VISIBLE);
+        }
+
+        for (int i = 0; i < tempPosterArrayList.size(); i++) {
+            posterArrayList_canceled.add(tempPosterArrayList.get(i));
+            if (native_ads_enabled){
+                item++;
+                if (item == lines_beetween_ads ){
+                    item= 0;
+                    if (prefManager.getString("ADMIN_NATIVE_TYPE").equals("FACEBOOK")) {
+                        posterArrayList_canceled.add(new Poster().setTypeView(4));
+                    }else if (prefManager.getString("ADMIN_NATIVE_TYPE").equals("ADMOB")){
+                        posterArrayList_canceled.add(new Poster().setTypeView(5));
+                    } else if (prefManager.getString("ADMIN_NATIVE_TYPE").equals("BOTH")){
+                        if (type_ads == 0) {
+                            posterArrayList_canceled.add(new Poster().setTypeView(4));
+                            type_ads = 1;
+                        }else if (type_ads == 1){
+                            posterArrayList_canceled.add(new Poster().setTypeView(5));
+                            type_ads = 0;
+                        }
+                    }
+                }
+            }
+        }
+
+        swipe_refresh_layout_list_my_list_search.setRefreshing(false);
+        adapter_canceled.notifyDataSetChanged();
+
+
     }
 
     private void initAction() {
@@ -122,9 +268,18 @@ public class MyListActivity extends AppCompatActivity {
                 item = 0;
                 page = 0;
                 loading = true;
-                posterArrayList.clear();
-                adapter.notifyDataSetChanged();
-                loadPosters();
+                posterArrayList_completed.clear();
+                adapter_completed.notifyDataSetChanged();
+                posterArrayList_watching.clear();
+                adapter_completed.notifyDataSetChanged();
+                posterArrayList_plan.clear();
+                adapter_completed.notifyDataSetChanged();
+                posterArrayList_canceled.clear();
+                adapter_completed.notifyDataSetChanged();
+                loadPosters_completed();
+                loadPosters_watching();
+                loadPosters_plan();
+                loadPosters_canceled();
             }
         });
         button_try_again.setOnClickListener(new View.OnClickListener() {
@@ -133,9 +288,18 @@ public class MyListActivity extends AppCompatActivity {
                 item = 0;
                 page = 0;
                 loading = true;
-                posterArrayList.clear();
-                adapter.notifyDataSetChanged();
-                loadPosters();
+                posterArrayList_completed.clear();
+                adapter_completed.notifyDataSetChanged();
+                posterArrayList_watching.clear();
+                adapter_completed.notifyDataSetChanged();
+                posterArrayList_plan.clear();
+                adapter_completed.notifyDataSetChanged();
+                posterArrayList_canceled.clear();
+                adapter_completed.notifyDataSetChanged();
+                loadPosters_completed();
+                loadPosters_watching();
+                loadPosters_plan();
+                loadPosters_canceled();
             }
         });
     }
@@ -166,8 +330,16 @@ public class MyListActivity extends AppCompatActivity {
         button_try_again            = findViewById(R.id.button_try_again);
         image_view_empty_list       = findViewById(R.id.image_view_empty_list);
         linear_layout_layout_error  = findViewById(R.id.linear_layout_layout_error);
-        recycler_view_activity_my_list          = findViewById(R.id.recycler_view_activity_my_list);
-        adapter = new PosterAdapter(posterArrayList, this,true);
+
+        recycler_view_activity_my_list_completed = findViewById(R.id.recycler_view_activity_my_list_completed);
+        recycler_view_activity_my_list_watching = findViewById(R.id.recycler_view_activity_my_list_watching);
+        recycler_view_activity_my_list_plan = findViewById(R.id.recycler_view_activity_my_list_plan_watch);
+        recycler_view_activity_my_list_canceled = findViewById(R.id.recycler_view_activity_my_list_canceled);
+
+        adapter_completed = new PosterAdapter(posterArrayList_completed, this,true);
+        adapter_watching = new PosterAdapter(posterArrayList_watching, this,true);
+        adapter_plan = new PosterAdapter(posterArrayList_plan, this,true);
+        adapter_canceled = new PosterAdapter(posterArrayList_canceled, this,true);
         if (native_ads_enabled){
             Log.v("MYADS","ENABLED");
             if (tabletSize) {
@@ -195,9 +367,18 @@ public class MyListActivity extends AppCompatActivity {
                 this.gridLayoutManager=  new GridLayoutManager(getApplicationContext(),3,RecyclerView.VERTICAL,false);
             }
         }
-        recycler_view_activity_my_list.setHasFixedSize(true);
-        recycler_view_activity_my_list.setAdapter(adapter);
-        recycler_view_activity_my_list.setLayoutManager(gridLayoutManager);
+        recycler_view_activity_my_list_completed.setHasFixedSize(true);
+        recycler_view_activity_my_list_completed.setAdapter(adapter_completed);
+        recycler_view_activity_my_list_completed.setLayoutManager(gridLayoutManager);
+        recycler_view_activity_my_list_plan.setHasFixedSize(true);
+        recycler_view_activity_my_list_plan.setAdapter(adapter_completed);
+        recycler_view_activity_my_list_plan.setLayoutManager(gridLayoutManager);
+        recycler_view_activity_my_list_watching.setHasFixedSize(true);
+        recycler_view_activity_my_list_watching.setAdapter(adapter_completed);
+        recycler_view_activity_my_list_watching.setLayoutManager(gridLayoutManager);
+        recycler_view_activity_my_list_canceled.setHasFixedSize(true);
+        recycler_view_activity_my_list_canceled.setAdapter(adapter_completed);
+        recycler_view_activity_my_list_canceled.setLayoutManager(gridLayoutManager);
 
     }
     @Override

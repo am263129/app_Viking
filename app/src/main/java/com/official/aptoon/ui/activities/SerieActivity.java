@@ -1731,7 +1731,7 @@ public class SerieActivity extends AppCompatActivity implements PlaylistDownload
     }
     private void addFavotite_plan() {
 
-        List<Poster> favorites_list =Hawk.get("my_list_plan");
+        List<Poster> favorites_list =Hawk.get("my_list_plan_to_watch");
         Boolean exist = false;
         if (favorites_list == null) {
             favorites_list = new ArrayList<>();
@@ -1745,12 +1745,12 @@ public class SerieActivity extends AppCompatActivity implements PlaylistDownload
         }
         if (exist == false) {
             favorites_list.add(poster);
-            Hawk.put("my_list_plan",favorites_list);
+            Hawk.put("my_list_plan_to_watch",favorites_list);
             image_view_activity_serie_my_list.setImageDrawable(getResources().getDrawable(R.drawable.ic_close));
             Toasty.info(this, "This movie has been added to your Plan list", Toast.LENGTH_SHORT).show();
         }else{
             favorites_list.remove(fav_position);
-            Hawk.put("my_list_plan",favorites_list);
+            Hawk.put("my_list_plan_to_watch",favorites_list);
             image_view_activity_serie_my_list.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             Toasty.warning(this, "This movie has been removed from your Plan list", Toast.LENGTH_SHORT).show();
         }

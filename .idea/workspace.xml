@@ -26,14 +26,10 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/official/aptoon/ui/activities/ChannelActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/official/aptoon/ui/activities/ChannelActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/official/aptoon/ui/activities/MovieActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/official/aptoon/ui/activities/MovieActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/official/aptoon/ui/activities/MyListActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/official/aptoon/ui/activities/MyListActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/official/aptoon/ui/activities/SerieActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/official/aptoon/ui/activities/SerieActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/boder_top_bottom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/boder_top_bottom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_channel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_channel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_movie.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_movie.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_serie.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_serie.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_my_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_my_list.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -153,8 +149,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/official/aptoon/ui/activities/MovieActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="1088" column="62" selection-start-line="1088" selection-start-column="62" selection-end-line="1088" selection-end-column="62" />
+            <state relative-caret-position="351">
+              <caret line="1557" column="43" selection-start-line="1557" selection-start-column="22" selection-end-line="1557" selection-end-column="43" />
               <folding>
                 <element signature="e#23001#23002#0" expanded="true" />
                 <element signature="e#23040#23041#0" expanded="true" />
@@ -199,11 +195,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/official/aptoon/ui/activities/SerieActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="1786" lean-forward="true" selection-start-line="1786" selection-end-line="1786" />
+            <state relative-caret-position="151">
+              <caret line="1746" column="39" lean-forward="true" selection-start-line="1746" selection-start-column="39" selection-end-line="1746" selection-end-column="39" />
               <folding>
                 <element signature="e#25634#25635#0" expanded="true" />
                 <element signature="e#25673#25674#0" expanded="true" />
@@ -226,6 +222,25 @@
                 <element signature="e#76940#76941#0" expanded="true" />
                 <element signature="e#76993#76994#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/official/aptoon/ui/activities/MyListActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="160">
+              <caret line="420" column="13" lean-forward="true" selection-start-line="420" selection-start-column="13" selection-end-line="420" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_my_list.xml">
+          <provider selected="true" editor-type-id="android-designer2" />
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="-1647">
+              <caret line="98" column="97" selection-start-line="98" selection-start-column="97" selection-end-line="98" selection-end-column="97" />
             </state>
           </provider>
         </entry>
@@ -253,13 +268,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>text_view_item_source_type</find>
-      <find>item_source_play</find>
-      <find>list</find>
-      <find>SourceAdapter</find>
-      <find>sourceAdapter</find>
-      <find>recycler_view_downloads_fragment</find>
-      <find>floating_action_button_activity_serie_play</find>
       <find>@drawable/ic_star</find>
       <find>android:text=&quot;TextView&quot;</find>
       <find>mylist</find>
@@ -282,7 +290,14 @@
       <find>menu</find>
       <find>btn_show_info</find>
       <find>add</find>
+      <find>my_list_watching</find>
+      <find>my_list_plan</find>
+      <find>my_list_plan_to_watch</find>
       <find>addf</find>
+      <find>my_list_canceled</find>
+      <find>posterArrayList_completed.clear();</find>
+      <find>setAda</find>
+      <find>recycler_view_activity_my_list_completed.setAdapter(adapter_completed);</find>
     </findStrings>
     <replaceStrings>
       <replace>loadRewardedVideoAd()</replace>
@@ -309,7 +324,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/com/official/aptoon/ui/activities/OuterLoginActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/official/aptoon/ui/activities/BroadcastTimeActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_order.xml" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
@@ -344,7 +358,6 @@
         <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_my_list_statistic.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/official/aptoon/ui/activities/HomeActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_my_list.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/official/aptoon/entity/GlobalVariable.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/gradient_list_completed.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/gradient_list_watching.xml" />
@@ -358,8 +371,10 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/official/aptoon/ui/activities/ChannelActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_movie.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_serie.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/official/aptoon/ui/activities/MovieActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_my_list.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/official/aptoon/ui/activities/SerieActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/official/aptoon/ui/activities/MovieActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/official/aptoon/ui/activities/MyListActivity.java" />
       </list>
     </option>
   </component>
@@ -731,7 +746,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.9016949" visible="true" weight="0.21643394" />
       <window_info id="Captures" order="1" sideWeight="0.098305084" side_tool="true" visible="true" weight="0.21643394" />
@@ -752,7 +766,7 @@
       <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49785176" weight="0.3277405" />
       <window_info anchor="bottom" id="Build" order="8" sideWeight="0.62620836" visible="true" weight="0.34004474" />
       <window_info anchor="bottom" id="Android Profiler" order="9" sideWeight="0.49946293" weight="0.32997763" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.37379164" side_tool="true" visible="true" weight="0.34004474" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.37379164" side_tool="true" weight="0.34004474" />
       <window_info anchor="bottom" id="Logcat" order="11" sideWeight="0.49624062" weight="0.32662192" />
       <window_info anchor="bottom" id="Version Control" order="12" show_stripe_button="false" />
       <window_info anchor="bottom" id="Flutter Performance" order="13" side_tool="true" />
@@ -990,18 +1004,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_my_list.xml">
-      <provider selected="true" editor-type-id="android-designer2" />
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="-376">
-          <caret line="132" column="62" selection-start-line="132" selection-start-column="62" selection-end-line="132" selection-end-column="62" />
-          <folding>
-            <element signature="e#3970#5158#0" />
-            <element signature="e#5365#6225#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/activity_main_drawer.xml">
       <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
@@ -1085,13 +1087,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-4108">
           <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/official/aptoon/ui/activities/MyListActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4702">
-          <caret line="62" column="19" lean-forward="true" selection-start-line="62" selection-start-column="19" selection-end-line="62" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -1226,10 +1221,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_my_list.xml">
+      <provider selected="true" editor-type-id="android-designer2" />
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="-1647">
+          <caret line="98" column="97" selection-start-line="98" selection-start-column="97" selection-end-line="98" selection-end-column="97" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/official/aptoon/ui/activities/SerieActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="1746" column="39" lean-forward="true" selection-start-line="1746" selection-start-column="39" selection-end-line="1746" selection-end-column="39" />
+          <folding>
+            <element signature="e#25634#25635#0" expanded="true" />
+            <element signature="e#25673#25674#0" expanded="true" />
+            <element signature="e#25842#25843#0" expanded="true" />
+            <element signature="e#25891#25892#0" expanded="true" />
+            <element signature="e#27572#27573#0" expanded="true" />
+            <element signature="e#27616#27617#0" expanded="true" />
+            <element signature="e#27795#27796#0" expanded="true" />
+            <element signature="e#27847#27848#0" expanded="true" />
+            <element signature="e#33342#33343#0" expanded="true" />
+            <element signature="e#33394#33395#0" expanded="true" />
+            <element signature="e#47213#47214#0" expanded="true" />
+            <element signature="e#47261#47262#0" expanded="true" />
+            <element signature="e#49556#49557#0" expanded="true" />
+            <element signature="e#49620#49621#0" expanded="true" />
+            <element signature="e#51964#51965#0" expanded="true" />
+            <element signature="e#52024#52025#0" expanded="true" />
+            <element signature="e#71267#71268#0" expanded="true" />
+            <element signature="e#71353#71354#0" expanded="true" />
+            <element signature="e#76940#76941#0" expanded="true" />
+            <element signature="e#76993#76994#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/official/aptoon/ui/activities/MovieActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="1088" column="62" selection-start-line="1088" selection-start-column="62" selection-end-line="1088" selection-end-column="62" />
+        <state relative-caret-position="351">
+          <caret line="1557" column="43" selection-start-line="1557" selection-start-column="22" selection-end-line="1557" selection-end-column="43" />
           <folding>
             <element signature="e#23001#23002#0" expanded="true" />
             <element signature="e#23040#23041#0" expanded="true" />
@@ -1253,32 +1285,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/official/aptoon/ui/activities/SerieActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/official/aptoon/ui/activities/MyListActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="1786" lean-forward="true" selection-start-line="1786" selection-end-line="1786" />
-          <folding>
-            <element signature="e#25634#25635#0" expanded="true" />
-            <element signature="e#25673#25674#0" expanded="true" />
-            <element signature="e#25842#25843#0" expanded="true" />
-            <element signature="e#25891#25892#0" expanded="true" />
-            <element signature="e#27572#27573#0" expanded="true" />
-            <element signature="e#27616#27617#0" expanded="true" />
-            <element signature="e#27795#27796#0" expanded="true" />
-            <element signature="e#27847#27848#0" expanded="true" />
-            <element signature="e#33342#33343#0" expanded="true" />
-            <element signature="e#33394#33395#0" expanded="true" />
-            <element signature="e#47213#47214#0" expanded="true" />
-            <element signature="e#47261#47262#0" expanded="true" />
-            <element signature="e#49556#49557#0" expanded="true" />
-            <element signature="e#49620#49621#0" expanded="true" />
-            <element signature="e#51964#51965#0" expanded="true" />
-            <element signature="e#52024#52025#0" expanded="true" />
-            <element signature="e#71267#71268#0" expanded="true" />
-            <element signature="e#71353#71354#0" expanded="true" />
-            <element signature="e#76940#76941#0" expanded="true" />
-            <element signature="e#76993#76994#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="160">
+          <caret line="420" column="13" lean-forward="true" selection-start-line="420" selection-start-column="13" selection-end-line="420" selection-end-column="13" />
         </state>
       </provider>
     </entry>
