@@ -99,16 +99,18 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_alignParentBottom="true"
-                            android:layout_marginBottom="40dp"
+                            android:layout_marginBottom="60dp"
+                            android:elevation="20dp"
                             android:orientation="horizontal"
-                            android:padding="10dp"
-                            android:elevation="20dp">
+                            android:padding="10dp">
 
                             <Button
                                 android:id="@+id/floating_action_button_activity_serie_play"
                                 android:layout_width="50dp"
                                 android:layout_height="30dp"
                                 android:layout_centerInParent="true"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginRight="20dp"
                                 android:background="@drawable/background_btn_play"
                                 android:drawableLeft="@drawable/ico_play"
                                 android:gravity="left|center_vertical"
@@ -139,7 +141,7 @@
                             </LinearLayout>
 
                             <LinearLayout
-                                android:id="@+id/btn_add_to_list"
+                                android:id="@+id/linear_layout_activity_serie_my_list"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1.5"
@@ -160,7 +162,7 @@
                             </LinearLayout>
 
                             <LinearLayout
-                                android:id="@+id/btn_share"
+                                android:id="@+id/linear_layout_serie_activity_share"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -181,7 +183,7 @@
                             </LinearLayout>
 
                             <LinearLayout
-                                android:id="@+id/label_star"
+                                android:id="@+id/linear_layout_serie_activity_rate"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -345,7 +347,8 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="3dp"
                         android:paddingTop="3dp"
-                        android:paddingRight="3dp">
+                        android:paddingRight="3dp"
+                        android:visibility="gone">
 
                         <LinearLayout
                             android:id="@+id/linear_layout_serie_activity_trailer"
@@ -366,12 +369,14 @@
                                 android:orientation="vertical"
                                 android:paddingTop="5dp"
                                 android:paddingBottom="5dp">
+
                                 <ImageView
                                     android:layout_width="50dp"
                                     android:layout_height="50dp"
                                     android:padding="10dp"
                                     android:tint="@color/white"
                                     app:srcCompat="@drawable/ic_movie" />
+
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -390,7 +395,7 @@
                             android:layout_weight="1">
 
                             <LinearLayout
-                                android:id="@+id/linear_layout_serie_activity_share"
+                                android:id="@+id/linear_layout_serie_activity_share_old"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="?attr/selectableItemBackgroundBorderless"
@@ -427,7 +432,7 @@
                             android:orientation="vertical">
 
                             <LinearLayout
-                                android:id="@+id/linear_layout_activity_serie_my_list"
+                                android:id="@+id/linear_layout_activity_serie_my_list_old"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="?attr/selectableItemBackgroundBorderless"
@@ -465,7 +470,7 @@
                             android:orientation="vertical">
 
                             <LinearLayout
-                                android:id="@+id/linear_layout_serie_activity_rate"
+                                android:id="@+id/linear_layout_serie_activity_rate_old"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="?attr/selectableItemBackgroundBorderless"
