@@ -6,14 +6,16 @@
     android:layout_height="match_parent"
     android:background="@color/black"
     tools:context=".ui.activities.MovieActivity">
+
     <RelativeLayout
+        android:id="@+id/parent_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
+
         <RelativeLayout
-            android:layout_above="@id/linear_layout_ads"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_above="@id/linear_layout_ads"
             android:background="#ff1d1c22">
 
             <ImageView
@@ -42,10 +44,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="300dp"
                             android:layout_marginTop="-10dp"
+                            android:elevation="0dp"
                             app:cardBackgroundColor="#ff1d1c22"
                             app:cardCornerRadius="15dp"
-                            app:cardElevation="10dp"
-                            android:elevation="0dp">
+                            app:cardElevation="10dp">
 
                             <RelativeLayout
                                 android:layout_width="match_parent"
@@ -554,40 +556,44 @@
                                 android:textColor="@color/colorAccent"
                                 android:textSize="19dp"
                                 android:textStyle="bold" />
+
                             <RelativeLayout
 
-                                android:layout_marginTop="40dp"
-                                android:layout_marginLeft="5dp"
-                                android:layout_marginBottom="10dp"
-                                android:background="@color/colorAccent"
                                 android:layout_width="100dp"
-                                android:layout_height="4dp"/>
-                            <RelativeLayout
-                                android:layout_margin="5dp"
-                                android:layout_alignParentRight="true"
+                                android:layout_height="4dp"
                                 android:layout_marginLeft="5dp"
-                                android:background="@drawable/bg_season_tab"
+                                android:layout_marginTop="40dp"
+                                android:layout_marginBottom="10dp"
+                                android:background="@color/colorAccent" />
+
+                            <RelativeLayout
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_margin="5dp"
+                                android:layout_marginLeft="5dp"
+                                android:background="@drawable/bg_season_tab">
+
                                 <androidx.appcompat.widget.AppCompatSpinner
                                     android:id="@+id/spinner_activity_serie_season_list"
-                                    android:background="@android:color/transparent"
-                                    android:spinnerMode="dropdown"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"/>
+                                    android:layout_height="wrap_content"
+                                    android:background="@android:color/transparent"
+                                    android:spinnerMode="dropdown" />
 
                             </RelativeLayout>
                         </RelativeLayout>
+
                         <RelativeLayout
-                            android:orientation="vertical"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/recycle_view_activity_activity_serie_episodes"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginBottom="70dp"
-                            />
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recycle_view_activity_activity_serie_episodes"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="70dp" />
                         </RelativeLayout>
                     </LinearLayout>
                 </LinearLayout>
@@ -597,7 +603,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_marginTop="220dp"
-                android:background="@drawable/cast_expanded_controller_bg_gradient_light"  />
+                android:background="@drawable/cast_expanded_controller_bg_gradient_light" />
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -671,12 +677,12 @@
                     android:visibility="visible" />
             </RelativeLayout>
         </RelativeLayout>
+
         <LinearLayout
-            android:orientation="vertical"
             android:id="@+id/linear_layout_ads"
-            android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical"></LinearLayout>
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

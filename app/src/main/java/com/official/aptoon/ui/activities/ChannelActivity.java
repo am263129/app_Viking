@@ -28,6 +28,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Base64;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -42,6 +43,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
@@ -74,6 +76,7 @@ import com.google.android.gms.cast.framework.media.RemoteMediaClient;
 import com.google.android.gms.common.images.WebImage;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.jackandphantom.blurimage.BlurImage;
+import com.official.aptoon.entity.Poster;
 import com.orhanobut.hawk.Hawk;
 import com.official.aptoon.Provider.PrefManager;
 import com.official.aptoon.R;
@@ -122,7 +125,7 @@ public class ChannelActivity extends AppCompatActivity {
     private LinearLayout linear_layout_channel_activity_rate;
 
 
-    private RelativeLayout relative_layout_subtitles_loading;
+    private RelativeLayout relative_layout_subtitles_loading, parent_view;
     private RecyclerView recycle_view_activity_activity_channel_more_channels;
     private LinearLayout linear_layout_activity_channel_more_channels;
     private LinearLayout linear_layout_activity_channel_my_list;
@@ -371,7 +374,7 @@ public class ChannelActivity extends AppCompatActivity {
         this.image_view_activity_channel_my_list =  (ImageView) findViewById(R.id.image_view_activity_channel_my_list);
         this.linear_layout_channel_activity_website =  (LinearLayout) findViewById(R.id.linear_layout_channel_activity_website);
         this.linear_layout_channel_activity_website_clicked =  (LinearLayout) findViewById(R.id.linear_layout_channel_activity_website_clicked);
-
+        this.parent_view = (RelativeLayout)findViewById(R.id.parent_view);
 
     }
     private void getChannel() {
@@ -457,7 +460,7 @@ public class ChannelActivity extends AppCompatActivity {
         linear_layout_activity_channel_my_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addFavotite();
+                show_add_dialog();
             }
         });
 
@@ -763,9 +766,66 @@ public class ChannelActivity extends AppCompatActivity {
             image_view_activity_channel_my_list.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
         }
     }
-    private void addFavotite() {
 
-        List<Channel> favorites_list =Hawk.get("channel_fav_list");
+    private void show_add_dialog(){
+        LayoutInflater inflater = (LayoutInflater) HomeActivity.getInstance().getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.dialog_add_list_window, null);
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        HomeActivity.getInstance().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int screen_width = displayMetrics.widthPixels;
+        int width = (int)Math.floor(screen_width/2);
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true;
+        int[] pos = new int[2];
+        linear_layout_activity_channel_my_list.getLocationOnScreen(pos);
+        PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+        ImageView btn_close = popupView.findViewById(R.id.btn_close);
+        RelativeLayout btn_completed = popupView.findViewById(R.id.btn_completed);
+        RelativeLayout btn_plan = popupView.findViewById(R.id.btn_plan);
+        RelativeLayout btn_watching = popupView.findViewById(R.id.btn_watching);
+        RelativeLayout btn_canceled = popupView.findViewById(R.id.btn_canceled);
+        btn_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
+        btn_completed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addFavotite_completed();
+                popupWindow.dismiss();
+            }
+        });
+        btn_watching.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addFavotite_watching();
+                popupWindow.dismiss();
+            }
+        });
+        btn_plan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addFavotite_plan();
+                popupWindow.dismiss();
+            }
+        });
+        btn_canceled.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addFavotite_canceled();
+                popupWindow.dismiss();
+            }
+        });
+
+        popupWindow.showAtLocation(parent_view,0, pos[0],pos[1]+100);
+
+
+    }
+    private void addFavotite_completed() {
+
+        List<Channel> favorites_list =Hawk.get("channel_fav_list_completed");
         Boolean exist = false;
         if (favorites_list == null) {
             favorites_list = new ArrayList<>();
@@ -779,12 +839,90 @@ public class ChannelActivity extends AppCompatActivity {
         }
         if (exist == false) {
             favorites_list.add(channel);
-            Hawk.put("channel_fav_list",favorites_list);
+            Hawk.put("channel_fav_list_completed",favorites_list);
             image_view_activity_channel_my_list.setImageDrawable(getResources().getDrawable(R.drawable.ic_close));
             Toasty.info(this, getString(R.string.channel_added_fav), Toast.LENGTH_SHORT).show();
         }else{
             favorites_list.remove(fav_position);
-            Hawk.put("channel_fav_list",favorites_list);
+            Hawk.put("channel_fav_list_completed",favorites_list);
+            image_view_activity_channel_my_list.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            Toasty.warning(this, getString(R.string.channel_removed_fav), Toast.LENGTH_SHORT).show();
+        }
+    }
+    private void addFavotite_watching() {
+
+        List<Channel> favorites_list =Hawk.get("channel_fav_list_watching");
+        Boolean exist = false;
+        if (favorites_list == null) {
+            favorites_list = new ArrayList<>();
+        }
+        int fav_position = -1;
+        for (int i = 0; i < favorites_list.size(); i++) {
+            if (favorites_list.get(i).getId().equals(channel.getId())) {
+                exist = true;
+                fav_position = i;
+            }
+        }
+        if (exist == false) {
+            favorites_list.add(channel);
+            Hawk.put("channel_fav_list_watching",favorites_list);
+            image_view_activity_channel_my_list.setImageDrawable(getResources().getDrawable(R.drawable.ic_close));
+            Toasty.info(this, getString(R.string.channel_added_fav), Toast.LENGTH_SHORT).show();
+        }else{
+            favorites_list.remove(fav_position);
+            Hawk.put("channel_fav_list_watching",favorites_list);
+            image_view_activity_channel_my_list.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            Toasty.warning(this, getString(R.string.channel_removed_fav), Toast.LENGTH_SHORT).show();
+        }
+    }
+    private void addFavotite_plan() {
+
+        List<Channel> favorites_list =Hawk.get("channel_fav_list_plan_to_watch");
+        Boolean exist = false;
+        if (favorites_list == null) {
+            favorites_list = new ArrayList<>();
+        }
+        int fav_position = -1;
+        for (int i = 0; i < favorites_list.size(); i++) {
+            if (favorites_list.get(i).getId().equals(channel.getId())) {
+                exist = true;
+                fav_position = i;
+            }
+        }
+        if (exist == false) {
+            favorites_list.add(channel);
+            Hawk.put("channel_fav_list_plan_to_watch",favorites_list);
+            image_view_activity_channel_my_list.setImageDrawable(getResources().getDrawable(R.drawable.ic_close));
+            Toasty.info(this, getString(R.string.channel_added_fav), Toast.LENGTH_SHORT).show();
+        }else{
+            favorites_list.remove(fav_position);
+            Hawk.put("channel_fav_list_plan_to_watch",favorites_list);
+            image_view_activity_channel_my_list.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            Toasty.warning(this, getString(R.string.channel_removed_fav), Toast.LENGTH_SHORT).show();
+        }
+    }
+    private void addFavotite_canceled() {
+
+        List<Channel> favorites_list =Hawk.get("channel_fav_list_canceled");
+        Boolean exist = false;
+        if (favorites_list == null) {
+            favorites_list = new ArrayList<>();
+        }
+        int fav_position = -1;
+        for (int i = 0; i < favorites_list.size(); i++) {
+            if (favorites_list.get(i).getId().equals(channel.getId())) {
+                exist = true;
+                fav_position = i;
+            }
+        }
+        if (exist == false) {
+            favorites_list.add(channel);
+            Hawk.put("channel_fav_list_canceled",favorites_list);
+            image_view_activity_channel_my_list.setImageDrawable(getResources().getDrawable(R.drawable.ic_close));
+            Toasty.info(this, getString(R.string.channel_added_fav), Toast.LENGTH_SHORT).show();
+        }else{
+            favorites_list.remove(fav_position);
+            Hawk.put("channel_fav_list_canceled",favorites_list);
             image_view_activity_channel_my_list.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             Toasty.warning(this, getString(R.string.channel_removed_fav), Toast.LENGTH_SHORT).show();
         }

@@ -39,6 +39,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
 import android.util.Base64;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -55,6 +56,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
@@ -171,7 +173,7 @@ public class SerieActivity extends AppCompatActivity implements PlaylistDownload
 
 
     private LinearLayout linear_layout_serie_activity_trailer_clicked;
-    private RelativeLayout relative_layout_subtitles_loading;
+    private RelativeLayout relative_layout_subtitles_loading, parent_view;
     private RecyclerView recycle_view_activity_activity_serie_episodes;
     private LinearLayout linear_layout_activity_serie_seasons;
     private LinearLayout linear_layout_activity_serie_my_list;
@@ -640,7 +642,7 @@ public class SerieActivity extends AppCompatActivity implements PlaylistDownload
         linear_layout_activity_serie_my_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addFavotite();
+                show_add_dialog();
             }
         });
         linear_layout_serie_activity_trailer_clicked.setOnClickListener(v-> {
@@ -1191,6 +1193,7 @@ public class SerieActivity extends AppCompatActivity implements PlaylistDownload
         this.linear_layout_activity_serie_seasons =  (LinearLayout) findViewById(R.id.linear_layout_activity_serie_seasons);
         this.linear_layout_activity_serie_my_list =  (LinearLayout) findViewById(R.id.linear_layout_activity_serie_my_list);
         this.image_view_activity_serie_my_list =  (ImageView) findViewById(R.id.image_view_activity_serie_my_list);
+        this.parent_view = findViewById(R.id.parent_view);
     }
     private void loadRemoteMedia(int position, boolean autoPlay) {
         final RemoteMediaClient remoteMediaClient = mCastSession.getRemoteMediaClient();
@@ -1617,6 +1620,168 @@ public class SerieActivity extends AppCompatActivity implements PlaylistDownload
             image_view_activity_serie_my_list.setImageResource(R.drawable.ic_check);
         }
     }
+
+    private void show_add_dialog(){
+        LayoutInflater inflater = (LayoutInflater) HomeActivity.getInstance().getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.dialog_add_list_window, null);
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        HomeActivity.getInstance().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int screen_width = displayMetrics.widthPixels;
+        int width = (int)Math.floor(screen_width/2);
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true;
+        int[] pos = new int[2];
+        linear_layout_activity_serie_my_list.getLocationOnScreen(pos);
+        PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+        ImageView btn_close = popupView.findViewById(R.id.btn_close);
+        RelativeLayout btn_completed = popupView.findViewById(R.id.btn_completed);
+        RelativeLayout btn_plan = popupView.findViewById(R.id.btn_plan);
+        RelativeLayout btn_watching = popupView.findViewById(R.id.btn_watching);
+        RelativeLayout btn_canceled = popupView.findViewById(R.id.btn_canceled);
+        btn_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
+        btn_completed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addFavotite_completed();
+                popupWindow.dismiss();
+            }
+        });
+        btn_watching.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addFavotite_watching();
+                popupWindow.dismiss();
+            }
+        });
+        btn_plan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addFavotite_plan();
+                popupWindow.dismiss();
+            }
+        });
+        btn_canceled.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addFavotite_canceled();
+                popupWindow.dismiss();
+            }
+        });
+
+        popupWindow.showAtLocation(parent_view,0, pos[0],pos[1]+100);
+
+
+    }
+    private void addFavotite_completed() {
+
+        List<Poster> favorites_list =Hawk.get("my_list_completed");
+        Boolean exist = false;
+        if (favorites_list == null) {
+            favorites_list = new ArrayList<>();
+        }
+        int fav_position = -1;
+        for (int i = 0; i < favorites_list.size(); i++) {
+            if (favorites_list.get(i).getId().equals(poster.getId())) {
+                exist = true;
+                fav_position = i;
+            }
+        }
+        if (exist == false) {
+            favorites_list.add(poster);
+            Hawk.put("my_list_completed",favorites_list);
+            image_view_activity_serie_my_list.setImageDrawable(getResources().getDrawable(R.drawable.ic_close));
+            Toasty.info(this, "This movie has been added to your Completed list", Toast.LENGTH_SHORT).show();
+        }else{
+            favorites_list.remove(fav_position);
+            Hawk.put("my_list_completed",favorites_list);
+            image_view_activity_serie_my_list.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            Toasty.warning(this, "This movie has been removed from your Completed list", Toast.LENGTH_SHORT).show();
+        }
+    }
+    private void addFavotite_watching() {
+
+        List<Poster> favorites_list =Hawk.get("my_list_watching");
+        Boolean exist = false;
+        if (favorites_list == null) {
+            favorites_list = new ArrayList<>();
+        }
+        int fav_position = -1;
+        for (int i = 0; i < favorites_list.size(); i++) {
+            if (favorites_list.get(i).getId().equals(poster.getId())) {
+                exist = true;
+                fav_position = i;
+            }
+        }
+        if (exist == false) {
+            favorites_list.add(poster);
+            Hawk.put("my_list_watching",favorites_list);
+            image_view_activity_serie_my_list.setImageDrawable(getResources().getDrawable(R.drawable.ic_close));
+            Toasty.info(this, "This movie has been added to your Watching list", Toast.LENGTH_SHORT).show();
+        }else{
+            favorites_list.remove(fav_position);
+            Hawk.put("my_list_watching",favorites_list);
+            image_view_activity_serie_my_list.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            Toasty.warning(this, "This movie has been removed from your Watching list", Toast.LENGTH_SHORT).show();
+        }
+    }
+    private void addFavotite_plan() {
+
+        List<Poster> favorites_list =Hawk.get("my_list_plan");
+        Boolean exist = false;
+        if (favorites_list == null) {
+            favorites_list = new ArrayList<>();
+        }
+        int fav_position = -1;
+        for (int i = 0; i < favorites_list.size(); i++) {
+            if (favorites_list.get(i).getId().equals(poster.getId())) {
+                exist = true;
+                fav_position = i;
+            }
+        }
+        if (exist == false) {
+            favorites_list.add(poster);
+            Hawk.put("my_list_plan",favorites_list);
+            image_view_activity_serie_my_list.setImageDrawable(getResources().getDrawable(R.drawable.ic_close));
+            Toasty.info(this, "This movie has been added to your Plan list", Toast.LENGTH_SHORT).show();
+        }else{
+            favorites_list.remove(fav_position);
+            Hawk.put("my_list_plan",favorites_list);
+            image_view_activity_serie_my_list.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            Toasty.warning(this, "This movie has been removed from your Plan list", Toast.LENGTH_SHORT).show();
+        }
+    }
+    private void addFavotite_canceled() {
+
+        List<Poster> favorites_list =Hawk.get("my_list_canceled");
+        Boolean exist = false;
+        if (favorites_list == null) {
+            favorites_list = new ArrayList<>();
+        }
+        int fav_position = -1;
+        for (int i = 0; i < favorites_list.size(); i++) {
+            if (favorites_list.get(i).getId().equals(poster.getId())) {
+                exist = true;
+                fav_position = i;
+            }
+        }
+        if (exist == false) {
+            favorites_list.add(poster);
+            Hawk.put("my_list_canceled",favorites_list);
+            image_view_activity_serie_my_list.setImageDrawable(getResources().getDrawable(R.drawable.ic_close));
+            Toasty.info(this, "This movie has been added to your canceled list", Toast.LENGTH_SHORT).show();
+        }else{
+            favorites_list.remove(fav_position);
+            Hawk.put("my_list_canceled",favorites_list);
+            image_view_activity_serie_my_list.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            Toasty.warning(this, "This movie has been removed from your canceled list", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private void addFavotite() {
 
 

@@ -6,15 +6,17 @@
     android:layout_height="match_parent"
     android:background="@color/black"
     tools:context=".ui.activities.MovieActivity">
+
     <RelativeLayout
 
+        android:id="@+id/parent_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <RelativeLayout
-            android:layout_above="@+id/linear_layout_ads"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-           >
+            android:layout_above="@+id/linear_layout_ads">
 
             <ImageView
                 android:id="@+id/image_view_activity_movie_background"
@@ -250,26 +252,25 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:visibility="gone"
                                 android:id="@+id/text_view_activity_movie_year"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/border_right"
                                 android:paddingRight="7dp"
-                                android:textColor="@color/white_text" />
+                                android:textColor="@color/white_text"
+                                android:visibility="gone" />
 
                             <TextView
-                                android:visibility="gone"
                                 android:id="@+id/text_view_activity_movie_classification"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/border_right"
                                 android:paddingLeft="7dp"
                                 android:paddingRight="7dp"
-                                android:textColor="@color/white_text" />
+                                android:textColor="@color/white_text"
+                                android:visibility="gone" />
 
                             <TextView
-                                android:visibility="gone"
                                 android:id="@+id/text_view_activity_movie_duration"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -278,7 +279,8 @@
                                 android:paddingLeft="7dp"
                                 android:paddingRight="7dp"
                                 android:text="2h22min"
-                                android:textColor="@color/white_text" />
+                                android:textColor="@color/white_text"
+                                android:visibility="gone" />
 
                             <LinearLayout
                                 android:id="@+id/linear_layout_activity_movie_rating"
@@ -602,8 +604,7 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recycle_view_activity_activity_movie_more_movies"
                             android:layout_width="match_parent"
-                            android:layout_height="182dp"
-                            />
+                            android:layout_height="182dp" />
                     </LinearLayout>
                 </LinearLayout>
             </ScrollView>
@@ -686,12 +687,12 @@
                     android:visibility="visible" />
             </RelativeLayout>
         </RelativeLayout>
+
         <LinearLayout
-            android:orientation="vertical"
             android:id="@+id/linear_layout_ads"
-            android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical"></LinearLayout>
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
