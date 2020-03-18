@@ -23,8 +23,7 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".ui.activities.BroadcastTimeActivity"
-            android:theme="@style/AppThemeNoAction" >
-        </activity>
+            android:theme="@style/AppThemeNoAction"></activity>
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
         <activity
             android:name=".ui.activities.ProfileActivity"
@@ -133,11 +132,13 @@
         <activity
             android:name=".ui.activities.HomeActivity"
             android:theme="@style/AppThemeActionDestils">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".ui.activities.YoutubeActivity"
@@ -196,12 +197,11 @@
         <activity
             android:name=".ui.activities.SplashActivity"
             android:theme="@style/AppThemeActionDestils">
-
-             <intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".ui.activities.SettingsActivity"

@@ -3,6 +3,7 @@ package com.official.aptoon.ui.Adapters;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.media.Image;
 import android.net.Uri;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -16,7 +17,9 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.facebook.ads.Ad;
@@ -39,11 +42,13 @@ import com.official.aptoon.Provider.PrefManager;
 import com.official.aptoon.R;
 import com.official.aptoon.entity.Data;
 import com.official.aptoon.entity.Notification;
+import com.official.aptoon.entity.Poster;
 import com.official.aptoon.ui.activities.ActorsActivity;
 import com.official.aptoon.ui.activities.GenreActivity;
 import com.official.aptoon.ui.activities.HomeActivity;
 import com.official.aptoon.ui.activities.MyListActivity;
 import com.official.aptoon.ui.activities.TopActivity;
+import com.orhanobut.hawk.Hawk;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +58,8 @@ import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
+
+import es.dmoral.toasty.Toasty;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
@@ -265,6 +272,143 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     }
                 });
 
+                streamingHolder.btn_add_to_mylist.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        LayoutInflater inflater = (LayoutInflater) HomeActivity.getInstance().getSystemService(LAYOUT_INFLATER_SERVICE);
+                        View popupView = inflater.inflate(R.layout.dialog_add_list_window, null);
+                        DisplayMetrics displayMetrics = new DisplayMetrics();
+                        HomeActivity.getInstance().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                        int screen_width = displayMetrics.widthPixels;
+                        int width = (int)Math.floor(screen_width/2);
+                        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+                        boolean focusable = true;
+                        int[] pos = new int[2];
+                        streamingHolder.btn_show_info.getLocationOnScreen(pos);
+                        PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+                        ImageView btn_close = popupView.findViewById(R.id.btn_close);
+                        RelativeLayout btn_completed = popupView.findViewById(R.id.btn_completed);
+                        RelativeLayout btn_plan = popupView.findViewById(R.id.btn_plan);
+                        RelativeLayout btn_watching = popupView.findViewById(R.id.btn_watching);
+                        RelativeLayout btn_canceled = popupView.findViewById(R.id.btn_canceled);
+                        Poster poster = new Poster();
+                        poster.setId(00001);
+                        poster.setClassification("Classification");
+                        poster.setComment(true);
+                        poster.setCover("Cover");
+                        poster.setDescription("Story about how Kakashi be a Ninja");
+                        poster.setDownloadas("nothing");
+                        poster.setDuration("duration");
+                        poster.setRating((float)6.7);
+                        poster.setImdb("IMDB");
+                        poster.setTitle("Naruto and Kakashi");
+                        poster.setType("Movie");
+                        poster.setYear("2020");
+                        poster.setPlayas("MP4");
+                        poster.setImage("https://firebasestorage.googleapis.com/v0/b/lancul-10966.appspot.com/o/Restaurant%2Fdownload%20(3).jpeg?alt=media&token=29eb9584-fb2f-43a3-aa41-a0b09f73304c");
+                        btn_close.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                popupWindow.dismiss();
+                            }
+                        });
+                        btn_completed.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                List<Poster> favorites_list = Hawk.get("my_list_completed");
+                                Boolean exist = false;
+                                if (favorites_list == null) {
+                                    favorites_list = new ArrayList<>();
+                                }
+                                int fav_position = -1;
+                                for (int i = 0; i < favorites_list.size(); i++) {
+                                    if (favorites_list.get(i).getId().equals(poster.getId())) {
+                                        exist = true;
+                                        fav_position = i;
+                                    }
+                                }
+                                if (exist == false) {
+                                    favorites_list.add(poster);
+                                    Hawk.put("my_list_completed",favorites_list);
+                                    Toasty.info(HomeActivity.getInstance(), "This movie has been added to your Completed list", Toast.LENGTH_SHORT).show();
+                                }
+                                popupWindow.dismiss();
+                            }
+                        });
+                        btn_watching.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                List<Poster> favorites_list = Hawk.get("my_list_watching");
+                                Boolean exist = false;
+                                if (favorites_list == null) {
+                                    favorites_list = new ArrayList<>();
+                                }
+                                int fav_position = -1;
+                                for (int i = 0; i < favorites_list.size(); i++) {
+                                    if (favorites_list.get(i).getId().equals(poster.getId())) {
+                                        exist = true;
+                                        fav_position = i;
+                                    }
+                                }
+                                if (exist == false) {
+                                    favorites_list.add(poster);
+                                    Hawk.put("my_list_watching",favorites_list);
+                                    Toasty.info(HomeActivity.getInstance(), "This movie has been added to your Watching list", Toast.LENGTH_SHORT).show();
+                                }
+                                popupWindow.dismiss();
+                            }
+                        });
+                        btn_plan.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                List<Poster> favorites_list = Hawk.get("my_list_plan_to_watch");
+                                Boolean exist = false;
+                                if (favorites_list == null) {
+                                    favorites_list = new ArrayList<>();
+                                }
+                                int fav_position = -1;
+                                for (int i = 0; i < favorites_list.size(); i++) {
+                                    if (favorites_list.get(i).getId().equals(poster.getId())) {
+                                        exist = true;
+                                        fav_position = i;
+                                    }
+                                }
+                                if (exist == false) {
+                                    favorites_list.add(poster);
+                                    Hawk.put("my_list_plan_to_watch",favorites_list);
+                                    Toasty.info(HomeActivity.getInstance(), "This movie has been added to your Plan list", Toast.LENGTH_SHORT).show();
+                                }
+                                popupWindow.dismiss();
+                            }
+                        });
+                        btn_canceled.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                List<Poster> favorites_list = Hawk.get("my_list_canceled");
+                                Boolean exist = false;
+                                if (favorites_list == null) {
+                                    favorites_list = new ArrayList<>();
+                                }
+                                int fav_position = -1;
+                                for (int i = 0; i < favorites_list.size(); i++) {
+                                    if (favorites_list.get(i).getId().equals(poster.getId())) {
+                                        exist = true;
+                                        fav_position = i;
+                                    }
+                                }
+                                if (exist == false) {
+                                    favorites_list.add(poster);
+                                    Hawk.put("my_list_canceled",favorites_list);
+                                    Toasty.info(HomeActivity.getInstance(), "This movie has been added to your Canceled list", Toast.LENGTH_SHORT).show();
+                                }
+                                popupWindow.dismiss();
+                            }
+                        });
+
+                        popupWindow.showAtLocation(streamingHolder.itemView,0, pos[0],pos[1]+100);
+
+                    }
+                });
                 break;
             }
         }

@@ -94,6 +94,7 @@
                         </androidx.cardview.widget.CardView>
 
                         <LinearLayout
+                            android:id="@+id/button_area"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_alignParentBottom="true"
@@ -607,17 +608,18 @@
                 </LinearLayout>
             </ScrollView>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:background="@drawable/bg_gradient" />
-
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:theme="@style/CustomActionBar" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="220dp"
+                android:background="@drawable/cast_expanded_controller_bg_gradient_light" />
 
             <RelativeLayout
                 android:id="@+id/relative_layout_movie_activity_controller"

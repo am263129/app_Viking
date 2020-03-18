@@ -136,7 +136,7 @@ public class MovieActivity extends AppCompatActivity {
     private TextView text_view_activity_movie_classification;
     private RatingBar rating_bar_activity_movie_rating;
     private RecyclerView recycle_view_activity_movie_genres;
-    private FloatingActionButton floating_action_button_activity_movie_play;
+    private Button floating_action_button_activity_movie_play;
     private FloatingActionButton floating_action_button_activity_movie_comment;
 
     private LinearLayout linear_layout_activity_movie_cast;
@@ -1062,7 +1062,7 @@ public class MovieActivity extends AppCompatActivity {
         this.linear_layout_movie_activity_share =  (LinearLayout) findViewById(R.id.linear_layout_movie_activity_share);
         this.floating_action_button_activity_movie_comment =  (FloatingActionButton) findViewById(R.id.floating_action_button_activity_movie_comment);
         this.relative_layout_subtitles_loading =  (RelativeLayout) findViewById(R.id.relative_layout_subtitles_loading);
-        this.floating_action_button_activity_movie_play =  (FloatingActionButton) findViewById(R.id.floating_action_button_activity_movie_play);
+        this.floating_action_button_activity_movie_play =  (Button) findViewById(R.id.floating_action_button_activity_movie_play);
         this.image_view_activity_movie_background =  (ImageView) findViewById(R.id.image_view_activity_movie_background);
         this.image_view_activity_movie_cover =  (ImageView) findViewById(R.id.image_view_activity_movie_cover);
         this.text_view_activity_movie_title =  (TextView) findViewById(R.id.text_view_activity_movie_title);
@@ -1423,7 +1423,6 @@ public class MovieActivity extends AppCompatActivity {
         }
     }
     private void addFavotite() {
-
 
         List<Poster> favorites_list =Hawk.get("my_list");
         Boolean exist = false;

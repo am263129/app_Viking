@@ -645,6 +645,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.enter, R.anim.exit);
+        }else if (id == R.id.my_list) {
+            Intent intent = new Intent(getApplicationContext(), MyListActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.enter, R.anim.exit);
         }
 //        else if (id==R.id.my_profile){
 //            PrefManager prf= new PrefManager(getApplicationContext());

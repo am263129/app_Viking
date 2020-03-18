@@ -114,7 +114,7 @@ public class ChannelActivity extends AppCompatActivity {
     private TextView text_view_activity_channel_classification;
     private RatingBar rating_bar_activity_channel_rating;
     private RecyclerView recycle_view_activity_channel_categories;
-    private FloatingActionButton floating_action_button_activity_channel_play;
+    private Button floating_action_button_activity_channel_play;
     private FloatingActionButton floating_action_button_activity_channel_comment;
     private LinearLayout linear_layout_activity_channel_cast;
     private RecyclerView recycle_view_activity_activity_channel_cast;
@@ -353,7 +353,7 @@ public class ChannelActivity extends AppCompatActivity {
         this.linear_layout_channel_activity_share =  (LinearLayout) findViewById(R.id.linear_layout_channel_activity_share);
         this.floating_action_button_activity_channel_comment =  (FloatingActionButton) findViewById(R.id.floating_action_button_activity_channel_comment);
         this.relative_layout_subtitles_loading =  (RelativeLayout) findViewById(R.id.relative_layout_subtitles_loading);
-        this.floating_action_button_activity_channel_play =  (FloatingActionButton) findViewById(R.id.floating_action_button_activity_channel_play);
+        this.floating_action_button_activity_channel_play =  (Button) findViewById(R.id.floating_action_button_activity_channel_play);
         this.image_view_activity_channel_background =  (ImageView) findViewById(R.id.image_view_activity_channel_background);
         this.image_view_activity_channel_cover =  (ImageView) findViewById(R.id.image_view_activity_channel_cover);
         this.image_view_activity_channel_cover_bg =  (ImageView) findViewById(R.id.image_view_activity_channel_cover_bg);

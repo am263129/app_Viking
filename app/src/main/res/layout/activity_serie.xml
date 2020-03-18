@@ -596,7 +596,8 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
-                android:background="@drawable/bg_gradient" />
+                android:layout_marginTop="220dp"
+                android:background="@drawable/cast_expanded_controller_bg_gradient_light"  />
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"

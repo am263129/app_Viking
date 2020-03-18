@@ -51,6 +51,15 @@
     <color name="guider_orange">#5b86e5</color>
     <color name="guider_pink">#36d1dc</color>
 
+    <color name="gradient_color_1">#0467c4</color>
+    <color name="gradient_color_2">#f75591</color>
+    <color name="gradient_color_3">#ff3232</color>
+    <color name="gradient_color_4">#fce565</color>
+    <color name="gradient_color_5">#1cf664</color>
+    <color name="gradient_color_6">#a4ca5b</color>
+    <color name="gradient_color_7">#FFE949</color>
+    <color name="gradient_color_8">#76DC36</color>
+
 
 
 </resources>
