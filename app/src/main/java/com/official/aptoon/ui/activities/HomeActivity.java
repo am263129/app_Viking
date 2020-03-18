@@ -1036,7 +1036,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 @Override
                 public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                     BlurImage.with(getApplicationContext()).load(bitmap).intensity(25).Async(true).into(image_view_profile_nav_header_bg);
-                    BlurImage.with(getApplicationContext()).load(bitmap).intensity(25).Async(true).into(btn_profile);
+                    BlurImage.with(getApplicationContext()).load(bitmap).Async(true).into(btn_profile);
                 }
                 @Override
                 public void onBitmapFailed(Drawable errorDrawable) { }

@@ -26,9 +26,15 @@
             android:id="@+id/buy_now"
             android:icon="@drawable/ic_subscribe"
             android:title="@string/subscribe" />
+        <item
+            android:id="@+id/my_list"
+            android:icon="@drawable/ic_my_list"
+            android:title="@string/my_list" />
+
     </group>
     <item android:title="Applications">
         <menu>
+
             <item
                 android:id="@+id/broadcast_tv"
                 android:icon="@drawable/live_tv"
@@ -36,7 +42,7 @@
 
             <item
                 android:id="@+id/nav_rate"
-                android:icon="@drawable/ic_star"
+                android:icon="@drawable/ic_star_yellow"
                 android:title="@string/action_rate" />
             <item
                 android:id="@+id/nav_share"

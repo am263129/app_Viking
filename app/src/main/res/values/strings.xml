@@ -122,5 +122,6 @@
     <string name="com_facebook_loginview_log_in_button_long">Log in with Facebook</string>
     <string name="broadcast_time">Broadcast Time</string>
     <string name="never">NEVER</string>
+    <string name="my_list">My List</string>
 
 </resources>

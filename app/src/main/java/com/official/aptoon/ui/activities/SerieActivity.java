@@ -143,7 +143,7 @@ public class SerieActivity extends AppCompatActivity implements PlaylistDownload
     private TextView text_view_activity_serie_classification;
     private RatingBar rating_bar_activity_serie_rating;
     private RecyclerView recycle_view_activity_serie_genres;
-    private FloatingActionButton floating_action_button_activity_serie_play;
+    private Button floating_action_button_activity_serie_play;
     private FloatingActionButton floating_action_button_activity_serie_comment;
 
     private LinearLayout linear_layout_activity_serie_cast;
@@ -1171,7 +1171,7 @@ public class SerieActivity extends AppCompatActivity implements PlaylistDownload
         this.linear_layout_serie_activity_share =  (LinearLayout) findViewById(R.id.linear_layout_serie_activity_share);
         this.floating_action_button_activity_serie_comment =  (FloatingActionButton) findViewById(R.id.floating_action_button_activity_serie_comment);
         this.relative_layout_subtitles_loading =  (RelativeLayout) findViewById(R.id.relative_layout_subtitles_loading);
-        this.floating_action_button_activity_serie_play =  (FloatingActionButton) findViewById(R.id.floating_action_button_activity_serie_play);
+        this.floating_action_button_activity_serie_play =  (Button) findViewById(R.id.floating_action_button_activity_serie_play);
         this.image_view_activity_serie_background =  (ImageView) findViewById(R.id.image_view_activity_serie_background);
         this.image_view_activity_serie_cover =  (ImageView) findViewById(R.id.image_view_activity_serie_cover);
         this.text_view_activity_serie_title =  (TextView) findViewById(R.id.text_view_activity_serie_title);

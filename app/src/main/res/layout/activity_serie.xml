@@ -44,7 +44,8 @@
                             android:layout_marginTop="-10dp"
                             app:cardBackgroundColor="#ff1d1c22"
                             app:cardCornerRadius="15dp"
-                            app:cardElevation="10dp">
+                            app:cardElevation="10dp"
+                            android:elevation="0dp">
 
                             <RelativeLayout
                                 android:layout_width="match_parent"
@@ -59,6 +60,7 @@
                                     android:src="@drawable/placeholder" />
 
                                 <LinearLayout
+                                    android:id="@+id/left_list"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentLeft="true"
@@ -93,17 +95,131 @@
                             </RelativeLayout>
                         </androidx.cardview.widget.CardView>
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginBottom="40dp"
+                            android:orientation="horizontal"
+                            android:padding="10dp"
+                            android:elevation="20dp">
+
+                            <Button
+                                android:id="@+id/floating_action_button_activity_serie_play"
+                                android:layout_width="50dp"
+                                android:layout_height="30dp"
+                                android:layout_centerInParent="true"
+                                android:background="@drawable/background_btn_play"
+                                android:drawableLeft="@drawable/ico_play"
+                                android:gravity="left|center_vertical"
+                                android:text=" Play"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                android:textColor="@color/mr_dynamic_dialog_icon_light"
+                                android:textSize="12sp" />
+
+                            <LinearLayout
+                                android:id="@+id/btn_info"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.8"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    app:srcCompat="@drawable/ico_info" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="  Info"
+                                    android:textColor="@color/white"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/btn_add_to_list"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1.5"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    app:srcCompat="@drawable/ico_check" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=" Add to list"
+                                    android:textColor="@color/white"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/btn_share"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    app:srcCompat="@drawable/ic_share" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Share"
+                                    android:textColor="@color/white"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/label_star"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    app:srcCompat="@drawable/ic_star_yellow" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="6.8/10"
+                                    android:textColor="@color/white" />
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
                         <com.google.android.material.floatingactionbutton.FloatingActionButton
-                            android:id="@+id/floating_action_button_activity_serie_play"
+                            android:id="@+id/floating_action_button_activity_serie_play_old"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_alignParentBottom="true"
-                            android:layout_margin="15dp"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginEnd="15dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginBottom="15dp"
                             android:elevation="10dp"
                             android:outlineAmbientShadowColor="@color/colorAccent"
                             android:outlineSpotShadowColor="@color/colorAccent"
                             android:tint="@color/white"
+                            android:visibility="gone"
                             app:elevation="10dp"
                             app:rippleColor="@color/colorAccent"
                             app:srcCompat="@drawable/ic_play" />
@@ -112,7 +228,6 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="-30dp"
                         android:orientation="vertical"
                         android:padding="10dp">
 
@@ -130,32 +245,32 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:visibility="gone">
 
                             <TextView
-                                android:visibility="gone"
                                 android:id="@+id/text_view_activity_serie_year"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/border_right"
                                 android:paddingRight="7dp"
                                 android:text="2019"
-                                android:textColor="@color/white_text" />
+                                android:textColor="@color/white_text"
+                                android:visibility="gone" />
 
                             <TextView
-                                android:visibility="gone"
                                 android:id="@+id/text_view_activity_serie_classification"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginRight="7dp"
                                 android:background="@drawable/border_right"
                                 android:paddingLeft="7dp"
                                 android:paddingRight="7dp"
-                                android:layout_marginRight="7dp"
                                 android:text="+16"
-                                android:textColor="@color/white_text" />
+                                android:textColor="@color/white_text"
+                                android:visibility="gone" />
 
                             <TextView
-                                android:visibility="gone"
                                 android:id="@+id/text_view_activity_serie_duration"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -164,16 +279,17 @@
                                 android:paddingLeft="7dp"
                                 android:paddingRight="7dp"
                                 android:text="2h22min"
-                                android:textColor="@color/white_text" />
+                                android:textColor="@color/white_text"
+                                android:visibility="gone" />
 
                             <LinearLayout
                                 android:id="@+id/linear_layout_activity_serie_rating"
-                                android:visibility="gone"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="7dp"
                                 android:background="@drawable/border_right"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal"
+                                android:visibility="gone">
 
                                 <androidx.appcompat.widget.AppCompatRatingBar
                                     android:id="@+id/rating_bar_activity_serie_rating"
