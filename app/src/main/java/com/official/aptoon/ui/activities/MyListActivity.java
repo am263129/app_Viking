@@ -38,7 +38,10 @@ public class MyListActivity extends AppCompatActivity {
     recycler_view_activity_my_list_plan,
     recycler_view_activity_my_list_canceled;
     private ImageView image_view_empty_list;
-//    private GridLayoutManager gridLayoutManager;
+    private GridLayoutManager gridLayoutManager_completed;
+    private GridLayoutManager gridLayoutManager_watching;
+    private GridLayoutManager gridLayoutManager_plan;
+    private GridLayoutManager gridLayoutManager_canceled;
     private PosterAdapter adapter_completed;
     private PosterAdapter adapter_watching;
     private PosterAdapter adapter_plan;
@@ -351,22 +354,63 @@ public class MyListActivity extends AppCompatActivity {
         adapter_watching = new PosterAdapter(posterArrayList_watching, this,true);
         adapter_plan = new PosterAdapter(posterArrayList_plan, this,true);
         adapter_canceled = new PosterAdapter(posterArrayList_canceled, this,true);
-
-        GridLayoutManager gridLayoutManager;
         if (native_ads_enabled){
             Log.v("MYADS","ENABLED");
             if (tabletSize) {
-                gridLayoutManager=  new GridLayoutManager(getApplicationContext(),6,RecyclerView.VERTICAL,false);
+                this.gridLayoutManager_completed =  new GridLayoutManager(getApplicationContext(),6,RecyclerView.VERTICAL,false);
+                this.gridLayoutManager_watching =  new GridLayoutManager(getApplicationContext(),6,RecyclerView.VERTICAL,false);
+                this.gridLayoutManager_plan =  new GridLayoutManager(getApplicationContext(),6,RecyclerView.VERTICAL,false);
+                this.gridLayoutManager_canceled =  new GridLayoutManager(getApplicationContext(),6,RecyclerView.VERTICAL,false);
+
                 Log.v("MYADS","tabletSize");
-                gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                gridLayoutManager_completed.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                    @Override
+                    public int getSpanSize(int position) {
+                        return ((position  + 1) % (lines_beetween_ads  + 1  ) == 0 && position!=0) ? 6 : 1;
+                    }
+                });
+                gridLayoutManager_watching.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                    @Override
+                    public int getSpanSize(int position) {
+                        return ((position  + 1) % (lines_beetween_ads  + 1  ) == 0 && position!=0) ? 6 : 1;
+                    }
+                });
+                gridLayoutManager_plan.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                    @Override
+                    public int getSpanSize(int position) {
+                        return ((position  + 1) % (lines_beetween_ads  + 1  ) == 0 && position!=0) ? 6 : 1;
+                    }
+                });
+                gridLayoutManager_canceled.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                     @Override
                     public int getSpanSize(int position) {
                         return ((position  + 1) % (lines_beetween_ads  + 1  ) == 0 && position!=0) ? 6 : 1;
                     }
                 });
             } else {
-                gridLayoutManager=  new GridLayoutManager(getApplicationContext(),3,RecyclerView.VERTICAL,false);
-                gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                this.gridLayoutManager_completed =  new GridLayoutManager(getApplicationContext(),3,RecyclerView.VERTICAL,false);
+                gridLayoutManager_completed.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                    @Override
+                    public int getSpanSize(int position) {
+                        return ((position  + 1) % (lines_beetween_ads + 1 ) == 0  && position!=0)  ? 3 : 1;
+                    }
+                });
+                this.gridLayoutManager_watching =  new GridLayoutManager(getApplicationContext(),3,RecyclerView.VERTICAL,false);
+                gridLayoutManager_watching.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                    @Override
+                    public int getSpanSize(int position) {
+                        return ((position  + 1) % (lines_beetween_ads + 1 ) == 0  && position!=0)  ? 3 : 1;
+                    }
+                });
+                this.gridLayoutManager_plan =  new GridLayoutManager(getApplicationContext(),3,RecyclerView.VERTICAL,false);
+                gridLayoutManager_plan.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                    @Override
+                    public int getSpanSize(int position) {
+                        return ((position  + 1) % (lines_beetween_ads + 1 ) == 0  && position!=0)  ? 3 : 1;
+                    }
+                });
+                this.gridLayoutManager_canceled =  new GridLayoutManager(getApplicationContext(),3,RecyclerView.VERTICAL,false);
+                gridLayoutManager_canceled.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                     @Override
                     public int getSpanSize(int position) {
                         return ((position  + 1) % (lines_beetween_ads + 1 ) == 0  && position!=0)  ? 3 : 1;
@@ -375,23 +419,29 @@ public class MyListActivity extends AppCompatActivity {
             }
         }else {
             if (tabletSize) {
-                gridLayoutManager=  new GridLayoutManager(getApplicationContext(),6,RecyclerView.VERTICAL,false);
+                this.gridLayoutManager_completed =  new GridLayoutManager(getApplicationContext(),6,RecyclerView.VERTICAL,false);
+                this.gridLayoutManager_watching =  new GridLayoutManager(getApplicationContext(),6,RecyclerView.VERTICAL,false);
+                this.gridLayoutManager_plan =  new GridLayoutManager(getApplicationContext(),6,RecyclerView.VERTICAL,false);
+                this.gridLayoutManager_canceled =  new GridLayoutManager(getApplicationContext(),6,RecyclerView.VERTICAL,false);
             } else {
-                gridLayoutManager=  new GridLayoutManager(getApplicationContext(),3,RecyclerView.VERTICAL,false);
+                this.gridLayoutManager_completed =  new GridLayoutManager(getApplicationContext(),3,RecyclerView.VERTICAL,false);
+                this.gridLayoutManager_watching =  new GridLayoutManager(getApplicationContext(),3,RecyclerView.VERTICAL,false);
+                this.gridLayoutManager_plan =  new GridLayoutManager(getApplicationContext(),3,RecyclerView.VERTICAL,false);
+                this.gridLayoutManager_canceled =  new GridLayoutManager(getApplicationContext(),3,RecyclerView.VERTICAL,false);
             }
         }
         recycler_view_activity_my_list_completed.setHasFixedSize(true);
         recycler_view_activity_my_list_completed.setAdapter(adapter_completed);
-        recycler_view_activity_my_list_completed.setLayoutManager(gridLayoutManager);
+        recycler_view_activity_my_list_completed.setLayoutManager(gridLayoutManager_completed);
         recycler_view_activity_my_list_plan.setHasFixedSize(true);
-        recycler_view_activity_my_list_plan.setAdapter(adapter_completed);
-        recycler_view_activity_my_list_plan.setLayoutManager(gridLayoutManager);
+        recycler_view_activity_my_list_plan.setAdapter(adapter_plan);
+        recycler_view_activity_my_list_plan.setLayoutManager(gridLayoutManager_plan);
         recycler_view_activity_my_list_watching.setHasFixedSize(true);
-        recycler_view_activity_my_list_watching.setAdapter(adapter_completed);
-        recycler_view_activity_my_list_watching.setLayoutManager(gridLayoutManager);
+        recycler_view_activity_my_list_watching.setAdapter(adapter_watching);
+        recycler_view_activity_my_list_watching.setLayoutManager(gridLayoutManager_watching);
         recycler_view_activity_my_list_canceled.setHasFixedSize(true);
-        recycler_view_activity_my_list_canceled.setAdapter(adapter_completed);
-        recycler_view_activity_my_list_canceled.setLayoutManager(gridLayoutManager);
+        recycler_view_activity_my_list_canceled.setAdapter(adapter_canceled);
+        recycler_view_activity_my_list_canceled.setLayoutManager(gridLayoutManager_canceled);
         area_canceled = findViewById(R.id.area_canceled);
         area_completed = findViewById(R.id.area_completed);
         area_plan = findViewById(R.id.area_plan);

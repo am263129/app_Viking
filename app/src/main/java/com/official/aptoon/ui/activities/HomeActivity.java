@@ -1068,6 +1068,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         if (FromLogin){
             FromLogin = false;
         }
+        openFragment(new HomeFragment());
+
+
 
     }
     public void goToTV() {

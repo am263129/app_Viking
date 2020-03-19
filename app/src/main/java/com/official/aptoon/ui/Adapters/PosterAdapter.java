@@ -58,6 +58,7 @@ public class PosterAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     private InterstitialAd admobInterstitialAd;
     private com.facebook.ads.InterstitialAd facebookInterstitialAd;
+    private String TAG = "Poster Adapter";
 
     public PosterAdapter(List<Poster> posterList,List<Channel> channelList, Activity activity) {
         this.posterList = posterList;
@@ -112,6 +113,7 @@ public class PosterAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
         public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, final int position) {
         switch (getItemViewType(position)) {
+
             case 1:
 
                 final PosterHolder holder = (PosterHolder) viewHolder;
@@ -121,8 +123,62 @@ public class PosterAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 else
                     holder.relative_layout_item_poster_delete.setVisibility(View.GONE);
 
-                holder.image_view_item_poster_image.setOnClickListener(v -> {
+                ArrayList<Poster> tempPosterArrayList = new ArrayList<>();
+                holder.area_list_item_type.setVisibility(View.GONE);
+                try {
+                    tempPosterArrayList = Hawk.get("my_list_completed");
+                    for (int i = 0; i < tempPosterArrayList.size(); i++) {
+                        if(tempPosterArrayList.get(i).getId() == posterList.get(position).getId()){
+                            holder.area_list_item_type.setVisibility(View.VISIBLE);
+                            holder.my_list_type.setBackgroundResource(R.drawable.ico_list_completed);
+                            holder.my_list_title.setText("Completed");
+                        }
+                    }
 
+                }catch (Exception e){
+                    Log.e(TAG, "no completed list");
+                }
+                try {
+                    tempPosterArrayList = Hawk.get("my_list_watching");
+                    for (int i = 0; i < tempPosterArrayList.size(); i++) {
+                        if(tempPosterArrayList.get(i).getId() == posterList.get(position).getId()){
+                            holder.area_list_item_type.setVisibility(View.VISIBLE);
+                            holder.my_list_type.setBackgroundResource(R.drawable.ico_list_watching);
+                            holder.my_list_title.setText("Watching");
+                        }
+                    }
+
+                }catch (Exception e){
+                    Log.e(TAG, "no watching list");
+                }
+                try {
+                    tempPosterArrayList = Hawk.get("my_list_plan_to_watch");
+                    for (int i = 0; i < tempPosterArrayList.size(); i++) {
+                        if(tempPosterArrayList.get(i).getId() == posterList.get(position).getId()){
+                            holder.area_list_item_type.setVisibility(View.VISIBLE);
+                            holder.my_list_type.setBackgroundResource(R.drawable.ico_list_plan_to_watch);
+                            holder.my_list_title.setText("Plan to Watch");
+                        }
+                    }
+
+                }catch (Exception e){
+                    Log.e(TAG, "no plan list");
+                }
+                try {
+                    tempPosterArrayList = Hawk.get("my_list_canceled");
+                    for (int i = 0; i < tempPosterArrayList.size(); i++) {
+                        if(tempPosterArrayList.get(i).getId() == posterList.get(position).getId()){
+                            holder.area_list_item_type.setVisibility(View.VISIBLE);
+                            holder.my_list_type.setBackgroundResource(R.drawable.ico_list_canceled);
+                            holder.my_list_title.setText("Canceled");
+                        }
+                    }
+
+                }catch (Exception e){
+                    Log.e(TAG, "no Canceled list");
+                }
+
+                holder.image_view_item_poster_image.setOnClickListener(v -> {
 
                     ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, holder.image_view_item_poster_image, "imageMain");
                     Intent intent = new Intent(activity, MovieActivity.class);
@@ -349,12 +405,18 @@ public class PosterAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder
         public class PosterHolder extends RecyclerView.ViewHolder {
             private ImageView image_view_item_poster_delete;
             public ImageView image_view_item_poster_image ;
-            public RelativeLayout relative_layout_item_poster_delete ;
+            public RelativeLayout relative_layout_item_poster_delete,area_list_item_type ;
+            public ImageView my_list_type;
+            public TextView my_list_title;
+
             public PosterHolder(View itemView) {
                 super(itemView);
                 this.image_view_item_poster_image =  (ImageView) itemView.findViewById(R.id.image_view_item_poster_image);
                 this.relative_layout_item_poster_delete =  (RelativeLayout) itemView.findViewById(R.id.relative_layout_item_poster_delete);
                 this.image_view_item_poster_delete =  (ImageView) itemView.findViewById(R.id.image_view_item_poster_delete);
+                this.my_list_title = (TextView) itemView.findViewById(R.id.label_type_list);
+                this.my_list_type = (ImageView) itemView.findViewById(R.id.ico_list_type);
+                this.area_list_item_type = (RelativeLayout)itemView.findViewById(R.id.area_list_item_type);
             }
         }
     public class EmptyHolder extends RecyclerView.ViewHolder {
