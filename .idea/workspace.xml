@@ -19,7 +19,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d022c3c4-ae5f-4320-acbb-952346d8d756" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/official/aptoon/ui/Adapters/PosterAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/official/aptoon/ui/Adapters/PosterAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/official/aptoon/ui/activities/MovieActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/official/aptoon/ui/activities/MovieActivity.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -98,8 +97,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/official/aptoon/ui/activities/MovieActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="1661" column="24" selection-start-line="1661" selection-start-column="24" selection-end-line="1661" selection-end-column="24" />
+            <state relative-caret-position="-367">
+              <caret line="1484" column="35" selection-start-line="1484" selection-start-column="35" selection-end-line="1484" selection-end-column="35" />
               <folding>
                 <element signature="e#23013#23014#0" expanded="true" />
                 <element signature="e#23052#23053#0" expanded="true" />
@@ -123,7 +122,7 @@
                 <element signature="e#75323#75689#1" />
                 <element signature="e#75729#76116#1" />
                 <element signature="e#76140#76532#1" />
-                <element signature="e#89574#89575#0" expanded="true" />
+                <element signature="e#85331#85332#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1166,8 +1165,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/official/aptoon/ui/activities/MovieActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="1661" column="24" selection-start-line="1661" selection-start-column="24" selection-end-line="1661" selection-end-column="24" />
+        <state relative-caret-position="-367">
+          <caret line="1484" column="35" selection-start-line="1484" selection-start-column="35" selection-end-line="1484" selection-end-column="35" />
           <folding>
             <element signature="e#23013#23014#0" expanded="true" />
             <element signature="e#23052#23053#0" expanded="true" />
@@ -1191,7 +1190,7 @@
             <element signature="e#75323#75689#1" />
             <element signature="e#75729#76116#1" />
             <element signature="e#76140#76532#1" />
-            <element signature="e#89574#89575#0" expanded="true" />
+            <element signature="e#85331#85332#0" expanded="true" />
           </folding>
         </state>
       </provider>

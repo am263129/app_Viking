@@ -216,6 +216,11 @@ public class MovieActivity extends AppCompatActivity {
     private PrefManager prefManager;
     private String list_name;
 
+    private String list_name_completed = "my_list_completed";
+    private String list_name_watching = "my_list_watching";
+    private String list_name_plan = "my_list_plan_to_watch";
+    private String list_name_canceled = "my_list_canceled";
+
 
     private class SessionManagerListenerImpl implements SessionManagerListener {
         @Override
@@ -1453,28 +1458,32 @@ public class MovieActivity extends AppCompatActivity {
         btn_completed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addFavotite_completed();
+                check_and_remove();
+                addFavotite(list_name_completed);
                 popupWindow.dismiss();
             }
         });
         btn_watching.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addFavotite_watching();
+                check_and_remove();
+                addFavotite(list_name_watching);
                 popupWindow.dismiss();
             }
         });
         btn_plan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addFavotite_plan();
+                check_and_remove();
+                addFavotite(list_name_plan);
                 popupWindow.dismiss();
             }
         });
         btn_canceled.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addFavotite_canceled();
+                check_and_remove();
+                addFavotite(list_name_canceled);
                 popupWindow.dismiss();
             }
         });
@@ -1483,112 +1492,9 @@ public class MovieActivity extends AppCompatActivity {
 
 
     }
-    private void addFavotite_completed() {
 
-        List<Poster> favorites_list =Hawk.get("my_list_completed");
-        Boolean exist = false;
-        if (favorites_list == null) {
-            favorites_list = new ArrayList<>();
-        }
-        int fav_position = -1;
-        for (int i = 0; i < favorites_list.size(); i++) {
-            if (favorites_list.get(i).getId().equals(poster.getId())) {
-                exist = true;
-                fav_position = i;
-            }
-        }
-        if (exist == false) {
-            favorites_list.add(poster);
-            Hawk.put("my_list_completed",favorites_list);
-            image_view_activity_movie_my_list.setImageDrawable(getResources().getDrawable(R.drawable.ic_close));
-            Toasty.info(this, "This movie has been added to your Completed list", Toast.LENGTH_SHORT).show();
-        }else{
-            favorites_list.remove(fav_position);
-            Hawk.put("my_list_completed",favorites_list);
-            image_view_activity_movie_my_list.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            Toasty.warning(this, "This movie has been removed from your Completed list", Toast.LENGTH_SHORT).show();
-        }
-    }
-    private void addFavotite_watching() {
 
-        List<Poster> favorites_list =Hawk.get("my_list_watching");
-        Boolean exist = false;
-        if (favorites_list == null) {
-            favorites_list = new ArrayList<>();
-        }
-        int fav_position = -1;
-        for (int i = 0; i < favorites_list.size(); i++) {
-            if (favorites_list.get(i).getId().equals(poster.getId())) {
-                exist = true;
-                fav_position = i;
-            }
-        }
-        if (exist == false) {
-            favorites_list.add(poster);
-            Hawk.put("my_list_watching",favorites_list);
-            image_view_activity_movie_my_list.setImageDrawable(getResources().getDrawable(R.drawable.ic_close));
-            Toasty.info(this, "This movie has been added to your Watching list", Toast.LENGTH_SHORT).show();
-        }else{
-            favorites_list.remove(fav_position);
-            Hawk.put("my_list_watching",favorites_list);
-            image_view_activity_movie_my_list.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            Toasty.warning(this, "This movie has been removed from your Watching list", Toast.LENGTH_SHORT).show();
-        }
-    }
-    private void addFavotite_plan() {
-
-        List<Poster> favorites_list =Hawk.get("my_list_plan_to_watch");
-        Boolean exist = false;
-        if (favorites_list == null) {
-            favorites_list = new ArrayList<>();
-        }
-        int fav_position = -1;
-        for (int i = 0; i < favorites_list.size(); i++) {
-            if (favorites_list.get(i).getId().equals(poster.getId())) {
-                exist = true;
-                fav_position = i;
-            }
-        }
-        if (exist == false) {
-            favorites_list.add(poster);
-            Hawk.put("my_list_plan_to_watch",favorites_list);
-            image_view_activity_movie_my_list.setImageDrawable(getResources().getDrawable(R.drawable.ic_close));
-            Toasty.info(this, "This movie has been added to your Plan list", Toast.LENGTH_SHORT).show();
-        }else{
-            favorites_list.remove(fav_position);
-            Hawk.put("my_list_plan_to_watch",favorites_list);
-            image_view_activity_movie_my_list.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            Toasty.warning(this, "This movie has been removed from your Plan list", Toast.LENGTH_SHORT).show();
-        }
-    }
-    private void addFavotite_canceled() {
-
-        List<Poster> favorites_list =Hawk.get("my_list_canceled");
-        Boolean exist = false;
-        if (favorites_list == null) {
-            favorites_list = new ArrayList<>();
-        }
-        int fav_position = -1;
-        for (int i = 0; i < favorites_list.size(); i++) {
-            if (favorites_list.get(i).getId().equals(poster.getId())) {
-                exist = true;
-                fav_position = i;
-            }
-        }
-        if (exist == false) {
-            favorites_list.add(poster);
-            Hawk.put("my_list_canceled",favorites_list);
-            image_view_activity_movie_my_list.setImageDrawable(getResources().getDrawable(R.drawable.ic_close));
-            Toasty.info(this, "This movie has been added to your canceled list", Toast.LENGTH_SHORT).show();
-        }else{
-            favorites_list.remove(fav_position);
-            Hawk.put("my_list_canceled",favorites_list);
-            image_view_activity_movie_my_list.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            Toasty.warning(this, "This movie has been removed from your canceled list", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void check_and_remove(Poster poster){
+    private void check_and_remove(){
         List<Poster> completed_list =Hawk.get("my_list_completed");
         List<Poster> watching_list =Hawk.get("my_list_watching");
         List<Poster> plan_list =Hawk.get("my_list_plan_to_watch");
