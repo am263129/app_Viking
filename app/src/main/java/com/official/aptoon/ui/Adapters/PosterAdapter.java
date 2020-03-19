@@ -123,60 +123,10 @@ public class PosterAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 else
                     holder.relative_layout_item_poster_delete.setVisibility(View.GONE);
 
-                ArrayList<Poster> tempPosterArrayList = new ArrayList<>();
+
                 holder.area_list_item_type.setVisibility(View.GONE);
-                try {
-                    tempPosterArrayList = Hawk.get("my_list_completed");
-                    for (int i = 0; i < tempPosterArrayList.size(); i++) {
-                        if(tempPosterArrayList.get(i).getId() == posterList.get(position).getId()){
-                            holder.area_list_item_type.setVisibility(View.VISIBLE);
-                            holder.my_list_type.setBackgroundResource(R.drawable.ico_list_completed);
-                            holder.my_list_title.setText("Completed");
-                        }
-                    }
 
-                }catch (Exception e){
-                    Log.e(TAG, "no completed list");
-                }
-                try {
-                    tempPosterArrayList = Hawk.get("my_list_watching");
-                    for (int i = 0; i < tempPosterArrayList.size(); i++) {
-                        if(tempPosterArrayList.get(i).getId() == posterList.get(position).getId()){
-                            holder.area_list_item_type.setVisibility(View.VISIBLE);
-                            holder.my_list_type.setBackgroundResource(R.drawable.ico_list_watching);
-                            holder.my_list_title.setText("Watching");
-                        }
-                    }
-
-                }catch (Exception e){
-                    Log.e(TAG, "no watching list");
-                }
-                try {
-                    tempPosterArrayList = Hawk.get("my_list_plan_to_watch");
-                    for (int i = 0; i < tempPosterArrayList.size(); i++) {
-                        if(tempPosterArrayList.get(i).getId() == posterList.get(position).getId()){
-                            holder.area_list_item_type.setVisibility(View.VISIBLE);
-                            holder.my_list_type.setBackgroundResource(R.drawable.ico_list_plan_to_watch);
-                            holder.my_list_title.setText("Plan to Watch");
-                        }
-                    }
-
-                }catch (Exception e){
-                    Log.e(TAG, "no plan list");
-                }
-                try {
-                    tempPosterArrayList = Hawk.get("my_list_canceled");
-                    for (int i = 0; i < tempPosterArrayList.size(); i++) {
-                        if(tempPosterArrayList.get(i).getId() == posterList.get(position).getId()){
-                            holder.area_list_item_type.setVisibility(View.VISIBLE);
-                            holder.my_list_type.setBackgroundResource(R.drawable.ico_list_canceled);
-                            holder.my_list_title.setText("Canceled");
-                        }
-                    }
-
-                }catch (Exception e){
-                    Log.e(TAG, "no Canceled list");
-                }
+                boolean change_icon = check_type(holder,position);
 
                 holder.image_view_item_poster_image.setOnClickListener(v -> {
 
@@ -356,23 +306,9 @@ public class PosterAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 });
                 holder.image_view_item_poster_delete.setOnClickListener(v->{
 
-                        List<Poster> favorites_list =Hawk.get("my_list");
-                        if (favorites_list == null) {
-                            favorites_list = new ArrayList<>();
-                        }
-                        int fav_position = -1;
-                        for (int i = 0; i < favorites_list.size(); i++) {
-                            if (favorites_list.get(i).getId().equals(posterList.get(position).getId())) {
-                                fav_position = i;
-                            }
-                        }
+                    delete_from_list(position);
 
-                        favorites_list.remove(fav_position);
-                        Hawk.put("my_list",favorites_list);
 
-                        posterList.remove(position);
-                        notifyItemRemoved(position);
-                        notifyDataSetChanged();
 
                 });
                 break;
@@ -398,7 +334,91 @@ public class PosterAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
 
         }
-        @Override
+
+    private boolean check_type(PosterHolder holder, Integer position) {
+
+        ArrayList<Poster> tempPosterArrayList = new ArrayList<>();
+        try {
+            tempPosterArrayList = Hawk.get("my_list_completed");
+            for (int i = 0; i < tempPosterArrayList.size(); i++) {
+                if(tempPosterArrayList.get(i).getId() == posterList.get(position).getId()){
+                    holder.area_list_item_type.setVisibility(View.VISIBLE);
+                    holder.my_list_type.setBackgroundResource(R.drawable.ico_list_completed);
+                    holder.my_list_title.setText("Completed");
+                    break;
+                }
+            }
+
+        }catch (Exception e){
+            Log.e(TAG, "no completed list");
+        }
+        try {
+            tempPosterArrayList = Hawk.get("my_list_watching");
+            for (int i = 0; i < tempPosterArrayList.size(); i++) {
+                if(tempPosterArrayList.get(i).getId() == posterList.get(position).getId()){
+                    holder.area_list_item_type.setVisibility(View.VISIBLE);
+                    holder.my_list_type.setBackgroundResource(R.drawable.ico_list_watching);
+                    holder.my_list_title.setText("Watching");
+                    break;
+                }
+            }
+
+        }catch (Exception e){
+            Log.e(TAG, "no watching list");
+        }
+        try {
+            tempPosterArrayList = Hawk.get("my_list_plan_to_watch");
+            for (int i = 0; i < tempPosterArrayList.size(); i++) {
+                if(tempPosterArrayList.get(i).getId() == posterList.get(position).getId()){
+                    holder.area_list_item_type.setVisibility(View.VISIBLE);
+                    holder.my_list_type.setBackgroundResource(R.drawable.ico_list_plan_to_watch);
+                    holder.my_list_title.setText("Plan to Watch");
+                    break;
+                }
+            }
+
+        }catch (Exception e){
+            Log.e(TAG, "no plan list");
+        }
+        try {
+            tempPosterArrayList = Hawk.get("my_list_canceled");
+            for (int i = 0; i < tempPosterArrayList.size(); i++) {
+                if(tempPosterArrayList.get(i).getId() == posterList.get(position).getId()){
+                    holder.area_list_item_type.setVisibility(View.VISIBLE);
+                    holder.my_list_type.setBackgroundResource(R.drawable.ico_list_canceled);
+                    holder.my_list_title.setText("Canceled");
+                    break;
+                }
+            }
+
+        }catch (Exception e){
+            Log.e(TAG, "no Canceled list");
+        }
+        return true;
+    }
+
+    private void delete_from_list(Integer position) {
+
+        List<Poster> favorites_list =Hawk.get("my_list_completed");
+        if (favorites_list == null) {
+            favorites_list = new ArrayList<>();
+        }
+        int fav_position = -1;
+        for (int i = 0; i < favorites_list.size(); i++) {
+            if (favorites_list.get(i).getId().equals(posterList.get(position).getId())) {
+                fav_position = i;
+            }
+        }
+        favorites_list.remove(fav_position);
+        Hawk.put("my_list_completed",favorites_list);
+
+        posterList.remove(position);
+        notifyItemRemoved(position);
+        notifyDataSetChanged();
+
+    }
+
+    @Override
         public int getItemCount() {
             return posterList.size();
         }
