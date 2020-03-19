@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -247,6 +248,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 Toasty.error(RegisterActivity.this, "Operation has been cancelled ! ", Toast.LENGTH_SHORT, true).show();
             }
             register_progress.dismiss();
+            Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
+            startActivity(intent);
+            finish();
         }
         @Override
         public void onFailure(Call<ApiResponse> call, Throwable t) {

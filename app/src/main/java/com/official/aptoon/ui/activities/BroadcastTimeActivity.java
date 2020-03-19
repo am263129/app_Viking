@@ -1,10 +1,12 @@
 package com.official.aptoon.ui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.Button;
@@ -67,6 +69,11 @@ public class BroadcastTimeActivity extends AppCompatActivity {
     }
 
     private void init_view() {
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        toolbar.setTitle("Broadcast Time");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         label = findViewById(R.id.label_time);
         broadcast_list = findViewById(R.id.list_broadcast_time);
         error_page = findViewById(R.id.linear_layout_page_error_broadcast_list);
@@ -137,4 +144,15 @@ public class BroadcastTimeActivity extends AppCompatActivity {
         list_page.setVisibility(View.VISIBLE);
         load_page.setVisibility(View.GONE);
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem itemMenu) {
+        switch (itemMenu.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                super.onBackPressed();
+                return true;
+        }
+        return true;
+    }
+
 }

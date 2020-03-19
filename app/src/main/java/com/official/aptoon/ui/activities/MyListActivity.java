@@ -38,7 +38,7 @@ public class MyListActivity extends AppCompatActivity {
     recycler_view_activity_my_list_plan,
     recycler_view_activity_my_list_canceled;
     private ImageView image_view_empty_list;
-    private GridLayoutManager gridLayoutManager;
+//    private GridLayoutManager gridLayoutManager;
     private PosterAdapter adapter_completed;
     private PosterAdapter adapter_watching;
     private PosterAdapter adapter_plan;
@@ -54,6 +54,7 @@ public class MyListActivity extends AppCompatActivity {
     ArrayList<Poster> posterArrayList_watching = new ArrayList<>();
     ArrayList<Poster> posterArrayList_plan = new ArrayList<>();
     ArrayList<Poster> posterArrayList_canceled = new ArrayList<>();
+    LinearLayout area_completed, area_watching, area_plan, area_canceled;
     private RelativeLayout relative_layout_load_more;
     private LinearLayout linear_layout_load_my_list_activity;
 
@@ -62,6 +63,7 @@ public class MyListActivity extends AppCompatActivity {
     private Boolean native_ads_enabled = false ;
     private int type_ads = 0;
     private PrefManager prefManager;
+    String TAG = "MyListActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,19 +84,21 @@ public class MyListActivity extends AppCompatActivity {
 
 
     private void loadPosters_completed() {
-        List<Poster> tempPosterArrayList = new ArrayList<>();
+        ArrayList<Poster> tempPosterArrayList = new ArrayList<>();
         try {
             tempPosterArrayList = Hawk.get("my_list_completed");
 
-        }catch (NullPointerException e){
+        }catch (Exception e){
+            Log.e(TAG, "no completed list");
+        }
+        if(tempPosterArrayList == null){
             tempPosterArrayList  = new ArrayList<>();
         }
         if (tempPosterArrayList.size()>0){
             recycler_view_activity_my_list_completed.setVisibility(View.VISIBLE);
             image_view_empty_list.setVisibility(View.GONE);
         }else{
-            recycler_view_activity_my_list_completed.setVisibility(View.GONE);
-            image_view_empty_list.setVisibility(View.VISIBLE);
+            area_completed.setVisibility(View.GONE);
         }
 
         for (int i = 0; i < tempPosterArrayList.size(); i++) {
@@ -133,12 +137,14 @@ public class MyListActivity extends AppCompatActivity {
         }catch (NullPointerException e){
             tempPosterArrayList  = new ArrayList<>();
         }
+        if(tempPosterArrayList == null){
+            tempPosterArrayList  = new ArrayList<>();
+        }
         if (tempPosterArrayList.size()>0){
             recycler_view_activity_my_list_watching.setVisibility(View.VISIBLE);
             image_view_empty_list.setVisibility(View.GONE);
         }else{
-            recycler_view_activity_my_list_watching.setVisibility(View.GONE);
-            image_view_empty_list.setVisibility(View.VISIBLE);
+            area_watching.setVisibility(View.GONE);
         }
 
         for (int i = 0; i < tempPosterArrayList.size(); i++) {
@@ -177,12 +183,14 @@ public class MyListActivity extends AppCompatActivity {
         }catch (NullPointerException e){
             tempPosterArrayList  = new ArrayList<>();
         }
+        if(tempPosterArrayList == null){
+            tempPosterArrayList  = new ArrayList<>();
+        }
         if (tempPosterArrayList.size()>0){
             recycler_view_activity_my_list_plan.setVisibility(View.VISIBLE);
             image_view_empty_list.setVisibility(View.GONE);
         }else{
-            recycler_view_activity_my_list_plan.setVisibility(View.GONE);
-            image_view_empty_list.setVisibility(View.VISIBLE);
+            area_plan.setVisibility(View.GONE);
         }
 
         for (int i = 0; i < tempPosterArrayList.size(); i++) {
@@ -221,12 +229,15 @@ public class MyListActivity extends AppCompatActivity {
         }catch (NullPointerException e){
             tempPosterArrayList  = new ArrayList<>();
         }
+        if(tempPosterArrayList == null){
+            tempPosterArrayList  = new ArrayList<>();
+        }
         if (tempPosterArrayList.size()>0){
             recycler_view_activity_my_list_canceled.setVisibility(View.VISIBLE);
             image_view_empty_list.setVisibility(View.GONE);
         }else{
-            recycler_view_activity_my_list_canceled.setVisibility(View.GONE);
-            image_view_empty_list.setVisibility(View.VISIBLE);
+            area_canceled.setVisibility(View.GONE);
+
         }
 
         for (int i = 0; i < tempPosterArrayList.size(); i++) {
@@ -340,10 +351,12 @@ public class MyListActivity extends AppCompatActivity {
         adapter_watching = new PosterAdapter(posterArrayList_watching, this,true);
         adapter_plan = new PosterAdapter(posterArrayList_plan, this,true);
         adapter_canceled = new PosterAdapter(posterArrayList_canceled, this,true);
+
+        GridLayoutManager gridLayoutManager;
         if (native_ads_enabled){
             Log.v("MYADS","ENABLED");
             if (tabletSize) {
-                this.gridLayoutManager=  new GridLayoutManager(getApplicationContext(),6,RecyclerView.VERTICAL,false);
+                gridLayoutManager=  new GridLayoutManager(getApplicationContext(),6,RecyclerView.VERTICAL,false);
                 Log.v("MYADS","tabletSize");
                 gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                     @Override
@@ -352,7 +365,7 @@ public class MyListActivity extends AppCompatActivity {
                     }
                 });
             } else {
-                this.gridLayoutManager=  new GridLayoutManager(getApplicationContext(),3,RecyclerView.VERTICAL,false);
+                gridLayoutManager=  new GridLayoutManager(getApplicationContext(),3,RecyclerView.VERTICAL,false);
                 gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                     @Override
                     public int getSpanSize(int position) {
@@ -362,9 +375,9 @@ public class MyListActivity extends AppCompatActivity {
             }
         }else {
             if (tabletSize) {
-                this.gridLayoutManager=  new GridLayoutManager(getApplicationContext(),6,RecyclerView.VERTICAL,false);
+                gridLayoutManager=  new GridLayoutManager(getApplicationContext(),6,RecyclerView.VERTICAL,false);
             } else {
-                this.gridLayoutManager=  new GridLayoutManager(getApplicationContext(),3,RecyclerView.VERTICAL,false);
+                gridLayoutManager=  new GridLayoutManager(getApplicationContext(),3,RecyclerView.VERTICAL,false);
             }
         }
         recycler_view_activity_my_list_completed.setHasFixedSize(true);
@@ -379,6 +392,11 @@ public class MyListActivity extends AppCompatActivity {
         recycler_view_activity_my_list_canceled.setHasFixedSize(true);
         recycler_view_activity_my_list_canceled.setAdapter(adapter_completed);
         recycler_view_activity_my_list_canceled.setLayoutManager(gridLayoutManager);
+        area_canceled = findViewById(R.id.area_canceled);
+        area_completed = findViewById(R.id.area_completed);
+        area_plan = findViewById(R.id.area_plan);
+        area_watching = findViewById(R.id.area_watching);
+
 
     }
     @Override

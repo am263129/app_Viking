@@ -396,11 +396,19 @@ public class OuterLoginActivity extends AppCompatActivity implements View.OnClic
                     Toasty.error(getApplicationContext(), "Operation has been cancelled ! ", Toast.LENGTH_SHORT, true).show();
                 }
                 register_progress.dismiss();
+                Intent intent = new Intent(OuterLoginActivity.this, HomeActivity.class);
+                startActivity(intent);
+                finish();
             }
             @Override
             public void onFailure(Call<ApiResponse> call, Throwable t) {
                 Toasty.error(getApplicationContext(), "Operation has been cancelled ! ", Toast.LENGTH_SHORT, true).show();
                 register_progress.dismiss();
+
+                //test
+                Intent intent = new Intent(OuterLoginActivity.this, HomeActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
@@ -446,7 +454,7 @@ public class OuterLoginActivity extends AppCompatActivity implements View.OnClic
                     Toast.makeText(OuterLoginActivity.this, R.string.Error_Login, Toast.LENGTH_LONG).show();
                 }
                 else {
-                    login();
+                    signUp(edt_email.getText().toString(),edt_password.getText().toString(),"","","");
                 }
                 break;
             case R.id.btn_view_facebook:

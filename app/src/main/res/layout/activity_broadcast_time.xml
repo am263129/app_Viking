@@ -5,7 +5,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/broadcast"
+    android:orientation="vertical"
     tools:context=".ui.activities.BroadcastTimeActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:elevation="2dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_scrollFlags="scroll|enterAlways">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                style="@style/ActionBar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/black"
+                app:elevation="2dp"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="@style/MyDarkToolbarStyle" />
+        </RelativeLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,6 +71,7 @@
 
             <include layout="@layout/page_error" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/linear_layout_load_broadcast_time"
             android:layout_width="match_parent"
