@@ -14,10 +14,7 @@
 <!--            android:id="@+id/login"-->
 <!--            android:icon="@drawable/ic_login_black"-->
 <!--            android:title="@string/login" />-->
-        <item
-            android:id="@+id/logout"
-            android:icon="@drawable/ic_logout"
-            android:title="@string/Logout" />
+
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_settings"
@@ -56,6 +53,10 @@
                 android:id="@+id/nav_policy"
                 android:icon="@drawable/ic_lock"
                 android:title="@string/policy_privacy" />
+            <item
+                android:id="@+id/logout"
+                android:icon="@drawable/ic_logout"
+                android:title="@string/Logout" />
             <item
                 android:id="@+id/nav_exit"
                 android:icon="@drawable/ic_exit"

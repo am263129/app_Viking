@@ -308,7 +308,9 @@ public class OuterLoginActivity extends AppCompatActivity implements View.OnClic
 
             signUp(acct.getId().toString(),acct.getId(), acct.getDisplayName().toString(),"google",photo);
             Auth.GoogleSignInApi.signOut(mGoogleApiClient);
-        } else {
+        }
+        else {
+
         }
     }
 

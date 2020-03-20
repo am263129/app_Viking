@@ -76,7 +76,6 @@ import com.google.android.gms.cast.framework.media.RemoteMediaClient;
 import com.google.android.gms.common.images.WebImage;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.jackandphantom.blurimage.BlurImage;
-import com.official.aptoon.entity.Poster;
 import com.orhanobut.hawk.Hawk;
 import com.official.aptoon.Provider.PrefManager;
 import com.official.aptoon.R;
@@ -188,6 +187,12 @@ public class ChannelActivity extends AppCompatActivity {
     private Dialog dialog;
     private boolean autoDisplay = false;
 
+    private String list_name;
+
+    private String list_name_completed = "channel_fav_list_completed";
+    private String list_name_watching = "channel_fav_list_watching";
+    private String list_name_plan = "channel_fav_list_plan";
+    private String list_name_canceled = "channel_fav_list_canceled";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -793,28 +798,32 @@ public class ChannelActivity extends AppCompatActivity {
         btn_completed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addFavotite_completed();
+                check_and_remove();
+                addFavotite(list_name_completed);
                 popupWindow.dismiss();
             }
         });
         btn_watching.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addFavotite_watching();
+                check_and_remove();
+                addFavotite(list_name_watching);
                 popupWindow.dismiss();
             }
         });
         btn_plan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addFavotite_plan();
+                check_and_remove();
+                addFavotite(list_name_plan);
                 popupWindow.dismiss();
             }
         });
         btn_canceled.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addFavotite_canceled();
+                check_and_remove();
+                addFavotite(list_name_canceled);
                 popupWindow.dismiss();
             }
         });
@@ -849,9 +858,92 @@ public class ChannelActivity extends AppCompatActivity {
             Toasty.warning(this, getString(R.string.channel_removed_fav), Toast.LENGTH_SHORT).show();
         }
     }
-    private void addFavotite_watching() {
+    private void check_and_remove(){
 
-        List<Channel> favorites_list =Hawk.get("channel_fav_list_watching");
+        List<Channel> completed_list =Hawk.get("channel_fav_list_completed");
+        List<Channel> watching_list =Hawk.get("channel_fav_list_watching");
+        List<Channel> plan_list =Hawk.get("channel_fav_list_plan");
+        List<Channel> canceled_list =Hawk.get("channel_fav_list_canceled");
+        Integer position;
+        boolean find = false;
+        try{
+            for (int i = 0; i < completed_list.size(); i++) {
+                if (completed_list.get(i).getId().equals(channel.getId())) {
+                    find = true;
+                    completed_list.remove(i);
+                    Hawk.put("my_list_completed",completed_list);
+                }
+            }
+
+        }catch (Exception e){
+            Log.e(TAG, "no in completed list");
+        }
+        if (!find){
+            try{
+                for (int i = 0; i < watching_list.size(); i++) {
+                    if (watching_list.get(i).getId().equals(channel.getId())) {
+                        find = true;
+                        watching_list.remove(i);
+                        Hawk.put("my_list_watching",watching_list);
+                    }
+                }
+
+            }catch (Exception e){
+                Log.e(TAG, "no in watching list");
+            }
+        }
+        if (!find){
+            try{
+                for (int i = 0; i < plan_list.size(); i++) {
+                    if (plan_list.get(i).getId().equals(channel.getId())) {
+                        find = true;
+                        plan_list.remove(i);
+                        Hawk.put("my_list_plan_to_watch",plan_list);
+                    }
+                }
+
+
+            }catch (Exception e){
+                Log.e(TAG, "no in plan list");
+            }
+        }
+        if (!find){
+            try{
+                for (int i = 0; i < canceled_list.size(); i++) {
+                    if (canceled_list.get(i).getId().equals(channel.getId())) {
+                        find = true;
+                        canceled_list.remove(i);
+                        Hawk.put("my_list_canceled",canceled_list);
+                    }
+                }
+
+
+            }catch (Exception e){
+                Log.e(TAG, "no in cancel list");
+            }
+        }
+
+    }
+
+    private void addFavotite(String hawk_index) {
+
+        switch (hawk_index){
+            case "my_list_completed":
+                list_name = "Complete";
+                break;
+            case "my_list_watching":
+                list_name = "Watching";
+                break;
+            case "my_list_plan_to_watch":
+                list_name = "Plan to Watch";
+                break;
+            case "my_list_canceled":
+                list_name = "Canceled";
+                break;
+        }
+
+        List<Channel> favorites_list =Hawk.get(hawk_index);
+
         Boolean exist = false;
         if (favorites_list == null) {
             favorites_list = new ArrayList<>();
@@ -865,68 +957,17 @@ public class ChannelActivity extends AppCompatActivity {
         }
         if (exist == false) {
             favorites_list.add(channel);
-            Hawk.put("channel_fav_list_watching",favorites_list);
+            Hawk.put(hawk_index,favorites_list);
             image_view_activity_channel_my_list.setImageDrawable(getResources().getDrawable(R.drawable.ic_close));
-            Toasty.info(this, getString(R.string.channel_added_fav), Toast.LENGTH_SHORT).show();
+            Toasty.info(this, "This movie has been added to your "+ list_name +" list", Toast.LENGTH_SHORT).show();
         }else{
             favorites_list.remove(fav_position);
-            Hawk.put("channel_fav_list_watching",favorites_list);
+            Hawk.put(hawk_index,favorites_list);
             image_view_activity_channel_my_list.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            Toasty.warning(this, getString(R.string.channel_removed_fav), Toast.LENGTH_SHORT).show();
+            Toasty.warning(this, "This movie has been removed from your "+ list_name +" list", Toast.LENGTH_SHORT).show();
         }
     }
-    private void addFavotite_plan() {
 
-        List<Channel> favorites_list =Hawk.get("channel_fav_list_plan_to_watch");
-        Boolean exist = false;
-        if (favorites_list == null) {
-            favorites_list = new ArrayList<>();
-        }
-        int fav_position = -1;
-        for (int i = 0; i < favorites_list.size(); i++) {
-            if (favorites_list.get(i).getId().equals(channel.getId())) {
-                exist = true;
-                fav_position = i;
-            }
-        }
-        if (exist == false) {
-            favorites_list.add(channel);
-            Hawk.put("channel_fav_list_plan_to_watch",favorites_list);
-            image_view_activity_channel_my_list.setImageDrawable(getResources().getDrawable(R.drawable.ic_close));
-            Toasty.info(this, getString(R.string.channel_added_fav), Toast.LENGTH_SHORT).show();
-        }else{
-            favorites_list.remove(fav_position);
-            Hawk.put("channel_fav_list_plan_to_watch",favorites_list);
-            image_view_activity_channel_my_list.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            Toasty.warning(this, getString(R.string.channel_removed_fav), Toast.LENGTH_SHORT).show();
-        }
-    }
-    private void addFavotite_canceled() {
-
-        List<Channel> favorites_list =Hawk.get("channel_fav_list_canceled");
-        Boolean exist = false;
-        if (favorites_list == null) {
-            favorites_list = new ArrayList<>();
-        }
-        int fav_position = -1;
-        for (int i = 0; i < favorites_list.size(); i++) {
-            if (favorites_list.get(i).getId().equals(channel.getId())) {
-                exist = true;
-                fav_position = i;
-            }
-        }
-        if (exist == false) {
-            favorites_list.add(channel);
-            Hawk.put("channel_fav_list_canceled",favorites_list);
-            image_view_activity_channel_my_list.setImageDrawable(getResources().getDrawable(R.drawable.ic_close));
-            Toasty.info(this, getString(R.string.channel_added_fav), Toast.LENGTH_SHORT).show();
-        }else{
-            favorites_list.remove(fav_position);
-            Hawk.put("channel_fav_list_canceled",favorites_list);
-            image_view_activity_channel_my_list.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            Toasty.warning(this, getString(R.string.channel_removed_fav), Toast.LENGTH_SHORT).show();
-        }
-    }
     public void share(){
         String shareBody = channel.getTitle()+"\n\n"+getResources().getString(R.string.get_this_channel_here)+"\n"+ Global.API_URL.replace("api","c/share")+ channel.getId()+".html";
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);

@@ -396,27 +396,93 @@ public class PosterAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
         return true;
     }
+    private void delete_from_list(Integer position){
+        List<Poster> completed_list =Hawk.get("my_list_completed");
+        List<Poster> watching_list =Hawk.get("my_list_watching");
+        List<Poster> plan_list =Hawk.get("my_list_plan_to_watch");
+        List<Poster> canceled_list =Hawk.get("my_list_canceled");
+        boolean find = false;
+        try{
+            for (int i = 0; i < completed_list.size(); i++) {
+                if (completed_list.get(i).getId().equals(posterList.get(position).getId())) {
+                    find = true;
+                    completed_list.remove(i);
+                    Hawk.put("my_list_completed",completed_list);
+                }
+            }
 
-    private void delete_from_list(Integer position) {
-
-        List<Poster> favorites_list =Hawk.get("my_list_completed");
-        if (favorites_list == null) {
-            favorites_list = new ArrayList<>();
+        }catch (Exception e){
+            Log.e(TAG, "no in completed list");
         }
-        int fav_position = -1;
-        for (int i = 0; i < favorites_list.size(); i++) {
-            if (favorites_list.get(i).getId().equals(posterList.get(position).getId())) {
-                fav_position = i;
+        if (!find){
+            try{
+                for (int i = 0; i < watching_list.size(); i++) {
+                    if (watching_list.get(i).getId().equals(posterList.get(position).getId())) {
+                        find = true;
+                        watching_list.remove(i);
+                        Hawk.put("my_list_watching",watching_list);
+                    }
+                }
+
+            }catch (Exception e){
+                Log.e(TAG, "no in watching list");
             }
         }
-        favorites_list.remove(fav_position);
-        Hawk.put("my_list_completed",favorites_list);
+        if (!find){
+            try{
+                for (int i = 0; i < plan_list.size(); i++) {
+                    if (plan_list.get(i).getId().equals(posterList.get(position).getId())) {
+                        find = true;
+                        plan_list.remove(i);
+                        Hawk.put("my_list_plan_to_watch",plan_list);
+                    }
+                }
 
+
+            }catch (Exception e){
+                Log.e(TAG, "no in plan list");
+            }
+        }
+        if (!find){
+            try{
+                for (int i = 0; i < canceled_list.size(); i++) {
+                    if (canceled_list.get(i).getId().equals(posterList.get(position).getId())) {
+                        find = true;
+                        canceled_list.remove(i);
+                        Hawk.put("my_list_canceled",canceled_list);
+                    }
+                }
+
+
+            }catch (Exception e){
+                Log.e(TAG, "no in cancel list");
+            }
+        }
         posterList.remove(position);
         notifyItemRemoved(position);
         notifyDataSetChanged();
 
     }
+//    private void delete_from_list(Integer position) {
+//
+//        List<Poster> favorites_list =Hawk.get("my_list_completed");
+//        if (favorites_list == null) {
+//            favorites_list = new ArrayList<>();
+//        }
+//        int fav_position = -1;
+//        for (int i = 0; i < favorites_list.size(); i++) {
+//            if (favorites_list.get(i).getId().equals(posterList.get(position).getId())) {
+//                fav_position = i;
+//            }
+//        }
+//        favorites_list.remove(fav_position);
+//        Hawk.put("my_list_completed",favorites_list);
+//
+//        posterList.remove(position);
+//        notifyItemRemoved(position);
+//        notifyDataSetChanged();
+//
+//    }
 
     @Override
         public int getItemCount() {

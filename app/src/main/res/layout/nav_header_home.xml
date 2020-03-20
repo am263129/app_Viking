@@ -67,7 +67,8 @@
                         android:id="@+id/imageView10"
                         android:layout_width="50dp"
                         android:layout_height="80dp"
-                        android:layout_marginStart="-35dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginTop="-10dp"
                         android:layout_toRightOf="@+id/circle_image_view_profile_nav_header"
                         app:srcCompat="@drawable/label_statistics" />

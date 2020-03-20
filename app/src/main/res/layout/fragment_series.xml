@@ -49,35 +49,38 @@
                     />
             </LinearLayout>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
         <RelativeLayout
-            android:gravity="center"
-            android:elevation="10dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:visibility="visible"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="80dp"
-            android:layout_alignParentRight="true"
             android:id="@+id/relative_layout_series_fragement_filtres_button"
-            android:background="@drawable/bg_filter_green"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="80dp"
+            android:background="@drawable/bg_filter_orange"
+            android:clickable="true"
+            android:elevation="10dp"
+            android:focusable="true"
+            android:gravity="center"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp">
+            android:visibility="visible">
+
             <ImageView
-                android:tint="@color/white"
-                android:padding="5dp"
-                app:srcCompat="@drawable/ic_tune"
                 android:layout_width="30dp"
-                android:layout_height="30dp" />
+                android:layout_height="30dp"
+                android:padding="5dp"
+                android:tint="@color/white"
+                app:srcCompat="@drawable/ic_tune" />
+
             <TextView
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:layout_marginLeft="35dp"
-                android:text="Filtres"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp" />
+                android:layout_height="30dp"
+                android:layout_marginLeft="35dp"
+                android:gravity="center"
+                android:text="Filtres"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
         </RelativeLayout>
         <androidx.cardview.widget.CardView
             android:id="@+id/card_view_series_fragement_filtres_layout"

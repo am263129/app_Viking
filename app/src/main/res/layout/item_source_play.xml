@@ -16,7 +16,7 @@
             android:id="@+id/image_view_item_source_type_image"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@color/guider_pink"
+            android:background="@color/orange"
             android:padding="10dp"
             android:tint="@color/black"
             app:srcCompat="@drawable/ic_mp4_file" />
@@ -26,7 +26,7 @@
             android:layout_height="50dp"
             android:layout_marginLeft="55dp"
             android:layout_marginRight="55dp"
-            android:background="@drawable/background_download_item"
+            android:background="@color/orange"
             android:gravity="center|left"
             android:orientation="vertical"
             android:padding="6dp">
@@ -56,7 +56,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentRight="true"
-            android:background="@color/guider_orange">
+            android:background="@color/orange">
 
             <ImageView
                 android:id="@+id/image_view_item_source_type_play"
