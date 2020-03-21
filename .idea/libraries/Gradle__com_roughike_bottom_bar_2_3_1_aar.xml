@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.roughike:bottom-bar:2.3.1@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d2d4e883919c3563e97900ff9784e5d0/jetified-bottom-bar-2.3.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d2d4e883919c3563e97900ff9784e5d0/jetified-bottom-bar-2.3.1/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/73c47a13ebf0ea81d7514ff2a27d5717/jetified-bottom-bar-2.3.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/73c47a13ebf0ea81d7514ff2a27d5717/jetified-bottom-bar-2.3.1/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.roughike/bottom-bar/2.3.1/39f1119fdae83e453c640b68c543defded759e3b/bottom-bar-2.3.1-javadoc.jar!/" />
