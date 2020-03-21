@@ -14,6 +14,7 @@
         <item name="android:fontFamily">@font/font</item>
         <item name="fontFamily">@font/font</item>
         <item name="colorControlHighlight">#23ffffff</item>
+        <item name="spinnerStyle">@style/myListSpinnerItemStyle</item>
         <item name="castMiniControllerStyle">@style/CustomCastMiniController</item>
     </style>
     <!-- Base application theme. -->
@@ -52,6 +53,9 @@
     </style>
     <style name="mySpinnerItemStyle" parent="Base.Widget.AppCompat.Spinner">
         <item name="android:textColor">@color/orange</item>
+    </style>
+    <style name="myListSpinnerItemStyle" parent="Base.Widget.AppCompat.Spinner">
+        <item name="android:textColor">@color/white</item>
     </style>
     <style name="MyDarkToolbarStyle" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:colorBackground">@color/white</item>

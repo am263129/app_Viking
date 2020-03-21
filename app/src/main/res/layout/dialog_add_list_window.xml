@@ -47,7 +47,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:orientation="horizontal">
@@ -56,13 +56,19 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:text="Status" />
+                android:text="Status"
+                android:textColor="@color/blue_bg_light" />
 
             <Spinner
-                style="@style/mySpinnerItemStyle"
+                android:id="@+id/spin_status"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
-                android:layout_weight="8" />
+                android:layout_weight="8"
+                android:drawSelectorOnTop="true"
+                android:entries="@array/status"
+                android:scrollbarThumbHorizontal="@color/white"
+                android:scrollbarThumbVertical="@color/white"
+                android:textColor="#FFFFFF" />
         </LinearLayout>
 
         <LinearLayout
@@ -76,38 +82,73 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:text="Rating" />
+                android:text="Rating"
+                android:textColor="@color/blue_bg_light" />
 
             <Spinner
-                style="@style/mySpinnerItemStyle"
+                android:id="@+id/spin_rating"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
-                android:layout_weight="8" />
+                android:layout_weight="8"
+                android:drawSelectorOnTop="true"
+                android:entries="@array/Rating"
+                android:scrollbarThumbHorizontal="@color/white"
+                android:textColor="#FFFFFF" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_season_tab"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Comment for this movie"
+                android:textColor="@color/blue_bg_light" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/user_comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/btn_cancel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/bg_season_tab"
-                android:text="Cancel" />
+                android:text="Cancel"
+                android:textColor="@color/white" />
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/btn_sumit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/background_btn_play"
-                android:text="Submit" />
+                android:text="Submit"
+                android:textColor="@color/white" />
         </LinearLayout>
 
     </LinearLayout>

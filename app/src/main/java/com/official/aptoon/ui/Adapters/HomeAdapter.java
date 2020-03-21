@@ -3,6 +3,7 @@ package com.official.aptoon.ui.Adapters;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.media.Image;
 import android.net.Uri;
 import android.util.DisplayMetrics;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -18,6 +20,7 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -75,6 +78,13 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private LinearLayoutManager linearLayoutManagerActorAdapter;
     private LinearLayoutManager linearLayoutManagerGenreAdapter;
     private PosterAdapter posterAdapter;
+    private String TAG = "HomeAdapter";
+    private String list_name;
+
+    private String list_name_completed = "my_list_completed";
+    private String list_name_watching = "my_list_watching";
+    private String list_name_plan = "my_list_plan_to_watch";
+    private String list_name_canceled = "my_list_canceled";
 
 
     // private Timer mTimer;
@@ -276,7 +286,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     @Override
                     public void onClick(View v) {
                         LayoutInflater inflater = (LayoutInflater) HomeActivity.getInstance().getSystemService(LAYOUT_INFLATER_SERVICE);
-                        View popupView = inflater.inflate(R.layout.dialog_add_list_window, null);
+                        View dialog_view = inflater.inflate(R.layout.dialog_add_list_window, null);
                         DisplayMetrics displayMetrics = new DisplayMetrics();
                         HomeActivity.getInstance().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
                         int screen_width = displayMetrics.widthPixels;
@@ -285,12 +295,14 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         boolean focusable = true;
                         int[] pos = new int[2];
                         streamingHolder.btn_show_info.getLocationOnScreen(pos);
-                        PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
-                        ImageView btn_close = popupView.findViewById(R.id.btn_close);
-                        RelativeLayout btn_completed = popupView.findViewById(R.id.btn_completed);
-                        RelativeLayout btn_plan = popupView.findViewById(R.id.btn_plan);
-                        RelativeLayout btn_watching = popupView.findViewById(R.id.btn_watching);
-                        RelativeLayout btn_canceled = popupView.findViewById(R.id.btn_canceled);
+                        Dialog dialog = new Dialog(HomeActivity.getInstance());
+                        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                        Rect displayRectangle = new Rect();
+                        Window window = HomeActivity.getInstance().getWindow();
+                        window.getDecorView().getWindowVisibleDisplayFrame(displayRectangle);
+                        dialog_view.setMinimumWidth((int)(displayRectangle.width() * 0.9f));
+                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        ImageView btn_close = dialog_view.findViewById(R.id.btn_close);
                         Poster poster = new Poster();
                         poster.setId(00001);
                         poster.setClassification("Classification");
@@ -309,108 +321,158 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         btn_close.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                popupWindow.dismiss();
+                                dialog.dismiss();
                             }
                         });
-                        btn_completed.setOnClickListener(new View.OnClickListener() {
+                        Spinner spin_status = dialog_view.findViewById(R.id.spin_status);
+                        Spinner spin_rating = dialog_view.findViewById(R.id.spin_rating);
+                        Button btn_sumit = dialog_view.findViewById(R.id.btn_sumit);
+                        Button btn_cancel = dialog_view.findViewById(R.id.btn_cancel);
+                        btn_sumit.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                List<Poster> favorites_list = Hawk.get("my_list_completed");
-                                Boolean exist = false;
-                                if (favorites_list == null) {
-                                    favorites_list = new ArrayList<>();
+                                switch (spin_status.getSelectedItemPosition()){
+                                    case 0:
+                                        check_and_remove(poster);
+                                        addFavotite(list_name_completed, poster);
+                                        dialog.dismiss();
+                                        break;
+                                    case 1:
+                                        check_and_remove(poster);
+                                        addFavotite(list_name_watching, poster);
+                                        dialog.dismiss();
+                                        break;
+                                    case 2:
+                                        check_and_remove(poster);
+                                        addFavotite(list_name_plan, poster);
+                                        dialog.dismiss();
+                                        break;
+                                    case 3:
+                                        check_and_remove(poster);
+                                        addFavotite(list_name_canceled, poster);
+                                        dialog.dismiss();
+                                        break;
                                 }
-                                int fav_position = -1;
-                                for (int i = 0; i < favorites_list.size(); i++) {
-                                    if (favorites_list.get(i).getId().equals(poster.getId())) {
-                                        exist = true;
-                                        fav_position = i;
-                                    }
-                                }
-                                if (exist == false) {
-                                    favorites_list.add(poster);
-                                    Hawk.put("my_list_completed",favorites_list);
-                                    Toasty.info(HomeActivity.getInstance(), "This movie has been added to your Completed list", Toast.LENGTH_SHORT).show();
-                                }
-                                popupWindow.dismiss();
                             }
                         });
-                        btn_watching.setOnClickListener(new View.OnClickListener() {
+                        btn_cancel.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                List<Poster> favorites_list = Hawk.get("my_list_watching");
-                                Boolean exist = false;
-                                if (favorites_list == null) {
-                                    favorites_list = new ArrayList<>();
-                                }
-                                int fav_position = -1;
-                                for (int i = 0; i < favorites_list.size(); i++) {
-                                    if (favorites_list.get(i).getId().equals(poster.getId())) {
-                                        exist = true;
-                                        fav_position = i;
-                                    }
-                                }
-                                if (exist == false) {
-                                    favorites_list.add(poster);
-                                    Hawk.put("my_list_watching",favorites_list);
-                                    Toasty.info(HomeActivity.getInstance(), "This movie has been added to your Watching list", Toast.LENGTH_SHORT).show();
-                                }
-                                popupWindow.dismiss();
+                                dialog.dismiss();
                             }
                         });
-                        btn_plan.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                List<Poster> favorites_list = Hawk.get("my_list_plan_to_watch");
-                                Boolean exist = false;
-                                if (favorites_list == null) {
-                                    favorites_list = new ArrayList<>();
-                                }
-                                int fav_position = -1;
-                                for (int i = 0; i < favorites_list.size(); i++) {
-                                    if (favorites_list.get(i).getId().equals(poster.getId())) {
-                                        exist = true;
-                                        fav_position = i;
-                                    }
-                                }
-                                if (exist == false) {
-                                    favorites_list.add(poster);
-                                    Hawk.put("my_list_plan_to_watch",favorites_list);
-                                    Toasty.info(HomeActivity.getInstance(), "This movie has been added to your Plan list", Toast.LENGTH_SHORT).show();
-                                }
-                                popupWindow.dismiss();
-                            }
-                        });
-                        btn_canceled.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                List<Poster> favorites_list = Hawk.get("my_list_canceled");
-                                Boolean exist = false;
-                                if (favorites_list == null) {
-                                    favorites_list = new ArrayList<>();
-                                }
-                                int fav_position = -1;
-                                for (int i = 0; i < favorites_list.size(); i++) {
-                                    if (favorites_list.get(i).getId().equals(poster.getId())) {
-                                        exist = true;
-                                        fav_position = i;
-                                    }
-                                }
-                                if (exist == false) {
-                                    favorites_list.add(poster);
-                                    Hawk.put("my_list_canceled",favorites_list);
-                                    Toasty.info(HomeActivity.getInstance(), "This movie has been added to your Canceled list", Toast.LENGTH_SHORT).show();
-                                }
-                                popupWindow.dismiss();
-                            }
-                        });
-
-                        popupWindow.showAtLocation(streamingHolder.itemView,0, pos[0],pos[1]+100);
+                        dialog.show();
 
                     }
                 });
                 break;
             }
+        }
+    }
+    private void check_and_remove(Poster poster){
+        List<Poster> completed_list =Hawk.get("my_list_completed");
+        List<Poster> watching_list =Hawk.get("my_list_watching");
+        List<Poster> plan_list =Hawk.get("my_list_plan_to_watch");
+        List<Poster> canceled_list =Hawk.get("my_list_canceled");
+        Integer position;
+        boolean find = false;
+        try{
+            for (int i = 0; i < completed_list.size(); i++) {
+                if (completed_list.get(i).getId().equals(poster.getId())) {
+                    find = true;
+                    completed_list.remove(i);
+                    Hawk.put("my_list_completed",completed_list);
+                }
+            }
+
+        }catch (Exception e){
+            Log.e(TAG, "no in completed list");
+        }
+        if (!find){
+            try{
+                for (int i = 0; i < watching_list.size(); i++) {
+                    if (watching_list.get(i).getId().equals(poster.getId())) {
+                        find = true;
+                        watching_list.remove(i);
+                        Hawk.put("my_list_watching",watching_list);
+                    }
+                }
+
+            }catch (Exception e){
+                Log.e(TAG, "no in watching list");
+            }
+        }
+        if (!find){
+            try{
+                for (int i = 0; i < plan_list.size(); i++) {
+                    if (plan_list.get(i).getId().equals(poster.getId())) {
+                        find = true;
+                        plan_list.remove(i);
+                        Hawk.put("my_list_plan_to_watch",plan_list);
+                    }
+                }
+
+
+            }catch (Exception e){
+                Log.e(TAG, "no in plan list");
+            }
+        }
+        if (!find){
+            try{
+                for (int i = 0; i < canceled_list.size(); i++) {
+                    if (canceled_list.get(i).getId().equals(poster.getId())) {
+                        find = true;
+                        canceled_list.remove(i);
+                        Hawk.put("my_list_canceled",canceled_list);
+                    }
+                }
+
+
+            }catch (Exception e){
+                Log.e(TAG, "no in cancel list");
+            }
+        }
+
+    }
+
+    private void addFavotite(String hawk_index, Poster poster) {
+
+        switch (hawk_index){
+            case "my_list_completed":
+                list_name = "Complete";
+                break;
+            case "my_list_watching":
+                list_name = "Watching";
+                break;
+            case "my_list_plan_to_watch":
+                list_name = "Plan to Watch";
+                break;
+            case "my_list_canceled":
+                list_name = "Canceled";
+                break;
+        }
+
+        List<Poster> favorites_list =Hawk.get(hawk_index);
+
+        Boolean exist = false;
+        if (favorites_list == null) {
+            favorites_list = new ArrayList<>();
+        }
+        int fav_position = -1;
+        for (int i = 0; i < favorites_list.size(); i++) {
+            if (favorites_list.get(i).getId().equals(poster.getId())) {
+                exist = true;
+                fav_position = i;
+            }
+        }
+        if (exist == false) {
+            favorites_list.add(poster);
+            Hawk.put(hawk_index,favorites_list);
+            Toasty.info(HomeActivity.getInstance(), "This movie has been added to your "+ list_name +" list", Toast.LENGTH_SHORT).show();
+        }else{
+            favorites_list.remove(fav_position);
+            Hawk.put(hawk_index,favorites_list);
+            Toasty.warning(HomeActivity.getInstance()  , "This movie has been removed from your "+ list_name +" list", Toast.LENGTH_SHORT).show();
         }
     }
 

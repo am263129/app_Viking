@@ -13,6 +13,7 @@ import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.MediaFormat;
@@ -33,6 +34,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -41,6 +43,7 @@ import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -914,6 +917,7 @@ public class MovieActivity extends AppCompatActivity {
                                         comment.setCreated(getResources().getString(R.string.now_time));
                                         commentList.add(comment);
                                         commentAdapter.notifyDataSetChanged();
+                                        //see this.
                                         text_view_comment_dialog_count.setText(commentList.size()+" Comments");
 
                                     }else{
@@ -1434,7 +1438,7 @@ public class MovieActivity extends AppCompatActivity {
     }
     private void show_add_dialog(){
         LayoutInflater inflater = (LayoutInflater) HomeActivity.getInstance().getSystemService(LAYOUT_INFLATER_SERVICE);
-        View popupView = inflater.inflate(R.layout.dialog_add_list_window, null);
+        View add_list_dialog = inflater.inflate(R.layout.dialog_add_list_window, null);
         DisplayMetrics displayMetrics = new DisplayMetrics();
         HomeActivity.getInstance().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int screen_width = displayMetrics.widthPixels;
@@ -1443,53 +1447,118 @@ public class MovieActivity extends AppCompatActivity {
         boolean focusable = true;
         int[] pos = new int[2];
         linear_layout_activity_movie_my_list.getLocationOnScreen(pos);
-        PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
-        ImageView btn_close = popupView.findViewById(R.id.btn_close);
-        RelativeLayout btn_completed = popupView.findViewById(R.id.btn_completed);
-        RelativeLayout btn_plan = popupView.findViewById(R.id.btn_plan);
-        RelativeLayout btn_watching = popupView.findViewById(R.id.btn_watching);
-        RelativeLayout btn_canceled = popupView.findViewById(R.id.btn_canceled);
+        Dialog dialog = new Dialog(this);
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+        Rect displayRectangle = new Rect();
+        Window window = this.getWindow();
+        window.getDecorView().getWindowVisibleDisplayFrame(displayRectangle);
+        add_list_dialog.setMinimumWidth((int)(displayRectangle.width() * 0.9f));
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(add_list_dialog);
+        ImageView btn_close = add_list_dialog.findViewById(R.id.btn_close);
         btn_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                popupWindow.dismiss();
+                dialog.dismiss();
             }
         });
-        btn_completed.setOnClickListener(new View.OnClickListener() {
+        ArrayAdapter<String> statusAdapter =
+                new ArrayAdapter<String>(this, R.layout.spinner_item,  getResources().getStringArray(R.array.status))
+                {
+                    public View getView(int position, View convertView, ViewGroup parent) {
+                        View v = super.getView(position, convertView, parent);
+
+                        ((TextView) v).setTextSize(16);
+                        ((TextView) v).setTextColor(
+                                getResources().getColorStateList(R.color.orange)
+                        );
+
+                        return v;
+                    }
+
+                    public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                        View v = super.getDropDownView(position, convertView, parent);
+                        v.setBackgroundResource(R.color.black);
+
+                        ((TextView) v).setTextColor(
+                                getResources().getColorStateList(R.color.white)
+                        );
+
+                        ((TextView) v).setGravity(Gravity.CENTER);
+
+                        return v;
+                    }
+                };
+        ArrayAdapter<String> ratingAdapter =
+                new ArrayAdapter<String>(this, R.layout.spinner_item,  getResources().getStringArray(R.array.Rating))
+                {
+                    public View getView(int position, View convertView, ViewGroup parent) {
+                        View v = super.getView(position, convertView, parent);
+
+                        ((TextView) v).setTextSize(16);
+                        ((TextView) v).setTextColor(
+                                getResources().getColorStateList(R.color.orange)
+                        );
+
+                        return v;
+                    }
+
+                    public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                        View v = super.getDropDownView(position, convertView, parent);
+                        v.setBackgroundResource(R.color.black);
+
+                        ((TextView) v).setTextColor(
+                                getResources().getColorStateList(R.color.white)
+                        );
+
+                        ((TextView) v).setGravity(Gravity.LEFT);
+
+                        return v;
+                    }
+                };
+        Spinner spin_status = add_list_dialog.findViewById(R.id.spin_status);
+        spin_status.setAdapter(statusAdapter);
+        Spinner spin_rating = add_list_dialog.findViewById(R.id.spin_rating);
+        spin_rating.setAdapter(ratingAdapter);
+        Button btn_sumit = add_list_dialog.findViewById(R.id.btn_sumit);
+        Button btn_cancel = add_list_dialog.findViewById(R.id.btn_cancel);
+        btn_sumit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                check_and_remove();
-                addFavotite(list_name_completed);
-                popupWindow.dismiss();
+                switch (spin_status.getSelectedItemPosition()){
+                    case 0:
+                        check_and_remove();
+                        addFavotite(list_name_completed);
+                        dialog.dismiss();
+                        break;
+                    case 1:
+                        check_and_remove();
+                        addFavotite(list_name_watching);
+                        dialog.dismiss();
+                        break;
+                    case 2:
+                        check_and_remove();
+                        addFavotite(list_name_plan);
+                        dialog.dismiss();
+                        break;
+                    case 3:
+                        check_and_remove();
+                        addFavotite(list_name_canceled);
+                        dialog.dismiss();
+                        break;
+                }
             }
         });
-        btn_watching.setOnClickListener(new View.OnClickListener() {
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                check_and_remove();
-                addFavotite(list_name_watching);
-                popupWindow.dismiss();
-            }
-        });
-        btn_plan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                check_and_remove();
-                addFavotite(list_name_plan);
-                popupWindow.dismiss();
-            }
-        });
-        btn_canceled.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                check_and_remove();
-                addFavotite(list_name_canceled);
-                popupWindow.dismiss();
+                dialog.dismiss();
             }
         });
 
-        popupWindow.showAtLocation(parent_view,0, pos[0],pos[1]+100);
-
+        dialog.show();
 
     }
 

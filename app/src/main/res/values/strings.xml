@@ -138,4 +138,10 @@
         <item>1:  Nightmare</item>
     </string-array>
 
+    <string-array name="status">
+        <item>Completed</item>
+        <item>Watching</item>
+        <item>Plan to Watch</item>
+        <item>Canceled</item>
+    </string-array>
 </resources>
