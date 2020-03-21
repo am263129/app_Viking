@@ -537,45 +537,8 @@ public class ChannelActivity extends AppCompatActivity {
         buttun_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PrefManager prf = new PrefManager(getApplicationContext());
-                if (prf.getString("LOGGED").toString().equals("TRUE")) {
-                    Integer id_user=  Integer.parseInt(prf.getString("ID_USER"));
-                    String   key_user=  prf.getString("TOKEN_USER");
-                    Retrofit retrofit = apiClient.getClient();
-                    apiRest service = retrofit.create(apiRest.class);
-                    Call<ApiResponse> call = service.addChannelRate(id_user+"",key_user, channel.getId(), AppCompatRatingBar_dialog_rating_app.getRating());
-                    call.enqueue(new retrofit2.Callback<ApiResponse>() {
-                        @Override
-                        public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
-                            if (response.isSuccessful()) {
-                                if (response.body().getCode() == 200) {
-                                    Toasty.success(ChannelActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                                    if (response.body().getValues().size()>0){
-                                        if (response.body().getValues().get(0).getName().equals("rate") ){
-                                            rating_bar_activity_channel_rating.setVisibility(View.VISIBLE);
-                                            rating_bar_activity_channel_rating.setRating(Float.parseFloat(response.body().getValues().get(0).getValue()));
-                                        }
-                                    }
-                                } else {
-                                    Toasty.error(ChannelActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-
-                            }
-                            rateDialog.dismiss();
-                        }
-
-                        @Override
-                        public void onFailure(Call<ApiResponse> call, Throwable t) {
-                            rateDialog.dismiss();
-                        }
-                    });
-                } else {
-                    rateDialog.dismiss();
-                    Intent intent = new Intent(ChannelActivity.this,LoginActivity.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
-
-                }
+                post_rate_to_server( AppCompatRatingBar_dialog_rating_app.getRating());
+                rateDialog.dismiss();
             }
         });
         rateDialog.setOnKeyListener(new Dialog.OnKeyListener() {
@@ -793,6 +756,7 @@ public class ChannelActivity extends AppCompatActivity {
         Window window = this.getWindow();
         window.getDecorView().getWindowVisibleDisplayFrame(displayRectangle);
         add_list_dialog.setMinimumWidth((int)(displayRectangle.width() * 0.9f));
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(add_list_dialog);
         ImageView btn_close = add_list_dialog.findViewById(R.id.btn_close);
@@ -863,6 +827,7 @@ public class ChannelActivity extends AppCompatActivity {
         spin_rating.setAdapter(ratingAdapter);
         Button btn_sumit = add_list_dialog.findViewById(R.id.btn_sumit);
         Button btn_cancel = add_list_dialog.findViewById(R.id.btn_cancel);
+        EditText comment = add_list_dialog.findViewById(R.id.user_comment);
         btn_sumit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -870,24 +835,25 @@ public class ChannelActivity extends AppCompatActivity {
                     case 0:
                         check_and_remove();
                         addFavotite(list_name_completed);
-                        dialog.dismiss();
                         break;
                     case 1:
                         check_and_remove();
                         addFavotite(list_name_watching);
-                        dialog.dismiss();
                         break;
                     case 2:
                         check_and_remove();
                         addFavotite(list_name_plan);
-                        dialog.dismiss();
                         break;
                     case 3:
                         check_and_remove();
                         addFavotite(list_name_canceled);
-                        dialog.dismiss();
                         break;
                 }
+
+                post_rate_to_server((float) 10-spin_rating.getSelectedItemPosition());
+                post_comment_to_server(comment.getText().toString());
+                dialog.dismiss();
+
             }
         });
         btn_cancel.setOnClickListener(new View.OnClickListener() {
@@ -901,6 +867,120 @@ public class ChannelActivity extends AppCompatActivity {
 
 
     }
+
+    private void post_comment_to_server(String commit) {
+        if (commit.length()>0){
+            PrefManager prf= new PrefManager(ChannelActivity.this.getApplicationContext());
+            if (prf.getString("LOGGED").toString().equals("TRUE")){
+                Integer id_user=  Integer.parseInt(prf.getString("ID_USER"));
+                String   key_user=  prf.getString("TOKEN_USER");
+                byte[] data = new byte[0];
+                String comment_final ="";
+                try {
+                    data = commit.toString().getBytes("UTF-8");
+                    comment_final = Base64.encodeToString(data, Base64.DEFAULT);
+                } catch (UnsupportedEncodingException e) {
+                    comment_final = commit.toString();
+                    e.printStackTrace();
+                }
+                Retrofit retrofit = apiClient.getClient();
+                apiRest service = retrofit.create(apiRest.class);
+                Call<ApiResponse> call = service.addChannelComment(id_user+"",key_user,channel.getId(),comment_final);
+                call.enqueue(new Callback<ApiResponse>() {
+                    @Override
+                    public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+                        if (response.isSuccessful()){
+                            if (response.body().getCode()==200){
+                                Toasty.success(ChannelActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                String id="";
+                                String content="";
+                                String user="";
+                                String image="";
+
+                                for (int i=0;i<response.body().getValues().size();i++){
+                                    if (response.body().getValues().get(i).getName().equals("id")){
+                                        id=response.body().getValues().get(i).getValue();
+                                    }
+                                    if (response.body().getValues().get(i).getName().equals("content")){
+                                        content=response.body().getValues().get(i).getValue();
+                                    }
+                                    if (response.body().getValues().get(i).getName().equals("user")){
+                                        user=response.body().getValues().get(i).getValue();
+                                    }
+                                    if (response.body().getValues().get(i).getName().equals("image")){
+                                        image=response.body().getValues().get(i).getValue();
+                                    }
+                                }
+                                Comment comment= new Comment();
+                                comment.setId(Integer.parseInt(id));
+                                comment.setUser(user);
+                                comment.setContent(content);
+                                comment.setImage(image);
+                                comment.setEnabled(true);
+                                comment.setCreated(getResources().getString(R.string.now_time));
+                                commentList.add(comment);
+                                commentAdapter.notifyDataSetChanged();
+
+                            }else{
+                                Toasty.error(ChannelActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }commentAdapter.notifyDataSetChanged();
+
+                    }
+                    @Override
+                    public void onFailure(Call<ApiResponse> call, Throwable t) {
+                    }
+                });
+            }else{
+                Intent intent = new Intent(ChannelActivity.this,LoginActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
+            }
+        }
+
+    }
+
+    private void post_rate_to_server(Float rate) {
+
+        PrefManager prf = new PrefManager(getApplicationContext());
+        if (prf.getString("LOGGED").toString().equals("TRUE")) {
+            Integer id_user=  Integer.parseInt(prf.getString("ID_USER"));
+            String   key_user=  prf.getString("TOKEN_USER");
+            Retrofit retrofit = apiClient.getClient();
+            apiRest service = retrofit.create(apiRest.class);
+            Call<ApiResponse> call = service.addChannelRate(id_user+"",key_user, channel.getId(),rate);
+            call.enqueue(new retrofit2.Callback<ApiResponse>() {
+                @Override
+                public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+                    if (response.isSuccessful()) {
+                        if (response.body().getCode() == 200) {
+                            Toasty.success(ChannelActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            if (response.body().getValues().size()>0){
+                                if (response.body().getValues().get(0).getName().equals("rate") ){
+                                    rating_bar_activity_channel_rating.setVisibility(View.VISIBLE);
+                                    rating_bar_activity_channel_rating.setRating(Float.parseFloat(response.body().getValues().get(0).getValue()));
+                                }
+                            }
+                        } else {
+                            Toasty.error(ChannelActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ApiResponse> call, Throwable t) {
+                }
+            });
+        } else {
+            Intent intent = new Intent(ChannelActivity.this,LoginActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
+
+        }
+
+    }
+
     private void addFavotite_completed() {
 
         List<Channel> favorites_list =Hawk.get("channel_fav_list_completed");
