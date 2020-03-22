@@ -98,9 +98,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="200dp"
             android:layout_marginTop="10dp"
-            android:layout_weight="1"
             android:background="@drawable/bg_season_tab"
             android:orientation="vertical"
             android:padding="10dp">
@@ -111,17 +110,18 @@
                 android:layout_height="wrap_content"
                 android:text="Comment for this movie"
                 android:textColor="@color/blue_bg_light"
-                android:visibility="invisible" />
+                android:visibility="visible" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/user_comment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Comment for this movie" />
+                    android:textColor="@color/white"
+                    android:text="Comment for this movie" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 

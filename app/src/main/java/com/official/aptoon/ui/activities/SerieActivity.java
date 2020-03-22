@@ -179,6 +179,7 @@ public class SerieActivity extends AppCompatActivity implements PlaylistDownload
     private RecyclerView recycle_view_activity_activity_serie_episodes;
     private LinearLayout linear_layout_activity_serie_seasons;
     private LinearLayout linear_layout_activity_serie_my_list;
+    private LinearLayout linear_layout_activity_show_info;
     private ImageView image_view_activity_serie_my_list;
     private Dialog play_source_dialog;
     private Dialog download_source_dialog;
@@ -648,15 +649,25 @@ public class SerieActivity extends AppCompatActivity implements PlaylistDownload
                 share();
             }
         });
+
+        linear_layout_activity_show_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                show_info_dialog();
+            }
+        });
         linear_layout_activity_serie_my_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 show_add_dialog();
             }
         });
+
         linear_layout_serie_activity_trailer_clicked.setOnClickListener(v-> {
             playTrailer();
         });
+
+
         floating_action_button_activity_serie_play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1201,6 +1212,7 @@ public class SerieActivity extends AppCompatActivity implements PlaylistDownload
         this.linear_layout_serie_activity_rate =  (LinearLayout) findViewById(R.id.linear_layout_serie_activity_rate);
         this.linear_layout_activity_serie_seasons =  (LinearLayout) findViewById(R.id.linear_layout_activity_serie_seasons);
         this.linear_layout_activity_serie_my_list =  (LinearLayout) findViewById(R.id.linear_layout_activity_serie_my_list);
+        this.linear_layout_activity_show_info = (LinearLayout) findViewById(R.id.linear_layout_activity_show_info);
         this.image_view_activity_serie_my_list =  (ImageView) findViewById(R.id.image_view_activity_serie_my_list);
         this.parent_view = findViewById(R.id.parent_view);
     }
@@ -1628,6 +1640,57 @@ public class SerieActivity extends AppCompatActivity implements PlaylistDownload
         }else{
             image_view_activity_serie_my_list.setImageResource(R.drawable.ic_check);
         }
+    }
+
+    private void show_info_dialog(){
+            LayoutInflater inflater = (LayoutInflater) HomeActivity.getInstance().getSystemService(LAYOUT_INFLATER_SERVICE);
+            View popupView = inflater.inflate(R.layout.dialog_information_window, null);
+            DisplayMetrics displayMetrics = new DisplayMetrics();
+            HomeActivity.getInstance().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+            int screen_width = displayMetrics.widthPixels;
+            int width = (int)Math.floor(screen_width/2);
+            int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+            boolean focusable = true;
+            int[] pos = new int[2];
+            PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+            TextView info_type = popupView.findViewById(R.id.info_type);
+            TextView info_episodes = popupView.findViewById(R.id.info_episodes);
+            TextView info_status = popupView.findViewById(R.id.info_status);
+            TextView info_aired = popupView.findViewById(R.id.info_aired);
+            TextView info_premiered = popupView.findViewById(R.id.info_premiered);
+            TextView info_broadcast = popupView.findViewById(R.id.info_broadcast);
+            TextView info_producers = popupView.findViewById(R.id.info_producers);
+            TextView info_licensors = popupView.findViewById(R.id.info_licensors);
+            TextView info_studio = popupView.findViewById(R.id.info_studio);
+            TextView info_source = popupView.findViewById(R.id.info_source);
+            ImageView btn_close = popupView.findViewById(R.id.btn_close);
+            info_type.setText(poster.getType());
+//            info_episodes.setText();
+//                info_status.setText();
+            info_aired.setText(poster.getYear().toString());
+//            info_premiered.setText();
+//                info_broadcast.setText();
+//                info_producers.setText();
+//                info_licensors.setText();
+//            info_studio.setText();
+            info_source.setText(poster.getSources().toString());
+            info_type.setSelected(true);
+            info_episodes.setSelected(true);
+            info_status.setSelected(true);
+            info_aired.setSelected(true);
+            info_premiered.setSelected(true);
+            info_broadcast.setSelected(true);
+            info_producers.setSelected(true);
+            info_licensors.setSelected(true);
+            info_studio.setSelected(true);
+            info_source.setSelected(true);
+            btn_close.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    popupWindow.dismiss();
+                }
+            });
+
     }
 
     private void show_add_dialog(){

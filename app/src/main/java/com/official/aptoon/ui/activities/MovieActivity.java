@@ -181,6 +181,7 @@ public class MovieActivity extends AppCompatActivity {
     private LinearLayout linear_layout_movie_activity_download;
     private List<Source> downloadableList =  new ArrayList<>();
     private LinearLayout linear_layout_movie_activity_share;
+    private LinearLayout linear_layout_movie_activity_show_info;
     private String from;
     private int tryed = 0;
     private LinearLayout linear_layout_activity_movie_rating;
@@ -593,6 +594,12 @@ public class MovieActivity extends AppCompatActivity {
                 show_add_dialog();
             }
         });
+        linear_layout_movie_activity_show_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                show_info_dialog();
+            }
+        });
         linear_layout_movie_activity_trailer_clicked.setOnClickListener(v-> {
             playTrailer();
         });
@@ -785,6 +792,57 @@ public class MovieActivity extends AppCompatActivity {
             }
         });
         rateDialog.show();
+
+    }
+
+    private void show_info_dialog(){
+        LayoutInflater inflater = (LayoutInflater) HomeActivity.getInstance().getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.dialog_information_window, null);
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        HomeActivity.getInstance().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int screen_width = displayMetrics.widthPixels;
+        int width = (int)Math.floor(screen_width/2);
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true;
+        int[] pos = new int[2];
+        PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+        TextView info_type = popupView.findViewById(R.id.info_type);
+        TextView info_episodes = popupView.findViewById(R.id.info_episodes);
+        TextView info_status = popupView.findViewById(R.id.info_status);
+        TextView info_aired = popupView.findViewById(R.id.info_aired);
+        TextView info_premiered = popupView.findViewById(R.id.info_premiered);
+        TextView info_broadcast = popupView.findViewById(R.id.info_broadcast);
+        TextView info_producers = popupView.findViewById(R.id.info_producers);
+        TextView info_licensors = popupView.findViewById(R.id.info_licensors);
+        TextView info_studio = popupView.findViewById(R.id.info_studio);
+        TextView info_source = popupView.findViewById(R.id.info_source);
+        ImageView btn_close = popupView.findViewById(R.id.btn_close);
+        info_type.setText(poster.getType());
+//            info_episodes.setText();
+//                info_status.setText();
+        info_aired.setText(poster.getYear().toString());
+//            info_premiered.setText();
+//                info_broadcast.setText();
+//                info_producers.setText();
+//                info_licensors.setText();
+//            info_studio.setText();
+        info_source.setText(poster.getSources().toString());
+        info_type.setSelected(true);
+        info_episodes.setSelected(true);
+        info_status.setSelected(true);
+        info_aired.setSelected(true);
+        info_premiered.setSelected(true);
+        info_broadcast.setSelected(true);
+        info_producers.setSelected(true);
+        info_licensors.setSelected(true);
+        info_studio.setSelected(true);
+        info_source.setSelected(true);
+        btn_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
 
     }
     public void showCommentsDialog(){
@@ -1073,6 +1131,7 @@ public class MovieActivity extends AppCompatActivity {
         this.linear_layout_activity_movie_rating =  (LinearLayout) findViewById(R.id.linear_layout_activity_movie_rating);
         this.linear_layout_activity_movie_imdb =  (LinearLayout) findViewById(R.id.linear_layout_activity_movie_imdb);
         this.linear_layout_movie_activity_share =  (LinearLayout) findViewById(R.id.linear_layout_movie_activity_share);
+        this.linear_layout_movie_activity_show_info = (LinearLayout) findViewById(R.id.linear_layout_movie_activity_show_info);
         this.floating_action_button_activity_movie_comment =  (FloatingActionButton) findViewById(R.id.floating_action_button_activity_movie_comment);
         this.relative_layout_subtitles_loading =  (RelativeLayout) findViewById(R.id.relative_layout_subtitles_loading);
         this.floating_action_button_activity_movie_play =  (Button) findViewById(R.id.floating_action_button_activity_movie_play);

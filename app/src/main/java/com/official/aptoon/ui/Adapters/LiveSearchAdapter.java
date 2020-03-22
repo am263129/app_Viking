@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.google.android.exoplayer2.C;
 import com.official.aptoon.R;
+import com.official.aptoon.entity.Channel;
 import com.official.aptoon.entity.SearchedChannel;
 import com.official.aptoon.ui.activities.HomeActivity;
 
@@ -28,10 +29,10 @@ import java.util.List;
 public class LiveSearchAdapter extends RecyclerView.Adapter<LiveSearchAdapter.PlanetHolder> implements Filterable {
 
     private Context context;
-    private ArrayList<SearchedChannel> channels;
+    private List<Channel> channels;
     boolean like = false;
 
-    public LiveSearchAdapter(Context context, ArrayList<SearchedChannel> channels) {
+    public LiveSearchAdapter(Context context, List<Channel> channels) {
         this.context = context;
         this.channels = channels;
     }
@@ -46,7 +47,7 @@ public class LiveSearchAdapter extends RecyclerView.Adapter<LiveSearchAdapter.Pl
 
     @Override
     public void onBindViewHolder(@NonNull PlanetHolder holder, final int position) {
-        final SearchedChannel channel = channels.get(position);
+        final Channel channel = channels.get(position);
         holder.setDetails(channel);
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +86,7 @@ public class LiveSearchAdapter extends RecyclerView.Adapter<LiveSearchAdapter.Pl
 
         }
 
-        void setDetails(SearchedChannel channel) {
+        void setDetails(Channel channel) {
             title.setText(channel.getTitle().toString());
             description.setText(channel.getDescription().toString());
             rating.setText(String.valueOf(channel.getRating()));

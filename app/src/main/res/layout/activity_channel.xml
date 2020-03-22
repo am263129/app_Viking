@@ -131,7 +131,7 @@
                                 android:textSize="12sp" />
 
                             <LinearLayout
-                                android:id="@+id/btn_info"
+                                android:id="@+id/linear_layout_activity_channel_info"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.8"
