@@ -78,8 +78,7 @@ public interface apiRest {
     Call<ApiResponse> register(@Field("name") String name, @Field("username") String username, @Field("password") String password, @Field("type") String type, @Field("image") String image);
 
 
-    @FormUrlEncoded
-    @POST("user/login/"+ Global.SECURE_KEY+"/"+ Global.ITEM_PURCHASE_CODE+"/")
+    @GET("user/login/{username}/{password}/"+ Global.SECURE_KEY+"/"+ Global.ITEM_PURCHASE_CODE+"/")
     Call<ApiResponse> login(@Field("username") String username, @Field("password") String password);
 
 
@@ -104,7 +103,7 @@ public interface apiRest {
 
     @FormUrlEncoded
     @POST("comment/poster/add/" + Global.SECURE_KEY + "/" + Global.ITEM_PURCHASE_CODE + "/")
-    Call<ApiResponse> addPosterComment(@Field("user") String user,@Field("key")  String key, @Field("id") Integer id, @Field("comment") String comment);
+    Call<ApiResponse> addPosterComment(@Field("user") String user,@Field("key")  String key, @Field("id") Integer id, @Field("comment") String comment,@Field("score") Integer rating,@Field("status") String status);
 
 
     @GET("comments/by/poster/{id}/" + Global.SECURE_KEY + "/" + Global.ITEM_PURCHASE_CODE + "/")
@@ -145,9 +144,15 @@ public interface apiRest {
     @GET("movie/by/filtres/{genre}/{order}/{page}/" + Global.SECURE_KEY + "/" + Global.ITEM_PURCHASE_CODE + "/")
     Call<List<Poster>> getMoviesByFiltres(@Path("genre") Integer genre,@Path("order") String order,@Path("page") Integer page);
 
+    @GET("movie/by/status/{status}/{page}/" + Global.SECURE_KEY + "/" + Global.ITEM_PURCHASE_CODE + "/")
+    Call<List<Poster>> getMoviesByStatus(@Path("status") Integer status,@Path("page") Integer page);
+
 
     @GET("poster/by/filtres/{genre}/{order}/{page}/" + Global.SECURE_KEY + "/" + Global.ITEM_PURCHASE_CODE + "/")
     Call<List<Poster>> getPostersByFiltres(@Path("genre") Integer genre,@Path("order") String order,@Path("page") Integer page);
+
+    @GET("poster/by/status/{status}/{page}/" + Global.SECURE_KEY + "/" + Global.ITEM_PURCHASE_CODE + "/")
+    Call<List<Poster>> getPostersByStatus(@Path("status") Integer status,@Path("page") Integer page);
 
 
     @GET("genre/all/" + Global.SECURE_KEY + "/" + Global.ITEM_PURCHASE_CODE + "/")
@@ -171,6 +176,11 @@ public interface apiRest {
 
     @GET("channel/by/filtres/{category}/{country}/{page}/" + Global.SECURE_KEY + "/" + Global.ITEM_PURCHASE_CODE + "/")
     Call<List<Channel>> getChannelsByFiltres(@Path("category") Integer category,@Path("country") Integer country,@Path("page") Integer page);
+
+
+    @GET("channel/by/status/{category}/{page}/" + Global.SECURE_KEY + "/" + Global.ITEM_PURCHASE_CODE + "/")
+    Call<List<Channel>> getChannelsByStatus(@Path("status") Integer status,@Path("page") Integer page);
+
 
     @FormUrlEncoded
     @POST("movie/add/download/"+ Global.SECURE_KEY+"/"+ Global.ITEM_PURCHASE_CODE+"/")

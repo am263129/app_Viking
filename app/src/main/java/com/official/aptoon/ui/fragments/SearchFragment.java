@@ -68,9 +68,9 @@ public class SearchFragment extends Fragment {
     LinearLayout placehoder_page;
     static LiveSearchAdapter search_adapter;
     public static int match_target = 0;
-    private List<Data> dataList=new ArrayList<>();
+    private static List<Data> dataList=new ArrayList<>();
     private Genre my_genre_list;
-
+    private List<Poster> movieList =  new ArrayList<>();
 
 
 
@@ -168,10 +168,69 @@ public class SearchFragment extends Fragment {
         });
     }
 
+//    private void loadMovies() {
+//
+//        placehoder_page.setVisibility(View.VISIBLE);
+//        Retrofit retrofit = apiClient.getClient();
+//        apiRest service = retrofit.create(apiRest.class);
+//        Call<List<Poster>> call = service.getMoviesByFiltres(genreSelected,orderSelected,page);
+//        call.enqueue(new Callback<List<Poster>>() {
+//            @Override
+//            public void onResponse(Call<List<Poster>> call, final Response<List<Poster>> response) {
+//                if (response.isSuccessful()){
+//                    if (response.body().size()>0){
+//                        for (int i = 0; i < response.body().size(); i++) {
+//                            movieList.add(response.body().get(i));
+//                            response.body().get(i).get
+//                        }
+//
+//
+//                        linear_layout_page_error_movies_fragment.setVisibility(View.GONE);
+//                        recycler_view_movies_fragment.setVisibility(View.VISIBLE);
+//                        image_view_empty_list.setVisibility(View.GONE);
+//
+//                        adapter.notifyDataSetChanged();
+//                        page++;
+//                        loading=true;
+//                    }else{
+//                        if (page==0) {
+//                            linear_layout_page_error_movies_fragment.setVisibility(View.GONE);
+//                            recycler_view_movies_fragment.setVisibility(View.GONE);
+//                            image_view_empty_list.setVisibility(View.VISIBLE);
+//                        }
+//                    }
+//                }else{
+//                    linear_layout_page_error_movies_fragment.setVisibility(View.VISIBLE);
+//                    recycler_view_movies_fragment.setVisibility(View.GONE);
+//                    image_view_empty_list.setVisibility(View.GONE);
+//                }
+//                relative_layout_load_more_movies_fragment.setVisibility(View.GONE);
+//                swipe_refresh_layout_movies_fragment.setRefreshing(false);
+//                linear_layout_load_movies_fragment.setVisibility(View.GONE);
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<Poster>> call, Throwable t) {
+//                linear_layout_page_error_movies_fragment.setVisibility(View.VISIBLE);
+//                recycler_view_movies_fragment.setVisibility(View.GONE);
+//                image_view_empty_list.setVisibility(View.GONE);
+//                relative_layout_load_more_movies_fragment.setVisibility(View.GONE);
+//                swipe_refresh_layout_movies_fragment.setVisibility(View.GONE);
+//                linear_layout_load_movies_fragment.setVisibility(View.GONE);
+//
+//            }
+//        });
+//    }
 
     private static void init_test_data() {
-        all_channel = new ArrayList<>();
-        result_channel = new ArrayList<>();
+//        for( int i = 0; i <dataList.size(); i ++ ){
+//            for (int j = 0; j < dataList.get(i).getChannels().size(); j++){
+//                all_channel.add(dataList.get(i).getChannels().get(j));
+//            }
+//        }
+//        all_channel = new ArrayList<>();
+//        result_channel = new ArrayList<>();
+
 //        all_channel.add(new SearchedChannel("Naruto 290","With the promise of granting any wish the omnipotent holy grail triggered three wars in the past, each too cruel and fierce to leave a victor, in spite of that, the wealthy Einzbern family is confident that the Fourth Holy Gra..",
 //                "www.movie.naruto.com", "Episodes:13", (float)7.93, "https://firebasestorage.googleapis.com/v0/b/lancul-10966.appspot.com/o/Restaurant%2Fdownload%20(2).jpeg?alt=media&token=53a5070a-b09e-44b2-aef2-7d6385a577a8"));
 //        all_channel.add(new SearchedChannel("Dengen ","As the Fourth Holy Grail War rages on with no clear victor in sight, the remaining Servants and their Masters are called upon by Church Supervisor Risei Kotomine in order to band together and confront an im...",

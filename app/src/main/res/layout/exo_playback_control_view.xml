@@ -102,17 +102,18 @@
             android:paddingRight="4dp"
             android:includeFontPadding="false"
             android:textColor="@color/white"/>
+
         <com.google.android.exoplayer2.ui.DefaultTimeBar
-            app:played_color="@color/yellow"
-            app:ad_marker_color="#4fd90f"
-            app:unplayed_color="#fdfdfd"
-            app:buffered_color="@color/yellow"
-            app:played_ad_marker_color="@color/yellow"
-            app:scrubber_color="@color/yellow"
             android:id="@id/exo_progress"
             android:layout_width="0dp"
+            android:layout_height="40dp"
             android:layout_weight="1"
-            android:layout_height="40dp"/>
+            app:ad_marker_color="#4fd90f"
+            app:buffered_color="@color/orange"
+            app:played_ad_marker_color="@color/yellow"
+            app:played_color="@color/yellow"
+            app:scrubber_color="@color/yellow"
+            app:unplayed_color="#fdfdfd" />
 
         <TextView
             android:visibility="gone"

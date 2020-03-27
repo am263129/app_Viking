@@ -978,6 +978,7 @@ public class SerieActivity extends AppCompatActivity implements PlaylistDownload
         image_view_comment_dialog_add_comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /*
                 if (edit_text_comment_dialog_add_comment.getText().length()>0){
                     PrefManager prf= new PrefManager(SerieActivity.this.getApplicationContext());
                     if (prf.getString("LOGGED").toString().equals("TRUE")){
@@ -1057,7 +1058,7 @@ public class SerieActivity extends AppCompatActivity implements PlaylistDownload
                         startActivity(intent);
                         overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
                     }
-                }
+                }*/
             }
         });
         image_view_comment_dialog_close.setOnClickListener(new View.OnClickListener() {

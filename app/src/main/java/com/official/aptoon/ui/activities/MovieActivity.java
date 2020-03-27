@@ -623,7 +623,7 @@ public class MovieActivity extends AppCompatActivity {
         linear_layout_movie_activity_rate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                rateDialog();
+//                rateDialog();
             }
         });
         linear_layout_movie_activity_download.setOnClickListener(v->{
@@ -919,6 +919,7 @@ public class MovieActivity extends AppCompatActivity {
         image_view_comment_dialog_add_comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /*
                 if (edit_text_comment_dialog_add_comment.getText().length()>0){
                     PrefManager prf= new PrefManager(MovieActivity.this.getApplicationContext());
                     if (prf.getString("LOGGED").toString().equals("TRUE")){
@@ -999,7 +1000,7 @@ public class MovieActivity extends AppCompatActivity {
                         startActivity(intent);
                         overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
                     }
-                }
+                }*/
             }
         });
         image_view_comment_dialog_close.setOnClickListener(new View.OnClickListener() {
@@ -1583,30 +1584,41 @@ public class MovieActivity extends AppCompatActivity {
         spin_rating.setAdapter(ratingAdapter);
         Button btn_sumit = add_list_dialog.findViewById(R.id.btn_sumit);
         Button btn_cancel = add_list_dialog.findViewById(R.id.btn_cancel);
+        EditText comment = add_list_dialog.findViewById(R.id.user_comment);
         btn_sumit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch (spin_status.getSelectedItemPosition()){
-                    case 0:
-                        check_and_remove();
-                        addFavotite(list_name_completed);
-                        dialog.dismiss();
-                        break;
-                    case 1:
-                        check_and_remove();
-                        addFavotite(list_name_watching);
-                        dialog.dismiss();
-                        break;
-                    case 2:
-                        check_and_remove();
-                        addFavotite(list_name_plan);
-                        dialog.dismiss();
-                        break;
-                    case 3:
-                        check_and_remove();
-                        addFavotite(list_name_canceled);
-                        dialog.dismiss();
-                        break;
+                String status = "";
+                if(comment.getText().toString().equals("")){
+                    Toasty.error(MovieActivity.this,"Please input some comment",Toast.LENGTH_SHORT,true).show();
+                }
+                else {
+                    switch (spin_status.getSelectedItemPosition()) {
+                        case 0:
+                            check_and_remove();
+                            addFavotite(list_name_completed);
+                            status = "Completed";
+                            break;
+                        case 1:
+                            check_and_remove();
+                            addFavotite(list_name_watching);
+                            status = "Watching";
+
+                            break;
+                        case 2:
+                            check_and_remove();
+                            addFavotite(list_name_plan);
+                            status = "Plan to Watch";
+                            break;
+                        case 3:
+                            check_and_remove();
+                            addFavotite(list_name_canceled);
+                            status = "Dropped";
+                            break;
+                    }
+
+                    post_rate_comment(spin_rating.getSelectedItemPosition(),status, comment.getText().toString());
+                    dialog.dismiss();
                 }
             }
         });
@@ -1618,6 +1630,66 @@ public class MovieActivity extends AppCompatActivity {
         });
 
         dialog.show();
+
+    }
+
+    private void post_rate_comment(Integer rating, String status, String comment) {
+        PrefManager prf= new PrefManager(MovieActivity.this.getApplicationContext());
+        Integer id_user=  Integer.parseInt(prf.getString("ID_USER"));
+        String   key_user=  prf.getString("TOKEN_USER");
+        Retrofit retrofit = apiClient.getClient();
+        apiRest service = retrofit.create(apiRest.class);
+
+        Call<ApiResponse> call = service.addPosterComment(id_user + "",key_user, poster.getId(), comment, rating, status);
+        call.enqueue(new Callback<ApiResponse>() {
+            @Override
+            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+                if (response.isSuccessful()){
+                    if (response.body().getCode()==200){
+
+                        Toasty.success(MovieActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        String id="";
+                        String content="";
+                        String user="";
+                        String image="";
+
+                        for (int i=0;i<response.body().getValues().size();i++){
+                            if (response.body().getValues().get(i).getName().equals("id")){
+                                id=response.body().getValues().get(i).getValue();
+                            }
+                            if (response.body().getValues().get(i).getName().equals("content")){
+                                content=response.body().getValues().get(i).getValue();
+                            }
+                            if (response.body().getValues().get(i).getName().equals("user")){
+                                user=response.body().getValues().get(i).getValue();
+                            }
+                            if (response.body().getValues().get(i).getName().equals("image")){
+                                image=response.body().getValues().get(i).getValue();
+                            }
+                        }
+                        Comment comment= new Comment();
+                        comment.setId(Integer.parseInt(id));
+                        comment.setUser(user);
+                        comment.setContent(content);
+                        comment.setImage(image);
+                        comment.setEnabled(true);
+                        comment.setCreated(getResources().getString(R.string.now_time));
+                        commentList.add(comment);
+                        commentAdapter.notifyDataSetChanged();
+                        //see this.
+
+                    }else{
+                        Toasty.error(MovieActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }commentAdapter.notifyDataSetChanged();
+            }
+            @Override
+            public void onFailure(Call<ApiResponse> call, Throwable t) {
+
+            }
+        });
+
+
 
     }
 

@@ -657,4 +657,11 @@ public class CustomPlayerFragment extends Fragment {
             }
         }
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.d("Tag", "FragmentA.onDestroyView() has been called.");
+    }
+
 }
