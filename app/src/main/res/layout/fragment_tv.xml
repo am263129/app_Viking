@@ -82,111 +82,123 @@
                 android:textColor="@color/white"
                 android:textStyle="bold" />
         </RelativeLayout>
+
         <androidx.cardview.widget.CardView
             android:id="@+id/card_view_channel_fragement_filtres_layout"
-            android:visibility="gone"
-            android:focusable="true"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
             android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="80dp"
             android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_alignParentRight="true"
-            app:cardCornerRadius="25dp"
             android:clickable="true"
-            app:cardBackgroundColor="@color/pruple"
-            android:layout_width="match_parent"
-            android:layout_height="45dp">
+            android:focusable="true"
+            android:visibility="gone"
+            app:cardBackgroundColor="@color/orange"
+            app:cardCornerRadius="25dp">
+
             <RelativeLayout
 
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
                 <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_marginRight="30dp"
                     android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:paddingRight="15dp">
+
                     <RelativeLayout
 
                         android:id="@+id/relative_layout_frament_channel_countries"
-                        android:background="@drawable/border_right_filtres"
-                        android:layout_weight="1"
                         android:layout_width="0dp"
-                        android:layout_height="match_parent">
-                        <ImageView
-                            android:padding="10dp"
-                            android:tint="@color/white"
-                            app:srcCompat="@drawable/ic_public"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp" />
-                        <androidx.appcompat.widget.AppCompatSpinner
-                            style="@style/mySpinnerItemStyle"
-                            android:layout_marginLeft="45dp"
-                            android:background="@android:color/transparent"
-                            android:id="@+id/spinner_fragement_channel_countries_list"
-                            android:spinnerMode="dropdown"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/border_right_filtres">
 
                         <ImageView
-                            android:tint="@color/white"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginRight="5dp"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center"
-                            app:srcCompat="@drawable/ic_arrow_down" />
-                    </RelativeLayout>
-                    <RelativeLayout
-                        android:id="@+id/relative_layout_frament_channel_categories"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent">
-                        <ImageView
-                            android:padding="7dp"
-                            android:tint="@color/white"
-                            app:srcCompat="@drawable/ic_sort"
                             android:layout_width="45dp"
-                            android:layout_height="45dp" />
+                            android:layout_height="45dp"
+                            android:padding="10dp"
+                            android:tint="@color/white"
+                            app:srcCompat="@drawable/ic_public" />
+
                         <androidx.appcompat.widget.AppCompatSpinner
-                            android:id="@+id/spinner_fragement_channel_categories_list"
+                            android:id="@+id/spinner_fragement_channel_countries_list"
+                            style="@style/mySpinnerItemStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:layout_marginLeft="45dp"
                             android:background="@android:color/transparent"
-                            android:spinnerMode="dropdown"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
+                            android:spinnerMode="dropdown" />
+
                         <ImageView
-                            android:tint="@color/white"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
                             android:layout_alignParentEnd="true"
-                            android:layout_marginRight="3dp"
+                            android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
+                            android:layout_marginRight="5dp"
+                            android:tint="@color/white"
+                            app:srcCompat="@drawable/ic_arrow_down" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/relative_layout_frament_channel_categories"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:padding="7dp"
+                            android:tint="@color/white"
+                            app:srcCompat="@drawable/ic_sort" />
+
+                        <androidx.appcompat.widget.AppCompatSpinner
+                            android:id="@+id/spinner_fragement_channel_categories_list"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="45dp"
+                            android:background="@android:color/transparent"
+                            android:spinnerMode="dropdown" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="3dp"
+                            android:tint="@color/white"
                             app:srcCompat="@drawable/ic_arrow_down" />
                     </RelativeLayout>
                 </LinearLayout>
+
                 <RelativeLayout
-                    android:layout_marginRight="5dp"
-                    android:background="@drawable/bg_filtres"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp">
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/bg_filtres">
+
                     <ImageView
-                        android:visibility="visible"
                         android:id="@+id/image_view_channel_fragement_close_filtres"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:focusable="true"
-                        android:clickable="true"
-                        android:tint="@color/white"
-                        app:srcCompat="@drawable/ic_close"
-                        android:padding="7dp"
                         android:layout_width="35dp"
-                        android:layout_height="35dp" />
+                        android:layout_height="35dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:padding="7dp"
+                        android:tint="@color/white"
+                        android:visibility="visible"
+                        app:srcCompat="@drawable/ic_close" />
                 </RelativeLayout>
             </RelativeLayout>
 

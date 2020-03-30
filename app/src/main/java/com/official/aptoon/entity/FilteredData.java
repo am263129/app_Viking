@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchedChannel {
+public class FilteredData {
 
 
 
@@ -20,11 +20,11 @@ public class SearchedChannel {
     public Float rating;
     public String image;
 
-    public SearchedChannel(){
+    public FilteredData(){
 
     }
 
-    public SearchedChannel(String title, String description, String website, String classification, Float rating, String image){
+    public FilteredData(String title, String description, String website, String classification, Float rating, String image){
         this.title  = title;
         this.description = description;
         this.website = website;

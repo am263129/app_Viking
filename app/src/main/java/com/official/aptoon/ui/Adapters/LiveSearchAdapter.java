@@ -1,8 +1,6 @@
 package com.official.aptoon.ui.Adapters;
 
 import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,20 +8,16 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.bumptech.glide.Glide;
-import com.google.android.exoplayer2.C;
 import com.official.aptoon.R;
 import com.official.aptoon.entity.Channel;
-import com.official.aptoon.entity.SearchedChannel;
 import com.official.aptoon.ui.activities.HomeActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LiveSearchAdapter extends RecyclerView.Adapter<LiveSearchAdapter.PlanetHolder> implements Filterable {

@@ -145,8 +145,65 @@ public class OuterLoginActivity extends AppCompatActivity implements View.OnClic
                 if(response.body()!=null){
 
                     if (response.body().getCode()==200){
+                        String id_user="0";
+                        String name_user="x";
+                        String username_user="x";
+                        String salt_user="0";
+                        String token_user="0";
+                        String type_user="x";
+                        String image_user="x";
+                        String enabled="x";
+                        for (int i=0;i<response.body().getValues().size();i++){
+                            if (response.body().getValues().get(i).getName().equals("salt")){
+                                salt_user=response.body().getValues().get(i).getValue();
+                            }
+                            if (response.body().getValues().get(i).getName().equals("token")){
+                                token_user=response.body().getValues().get(i).getValue();
+                            }
+                            if (response.body().getValues().get(i).getName().equals("id")){
+                                id_user=response.body().getValues().get(i).getValue();
+                            }
+                            if (response.body().getValues().get(i).getName().equals("name")){
+                                name_user=response.body().getValues().get(i).getValue();
+                            }
+                            if (response.body().getValues().get(i).getName().equals("type")){
+                                type_user=response.body().getValues().get(i).getValue();
+                            }
+                            if (response.body().getValues().get(i).getName().equals("username")){
+                                username_user=response.body().getValues().get(i).getValue();
+                            }
+                            if (response.body().getValues().get(i).getName().equals("url")){
+                                image_user=response.body().getValues().get(i).getValue();
+                            }
+                            if (response.body().getValues().get(i).getName().equals("enabled")){
+                                enabled=response.body().getValues().get(i).getValue();
+                            }
+                        }if (enabled.equals("true")){
+                            PrefManager prf= new PrefManager(getApplicationContext());
+                            prf.setString("ID_USER",id_user);
+                            prf.setString("SALT_USER",salt_user);
+                            prf.setString("TOKEN_USER",token_user);
+                            prf.setString("NAME_USER",name_user);
+                            prf.setString("TYPE_USER",type_user);
+                            prf.setString("USERN_USER",username_user);
+                            prf.setString("IMAGE_USER",image_user);
+                            Global.user_image = image_user;
+                            prf.setString("LOGGED","TRUE");
+                            String  token = FirebaseInstanceId.getInstance().getToken();
+                            if (name_user.equals("null")){
+                            }else{
+                                updateToken(Integer.parseInt(id_user),token_user,token,name_user);
+                            }
+
+
+                        }else{
+                            Toasty.error(getApplicationContext(),getResources().getString(R.string.account_disabled), Toast.LENGTH_SHORT, true).show();
+                        }
                         register_progress.dismiss();
                         Toasty.success(getApplicationContext(), "You logged in successfully.", Toast.LENGTH_SHORT, true).show();
+                        Intent intent = new Intent(OuterLoginActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                        finish();
                     }
                     if (response.body().getCode()==500){
                         register_progress.dismiss();

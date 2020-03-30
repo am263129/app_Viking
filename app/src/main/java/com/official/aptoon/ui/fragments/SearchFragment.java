@@ -1,46 +1,33 @@
 package com.official.aptoon.ui.fragments;
 
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
 
-import androidx.appcompat.widget.AppCompatSpinner;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
-import com.official.aptoon.Provider.PrefManager;
 import com.official.aptoon.R;
 import com.official.aptoon.api.apiClient;
 import com.official.aptoon.api.apiRest;
-import com.official.aptoon.entity.Category;
 import com.official.aptoon.entity.Channel;
 import com.official.aptoon.entity.Data;
+import com.official.aptoon.entity.FilteredData;
 import com.official.aptoon.entity.Genre;
-import com.official.aptoon.entity.SearchedChannel;
-import com.official.aptoon.entity.Country;
 import com.official.aptoon.entity.Poster;
 import com.official.aptoon.ui.Adapters.LiveSearchAdapter;
 import com.official.aptoon.ui.Adapters.SearchAdapter;
 import com.official.aptoon.ui.activities.HomeActivity;
-import com.official.aptoon.ui.activities.SearchActivity;
 
+import java.nio.channels.Channels;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,8 +35,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-
-import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -62,6 +47,7 @@ public class SearchFragment extends Fragment {
     LinearLayout  error_page, data_page;
     Button retry;
     public static List<Channel> all_channel;
+    public static List<Channel> all_genreData;
     public static List<Channel> result_channel;
 
     public static RecyclerView channel_list;
@@ -71,7 +57,7 @@ public class SearchFragment extends Fragment {
     private static List<Data> dataList=new ArrayList<>();
     private Genre my_genre_list;
     private List<Poster> movieList =  new ArrayList<>();
-
+    ArrayList<FilteredData> total_data =  new ArrayList<>();
 
 
     @Override
@@ -79,7 +65,6 @@ public class SearchFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view =  inflater.inflate(R.layout.fragment_search, container, false);
-        init_test_data();
         init_view(view);
         init_action();
         loadData();
@@ -98,16 +83,13 @@ public class SearchFragment extends Fragment {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 match_target = tab.getPosition();
+                refresh_list();
             }
-
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
             }
-
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
             }
         });
 
@@ -121,6 +103,10 @@ public class SearchFragment extends Fragment {
 //        startActivity(intent);
 
         return view;
+    }
+
+    private void refresh_list() {
+
     }
 
     private void loadData() {
@@ -142,16 +128,15 @@ public class SearchFragment extends Fragment {
 
                     if (response.body().getChannels().size()>0){
                         Data channelData = new Data();
-                        all_channel = response.body().getChannels();
                         channelData.setChannels(response.body().getChannels());
                         dataList.add(channelData);
                     }
 
                     if (response.body().getGenres().size()>0){
-                        if (my_genre_list!=null){
-                            Data genreDataMyList = new Data();
-                            genreDataMyList.setGenre(my_genre_list);
-                            dataList.add(genreDataMyList);
+                        for (int i = 0; i < response.body().getGenres().size(); i++) {
+                            Data genreData = new Data();
+                            genreData.setGenre(response.body().getGenres().get(i));
+                            dataList.add(genreData);
                         }
                     }
                     page_show();
@@ -222,56 +207,11 @@ public class SearchFragment extends Fragment {
 //        });
 //    }
 
-    private static void init_test_data() {
-//        for( int i = 0; i <dataList.size(); i ++ ){
-//            for (int j = 0; j < dataList.get(i).getChannels().size(); j++){
-//                all_channel.add(dataList.get(i).getChannels().get(j));
-//            }
-//        }
-//        all_channel = new ArrayList<>();
-//        result_channel = new ArrayList<>();
 
-//        all_channel.add(new SearchedChannel("Naruto 290","With the promise of granting any wish the omnipotent holy grail triggered three wars in the past, each too cruel and fierce to leave a victor, in spite of that, the wealthy Einzbern family is confident that the Fourth Holy Gra..",
-//                "www.movie.naruto.com", "Episodes:13", (float)7.93, "https://firebasestorage.googleapis.com/v0/b/lancul-10966.appspot.com/o/Restaurant%2Fdownload%20(2).jpeg?alt=media&token=53a5070a-b09e-44b2-aef2-7d6385a577a8"));
-//        all_channel.add(new SearchedChannel("Dengen ","As the Fourth Holy Grail War rages on with no clear victor in sight, the remaining Servants and their Masters are called upon by Church Supervisor Risei Kotomine in order to band together and confront an im...",
-//                "www.movie.naruto.com", "Episodes:13", (float)8.49, "https://firebasestorage.googleapis.com/v0/b/lancul-10966.appspot.com/o/Restaurant%2FSmartSelect_20200229-002050_Samsung%20Internet.jpg?alt=media&token=f5133bed-e9cf-4338-994f-67e99ec61e60"));
-//        all_channel.add(new SearchedChannel("Rikimaru ","Fate/Prototype is digest version of Kingko Nasu's original version of Fate/stay night.",
-//                "www.movie.naruto.com", "Episodes:13", (float)8.39, "https://firebasestorage.googleapis.com/v0/b/lancul-10966.appspot.com/o/Restaurant%2Fimages%20(1).jpeg?alt=media&token=83c56019-fe9d-40f0-8200-4afcc32e9ec6"));
-//        all_channel.add(new SearchedChannel("Rogue Knight 290","With the promise of granting any wish the omnipotent holy grail triggered three wars in the past, each too cruel and fierce to leave a victor, in spite of that, the wealthy Einzbern family is confident that the Fourth Holy Gra..",
-//                "www.movie.naruto.com", "Episodes:13", (float)8.42, "https://firebasestorage.googleapis.com/v0/b/lancul-10966.appspot.com/o/Restaurant%2Fdownload.jpeg?alt=media&token=de325547-77a2-46e5-a3e4-9505ee649ed9"));
-//        all_channel.add(new SearchedChannel("Advantage of Sasske 290","With the promise of granting any wish the omnipotent holy grail triggered three wars in the past, each too cruel and fierce to leave a victor, in spite of that, the wealthy Einzbern family is confident that the Fourth Holy Gra..",
-//                "www.movie.naruto.com", "Episodes:13", (float)8.41, "https://firebasestorage.googleapis.com/v0/b/lancul-10966.appspot.com/o/Restaurant%2Fdownload%20(1).jpeg?alt=media&token=2c4801c8-ac89-491f-acad-6402bd7ddafd"));
-//        all_channel.add(new SearchedChannel("Naruto 391","As the Fourth Holy Grail War rages on with no clear victor in sight, the remaining Servants ed three wars in the past, each too cruel and fierce to leave a victor, in spite of that, the wealthy Einzbern family is confident that the Fourth Holy Gra..",
-//                "www.movie.naruto.com", "Episodes:13", (float)8.67, "https://firebasestorage.googleapis.com/v0/b/lancul-10966.appspot.com/o/Restaurant%2Fdownload%20(3).jpeg?alt=media&token=29eb9584-fb2f-43a3-aa41-a0b09f73304c"));
-//        all_channel.add(new SearchedChannel("Naruto 392(Kakashi vs Orochimaru)","With the promise of granting any wish the omnipotent holy grail triggered three wars in the past, each too cruel and fierce to leave a victor, in spite of that, the wealthy Einzbern family is confident that the Fourth Holy Gra..",
-//                "www.movie.naruto.com", "Episodes:13", (float)8.17, "https://firebasestorage.googleapis.com/v0/b/lancul-10966.appspot.com/o/Restaurant%2Fdownload%20(3).jpeg?alt=media&token=29eb9584-fb2f-43a3-aa41-a0b09f73304c"));
-//        all_channel.add(new SearchedChannel("Sakura VS Hinata","Fate/Prototype is digest version of Kingko Nasu's original version of Fate/stay night.past, each too cruel and fierce to leave a victor, in spite of that, the wealthy Einzbern family is confident that the Fourth Holy Gra..",
-//                "www.movie.naruto.com", "Episodes:13", (float)8.89, "https://firebasestorage.googleapis.com/v0/b/lancul-10966.appspot.com/o/Restaurant%2Fdownload%20(2).jpeg?alt=media&token=53a5070a-b09e-44b2-aef2-7d6385a577a8"));
-//        all_channel.add(new SearchedChannel("Pig Family","With the promise of granting any wish the omnipotent holy grail triggered three wars in the past, each too cruel and fierce to leave a victor, in spite of that, the wealthy Einzbern family is confident that the Fourth Holy Gra..",
-//                "www.movie.naruto.com", "Episodes:13", (float)8.23, "https://firebasestorage.googleapis.com/v0/b/lancul-10966.appspot.com/o/Restaurant%2Fdownload.jpeg?alt=media&token=de325547-77a2-46e5-a3e4-9505ee649ed9"));
-//        all_channel.add(new SearchedChannel("Kid kid kid","With the promise of granting any wish the omnipotent holy grail triggered three wars in the past, each too cruel and fierce to leave a victor, in spite of that, the wealthy Einzbern family is confident that the Fourth Holy Gra..",
-//                "www.movie.naruto.com", "Episodes:13", (float)8.19, "https://firebasestorage.googleapis.com/v0/b/lancul-10966.appspot.com/o/Restaurant%2Fdownload.jpeg?alt=media&token=de325547-77a2-46e5-a3e4-9505ee649ed9"));
-//        all_channel.add(new SearchedChannel("Arana Token","With the promise of granting any wish the omnipotent holy grail triggered three wars in the past, each too cruel and fierce to leave a victor, in spite of that, the wealthy Einzbern family is confident that the Fourth Holy Gra..",
-//                "www.movie.naruto.com", "Episodes:13", (float)8.12, "https://firebasestorage.googleapis.com/v0/b/lancul-10966.appspot.com/o/Restaurant%2Fbackground%20(2).jpg?alt=media&token=c8defdd0-7768-49ee-8e55-fbb059ad1bf0"));
-//        all_channel.add(new SearchedChannel("Dengen Drive Tournament","With the promise of granting any wish the omnipotent holy grail triggered three wars in the past, each too cruel and fierce to leave a victor, in spite of that, the wealthy Einzbern family is confident that the Fourth Holy Gra..",
-//                "www.movie.naruto.com", "Episodes:13", (float)8.43, "https://firebasestorage.googleapis.com/v0/b/lancul-10966.appspot.com/o/Restaurant%2Fimages%20(1).jpeg?alt=media&token=83c56019-fe9d-40f0-8200-4afcc32e9ec6"));
-//        all_channel.add(new SearchedChannel("Arena Event","As the Fourth Holy Grail War rages on with no clear victor in sight, the remaining Servants  in the past, each too cruel and fierce to leave a victor, in spite of that, the wealthy Einzbern family is confident that the Fourth Holy Gra..",
-//                "www.movie.naruto.com", "Episodes:13", (float)8.22, "https://firebasestorage.googleapis.com/v0/b/lancul-10966.appspot.com/o/Restaurant%2Fimages.jpeg?alt=media&token=ef5f1971-0c15-4475-8f63-1dea3b5cb00d"));
-//        all_channel.add(new SearchedChannel("Galex and Athel","As the Fourth Holy Grail War rages on with no clear victor in sight, the remaining Servants s in the past, each too cruel and fierce to leave a victor, in spite of that, the wealthy Einzbern family is confident that the Fourth Holy Gra..",
-//                "www.movie.naruto.com", "Episodes:13", (float)8.54, "https://firebasestorage.googleapis.com/v0/b/lancul-10966.appspot.com/o/Restaurant%2Fdownload%20(2).jpeg?alt=media&token=53a5070a-b09e-44b2-aef2-7d6385a577a8"));
-//        all_channel.add(new SearchedChannel("Charlie","With the promise of granting any wish the omnipotent holy grail triggered three wars in the past, each too cruel and fierce to leave a victor, in spite of that, the wealthy Einzbern family is confident that the Fourth Holy Gra..",
-//                "www.movie.naruto.com", "Episodes:13", (float)8.29, "https://firebasestorage.googleapis.com/v0/b/lancul-10966.appspot.com/o/Restaurant%2Fimages.jpeg?alt=media&token=ef5f1971-0c15-4475-8f63-1dea3b5cb00d"));
-        for (int i = 0; i< all_channel.size(); i++){
-            result_channel.add(i,all_channel.get(i));
-        }
-
-    }
-
-    public static void get_search_result(String index){
+    public void get_search_result(String index){
 //        TabLayout.Tab tab = tabLayout.getTabAt(0);
 //        tab.select();
-
-        init_test_data();
+//        loadData();
         result_channel.clear();
         for (int i = 0;i < all_channel.size(); i++){
             String match = "";
@@ -298,6 +238,37 @@ public class SearchFragment extends Fragment {
             if(match.toLowerCase().contains(index.toLowerCase())){
                 result_channel.add(all_channel.get(i));
             }
+        }
+
+        for(int i = 0; i< dataList.size(); i++){
+            List<Channel> channels = dataList.get(i).getChannels();
+            for (int j = 0; j< channels.size();j++){
+                String image = "";
+                Float rating = 0f;
+                String title = "";
+                String description = "";
+                String website = "";
+                String classification = "";
+                if (channels.get(j).getImage() != null) {
+                    image = channels.get(j).getImage();
+                }
+                if (channels.get(j).getDescription() != null){
+                    description = channels.get(j).getDescription();
+                }
+                if (channels.get(j).getRating() != null){
+                    rating = channels.get(j).getRating();
+                }
+                if (channels.get(j).getWebsite() != null){
+                    website = channels.get(j).getWebsite();
+                }
+                if (channels.get(j).getClassification() !=null){
+                    classification = channels.get(j).getClassification();
+                }
+                FilteredData fdata = new FilteredData(title,description,website,classification,rating, image);
+                total_data.add(fdata);
+            }
+            List<Genre> genres = dataList.get(i).getGenres();
+
         }
         search_adapter = new LiveSearchAdapter(HomeActivity.getInstance(),SearchFragment.result_channel);
         channel_list.setAdapter(search_adapter);

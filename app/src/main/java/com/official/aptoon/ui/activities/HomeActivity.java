@@ -374,7 +374,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {
                 Search_ObjectFragment.channel_list.removeAllViews();
-                SearchFragment.get_search_result(edt_search_index.getText().toString());
+//                SearchFragment.get_search_result(edt_search_index.getText().toString());
             }
         });
 //        image_view_activity_actors_back.setOnClickListener(v->{
@@ -729,6 +729,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
         image_view_profile_nav_header_bg.setVisibility(View.GONE);
         Toasty.info(getApplicationContext(),getString(R.string.message_logout),Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(HomeActivity.this, OuterLoginActivity.class);
+        startActivity(intent);
+        finish();
     }
     class ViewPagerAdapter extends FragmentPagerAdapter {
 

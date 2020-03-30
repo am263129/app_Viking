@@ -79,7 +79,7 @@ public interface apiRest {
 
 
     @GET("user/login/{username}/{password}/"+ Global.SECURE_KEY+"/"+ Global.ITEM_PURCHASE_CODE+"/")
-    Call<ApiResponse> login(@Field("username") String username, @Field("password") String password);
+    Call<ApiResponse> login(@Path("username") String username, @Path("password") String password);
 
 
 

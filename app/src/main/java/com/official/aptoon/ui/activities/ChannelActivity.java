@@ -596,7 +596,7 @@ public class ChannelActivity extends AppCompatActivity {
 //                info_broadcast.setText();
 //                info_producers.setText();
 //                info_licensors.setText();
-                info_studio.setText(channel.getWebsite().toString());
+                info_studio.setText(channel.getComment().toString());
                 info_source.setText(channel.getSources().toString());
                 info_type.setSelected(true);
                 info_episodes.setSelected(true);
