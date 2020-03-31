@@ -116,7 +116,8 @@ public class TvFragment extends Fragment {
 
         initView();
         initActon();
-
+        getCategoriesList();
+        loadChannels();
         return view;
     }
     private void getCountiesList() {

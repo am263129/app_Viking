@@ -14,6 +14,38 @@
         <include layout="@layout/page_error" />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/toolbar_search"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_genre"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:visibility="visible">
+
+        <EditText
+            android:id="@+id/edt_search_index"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="9"
+            android:background="@drawable/bg_genre"
+            android:ems="10"
+            android:hint="Search index"
+            android:inputType="textPersonName"
+            android:padding="4dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white_text"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/btn_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@android:drawable/ic_menu_search" />
+    </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/linear_layout_show_search"
@@ -26,7 +58,7 @@
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginTop="60dp">
+            android:layout_marginTop="50dp">
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabLayout"

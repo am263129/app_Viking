@@ -115,7 +115,8 @@ public class SeriesFragment extends Fragment {
 
         initView();
         initActon();
-
+        getGenreList();
+        loadSeries();
         return view;
     }
 

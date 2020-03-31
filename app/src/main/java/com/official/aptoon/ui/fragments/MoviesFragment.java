@@ -84,6 +84,8 @@ public class MoviesFragment extends Fragment {
     private int type_ads = 0;
     private PrefManager prefManager;
 
+    private String TAG = "MovieFragment";
+
 
     public MoviesFragment() {
         // Required empty public constructor
@@ -113,7 +115,8 @@ public class MoviesFragment extends Fragment {
 
         initView();
         initActon();
-
+        getGenreList();
+        loadMovies();
         return view;
     }
 
@@ -148,6 +151,7 @@ public class MoviesFragment extends Fragment {
             }
             @Override
             public void onFailure(Call<List<Genre>> call, Throwable t) {
+                Log.e(TAG,"Failed to load data");
             }
         });
     }

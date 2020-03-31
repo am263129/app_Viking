@@ -2,13 +2,19 @@ package com.official.aptoon.ui.fragments;
 
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,6 +33,7 @@ import com.official.aptoon.ui.Adapters.LiveSearchAdapter;
 import com.official.aptoon.ui.Adapters.SearchAdapter;
 import com.official.aptoon.ui.activities.HomeActivity;
 
+import java.net.NoRouteToHostException;
 import java.nio.channels.Channels;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,30 +52,25 @@ public class SearchFragment extends Fragment {
     private static TabLayout tabLayout;
     private ViewPager viewPager;
     LinearLayout  error_page, data_page;
-    Button retry;
-    public static List<Channel> all_channel;
-    public static List<Channel> all_genreData;
-    public static List<Channel> result_channel;
-
+    private Button retry;
+    private EditText search_index;
+    private ImageView btn_search;
     public static RecyclerView channel_list;
     LinearLayout placehoder_page;
-    static LiveSearchAdapter search_adapter;
     public static int match_target = 0;
     private static List<Data> dataList=new ArrayList<>();
-    private Genre my_genre_list;
-    private List<Poster> movieList =  new ArrayList<>();
-    ArrayList<FilteredData> total_data =  new ArrayList<>();
+    private List<Poster> search_data_list = new ArrayList<>();
+    LiveSearchAdapter search_adapter;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         view =  inflater.inflate(R.layout.fragment_search, container, false);
         init_view(view);
         init_action();
         loadData();
-//        page_load();
 
         adapter = new SearchAdapter(HomeActivity.getInstance().getSupportFragmentManager());
         adapter.addFragment(new Search_ObjectFragment(), "Anime");
@@ -93,15 +95,6 @@ public class SearchFragment extends Fragment {
             }
         });
 
-
-
-
-
-
-//        Intent intent = new Intent(HomeActivity.getInstance(), SearchActivity.class);
-//        intent.putExtra("query","Eskimo");
-//        startActivity(intent);
-
         return view;
     }
 
@@ -124,7 +117,6 @@ public class SearchFragment extends Fragment {
                 apiClient.FormatData(getActivity(),response);
                 if (response.isSuccessful()){
                     dataList.clear();
-                    dataList.add(new Data().setViewType(0));
 
                     if (response.body().getChannels().size()>0){
                         Data channelData = new Data();
@@ -134,12 +126,18 @@ public class SearchFragment extends Fragment {
 
                     if (response.body().getGenres().size()>0){
                         for (int i = 0; i < response.body().getGenres().size(); i++) {
+                            if(response.body().getGenres().get(i).getId() ==0){
+                                search_data_list = response.body().getGenres().get(i).getPosters();
+                            }
                             Data genreData = new Data();
                             genreData.setGenre(response.body().getGenres().get(i));
                             dataList.add(genreData);
                         }
                     }
+
                     page_show();
+                    search_adapter = new LiveSearchAdapter(HomeActivity.getInstance(),search_data_list);
+                    channel_list.setAdapter(search_adapter);
                     search_adapter.notifyDataSetChanged();
                 }else{
                     page_error();
@@ -153,125 +151,24 @@ public class SearchFragment extends Fragment {
         });
     }
 
-//    private void loadMovies() {
-//
-//        placehoder_page.setVisibility(View.VISIBLE);
-//        Retrofit retrofit = apiClient.getClient();
-//        apiRest service = retrofit.create(apiRest.class);
-//        Call<List<Poster>> call = service.getMoviesByFiltres(genreSelected,orderSelected,page);
-//        call.enqueue(new Callback<List<Poster>>() {
-//            @Override
-//            public void onResponse(Call<List<Poster>> call, final Response<List<Poster>> response) {
-//                if (response.isSuccessful()){
-//                    if (response.body().size()>0){
-//                        for (int i = 0; i < response.body().size(); i++) {
-//                            movieList.add(response.body().get(i));
-//                            response.body().get(i).get
-//                        }
-//
-//
-//                        linear_layout_page_error_movies_fragment.setVisibility(View.GONE);
-//                        recycler_view_movies_fragment.setVisibility(View.VISIBLE);
-//                        image_view_empty_list.setVisibility(View.GONE);
-//
-//                        adapter.notifyDataSetChanged();
-//                        page++;
-//                        loading=true;
-//                    }else{
-//                        if (page==0) {
-//                            linear_layout_page_error_movies_fragment.setVisibility(View.GONE);
-//                            recycler_view_movies_fragment.setVisibility(View.GONE);
-//                            image_view_empty_list.setVisibility(View.VISIBLE);
-//                        }
-//                    }
-//                }else{
-//                    linear_layout_page_error_movies_fragment.setVisibility(View.VISIBLE);
-//                    recycler_view_movies_fragment.setVisibility(View.GONE);
-//                    image_view_empty_list.setVisibility(View.GONE);
-//                }
-//                relative_layout_load_more_movies_fragment.setVisibility(View.GONE);
-//                swipe_refresh_layout_movies_fragment.setRefreshing(false);
-//                linear_layout_load_movies_fragment.setVisibility(View.GONE);
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Poster>> call, Throwable t) {
-//                linear_layout_page_error_movies_fragment.setVisibility(View.VISIBLE);
-//                recycler_view_movies_fragment.setVisibility(View.GONE);
-//                image_view_empty_list.setVisibility(View.GONE);
-//                relative_layout_load_more_movies_fragment.setVisibility(View.GONE);
-//                swipe_refresh_layout_movies_fragment.setVisibility(View.GONE);
-//                linear_layout_load_movies_fragment.setVisibility(View.GONE);
-//
-//            }
-//        });
-//    }
-
-
     public void get_search_result(String index){
-//        TabLayout.Tab tab = tabLayout.getTabAt(0);
-//        tab.select();
-//        loadData();
-        result_channel.clear();
-        for (int i = 0;i < all_channel.size(); i++){
-            String match = "";
-            switch (match_target){
-                case 0:
-                    match = all_channel.get(i).getTitle();
-                    break;
-                case 1:
-                    match = all_channel.get(i).getDescription();
-                    break;
-                case 2:
-                    match = all_channel.get(i).getWebsite();
-                    break;
-                case 3:
-                    match = all_channel.get(i).getClassification();
-                    break;
-                case 4:
-                    match = String.valueOf(all_channel.get(i).getRating());
-                    break;
-                default:
-                    match = all_channel.get(i).getTitle();
-                    break;
-            }
-            if(match.toLowerCase().contains(index.toLowerCase())){
-                result_channel.add(all_channel.get(i));
-            }
+        if(index.equals("")){
+            search_adapter = new LiveSearchAdapter(HomeActivity.getInstance(),search_data_list);
+            channel_list.setAdapter(search_adapter);
+            search_adapter.notifyDataSetChanged();
         }
-
-        for(int i = 0; i< dataList.size(); i++){
-            List<Channel> channels = dataList.get(i).getChannels();
-            for (int j = 0; j< channels.size();j++){
-                String image = "";
-                Float rating = 0f;
-                String title = "";
-                String description = "";
-                String website = "";
-                String classification = "";
-                if (channels.get(j).getImage() != null) {
-                    image = channels.get(j).getImage();
+        else
+        {
+            List<Poster> result_data_list = new ArrayList<>();
+            for (int i = 0; i < search_data_list.size(); i++) {
+                if (search_data_list.get(i).getTitle().toLowerCase().contains(index.toLowerCase())) {
+                    result_data_list.add(search_data_list.get(i));
                 }
-                if (channels.get(j).getDescription() != null){
-                    description = channels.get(j).getDescription();
-                }
-                if (channels.get(j).getRating() != null){
-                    rating = channels.get(j).getRating();
-                }
-                if (channels.get(j).getWebsite() != null){
-                    website = channels.get(j).getWebsite();
-                }
-                if (channels.get(j).getClassification() !=null){
-                    classification = channels.get(j).getClassification();
-                }
-                FilteredData fdata = new FilteredData(title,description,website,classification,rating, image);
-                total_data.add(fdata);
             }
-            List<Genre> genres = dataList.get(i).getGenres();
-
+            search_adapter = new LiveSearchAdapter(HomeActivity.getInstance(),result_data_list);
+            channel_list.setAdapter(search_adapter);
+            search_adapter.notifyDataSetChanged();
         }
-        search_adapter = new LiveSearchAdapter(HomeActivity.getInstance(),SearchFragment.result_channel);
-        channel_list.setAdapter(search_adapter);
 
 
     }
@@ -287,9 +184,31 @@ public class SearchFragment extends Fragment {
         channel_list.setLayoutManager(new LinearLayoutManager(HomeActivity.getInstance()));
         placehoder_page = view.findViewById(R.id.linear_layout_placehoder);
         data_page = view.findViewById(R.id.linear_layout_data_search);
+        search_index = view.findViewById(R.id.edt_search_index);
+        btn_search = view.findViewById(R.id.btn_search);
+        search_index.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-        search_adapter = new LiveSearchAdapter(HomeActivity.getInstance(),SearchFragment.result_channel);
-        channel_list.setAdapter(search_adapter);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                get_search_result(search_index.getText().toString());
+            }
+        });
+        btn_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                get_search_result(search_index.getText().toString());
+            }
+        });
+
     }
     private void init_action() {
 
@@ -305,5 +224,16 @@ public class SearchFragment extends Fragment {
     private void page_show() {
         error_page.setVisibility(View.GONE);
         data_page.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
     }
 }

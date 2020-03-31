@@ -22,11 +22,11 @@ public class Global {
     public static String user_name = "";
     public static String user_image = "";
 
-    public static Integer val_watching = 12;
-    public static Integer val_completed = 78;
-    public static Integer val_on_hold = 22;
-    public static Integer val_dropped = 34;
-    public static Integer val_plan_to_watch = 115;
+    public static Integer val_watching = 10;
+    public static Integer val_completed = 20;
+    public static Integer val_on_hold = 30;
+    public static Integer val_dropped = 30;
+    public static Integer val_plan_to_watch = 10;
     public static Integer val_days = 25;
     public static Integer val_mean_score = 927;
     public static Integer val_total_entries = 152;

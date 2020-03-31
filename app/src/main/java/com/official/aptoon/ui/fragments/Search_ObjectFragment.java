@@ -34,8 +34,8 @@ public class Search_ObjectFragment extends Fragment {
 
         //test
         show_data();
-        adapter = new LiveSearchAdapter(HomeActivity.getInstance(),SearchFragment.result_channel);
-        channel_list.setAdapter(adapter);
+//        adapter = new LiveSearchAdapter(HomeActivity.getInstance(),SearchFragment.result_channel);
+//        channel_list.setAdapter(adapter);
         return view;
 
 
@@ -50,7 +50,7 @@ public class Search_ObjectFragment extends Fragment {
 //        adapter.notifyDataSetChanged();
         adapter.clear();
         channel_list.setAdapter(adapter);
-        adapter = new LiveSearchAdapter(HomeActivity.getInstance(),SearchFragment.result_channel);
-        channel_list.setAdapter(adapter);
+//        adapter = new LiveSearchAdapter(HomeActivity.getInstance(),SearchFragment.result_channel);
+//        channel_list.setAdapter(adapter);
     }
 }

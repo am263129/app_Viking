@@ -132,13 +132,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private boolean FromLogin;
     private RelativeLayout relative_layout_home_activity_search_section, btn_notification;
     private EditText edit_text_home_activity_search, edt_search_index;
-    private ImageView image_view_activity_home_close_search, btn_search;
+    private ImageView image_view_activity_home_close_search;
 //    private ImageView image_view_activity_home_search;
     private ImageView image_view_activity_actors_back;
     private Dialog dialog;
 
     private boolean search_mode = false;
-    private LinearLayout toolbar_normal, toolbar_search;
+    private LinearLayout toolbar_normal;
 
     View popupView;
     PopupWindow popupWindow;
@@ -354,7 +354,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View v) {
 //                bubbleNavigationLinearView.setCurrentActiveItem(4);
 
-                toolbar_search.setVisibility(View.GONE);
                 toolbar_normal.setVisibility(View.VISIBLE);
                 openFragment(new SeriesFragment());
             }
@@ -365,18 +364,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View v) {
 //                bubbleNavigationLinearView.setCurrentActiveItem(5);
 
-                toolbar_search.setVisibility(View.GONE);
                 toolbar_normal.setVisibility(View.VISIBLE);
                 openFragment(new MoviesFragment());
             }
         });
-        btn_search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Search_ObjectFragment.channel_list.removeAllViews();
-//                SearchFragment.get_search_result(edt_search_index.getText().toString());
-            }
-        });
+
 //        image_view_activity_actors_back.setOnClickListener(v->{
 //            relative_layout_home_activity_search_section.setVisibility(View.GONE);
 //            edit_text_home_activity_search.setText("");
@@ -447,9 +439,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         this.Tab_movies = (TextView)findViewById(R.id.tab_movies);
         this.edt_search_index = (EditText)findViewById(R.id.edt_search_index);
         this.toolbar_normal = (LinearLayout)findViewById(R.id.toolbar_normal);
-        this.toolbar_search = (LinearLayout)findViewById(R.id.toolbar_search);
-        btn_search = findViewById(R.id.btn_search);
-//        bubbleNavigationLinearView = findViewById(R.id.top_navigation_constraint);
         viewPager = (ViewPager) findViewById(R.id.vp_horizontal_ntb);
         viewPager.setOffscreenPageLimit(100);
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -595,14 +584,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    toolbar_search.setVisibility(View.GONE);
                     toolbar_normal.setVisibility(View.VISIBLE);
                     switch (item.getItemId()) {
                         case R.id.navigation_home:
                             openFragment(new HomeFragment());
                             return true;
                         case R.id.navigation_search:
-                            toolbar_search.setVisibility(View.VISIBLE);
                             toolbar_normal.setVisibility(View.GONE);
                             openFragment(new SearchFragment());
                             return true;
@@ -1045,16 +1032,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             Picasso.with(getApplicationContext()).load(prf.getString("IMAGE_USER").toString()).into(target);
             image_view_profile_nav_header_bg.setTag(target);
             image_view_profile_nav_header_bg.setVisibility(View.VISIBLE);
-
-        }else{
-//            nav_Menu.findItem(R.id.my_profile).setVisible(false);
-            nav_Menu.findItem(R.id.logout).setVisible(false);
-//            nav_Menu.findItem(R.id.login).setVisible(true);
-            image_view_profile_nav_header_bg.setVisibility(View.GONE);
-
-            text_view_name_nave_header.setText(getResources().getString(R.string.please_login));
-
-            //temp for show
             List<SliceValue> pieData = new ArrayList<>();
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 pieData.add(new SliceValue(Global.val_watching, getColor(R.color.red_bg)));
@@ -1063,11 +1040,23 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 pieData.add(new SliceValue(Global.val_dropped, getColor(R.color.purple_bg)));
                 pieData.add(new SliceValue(Global.val_plan_to_watch, getColor(R.color.yellow_bg)));
             }
+
             PieChartData pieChartData = new PieChartData(pieData);
             pieChartView.setPieChartData(pieChartData);
 
+
+
+
+        }else{
+//            nav_Menu.findItem(R.id.my_profile).setVisible(false);
+            nav_Menu.findItem(R.id.logout).setVisible(false);
+//            nav_Menu.findItem(R.id.login).setVisible(true);
+            image_view_profile_nav_header_bg.setVisibility(View.GONE);
+
+            text_view_name_nave_header.setText(getResources().getString(R.string.please_login));
             Picasso.with(getApplicationContext()).load(R.drawable.placeholder_profile).placeholder(R.drawable.placeholder_profile).error(R.drawable.placeholder_profile).resize(200,200).centerCrop().into(circle_image_view_profile_nav_header);
-        }
+            //temp for show
+           }
         if (FromLogin){
             FromLogin = false;
         }
