@@ -120,8 +120,7 @@
                     android:id="@+id/user_comment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:text="Comment for this movie" />
+                    android:textColor="@color/white" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 

@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.official.aptoon.R;
-import com.official.aptoon.entity.Channel;
 import com.official.aptoon.entity.Poster;
 import com.official.aptoon.ui.activities.HomeActivity;
 
@@ -66,7 +65,7 @@ public class LiveSearchAdapter extends RecyclerView.Adapter<LiveSearchAdapter.Pl
 
     class PlanetHolder extends RecyclerView.ViewHolder {
 
-        private TextView title, description, rating, channel_type, channel_classification;
+        private TextView title, description, rating, channel_type, movie_type;
         private ImageView movie_image;
         View mView;
 
@@ -78,12 +77,21 @@ public class LiveSearchAdapter extends RecyclerView.Adapter<LiveSearchAdapter.Pl
             description = itemView.findViewById(R.id.label_description);
             rating = itemView.findViewById(R.id.label_rating);
             movie_image = itemView.findViewById(R.id.movie_image);
-            channel_classification = itemView.findViewById(R.id.label_classification);
+            movie_type = itemView.findViewById(R.id.poster_type);
 
 
         }
 
         void setDetails(Poster poster) {
+            if(poster.getType().equals("movie")){
+                movie_type.setText("Movie");
+            }
+            else if(poster.getType().equals("serie")){
+                movie_type.setText("Serie");
+            }
+            else{
+                movie_type.setText("TV");
+            }
             try {
                 Glide.with(HomeActivity.getInstance()).load(poster.getImage()).into(movie_image);
                 rating.setText(String.valueOf(poster.getRating()));

@@ -4,7 +4,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_home"
+            android:icon="@drawable/home"
             android:title="Home" />
 <!--        <item-->
 <!--            android:id="@+id/my_profile"-->
@@ -47,7 +47,7 @@
                 android:title="@string/share_this_app" />
             <item
                 android:id="@+id/nav_help"
-                android:icon="@drawable/ic_help"
+                android:icon="@drawable/help"
                 android:title="@string/action_support" />
             <item
                 android:id="@+id/nav_policy"

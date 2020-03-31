@@ -161,8 +161,15 @@ public class SearchFragment extends Fragment {
         {
             List<Poster> result_data_list = new ArrayList<>();
             for (int i = 0; i < search_data_list.size(); i++) {
-                if (search_data_list.get(i).getTitle().toLowerCase().contains(index.toLowerCase())) {
-                    result_data_list.add(search_data_list.get(i));
+                if(search_data_list.get(i).getDescription()!=null) {
+                    if (search_data_list.get(i).getTitle().toLowerCase().contains(index.toLowerCase()) || search_data_list.get(i).getDescription().toLowerCase().contains(index.toLowerCase())) {
+                        result_data_list.add(search_data_list.get(i));
+                    }
+                }
+                else{
+                    if (search_data_list.get(i).getTitle().toLowerCase().contains(index.toLowerCase())) {
+                        result_data_list.add(search_data_list.get(i));
+                    }
                 }
             }
             search_adapter = new LiveSearchAdapter(HomeActivity.getInstance(),result_data_list);

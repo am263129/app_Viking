@@ -51,6 +51,7 @@
         android:id="@+id/linear_layout_show_search"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
         android:orientation="vertical"
         android:visibility="visible">
         <!--        <include layout="@layout/search_bar" />-->
@@ -58,7 +59,7 @@
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginTop="50dp">
+            android:visibility="gone">
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabLayout"
