@@ -106,7 +106,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:text="Pikachu"
-                        android:textColor="@color/black"
+                        android:textColor="@color/orange"
                         android:textSize="10pt"
                         android:textStyle="bold"
                         android:visibility="visible" />

@@ -1,5 +1,9 @@
 package com.official.aptoon.config;
 
+import com.official.aptoon.entity.Notification;
+
+import java.util.ArrayList;
+
 /**
  * Created by Tamim on 28/09/2017.
  */
@@ -18,6 +22,8 @@ public class Global {
     public static final String MERCHANT_KEY = "MERCHANT_KEY" ; // PUT YOUR MERCHANT KEY HERE;
     public static final long   SUBSCRIPTION_DURATION = 30; // PUT SUBSCRIPTION DURATION DAYS HERE;
 
+
+    public static ArrayList<Notification> notifications = new ArrayList<Notification>();
 
     public static String user_name = "";
     public static String user_image = "";

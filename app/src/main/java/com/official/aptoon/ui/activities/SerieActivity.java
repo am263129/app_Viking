@@ -91,6 +91,7 @@ import com.google.android.gms.cast.framework.media.RemoteMediaClient;
 import com.google.android.gms.common.images.WebImage;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.jackandphantom.blurimage.BlurImage;
+import com.official.aptoon.entity.Notification;
 import com.orhanobut.hawk.Hawk;
 import com.official.aptoon.Provider.PrefManager;
 import com.official.aptoon.R;
@@ -144,6 +145,7 @@ public class SerieActivity extends AppCompatActivity implements PlaylistDownload
     private TextView text_view_activity_serie_description;
     private TextView text_view_activity_serie_year;
     private TextView text_view_activity_serie_duration;
+    private TextView text_view_activity_serie_rating;
     private TextView text_view_activity_serie_classification;
     private RatingBar rating_bar_activity_serie_rating;
     private RecyclerView recycle_view_activity_serie_genres;
@@ -574,6 +576,7 @@ public class SerieActivity extends AppCompatActivity implements PlaylistDownload
         text_view_activity_serie_title.setText(poster.getTitle());
         text_view_activity_serie_sub_title.setText(poster.getTitle());
         text_view_activity_serie_description.setText(poster.getDescription());
+        text_view_activity_serie_rating.setText(String.valueOf(poster.getRating()) + "/10");
         if (poster.getYear()!=null){
             if(!poster.getYear().isEmpty()){
                 text_view_activity_serie_year.setVisibility(View.VISIBLE);
@@ -706,7 +709,7 @@ public class SerieActivity extends AppCompatActivity implements PlaylistDownload
         linear_layout_serie_activity_rate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                rateDialog();
+//                rateDialog();
             }
         });
 
@@ -1201,6 +1204,7 @@ public class SerieActivity extends AppCompatActivity implements PlaylistDownload
         this.text_view_activity_serie_sub_title =  (TextView) findViewById(R.id.text_view_activity_serie_sub_title);
         this.text_view_activity_serie_description =  (TextView) findViewById(R.id.text_view_activity_serie_description);
         this.text_view_activity_serie_duration =  (TextView) findViewById(R.id.text_view_activity_serie_duration);
+        this.text_view_activity_serie_rating = (TextView) findViewById(R.id.serie_rating);
         this.text_view_activity_serie_year =  (TextView) findViewById(R.id.text_view_activity_serie_year);
         this.text_view_activity_serie_classification =  (TextView) findViewById(R.id.text_view_activity_serie_classification);
         this.rating_bar_activity_serie_rating =  (RatingBar) findViewById(R.id.rating_bar_activity_serie_rating);
@@ -1649,10 +1653,11 @@ public class SerieActivity extends AppCompatActivity implements PlaylistDownload
             DisplayMetrics displayMetrics = new DisplayMetrics();
             HomeActivity.getInstance().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
             int screen_width = displayMetrics.widthPixels;
-            int width = (int)Math.floor(screen_width/2);
+            int width = (int)Math.floor(screen_width*2/3);
             int height = LinearLayout.LayoutParams.WRAP_CONTENT;
             boolean focusable = true;
             int[] pos = new int[2];
+            linear_layout_activity_show_info.getLocationOnScreen(pos);
             PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
             TextView info_type = popupView.findViewById(R.id.info_type);
             TextView info_episodes = popupView.findViewById(R.id.info_episodes);
@@ -1667,12 +1672,12 @@ public class SerieActivity extends AppCompatActivity implements PlaylistDownload
             ImageView btn_close = popupView.findViewById(R.id.btn_close);
             info_type.setText(poster.getType());
 //            info_episodes.setText();
-//                info_status.setText();
+//            info_status.setText();
             info_aired.setText(poster.getYear().toString());
 //            info_premiered.setText();
-//                info_broadcast.setText();
-//                info_producers.setText();
-//                info_licensors.setText();
+//            info_broadcast.setText();
+//            info_producers.setText();
+//            info_licensors.setText();
 //            info_studio.setText();
             info_source.setText(poster.getSources().toString());
             info_type.setSelected(true);
@@ -1691,6 +1696,7 @@ public class SerieActivity extends AppCompatActivity implements PlaylistDownload
                     popupWindow.dismiss();
                 }
             });
+            popupWindow.showAtLocation(parent_view,0, pos[0],pos[1]+100);
 
     }
 
@@ -1980,7 +1986,7 @@ public class SerieActivity extends AppCompatActivity implements PlaylistDownload
         return false;
     }
     public void DownloadSource(Source  source){
-
+        Global.notifications.add(new Notification("Download " +poster.getTitle() +  " starting","download"));
         switch (source.getType()){
             case "mov": {
                 if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -2030,6 +2036,7 @@ public class SerieActivity extends AppCompatActivity implements PlaylistDownload
                         intent.putExtra("duration","");
 
                     Toasty.info(this,"Download has been started ...",Toast.LENGTH_LONG).show();
+
                     startService(intent);
                     expandPanel(this);
 

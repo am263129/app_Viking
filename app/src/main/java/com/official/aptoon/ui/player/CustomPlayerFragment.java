@@ -3,8 +3,10 @@ package com.official.aptoon.ui.player;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.databinding.DataBindingUtil;
 
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
+import android.media.AudioManager;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -16,11 +18,13 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import top.defaults.colorpicker.ColorPickerPopup;
 
+import android.provider.Settings;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -42,6 +46,7 @@ import com.official.aptoon.event.CastSessionEndedEvent;
 import com.official.aptoon.event.CastSessionStartedEvent;
 
 
+import com.official.aptoon.ui.views.CircularSeekBar;
 import com.squareup.picasso.Picasso;
 
 import org.greenrobot.eventbus.EventBus;
@@ -49,6 +54,8 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.Context.AUDIO_SERVICE;
 
 
 /**
@@ -102,6 +109,12 @@ public class CustomPlayerFragment extends Fragment {
     private ImageView image_view_exo_player_replay_10;
     private ImageView image_view_exo_player_forward_10;
     private ImageView image_view_exo_player_back;
+    private CircularSeekBar volume_controller, brightness_controller;
+
+    private float mCurBrightness = -1;
+    private int mCurVolume = -1;
+    private int mMaxVolume = 0;
+    private AudioManager mAudioManager;
 
     @Override
     public void onResume() {
@@ -180,6 +193,8 @@ public class CustomPlayerFragment extends Fragment {
         text_view_exo_player_loading_subtitles = view.findViewById(R.id.text_view_exo_player_loading_subtitles);
         image_view_exo_player_replay_10 = view.findViewById(R.id.image_view_exo_player_replay_10);
         image_view_exo_player_forward_10 = view.findViewById(R.id.image_view_exo_player_forward_10);
+        volume_controller = view.findViewById(R.id.seek_volume);
+        brightness_controller = view.findViewById(R.id.seek_brightness);
         payer_pause_play = view.findViewById(R.id.payer_pause_play);
         relative_layout_subtitles_dialog = view.findViewById(R.id.relative_layout_subtitles_dialog);
         text_view_exo_player_live = view.findViewById(R.id.text_view_exo_player_live);
@@ -225,6 +240,14 @@ public class CustomPlayerFragment extends Fragment {
         recycler_view_comment_dialog_subtitles.setAdapter(subtitleAdapter);
         linearLayoutManagerSubtitles =  new LinearLayoutManager(getActivity(),RecyclerView.HORIZONTAL,false);
         recycler_view_comment_dialog_subtitles.setLayoutManager(linearLayoutManagerSubtitles);
+
+        mAudioManager = (AudioManager) getContext().getSystemService(AUDIO_SERVICE);
+        mMaxVolume = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+
+        updateVolume(0);
+        updateBrightness(0);
+
+
     }
     private void loadSubtitles() {
         if (videoKind==null)
@@ -430,7 +453,100 @@ public class CustomPlayerFragment extends Fragment {
             else
                 relative_layout_subtitles_dialog.setVisibility(View.VISIBLE);
         });
+
+        this.volume_controller.setOnSeekBarChangeListener(new CircularSeekBar.OnCircularSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(CircularSeekBar circularSeekBar, int progress, boolean fromUser) {
+                Log.e("volume",String.valueOf(progress));
+                updateVolume(progress);
+            }
+
+            @Override
+            public void onStopTrackingTouch(CircularSeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(CircularSeekBar seekBar) {
+
+            }
+        });
+
+        this.brightness_controller.setOnSeekBarChangeListener(new CircularSeekBar.OnCircularSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(CircularSeekBar circularSeekBar, int progress, boolean fromUser) {
+                Log.e("bright",String.valueOf(progress));
+                updateBrightness(progress);
+            }
+
+            @Override
+            public void onStopTrackingTouch(CircularSeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(CircularSeekBar seekBar) {
+
+            }
+        });
     }
+    /**
+     * update volume by seek percent
+     *
+     * @param percent seek percent
+     */
+    private void updateVolume(float percent) {
+
+        if (mCurVolume == -1) {
+            mCurVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+            if (mCurVolume < 0) {
+                mCurVolume = 0;
+            }
+        }
+
+        int volume = (int) (percent/100 * mMaxVolume);
+        if (volume > mMaxVolume) {
+            volume = mMaxVolume;
+        }
+
+        if (volume < 0) {
+            volume = 0;
+        }
+        mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volume, 0);
+
+        int progress = volume * 100 / mMaxVolume;
+        volume_controller.setProgress(progress);
+    }
+
+    /**
+     * update brightness by seek percent
+     *
+     * @param percent seek percent
+     */
+    private void updateBrightness(float percent) {
+
+        if (mCurBrightness == -1) {
+            mCurBrightness  = getActivity().getWindow().getAttributes().screenBrightness;
+            if (mCurBrightness <= 0.01f) {
+                mCurBrightness = 0.01f;
+            }
+        }
+
+        WindowManager.LayoutParams attributes = getActivity().getWindow().getAttributes();
+        attributes.screenBrightness = percent/100;
+        if (attributes.screenBrightness >= 1.0f) {
+            attributes.screenBrightness = 1.0f;
+        } else if (attributes.screenBrightness <= 0.01f) {
+            attributes.screenBrightness = 0.01f;
+        }
+        getActivity().getWindow().setAttributes(attributes);
+
+        float p = attributes.screenBrightness * 100;
+        brightness_controller.setProgress((int) p);
+
+    }
+
+
 
     private void getCurrentSubtitle() {
         if (subtitles.size()>0){

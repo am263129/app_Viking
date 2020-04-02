@@ -118,6 +118,7 @@ public class ChannelActivity extends AppCompatActivity {
     private TextView text_view_activity_channel_sub_title;
     private TextView text_view_activity_channel_description;
     private TextView text_view_activity_channel_classification;
+    private TextView text_view_activity_channel_rating;
     private RatingBar rating_bar_activity_channel_rating;
     private RecyclerView recycle_view_activity_channel_categories;
     private Button floating_action_button_activity_channel_play;
@@ -386,6 +387,7 @@ public class ChannelActivity extends AppCompatActivity {
         this.linear_layout_channel_activity_website =  (LinearLayout) findViewById(R.id.linear_layout_channel_activity_website);
         this.linear_layout_channel_activity_website_clicked =  (LinearLayout) findViewById(R.id.linear_layout_channel_activity_website_clicked);
         this.parent_view = (RelativeLayout)findViewById(R.id.parent_view);
+        this.text_view_activity_channel_rating = (TextView) findViewById(R.id.channel_rating);
 
     }
     private void getChannel() {
@@ -431,6 +433,7 @@ public class ChannelActivity extends AppCompatActivity {
         text_view_activity_channel_classification.setText(channel.getClassification());
         rating_bar_activity_channel_rating.setRating(channel.getRating());
         rating_bar_activity_channel_rating.setVisibility(channel.getRating()==0 ? View.GONE:View.VISIBLE);
+        text_view_activity_channel_rating.setText(String.valueOf(channel.getRating()) + "/10");
 
         if (channel.getCategories()!=null){
             if (channel.getCategories().size()>0){
@@ -501,7 +504,7 @@ public class ChannelActivity extends AppCompatActivity {
         linear_layout_channel_activity_rate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                rateDialog();
+//                rateDialog();
             }
         });
 
@@ -572,10 +575,11 @@ public class ChannelActivity extends AppCompatActivity {
                 DisplayMetrics displayMetrics = new DisplayMetrics();
                 HomeActivity.getInstance().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
                 int screen_width = displayMetrics.widthPixels;
-                int width = (int)Math.floor(screen_width/2);
+                int width = (int)Math.floor(screen_width*2/3);
                 int height = LinearLayout.LayoutParams.WRAP_CONTENT;
                 boolean focusable = true;
                 int[] pos = new int[2];
+                linear_layout_activity_show_info.getLocationOnScreen(pos);
                 PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
                 TextView info_type = popupView.findViewById(R.id.info_type);
                 TextView info_episodes = popupView.findViewById(R.id.info_episodes);
@@ -614,6 +618,7 @@ public class ChannelActivity extends AppCompatActivity {
                         popupWindow.dismiss();
                     }
                 });
+                popupWindow.showAtLocation(parent_view,0, pos[0],pos[1]+100);
     }
 
     public void showCommentsDialog(){

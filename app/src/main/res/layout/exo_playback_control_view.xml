@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app2="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="bottom"
     android:background="@drawable/bg_gradient_exo_player"
     android:layoutDirection="ltr">
@@ -146,73 +146,142 @@
         android:layout_centerVertical="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_centerInParent="true">
+
+            <ImageView
+                android:id="@+id/imageView12"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:layout_toLeftOf="@id/layer_play"
+                app2:srcCompat="@drawable/ico_brightness" />
+
+            <ImageView
+                android:id="@+id/imageView14"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/layer_play"
+                app2:srcCompat="@drawable/ico_volume" />
+
+            <RelativeLayout
+                android:id="@+id/layer_play"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/exo_play"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="0dp"
+                    android:tint="@color/white"
+                    app:srcCompat="@drawable/ic_media_play" />
+
+                <ImageView
+                    android:id="@+id/exo_pause"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="0dp"
+                    android:tint="@color/white"
+                    android:visibility="visible"
+                    app:srcCompat="@drawable/ic_media_pause" />
+            </RelativeLayout>
+
+            <com.official.aptoon.ui.views.CircularSeekBar
+                android:id="@+id/seek_volume"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:padding="0dp"
+                android:scaleY="-1"
+                app2:circle_progress_color="#FFFFFF"
+                app2:end_angle="45"
+                app2:max="100"
+                app2:pointer_alpha_ontouch="100"
+                app2:pointer_color="#FF9800"
+                app2:pointer_halo_color="#880174DF"
+                app2:progress="25"
+                app2:start_angle="-45"
+                app2:circle_color="#9E090808" />
+
+            <com.official.aptoon.ui.views.CircularSeekBar
+                android:id="@+id/seek_brightness"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:padding="0dp"
+                app2:circle_color="#9E090808"
+                app2:circle_progress_color="#FFFFFF"
+                app2:end_angle="225"
+                app2:max="100"
+                app2:pointer_alpha_ontouch="100"
+                app2:pointer_color="#FF9800"
+                app2:pointer_halo_color="#880174DF"
+                app2:progress="25"
+                app2:start_angle="135" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/image_view_exo_player_replay_10"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="15dp"
+                    android:tint="@color/white"
+                    android:visibility="visible"
+                    app:srcCompat="@drawable/ic_replay_10" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/image_view_exo_player_forward_10"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="10dp"
+                    android:tint="@color/white"
+                    android:visibility="visible"
+                    app:srcCompat="@drawable/ic_forward_10" />
+            </RelativeLayout>
+        </RelativeLayout>
+
         <LinearLayout
             android:weightSum="3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <RelativeLayout
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:focusable="true"
-                    android:clickable="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:visibility="visible"
-                    android:padding="15dp"
-                    android:layout_width="80dp"
-                    android:tint="@color/white"
-                    app:srcCompat="@drawable/ic_replay_10"
-                    android:id="@+id/image_view_exo_player_replay_10"
-                    android:layout_height="80dp" />
-            </RelativeLayout>
-            <RelativeLayout
-                android:gravity="center"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:focusable="true"
-                    android:clickable="true"
-                    android:padding="0dp"
-                    android:layout_width="80dp"
-                    android:tint="@color/white"
-                    app:srcCompat="@drawable/ic_media_play"
-                    android:id="@+id/exo_play"
-                    android:layout_height="80dp" />
-                <ImageView
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:focusable="true"
-                    android:clickable="true"
-                    android:visibility="visible"
-                    android:padding="0dp"
-                    android:layout_width="80dp"
-                    android:tint="@color/white"
-                    app:srcCompat="@drawable/ic_media_pause"
-                    android:id="@+id/exo_pause"
-                    android:layout_height="80dp" />
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:focusable="true"
-                    android:clickable="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:visibility="visible"
-                    android:padding="10dp"
-                    android:layout_width="80dp"
-                    android:tint="@color/white"
-                    app:srcCompat="@drawable/ic_forward_10"
-                    android:id="@+id/image_view_exo_player_forward_10"
-                    android:layout_height="80dp" />
-            </RelativeLayout>
+
         </LinearLayout>
     </RelativeLayout>
 </RelativeLayout>

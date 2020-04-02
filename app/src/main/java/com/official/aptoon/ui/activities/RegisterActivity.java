@@ -6,6 +6,7 @@ import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
@@ -69,6 +70,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         edt_lastname = findViewById(R.id.edt_lastname);
         logo = findViewById(R.id.img_logo);
         form = findViewById(R.id.register_form);
+        Typeface font = Typeface.createFromAsset(RegisterActivity.this.getAssets(), "SpartanMB-Regular.otf");
 
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -127,7 +129,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 }
             }
         });
-
+        register.setTypeface(font);
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);

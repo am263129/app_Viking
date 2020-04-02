@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
-        android:background="@drawable/rating_back"
+        android:background="@drawable/selector_btn_login"
         android:orientation="vertical"
         android:padding="10dp"
         android:visibility="visible">
@@ -52,10 +52,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:background="@drawable/btn_transparent_never_pressed"
+                android:background="@drawable/btn_transparent_default"
                 android:clickable="true"
                 android:text="Cancel"
-                android:textColor="@color/mr_cast_meta_default_background"
+                android:textColor="@color/white"
                 android:textStyle="bold" />
 
             <Button
@@ -64,10 +64,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
-                android:background="@drawable/btn_transparent_pressed"
+                android:background="@drawable/btn_transparent_default"
                 android:clickable="true"
                 android:text="Submit"
-                android:textColor="@color/mr_cast_meta_default_background"
+                android:textColor="@color/white"
                 android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
@@ -149,6 +149,7 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_centerHorizontal="true"
+        android:visibility="gone"
         app:srcCompat="@drawable/ico_comment" />
 
 </RelativeLayout>

@@ -139,6 +139,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     private boolean search_mode = false;
     private LinearLayout toolbar_normal;
+    private ListView list_notifications;
 
     View popupView;
     PopupWindow popupWindow;
@@ -536,16 +537,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         TextView alert = popupView.findViewById(R.id.alert_empty);
 
-        ListView list_notifications = popupView.findViewById(R.id.list_notification);
+        list_notifications = popupView.findViewById(R.id.list_notification);
         //only for test
         alert.setVisibility(View.GONE);
-        ArrayList<Notification> notifications = new ArrayList<Notification>();
-        notifications.add(new Notification("You have earned 70 coins","coin"));
-        notifications.add(new Notification("Naruto Uzmaki 160 successfully downloaded","check"));
-        notifications.add(new Notification("Naruto 980 is online","check"));
-        notifications.add(new Notification("You have earned 120 coins","coin"));
-        notifications.add(new Notification("Devil May Cry 5 video downloading","download"));
-        NotificationAdapter adapter = new NotificationAdapter(HomeActivity.this,R.layout.item_notification,notifications);
+
+        NotificationAdapter adapter = new NotificationAdapter(HomeActivity.this,R.layout.item_notification,Global.notifications);
         list_notifications.setAdapter(adapter);
 
         popupWindow = new PopupWindow(popupView, width, height, focusable);
@@ -671,9 +667,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
             sharingIntent.putExtra(Intent.EXTRA_SUBJECT,  getString(R.string.app_name));
             startActivity(Intent.createChooser(sharingIntent, getResources().getString(R.string.app_name)));
-        }else if (id == R.id.nav_rate) {
-            rateDialog(false);
-        }else if (id == R.id.nav_help){
+        }
+//        else if (id == R.id.nav_rate) {
+//            rateDialog(false);
+//        }
+        else if (id == R.id.nav_help){
             Intent intent= new Intent(HomeActivity.this, SupportActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
@@ -682,9 +680,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(getApplicationContext(), PolicyActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.enter, R.anim.exit);
-        }else if (id == R.id.buy_now){
-            showDialog();
         }
+//        else if (id == R.id.buy_now){
+//            showDialog();
+//        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.END);
         return true;

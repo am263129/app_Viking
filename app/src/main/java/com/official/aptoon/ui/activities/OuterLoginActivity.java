@@ -463,7 +463,7 @@ public class OuterLoginActivity extends AppCompatActivity implements View.OnClic
 
                 break;
             case R.id.btn_forget_password:
-                intent =  new Intent(OuterLoginActivity.this, forgotpassActivity.class);
+                intent =  new Intent(OuterLoginActivity.this, ForgotpassActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_sign_up:

@@ -199,6 +199,7 @@
                                     app:srcCompat="@drawable/ic_star_yellow" />
 
                                 <TextView
+                                    android:id="@+id/serie_rating"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="6.8/10"
@@ -604,7 +605,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_marginTop="220dp"
-                android:background="@drawable/cast_expanded_controller_bg_gradient_light" />
+                android:background="@drawable/cast_expanded_controller_bg_gradient_light"
+                android:visibility="gone" />
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"

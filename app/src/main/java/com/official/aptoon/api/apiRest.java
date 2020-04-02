@@ -81,7 +81,14 @@ public interface apiRest {
     @GET("user/login/{username}/{password}/"+ Global.SECURE_KEY+"/"+ Global.ITEM_PURCHASE_CODE+"/")
     Call<ApiResponse> login(@Path("username") String username, @Path("password") String password);
 
+    @GET("resetting/email/{email}/"+ Global.SECURE_KEY+"/"+ Global.ITEM_PURCHASE_CODE+"/")
+    Call<ApiResponse> requestresetpassword(@Path("email") String email);
 
+    @GET("resetting/request/{key}/{email}/"+ Global.SECURE_KEY+"/"+ Global.ITEM_PURCHASE_CODE+"/")
+    Call<ApiResponse> getresetcode(@Path("email") String email, @Path("key") String keycode);
+
+    @GET("resetting/reset/{userid}/"+Global.SECURE_KEY+"/" + "/{newpassword}/"+ Global.SECURE_KEY+"/"+ Global.ITEM_PURCHASE_CODE+"/")
+    Call<ApiResponse> resetpassword(@Path("userid") String id, @Path("newpassword") String newpassword);
 
     @GET("user/broadcast_time_list/"+ Global.SECURE_KEY+"/"+ Global.ITEM_PURCHASE_CODE+"/")
     Call<List<BroadcastTime>> broadcast_time();
