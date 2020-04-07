@@ -11,8 +11,8 @@ import java.util.ArrayList;
 
 
 public class Global {
-//    public static final String API_URL = "http://admin.aptoon.tv/api/";
-    public static final String API_URL = "http://192.168.207.182/api/";
+    public static final String API_URL = "http://admin.aptoon.tv/api/";
+//    public static final String API_URL = "http://192.168.207.182/api/";
     public static final String SECURE_KEY = "4F5A9C3D9A86FA54EACEDDD635185";
     public static final String Youtube_Key = "AIzaSyAephi0fVTEBXgphX7Z_WVSW8iPusDibtg"; // get it from this link  https://console.developers.google.com/apis/credentials
 
@@ -38,8 +38,6 @@ public class Global {
     public static Integer val_total_entries = 152;
     public static Integer val_rewathced = 3;
     public static Integer val_episodes = 1216;
-
-
 
 }
 

@@ -266,7 +266,7 @@ public class OuterLoginActivity extends AppCompatActivity implements View.OnClic
                     }
                 });
                 Bundle parameters = new Bundle();
-                parameters.putString("fields", "id,name,link,email,picture.type(large)");
+                parameters.putString("fields", "id,name,link,edt_email,picture.type(large)");
                 request.setParameters(parameters);
                 request.executeAsync();
             }

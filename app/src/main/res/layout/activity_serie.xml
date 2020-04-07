@@ -551,17 +551,18 @@
                             android:layout_height="wrap_content">
 
                             <TextView
+                                android:id="@+id/label_seasons"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:padding="10dp"
-                                android:text="SEASONS"
+                                android:text="Seasons"
                                 android:textColor="@color/colorAccent"
                                 android:textSize="19dp"
                                 android:textStyle="bold" />
 
                             <RelativeLayout
 
-                                android:layout_width="100dp"
+                                android:layout_width="80dp"
                                 android:layout_height="4dp"
                                 android:layout_marginLeft="5dp"
                                 android:layout_marginTop="40dp"
@@ -598,6 +599,43 @@
                                 android:layout_marginBottom="70dp" />
                         </RelativeLayout>
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linear_layout_activity_comments"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="10dp"
+                                android:text="@string/label_comment"
+                                android:textColor="@color/colorAccent"
+                                android:textSize="19dp"
+                                android:textStyle="bold" />
+
+                            <ProgressBar
+                                android:id="@+id/progress_bar_comment_dialog_comments"
+                                style="?android:attr/progressBarStyleLarge"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_centerInParent="true"
+                                android:layout_marginTop="200dp"
+                                android:indeterminateDrawable="@drawable/progress_comment"
+                                android:progressDrawable="@drawable/progress_comment" />
+
+                        </RelativeLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recycle_view_activity_seire_comments"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
                 </LinearLayout>
             </ScrollView>
 
@@ -631,21 +669,6 @@
                     app:castTitleTextAppearance="@style/MiniControllerTextAppearace"
                     app:layout_insetEdge="bottom" />
             </RelativeLayout>
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/floating_action_button_activity_serie_comment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@id/relative_layout_serie_activity_controller"
-                android:layout_alignParentRight="true"
-                android:layout_margin="15dp"
-                android:elevation="10dp"
-                android:outlineAmbientShadowColor="@color/colorAccent"
-                android:outlineSpotShadowColor="@color/colorAccent"
-                android:tint="@color/white"
-                app:elevation="10dp"
-                app:rippleColor="@color/colorAccent"
-                app:srcCompat="@drawable/ic_comment" />
 
             <RelativeLayout
                 android:id="@+id/relative_layout_subtitles_loading"

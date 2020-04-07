@@ -126,6 +126,13 @@
     <string name="never">NEVER</string>
     <string name="my_list">My List</string>
 
+    <string name="normal_sent_code_again">We have sent again.</string>
+    <string name="error_empty_email">Please input Email Address</string>
+    <string name="error_empty_vcode">Please input Verification Code</string>
+    <string name="error_empty_password">Please input new password</string>
+
+
+    <string name="label_comment">Comment</string>
 
     <string-array name="Rating">
         <item>10: Awesome</item>
@@ -146,4 +153,32 @@
         <item>Plan to Watch</item>
         <item>Canceled</item>
     </string-array>
+
+    <string-array name="menu_items">
+        <item>Home</item>
+        <item>My Profile</item>
+        <item>My List</item>
+        <item>Broadcast Time</item>
+        <item>Soon</item>
+        <item>Report Bug &amp; Help</item>
+        <item>Settings</item>
+        <item>Share</item>
+        <item>Policy privacy</item>
+        <item>Logout</item>
+        <item>Exit</item>
+
+    </string-array>
+    <array name="menu_icons">
+        <item>@drawable/home</item>
+        <item>@drawable/ic_account</item>
+        <item>@drawable/ic_my_list</item>
+        <item>@drawable/live_tv</item>
+        <item>@drawable/soon</item>
+        <item>@drawable/help</item>
+        <item>@drawable/ic_settings</item>
+        <item>@drawable/ic_share</item>
+        <item>@drawable/ic_lock</item>
+        <item>@drawable/ic_logout</item>
+        <item>@drawable/ic_exit</item>
+    </array>
 </resources>

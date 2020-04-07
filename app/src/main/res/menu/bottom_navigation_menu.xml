@@ -11,6 +11,11 @@
       android:title="Search" />
 
   <item
+      android:id="@+id/navigation_soon"
+      android:icon="@drawable/soon"
+      android:title="Soon" />
+
+  <item
       android:id="@+id/navigation_livetv"
       android:icon="@drawable/live_tv"
       android:title="LiveTV" />

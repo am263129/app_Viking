@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
@@ -66,8 +67,10 @@ import com.official.aptoon.api.apiClient;
 import com.official.aptoon.api.apiRest;
 import com.official.aptoon.config.Global;
 import com.official.aptoon.entity.ApiResponse;
+import com.official.aptoon.entity.DrawerItem;
 import com.official.aptoon.entity.Genre;
 import com.official.aptoon.entity.Notification;
+import com.official.aptoon.ui.Adapters.DrawerItemAdapter;
 import com.official.aptoon.ui.Adapters.NotificationAdapter;
 import com.official.aptoon.ui.fragments.DownloadsFragment;
 import com.official.aptoon.ui.fragments.HomeFragment;
@@ -75,6 +78,7 @@ import com.official.aptoon.ui.fragments.MoviesFragment;
 import com.official.aptoon.ui.fragments.SearchFragment;
 import com.official.aptoon.ui.fragments.Search_ObjectFragment;
 import com.official.aptoon.ui.fragments.SeriesFragment;
+import com.official.aptoon.ui.fragments.SoonFragment;
 import com.official.aptoon.ui.fragments.TvFragment;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
@@ -94,6 +98,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import de.hdodenhof.circleimageview.CircleImageView;
 import es.dmoral.toasty.Toasty;
@@ -107,10 +113,10 @@ import retrofit2.Retrofit;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private final List<Fragment> mFragmentList = new ArrayList<>();
-    private ViewPager viewPager;
+    public ViewPager viewPager;
     private ViewPagerAdapter adapter;
     private NavigationView navigationView;
-    private DrawerLayout menu_drawerLayout;
+    public DrawerLayout menu_drawerLayout;
     private TextView text_view_name_nave_header, Tab_Series, Tab_movies;
 
 
@@ -162,6 +168,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private boolean readyToPurchase = false;
     BottomNavigationView bottomNavigation;
     public static HomeActivity self;
+    public RecyclerView nav_menu;
 
     ServiceConnection mServiceConn = new ServiceConnection() {
         @Override
@@ -206,6 +213,18 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         label_total_entries.setText(String.valueOf(Global.val_total_entries));
         label_rewatched.setText(String.valueOf(Global.val_rewathced));
         label_episodes.setText(String.valueOf(Global.val_episodes));
+        nav_menu.setHasFixedSize(true);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        nav_menu.setLayoutManager(llm);
+        String []itemsTitle=getResources().getStringArray(R.array.menu_items);
+        TypedArray icons=getResources().obtainTypedArray(R.array.menu_icons);
+        List<DrawerItem> drawerItems= new ArrayList<DrawerItem>();
+        for(int i=0;i<itemsTitle.length;i++){
+            drawerItems.add(new DrawerItem(icons.getResourceId(i,-1),itemsTitle[i]));
+        }
+        DrawerItemAdapter ad= new DrawerItemAdapter(drawerItems,this);
+        nav_menu.setAdapter(ad);
     }
 
 
@@ -420,7 +439,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         this.navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         this.menu_drawerLayout = findViewById(R.id.drawer_layout);
-        View headerview = navigationView.getHeaderView(0);
+        View headerview = findViewById(R.id.nav_header);
         this.text_view_name_nave_header=(TextView) headerview.findViewById(R.id.text_view_name_nave_header);
         this.pieChartView = headerview.findViewById(R.id.chart);
         label_watching = headerview.findViewById(R.id.label_watching);
@@ -445,6 +464,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new HomeFragment());
         adapter.addFragment(new SearchFragment());
+        adapter.addFragment(new SoonFragment());
         adapter.addFragment(new TvFragment());
         adapter.addFragment(new DownloadsFragment());
         adapter.addFragment(new MoviesFragment());
@@ -466,51 +486,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 menu_drawerLayout.openDrawer(Gravity.RIGHT);
             }
         });
-
-
-//        viewPager.setAdapter(adapter);
-//        viewPager.setCurrentItem(0);
-//
-//
-//        viewPager.setAdapter(adapter);
-//        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-//            @Override
-//            public void onPageScrolled(int i, float v, int i1) {
-//            }
-//
-//            @Override
-//            public void onPageSelected(int i) {
-//
-//                if(i ==1){
-//                    edt_search_index.setVisibility(View.VISIBLE);
-//                    toolbar_normal.setVisibility(View.GONE);
-//                }
-//                else{
-//                    edt_search_index.setVisibility(View.GONE);
-//                    toolbar_normal.setVisibility(View.VISIBLE);
-//                }
-////                bubbleNavigationLinearView.setCurrentActiveItem(i);
-//
-//
-//            }
-//
-//            @Override
-//            public void onPageScrollStateChanged(int i) {
-//
-//            }
-//        });
-//        bubbleNavigationLinearView.setNavigationChangeListener(new BubbleNavigationChangeListener() {
-//            @Override
-//            public void onNavigationChanged(View view, int position) {
-//                viewPager.setCurrentItem(position, true);
-//            }
-//        });
-
-//        this.relative_layout_home_activity_search_section =  (RelativeLayout) findViewById(R.id.relative_layout_home_activity_search_section);
-//        this.edit_text_home_activity_search =  (EditText) findViewById(R.id.edit_text_home_activity_search);
-//        this.image_view_activity_home_close_search =  (ImageView) findViewById(R.id.image_view_activity_home_close_search);
-//        this.image_view_activity_actors_back =  (ImageView) findViewById(R.id.image_view_activity_actors_back);
-//        this.image_view_activity_home_search =  (ImageView) findViewById(R.id.image_view_activity_home_search);
+        nav_menu = findViewById(R.id.drawer_slidermenu);
         self = this;
     }
 
@@ -589,6 +565,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                             toolbar_normal.setVisibility(View.GONE);
                             openFragment(new SearchFragment());
                             return true;
+                        case R.id.navigation_soon:
+                            openFragment(new SoonFragment());
+                            return true;
                         case R.id.navigation_livetv:
                             openFragment(new TvFragment());
                             return true;
@@ -633,24 +612,24 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             startActivity(intent);
             overridePendingTransition(R.anim.enter, R.anim.exit);
         }
-//        else if (id==R.id.my_profile){
-//            PrefManager prf= new PrefManager(getApplicationContext());
-//            if (prf.getString("LOGGED").toString().equals("TRUE")){
-//                Intent intent  =  new Intent(getApplicationContext(), EditActivity.class);
-//                intent.putExtra("id", Integer.parseInt(prf.getString("ID_USER")));
-//                intent.putExtra("image",prf.getString("IMAGE_USER").toString());
-//                intent.putExtra("name",prf.getString("NAME_USER").toString());
-//                startActivity(intent);
-//                overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
-//
-//            }else{
-//                Intent intent= new Intent(HomeActivity.this, LoginActivity.class);
-//                startActivity(intent);
-//                overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
-//
-//                FromLogin=true;
-//            }
-//        }
+        else if (id==R.id.my_profile){
+            PrefManager prf= new PrefManager(getApplicationContext());
+            if (prf.getString("LOGGED").toString().equals("TRUE")){
+                Intent intent  =  new Intent(getApplicationContext(), EditActivity.class);
+                intent.putExtra("id", Integer.parseInt(prf.getString("ID_USER")));
+                intent.putExtra("image",prf.getString("IMAGE_USER").toString());
+                intent.putExtra("name",prf.getString("NAME_USER").toString());
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
+
+            }else{
+                Intent intent= new Intent(HomeActivity.this, LoginActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
+
+                FromLogin=true;
+            }
+        }
         else if (id==R.id.logout){
             logout();
         }
@@ -684,8 +663,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 //        else if (id == R.id.buy_now){
 //            showDialog();
 //        }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.END);
+        menu_drawerLayout.closeDrawer(GravityCompat.END);
         return true;
     }
 
@@ -706,9 +684,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }else {
             }
         }else{
-            Menu nav_Menu = navigationView.getMenu();
+//            Menu nav_Menu = navigationView.getMenu();
 //            nav_Menu.findItem(R.id.my_profile).setVisible(false);
-            nav_Menu.findItem(R.id.logout).setVisible(false);
+//            nav_Menu.findItem(R.id.logout).setVisible(false);
 //            nav_Menu.findItem(R.id.login).setVisible(true);
             text_view_name_nave_header.setText(getResources().getString(R.string.please_login));
             Picasso.with(getApplicationContext()).load(R.drawable.placeholder_profile).placeholder(R.drawable.placeholder_profile).error(R.drawable.placeholder_profile).resize(200,200).centerCrop().into(circle_image_view_profile_nav_header);
@@ -1010,8 +988,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         if (prf.getString("LOGGED").toString().equals("TRUE")){
 //            nav_Menu.findItem(R.id.my_profile).setVisible(true);
-
-            nav_Menu.findItem(R.id.logout).setVisible(true);
+//            nav_Menu.findItem(R.id.logout).setVisible(true);
 //            nav_Menu.findItem(R.id.login).setVisible(false);
             text_view_name_nave_header.setText(prf.getString("NAME_USER").toString());
             Picasso.with(getApplicationContext()).load(prf.getString("IMAGE_USER").toString()).placeholder(R.drawable.placeholder_profile).error(R.drawable.placeholder_profile).resize(200,200).centerCrop().into(circle_image_view_profile_nav_header);

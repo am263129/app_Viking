@@ -31,6 +31,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.MediaFormat;
@@ -39,7 +40,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
-import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -54,7 +54,6 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -121,7 +120,6 @@ import com.squareup.picasso.Picasso;
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -147,8 +145,10 @@ public class SerieActivity extends AppCompatActivity implements PlaylistDownload
     private TextView text_view_activity_serie_duration;
     private TextView text_view_activity_serie_rating;
     private TextView text_view_activity_serie_classification;
+    private TextView label_season;
     private RatingBar rating_bar_activity_serie_rating;
-    private RecyclerView recycle_view_activity_serie_genres;
+    private RecyclerView recycle_view_activity_serie_genres, recycle_view_activity_seire_comments;
+    private ProgressBar progress_bar_comment_dialog_comments;
     private Button floating_action_button_activity_serie_play;
     private FloatingActionButton floating_action_button_activity_serie_comment;
 
@@ -156,7 +156,7 @@ public class SerieActivity extends AppCompatActivity implements PlaylistDownload
     private RecyclerView recycle_view_activity_activity_serie_cast;
     private LinearLayoutManager linearLayoutManagerCast;
     private LinearLayout linear_layout_serie_activity_trailer;
-    private LinearLayout linear_layout_serie_activity_rate;
+    private LinearLayout linear_layout_serie_activity_rate,linear_layout_activity_comments;
     // lists
     private ArrayList<Comment> commentList= new ArrayList<>();
     private ArrayList<Subtitle> subtitlesForCast = new ArrayList<>();
@@ -303,6 +303,7 @@ public class SerieActivity extends AppCompatActivity implements PlaylistDownload
         setSerie();
         getPosterCastings();
         getSeasons();
+        show_comments();
         checkFavorite();
         showAdsBanner();
 
@@ -624,9 +625,9 @@ public class SerieActivity extends AppCompatActivity implements PlaylistDownload
             linear_layout_serie_activity_trailer.setVisibility(View.VISIBLE);
         }
         if (poster.getComment()){
-            floating_action_button_activity_serie_comment.setVisibility(View.VISIBLE);
+            linear_layout_activity_comments.setVisibility(View.VISIBLE);
         }else{
-            floating_action_button_activity_serie_comment.setVisibility(View.GONE);
+            linear_layout_activity_comments.setVisibility(View.GONE);
         }
     }
 
@@ -713,12 +714,6 @@ public class SerieActivity extends AppCompatActivity implements PlaylistDownload
             }
         });
 
-        floating_action_button_activity_serie_comment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showCommentsDialog();
-            }
-        });
 
 
     }
@@ -907,36 +902,17 @@ public class SerieActivity extends AppCompatActivity implements PlaylistDownload
         rateDialog.show();
 
     }
-    public void showCommentsDialog(){
 
-        Dialog dialog= new Dialog(this,
-                R.style.Theme_Dialog);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(true);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        Window window = dialog.getWindow();
-        WindowManager.LayoutParams wlp = window.getAttributes();
-        getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
-        wlp.gravity = Gravity.BOTTOM;
-        window.setAttributes(wlp);
-        dialog.setContentView(R.layout.dialog_comment);
-        TextView text_view_comment_dialog_count=dialog.findViewById(R.id.text_view_comment_dialog_count);
-        ImageView image_view_comment_dialog_close=dialog.findViewById(R.id.image_view_comment_dialog_close);
-        ImageView image_view_comment_dialog_empty=dialog.findViewById(R.id.image_view_comment_dialog_empty);
-        ImageView image_view_comment_dialog_add_comment=dialog.findViewById(R.id.image_view_comment_dialog_add_comment);
-        ProgressBar progress_bar_comment_dialog_comments=dialog.findViewById(R.id.progress_bar_comment_dialog_comments);
-        ProgressBar progress_bar_comment_dialog_add_comment=dialog.findViewById(R.id.progress_bar_comment_dialog_add_comment);
-        EditText edit_text_comment_dialog_add_comment=dialog.findViewById(R.id.edit_text_comment_dialog_add_comment);
-        RecyclerView recycler_view_comment_dialog_comments=dialog.findViewById(R.id.recycler_view_comment_dialog_comments);
+    
+    public void show_comments(){
 
-        image_view_comment_dialog_empty.setVisibility(View.GONE);
-        recycler_view_comment_dialog_comments.setVisibility(View.GONE);
+        recycle_view_activity_seire_comments.setVisibility(View.GONE);
         progress_bar_comment_dialog_comments.setVisibility(View.VISIBLE);
         commentAdapter = new CommentAdapter(commentList, SerieActivity.this);
         linearLayoutManagerComments = new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false);
-        recycler_view_comment_dialog_comments.setHasFixedSize(true);
-        recycler_view_comment_dialog_comments.setAdapter(commentAdapter);
-        recycler_view_comment_dialog_comments.setLayoutManager(linearLayoutManagerComments);
+        recycle_view_activity_seire_comments.setHasFixedSize(true);
+        recycle_view_activity_seire_comments.setAdapter(commentAdapter);
+        recycle_view_activity_seire_comments.setLayoutManager(linearLayoutManagerComments);
 
         Retrofit retrofit = apiClient.getClient();
         apiRest service = retrofit.create(apiRest.class);
@@ -951,126 +927,26 @@ public class SerieActivity extends AppCompatActivity implements PlaylistDownload
                             commentList.add(response.body().get(i));
 
                         commentAdapter.notifyDataSetChanged();
-
-                        text_view_comment_dialog_count.setText(commentList.size()+" Comments");
-                        image_view_comment_dialog_empty.setVisibility(View.GONE);
-                        recycler_view_comment_dialog_comments.setVisibility(View.VISIBLE);
+                        recycle_view_activity_seire_comments.setVisibility(View.VISIBLE);
                         progress_bar_comment_dialog_comments.setVisibility(View.GONE);
-                        recycler_view_comment_dialog_comments.scrollToPosition(recycler_view_comment_dialog_comments.getAdapter().getItemCount()-1);
-                        recycler_view_comment_dialog_comments.scrollToPosition(recycler_view_comment_dialog_comments.getAdapter().getItemCount()-1);
+                        recycle_view_activity_seire_comments.scrollToPosition(recycle_view_activity_seire_comments.getAdapter().getItemCount()-1);
+                        recycle_view_activity_seire_comments.scrollToPosition(recycle_view_activity_seire_comments.getAdapter().getItemCount()-1);
                     }else{
-                        image_view_comment_dialog_empty.setVisibility(View.VISIBLE);
-                        recycler_view_comment_dialog_comments.setVisibility(View.GONE);
+                        recycle_view_activity_seire_comments.setVisibility(View.GONE);
                         progress_bar_comment_dialog_comments.setVisibility(View.GONE);
                     }
                 }else{
-                    image_view_comment_dialog_empty.setVisibility(View.VISIBLE);
-                    recycler_view_comment_dialog_comments.setVisibility(View.GONE);
+                    recycle_view_activity_seire_comments.setVisibility(View.GONE);
                     progress_bar_comment_dialog_comments.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onFailure(Call<List<Comment>> call, Throwable t) {
-                image_view_comment_dialog_empty.setVisibility(View.VISIBLE);
-                recycler_view_comment_dialog_comments.setVisibility(View.GONE);
+                recycle_view_activity_seire_comments.setVisibility(View.GONE);
                 progress_bar_comment_dialog_comments.setVisibility(View.GONE);
             }
         });
-
-        image_view_comment_dialog_add_comment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /*
-                if (edit_text_comment_dialog_add_comment.getText().length()>0){
-                    PrefManager prf= new PrefManager(SerieActivity.this.getApplicationContext());
-                    if (prf.getString("LOGGED").toString().equals("TRUE")){
-                        Integer id_user=  Integer.parseInt(prf.getString("ID_USER"));
-                        String   key_user=  prf.getString("TOKEN_USER");
-                        byte[] data = new byte[0];
-                        String comment_final ="";
-                        try {
-                            data = edit_text_comment_dialog_add_comment.getText().toString().getBytes("UTF-8");
-                            comment_final = Base64.encodeToString(data, Base64.DEFAULT);
-                        } catch (UnsupportedEncodingException e) {
-                            comment_final = edit_text_comment_dialog_add_comment.getText().toString();
-                            e.printStackTrace();
-                        }
-                        progress_bar_comment_dialog_add_comment.setVisibility(View.VISIBLE);
-                        image_view_comment_dialog_add_comment.setVisibility(View.GONE);
-                        Retrofit retrofit = apiClient.getClient();
-                        apiRest service = retrofit.create(apiRest.class);
-                        Call<ApiResponse> call = service.addPosterComment(id_user+"",key_user,poster.getId(),comment_final);
-                        call.enqueue(new Callback<ApiResponse>() {
-                            @Override
-                            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
-                                if (response.isSuccessful()){
-                                    if (response.body().getCode()==200){
-                                        recycler_view_comment_dialog_comments.setVisibility(View.VISIBLE);
-                                        image_view_comment_dialog_empty.setVisibility(View.GONE);
-                                        Toasty.success(SerieActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                                        edit_text_comment_dialog_add_comment.setText("");
-                                        String id="";
-                                        String content="";
-                                        String user="";
-                                        String image="";
-
-                                        for (int i=0;i<response.body().getValues().size();i++){
-                                            if (response.body().getValues().get(i).getName().equals("id")){
-                                                id=response.body().getValues().get(i).getValue();
-                                            }
-                                            if (response.body().getValues().get(i).getName().equals("content")){
-                                                content=response.body().getValues().get(i).getValue();
-                                            }
-                                            if (response.body().getValues().get(i).getName().equals("user")){
-                                                user=response.body().getValues().get(i).getValue();
-                                            }
-                                            if (response.body().getValues().get(i).getName().equals("image")){
-                                                image=response.body().getValues().get(i).getValue();
-                                            }
-                                        }
-                                        Comment comment= new Comment();
-                                        comment.setId(Integer.parseInt(id));
-                                        comment.setUser(user);
-                                        comment.setContent(content);
-                                        comment.setImage(image);
-                                        comment.setEnabled(true);
-                                        comment.setCreated(getResources().getString(R.string.now_time));
-                                        commentList.add(comment);
-                                        commentAdapter.notifyDataSetChanged();
-                                        text_view_comment_dialog_count.setText(commentList.size()+" Comments");
-
-                                    }else{
-                                        Toasty.error(SerieActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                                recycler_view_comment_dialog_comments.scrollToPosition(recycler_view_comment_dialog_comments.getAdapter().getItemCount()-1);
-                                recycler_view_comment_dialog_comments.scrollToPosition(recycler_view_comment_dialog_comments.getAdapter().getItemCount()-1);
-                                commentAdapter.notifyDataSetChanged();
-                                progress_bar_comment_dialog_add_comment.setVisibility(View.GONE);
-                                image_view_comment_dialog_add_comment.setVisibility(View.VISIBLE);
-                            }
-                            @Override
-                            public void onFailure(Call<ApiResponse> call, Throwable t) {
-                                progress_bar_comment_dialog_add_comment.setVisibility(View.GONE);
-                                image_view_comment_dialog_add_comment.setVisibility(View.VISIBLE);
-                            }
-                        });
-                    }else{
-                        Intent intent = new Intent(SerieActivity.this,LoginActivity.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
-                    }
-                }*/
-            }
-        });
-        image_view_comment_dialog_close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
     }
 
     public void showSourcesDownloadDialog(){
@@ -1195,7 +1071,6 @@ public class SerieActivity extends AppCompatActivity implements PlaylistDownload
         this.text_view_activity_serie_imdb_rating =  (TextView) findViewById(R.id.text_view_activity_serie_imdb_rating);
         this.spinner_activity_serie_season_list =  (AppCompatSpinner) findViewById(R.id.spinner_activity_serie_season_list);
         this.linear_layout_serie_activity_share =  (LinearLayout) findViewById(R.id.linear_layout_serie_activity_share);
-        this.floating_action_button_activity_serie_comment =  (FloatingActionButton) findViewById(R.id.floating_action_button_activity_serie_comment);
         this.relative_layout_subtitles_loading =  (RelativeLayout) findViewById(R.id.relative_layout_subtitles_loading);
         this.floating_action_button_activity_serie_play =  (Button) findViewById(R.id.floating_action_button_activity_serie_play);
         this.image_view_activity_serie_background =  (ImageView) findViewById(R.id.image_view_activity_serie_background);
@@ -1207,19 +1082,24 @@ public class SerieActivity extends AppCompatActivity implements PlaylistDownload
         this.text_view_activity_serie_rating = (TextView) findViewById(R.id.serie_rating);
         this.text_view_activity_serie_year =  (TextView) findViewById(R.id.text_view_activity_serie_year);
         this.text_view_activity_serie_classification =  (TextView) findViewById(R.id.text_view_activity_serie_classification);
+        this.label_season = (TextView) findViewById(R.id.label_seasons);
         this.rating_bar_activity_serie_rating =  (RatingBar) findViewById(R.id.rating_bar_activity_serie_rating);
         this.recycle_view_activity_serie_genres =  (RecyclerView) findViewById(R.id.recycle_view_activity_serie_genres);
+        this.recycle_view_activity_seire_comments = (RecyclerView) findViewById(R.id.recycle_view_activity_seire_comments);
+        this.progress_bar_comment_dialog_comments = (ProgressBar) findViewById(R.id.progress_bar_comment_dialog_comments);
         this.recycle_view_activity_activity_serie_cast =  (RecyclerView) findViewById(R.id.recycle_view_activity_activity_serie_cast);
         this.recycle_view_activity_activity_serie_episodes =  (RecyclerView) findViewById(R.id.recycle_view_activity_activity_serie_episodes);
         this.linear_layout_activity_serie_cast =  (LinearLayout) findViewById(R.id.linear_layout_activity_serie_cast);
         this.linear_layout_serie_activity_trailer =  (LinearLayout) findViewById(R.id.linear_layout_serie_activity_trailer);
         this.linear_layout_serie_activity_trailer_clicked =  (LinearLayout) findViewById(R.id.linear_layout_serie_activity_trailer_clicked);
         this.linear_layout_serie_activity_rate =  (LinearLayout) findViewById(R.id.linear_layout_serie_activity_rate);
+        this.linear_layout_activity_comments = (LinearLayout) findViewById(R.id.linear_layout_activity_comments);
         this.linear_layout_activity_serie_seasons =  (LinearLayout) findViewById(R.id.linear_layout_activity_serie_seasons);
         this.linear_layout_activity_serie_my_list =  (LinearLayout) findViewById(R.id.linear_layout_activity_serie_my_list);
         this.linear_layout_activity_show_info = (LinearLayout) findViewById(R.id.linear_layout_activity_show_info);
         this.image_view_activity_serie_my_list =  (ImageView) findViewById(R.id.image_view_activity_serie_my_list);
         this.parent_view = findViewById(R.id.parent_view);
+
     }
     private void loadRemoteMedia(int position, boolean autoPlay) {
         final RemoteMediaClient remoteMediaClient = mCastSession.getRemoteMediaClient();
@@ -1277,6 +1157,7 @@ public class SerieActivity extends AppCompatActivity implements PlaylistDownload
     @Override
     protected void onResume() {
         super.onResume();
+        show_comments();
         mCastSession = mSessionManager.getCurrentCastSession();
         mSessionManager.addSessionManagerListener(mSessionManagerListener);
     }

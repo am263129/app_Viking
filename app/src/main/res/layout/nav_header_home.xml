@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_header"
     android:layout_width="match_parent"
     android:layout_height="242dp"
     android:layout_margin="0dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
     <ImageView
         android:id="@+id/image_view_profile_nav_header_bg"
-        android:scaleType="centerCrop"
-        android:adjustViewBounds="true"
-        android:src="@drawable/placeholder_profile"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/placeholder_profile" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -78,7 +80,7 @@
                         android:layout_width="140dp"
                         android:layout_height="140dp"
                         android:layout_marginLeft="20dp"
-                        android:layout_marginTop="10dp"/>
+                        android:layout_marginTop="10dp" />
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/circle_image_view_profile_nav_header"

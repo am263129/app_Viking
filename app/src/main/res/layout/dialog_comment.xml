@@ -74,8 +74,7 @@
                         android:adjustViewBounds="true"
                         android:clickable="true"
                         android:padding="40dp"
-                        android:visibility="gone"
-                        app:srcCompat="@drawable/ico_comment" />
+                        android:visibility="gone" />
 
                     <ProgressBar
                         android:id="@+id/progress_bar_comment_dialog_comments"

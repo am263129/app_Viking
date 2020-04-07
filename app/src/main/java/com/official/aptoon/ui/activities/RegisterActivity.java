@@ -48,7 +48,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private DatePicker datePicker;
     private Calendar calendar;
-    private TextView dateView;
+    private TextView dateView,policy;
     private int year, month, day, birth_year, birth_month, birth_day;
     private DatePickerDialog picker;
 
@@ -60,6 +60,21 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        init_view();
+        init_actions();
+
+
+
+
+
+
+
+
+
+
+    }
+
+    private void init_view() {
         edt_email = findViewById(R.id.edt_email);
         edt_password = findViewById(R.id.register_password);
         edt_confirm_password = findViewById(R.id.confirm_password);
@@ -68,11 +83,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         edt_username = findViewById(R.id.edt_username);
         edt_firstname = findViewById(R.id.edt_firstname);
         edt_lastname = findViewById(R.id.edt_lastname);
+        policy=  findViewById(R.id.term_link);
         logo = findViewById(R.id.img_logo);
         form = findViewById(R.id.register_form);
         Typeface font = Typeface.createFromAsset(RegisterActivity.this.getAssets(), "SpartanMB-Regular.otf");
-
-
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
@@ -91,13 +105,26 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             params = (LinearLayout.LayoutParams)form.getLayoutParams();
             params.height = screen_height*3/5;
         }
-
-
         form.setLayoutParams(params);
 
         show_pass.setOnClickListener(this);
         edt_birthday.setOnClickListener(this);
         register = (Button)findViewById(R.id.btn_register);
+        register.setTypeface(font);
+        calendar = Calendar.getInstance();
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH);
+        day = calendar.get(Calendar.DAY_OF_MONTH);
+    }
+    private void init_actions(){
+        policy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), PolicyActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.enter, R.anim.exit);
+            }
+        });
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,14 +156,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 }
             }
         });
-        register.setTypeface(font);
-        calendar = Calendar.getInstance();
-        year = calendar.get(Calendar.YEAR);
-        month = calendar.get(Calendar.MONTH);
-        day = calendar.get(Calendar.DAY_OF_MONTH);
 
 
     }
+
     public boolean isValidEmail(CharSequence target) {
         return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
