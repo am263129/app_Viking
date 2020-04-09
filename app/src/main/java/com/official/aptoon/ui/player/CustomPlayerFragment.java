@@ -344,6 +344,7 @@ public class CustomPlayerFragment extends Fragment {
                 mCustomPlayerViewModel.mExoPlayer.seekTo(mCustomPlayerViewModel.mExoPlayer.getCurrentPosition() + 10000);
             }
         });
+
         this.image_view_exo_player_replay_10.setOnClickListener(v -> {
             if (mCustomPlayerViewModel.mExoPlayer.getCurrentPosition()<10000) {
                 mCustomPlayerViewModel.mExoPlayer.seekTo(0);

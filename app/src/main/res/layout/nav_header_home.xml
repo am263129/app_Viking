@@ -39,8 +39,7 @@
                 android:id="@+id/imageView6"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
-                android:layout_weight="8"
-                app:srcCompat="@drawable/logo" />
+                android:layout_weight="8" />
 
             <ImageView
                 android:id="@+id/imageView7"
@@ -307,7 +306,7 @@
                             android:layout_marginLeft="20dp"
                             android:layout_weight="6"
                             android:text="Days"
-                            android:textSize="10sp" />
+                            android:textSize="12sp" />
 
                         <TextView
                             android:id="@+id/label_days"
@@ -315,7 +314,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="3"
                             android:text="0"
-                            android:textSize="10sp" />
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -329,7 +328,7 @@
                             android:layout_marginLeft="20dp"
                             android:layout_weight="6"
                             android:text="Mean Score"
-                            android:textSize="10sp" />
+                            android:textSize="12sp" />
 
                         <TextView
                             android:id="@+id/label_mean_score"
@@ -337,7 +336,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="3"
                             android:text="0"
-                            android:textSize="10sp" />
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -351,7 +350,7 @@
                             android:layout_marginLeft="20dp"
                             android:layout_weight="6"
                             android:text="Total Entries"
-                            android:textSize="10sp" />
+                            android:textSize="12sp" />
 
                         <TextView
                             android:id="@+id/label_total_entries"
@@ -359,7 +358,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="3"
                             android:text="0"
-                            android:textSize="10sp" />
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -373,7 +372,7 @@
                             android:layout_marginLeft="20dp"
                             android:layout_weight="6"
                             android:text="Rewatched"
-                            android:textSize="10sp" />
+                            android:textSize="12sp" />
 
                         <TextView
                             android:id="@+id/label_rewatched"
@@ -381,7 +380,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="3"
                             android:text="0"
-                            android:textSize="10sp" />
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -395,7 +394,7 @@
                             android:layout_marginLeft="20dp"
                             android:layout_weight="6"
                             android:text="Episodes"
-                            android:textSize="10sp" />
+                            android:textSize="12sp" />
 
                         <TextView
                             android:id="@+id/label_episodes"
@@ -403,7 +402,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="3"
                             android:text="0"
-                            android:textSize="10sp" />
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                 </LinearLayout>

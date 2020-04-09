@@ -122,7 +122,7 @@
     <string name="com_facebook_loginview_log_in_button">Facebook</string>
     <string name="com_facebook_loginview_log_in_button_long">Log in with Facebook</string>
     <string name="broadcast_time">Broadcast Time</string>
-    <string name="soon">Soon</string>
+    <string name="menu_donate">Donate</string>
     <string name="never">NEVER</string>
     <string name="my_list">My List</string>
 
@@ -159,7 +159,7 @@
         <item>My Profile</item>
         <item>My List</item>
         <item>Broadcast Time</item>
-        <item>Soon</item>
+        <item>Donate</item>
         <item>Report Bug &amp; Help</item>
         <item>Settings</item>
         <item>Share</item>
@@ -173,7 +173,7 @@
         <item>@drawable/ic_account</item>
         <item>@drawable/ic_my_list</item>
         <item>@drawable/live_tv</item>
-        <item>@drawable/soon</item>
+        <item>@drawable/ico_donate</item>
         <item>@drawable/help</item>
         <item>@drawable/ic_settings</item>
         <item>@drawable/ic_share</item>

@@ -69,14 +69,12 @@ import com.official.aptoon.config.Global;
 import com.official.aptoon.entity.ApiResponse;
 import com.official.aptoon.entity.DrawerItem;
 import com.official.aptoon.entity.Genre;
-import com.official.aptoon.entity.Notification;
-import com.official.aptoon.ui.Adapters.DrawerItemAdapter;
+import com.official.aptoon.ui.Adapters.NavMenuAdapter;
 import com.official.aptoon.ui.Adapters.NotificationAdapter;
 import com.official.aptoon.ui.fragments.DownloadsFragment;
 import com.official.aptoon.ui.fragments.HomeFragment;
 import com.official.aptoon.ui.fragments.MoviesFragment;
 import com.official.aptoon.ui.fragments.SearchFragment;
-import com.official.aptoon.ui.fragments.Search_ObjectFragment;
 import com.official.aptoon.ui.fragments.SeriesFragment;
 import com.official.aptoon.ui.fragments.SoonFragment;
 import com.official.aptoon.ui.fragments.TvFragment;
@@ -223,7 +221,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         for(int i=0;i<itemsTitle.length;i++){
             drawerItems.add(new DrawerItem(icons.getResourceId(i,-1),itemsTitle[i]));
         }
-        DrawerItemAdapter ad= new DrawerItemAdapter(drawerItems,this);
+        NavMenuAdapter ad= new NavMenuAdapter(drawerItems,this);
         nav_menu.setAdapter(ad);
     }
 
@@ -1025,7 +1023,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         }else{
 //            nav_Menu.findItem(R.id.my_profile).setVisible(false);
-            nav_Menu.findItem(R.id.logout).setVisible(false);
+//            nav_Menu.findItem(R.id.logout).setVisible(false);
 //            nav_Menu.findItem(R.id.login).setVisible(true);
             image_view_profile_nav_header_bg.setVisibility(View.GONE);
 
@@ -1135,5 +1133,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     public static HomeActivity getInstance(){
         return self;
+    }
+
+    public void make_donate(){
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.paypal.com/seniordeveloer919@gmail.com"));
+        startActivity(browserIntent);
     }
 }

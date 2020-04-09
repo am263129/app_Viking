@@ -1,6 +1,7 @@
 package com.official.aptoon.config;
 
 import com.official.aptoon.entity.Notification;
+import com.official.aptoon.entity.Poster;
 
 import java.util.ArrayList;
 
@@ -11,8 +12,8 @@ import java.util.ArrayList;
 
 
 public class Global {
-    public static final String API_URL = "http://admin.aptoon.tv/api/";
-//    public static final String API_URL = "http://192.168.207.182/api/";
+//    public static final String API_URL = "http://admin.aptoon.tv/api/";
+    public static final String API_URL = "http://192.168.207.182/api/";
     public static final String SECURE_KEY = "4F5A9C3D9A86FA54EACEDDD635185";
     public static final String Youtube_Key = "AIzaSyAephi0fVTEBXgphX7Z_WVSW8iPusDibtg"; // get it from this link  https://console.developers.google.com/apis/credentials
 
@@ -25,6 +26,7 @@ public class Global {
 
     public static ArrayList<Notification> notifications = new ArrayList<Notification>();
 
+    public static Poster next_poster ;
     public static String user_name = "";
     public static String user_image = "";
 
